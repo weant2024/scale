@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala Noc</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2 id="date-range"></h2>
+            <label for="start-date">Data inicial</label>
+            <input type="date" id="start-date">
+            <label for="end-date">Data Final:</label>
+            <input type="date" id="end-date">
+            <button onclick="updateDateRange()">Atualizar</button>
+            <button onclick="printPage()">Imprimir</button>
+            <button onclick="sendPage()">Enviar</button>
+            
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="sidebar" id="sidebar">
+            <div class="user-info">
+                 <!-- adicionar nome de usuario e imagem -->
+            </div>
+            <ul>
+                <li><a href="usuario.html"><i class="fas fa-user"></i> Usuário</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-cog"></i> Configuração</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Editar escala</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-plus"></i> Nova escala</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-users"></i> Funcionários</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-calendar"></i> Calendário</a></li>
+                <br>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair </a></li>
+            </ul>
+        </div>
+        <main>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Horarios</th>
+                            <th>Segunda</th>
+                            <th>Terça</th>
+                            <th>Quarta</th>
+                            <th>Quinta</th>
+                            <th>Sexta</th>
+                            <th>Sábado</th>
+                            <th>Domingo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01 as 07</td>
+                            <td>Colaborador 1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>07 as 13</td>
+                            <td>Colaborador 2</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <!-- Repetir para cada colaborador -->
+                        <tr>
+                            <td>13 as 19</td>
+                            <td>Colaborador 3</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>19 as 01</td>
+                            <td>Colaborador 4</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="register.js"></script>
+</body>
+</html>
+
