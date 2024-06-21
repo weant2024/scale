@@ -1,13 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escala Noc</title>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c6cedd;
+        }
 
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Estilos do header */
+        header {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        header button {
+            background-color: #2980b9;
+            color: #ecf0f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 80px;
+        }
+
+        header button:hover {
+            background-color: #3498db;
+        }
+
+        /* Estilos do painel lateral */
+        .sidebar {
+            width: 180px;
+            background-color: #f7f5fa;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 120px;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #270c72;
+        }
+
+        .sidebar ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar ul li a {
+            color: #050404;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos do conteúdo principal */
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        main h2 {
+            color: #333;
+            border-bottom: 1px solid #130e0e;
+            padding-bottom: 5px;
+        }
+
+        #schedule {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .schedule-item {
+            width: calc(13% - 10px);
+            background-color: #abbcc5;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .day {
+            font-weight: bold;
+        }
+
+        .time {
+            margin-top: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .schedule-item {
+                width: calc(33.33% - 20px);
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ecf0f1;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #bdc3c7;
+        }
+
+        .date-inputs {
+            display: flex;
+            align-items: center;
+            /* Alinha os itens centralmente na vertical */
+        }
+
+        .date-inputs input {
+            margin-left: 10px;
+            /* Espaçamento entre os inputs de data */
+            padding: 5px;
+            /* Espaçamento interno dos inputs de data */
+            font-size: 14px;
+            /* Tamanho da fonte dos inputs de data */
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -17,33 +198,33 @@
             <label for="end-date">Data Final:</label>
             <input type="date" id="end-date">
             <button onclick="updateDateRange()">Atualizar</button>
-            <button onclick="printPage()">Imprimir</button>
+            <button onclick="printPage()">Gerar PDF</button>
             <button onclick="sendPage()">Enviar</button>
-            
+
         </div>
     </header>
-    
+
     <div class="dashboard-container">
         <div class="sidebar" id="sidebar">
             <div class="user-info">
-                 <!-- adicionar nome de usuario e imagem -->
+                <!-- adicionar nome de usuario e imagem -->
             </div>
             <ul>
                 <li><a href="usuario.html"><i class="fas fa-user"></i> Usuário</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-cog"></i> Configuração</a></li>
+                <li><a href="configuracao.html"><i class="fas fa-cog"></i> Configuração</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> Editar escala</a></li>
+                <li><a href="editar_escala.html"><i class="fas fa-calendar-alt"></i> Editar escala</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-plus"></i> Nova escala</a></li>
+                <li><a href="nova_escala.html"><i class="fas fa-plus"></i> Nova escala</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-users"></i> Funcionários</a></li>
+                <li><a href="funcionarios.html"><i class="fas fa-users"></i> Funcionários</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-calendar"></i> Calendário</a></li>
+                <li><a href="calendario.html"><i class="fas fa-calendar"></i> Calendário</a></li>
                 <br>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair </a></li>
+                <li><a href="sair.html"><i class="fas fa-sign-out-alt"></i> Sair </a></li>
             </ul>
         </div>
         <main>
@@ -108,7 +289,37 @@
             </div>
         </main>
     </div>
-    <script src="register.js"></script>
-</body>
-</html>
 
+    <script>function formatDate(date) {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        function updateDateRange() {
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (!isNaN(startDate) && !isNaN(endDate) && startDate <= endDate) {
+                const formattedStartDate = formatDate(startDate);
+                const formattedEndDate = formatDate(endDate);
+                document.getElementById('date-range').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+            } else {
+                alert('Por favor, selecione datas válidas e certifique-se de que a data inicial seja anterior ou igual à data final.');
+            }
+        }
+
+        function printPage() {
+            window.print();
+        }
+
+        function sendPage() {
+            alert('Função de envio não implementada.');
+        }</script>
+</body>
+
+</html>

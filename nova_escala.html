@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Escala</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .schedule-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0c0904;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #f39c12;
+        }
+
+        .error-message {
+            color: #f00;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="schedule-container">
+        <h1>Criar Nova Escala</h1>
+        <form id="schedule-form">
+            <div class="form-group">
+                <label for="employee">Funcionário:</label>
+                <select id="employee" name="employee" required>
+                    <option value="">Selecione um funcionário</option>
+                    <!-- Opções de funcionários devem ser preenchidas dinamicamente -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Data:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="startTime">Horário de Início:</label>
+                <input type="time" id="startTime" name="startTime" required>
+            </div>
+            <div class="form-group">
+                <label for="endTime">Horário de Término:</label>
+                <input type="time" id="endTime" name="endTime" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn">Adicionar à Escala</button>
+            </div>
+            <p id="error-message" class="error-message"></p>
+        </form>
+    </div>
+
+    <script>
+        // Simulação de dados de funcionários (pode ser obtido dinamicamente de um banco de dados)
+        const employees = [
+            { id: 1, name: 'Funcionário A' },
+            { id: 2, name: 'Funcionário B' },
+            { id: 3, name: 'Funcionário C' },
+            { id: 4, name: 'Funcionário D' }
+            // Adicione mais funcionários conforme necessário
+        ];
+
+        // Simulação de escalas já criadas (pode ser obtido dinamicamente de um banco de dados)
+        let schedules = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const employeeSelect = document.getElementById('employee');
+
+            // Preenche o select de funcionários com as opções simuladas
+            employees.forEach(employee => {
+                const option = document.createElement('option');
+                option.value = employee.id;
+                option.textContent = employee.name;
+                employeeSelect.appendChild(option);
+            });
+
+            const scheduleForm = document.getElementById('schedule-form');
+            scheduleForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const employeeId = parseInt(document.getElementById('employee').value);
+                const date = document.getElementById('date').value;
+                const startTime = document.getElementById('startTime').value;
+                const endTime = document.getElementById('endTime').value;
+
+                // Validar se o funcionário já trabalhou nas últimas 24 horas
+                if (isEmployeeScheduledWithin24Hours(employeeId, date)) {
+                    displayErrorMessage('Funcionário já trabalhou nas últimas 24 horas.');
+                    return;
+                }
+
+                // Validar se o funcionário está programado para trabalhar nas próximas 24 horas
+                if (isEmployeeScheduledWithinNext24Hours(employeeId, date)) {
+                    displayErrorMessage('Funcionário está programado para trabalhar nas próximas 24 horas.');
+                    return;
+                }
+
+                // Adicionar nova escala
+                const newSchedule = {
+                    employeeId: employeeId,
+                    date: date,
+                    startTime: startTime,
+                    endTime: endTime
+                };
+
+                schedules.push(newSchedule);
+                console.log('Nova escala adicionada:', newSchedule);
+
+                // Limpar formulário e mensagens de erro
+                scheduleForm.reset();
+                clearErrorMessage();
+            });
+
+            function isEmployeeScheduledWithin24Hours(employeeId, date) {
+                const twentyFourHoursAgo = new Date();
+                twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1); // Data e hora de 24 horas atrás
+
+                return schedules.some(schedule =>
+                    schedule.employeeId === employeeId &&
+                    new Date(schedule.date) >= twentyFourHoursAgo &&
+                    new Date(schedule.date) <= new Date(date)
+                );
+            }
+
+            function isEmployeeScheduledWithinNext24Hours(employeeId, date) {
+                const twentyFourHoursLater = new Date(date);
+                twentyFourHoursLater.setDate(twentyFourHoursLater.getDate() + 1); // Data e hora de 24 horas depois
+
+                return schedules.some(schedule =>
+                    schedule.employeeId === employeeId &&
+                    new Date(schedule.date) >= new Date(date) &&
+                    new Date(schedule.date) <= twentyFourHoursLater
+                );
+            }
+
+            function displayErrorMessage(message) {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = message;
+            }
+
+            function clearErrorMessage() {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
