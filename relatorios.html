@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Relatórios de Funcionários</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #f39c12;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #f39c12;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f39c12;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        function generateReport() {
+            const employeeName = document.getElementById('employeeName').value;
+            const reportData = {
+                name: employeeName,
+                entrada: "08:00",
+                saida: "17:00",
+                almoco: "12:00 - 13:00",
+                horasTrabalhadas: 8,
+                horasPausa: 1,
+                horasSemana: 40,
+                bancoHoras: 5
+            };
+            
+            document.getElementById('reportName').innerText = reportData.name;
+            document.getElementById('reportEntrada').innerText = reportData.entrada;
+            document.getElementById('reportSaida').innerText = reportData.saida;
+            document.getElementById('reportAlmoco').innerText = reportData.almoco;
+            document.getElementById('reportHorasTrabalhadas').innerText = reportData.horasTrabalhadas;
+            document.getElementById('reportHorasPausa').innerText = reportData.horasPausa;
+            document.getElementById('reportHorasSemana').innerText = reportData.horasSemana;
+            document.getElementById('reportBancoHoras').innerText = reportData.bancoHoras;
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text("Relatório de Funcionário", 20, 20);
+            doc.text("Nome: " + document.getElementById('reportName').innerText, 20, 30);
+            doc.text("Horário de Entrada: " + document.getElementById('reportEntrada').innerText, 20, 40);
+            doc.text("Horário de Saída: " + document.getElementById('reportSaida').innerText, 20, 50);
+            doc.text("Horário de Almoço: " + document.getElementById('reportAlmoco').innerText, 20, 60);
+            doc.text("Horas Trabalhadas: " + document.getElementById('reportHorasTrabalhadas').innerText, 20, 70);
+            doc.text("Horas de Pausa: " + document.getElementById('reportHorasPausa').innerText, 20, 80);
+            doc.text("Horas Trabalhadas na Semana: " + document.getElementById('reportHorasSemana').innerText, 20, 90);
+            doc.text("Banco de Horas: " + document.getElementById('reportBancoHoras').innerText, 20, 100);
+
+            doc.save('relatorio_funcionario.pdf');
+        }
+    </script>
+</head>
+<body>
+    <h1>Gerar Relatórios de Funcionários</h1>
+    <label for="employeeName">Nome do Funcionário</label>
+    <select id="employeeName">
+        <option value="Ana Silva">Ana Silva</option>
+        <option value="João Souza">João Souza</option>
+        <option value="Maria Oliveira">Maria Oliveira</option>
+        <option value="Carlos Pereira">Carlos Pereira</option>
+        <option value="Lucia Santos">Lucia Santos</option>
+    </select>
+    <button onclick="generateReport()">Gerar Relatório</button>
+    <button onclick="exportToPDF()">Exportar para PDF</button>
+
+    <h2>Relatório do Funcionário</h2>
+    <table>
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <td id="reportName"></td>
+            </tr>
+            <tr>
+                <th>Horário de Entrada</th>
+                <td id="reportEntrada"></td>
+            </tr>
+            <tr>
+                <th>Horário de Saída</th>
+                <td id="reportSaida"></td>
+            </tr>
+            <tr>
+                <th>Horário de Almoço</th>
+                <td id="reportAlmoco"></td>
+            </tr>
+            <tr>
+                <th>Horas Trabalhadas</th>
+                <td id="reportHorasTrabalhadas"></td>
+            </tr>
+            <tr>
+                <th>Horas de Pausa</th>
+                <td id="reportHorasPausa"></td>
+            </tr>
+            <tr>
+                <th>Horas Trabalhadas na Semana</th>
+                <td id="reportHorasSemana"></td>
+            </tr>
+            <tr>
+                <th>Banco de Horas</th>
+                <td id="reportBancoHoras"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

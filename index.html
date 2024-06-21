@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEANT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="C:\Users\Usuário\Desktop\new\fontawesome-free-6.5.2-web\fontawesome-free-6.5.2-web\css\all.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            text-align: center;
+        }
+
+        .login-box {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        .avatar {
+            margin-bottom: 20px;
+        }
+
+        .avatar img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #270f91;
+        }
+
+        .textbox {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #d9d9d9;
+            outline: none;
+            background: none;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .textbox input:focus {
+            border-bottom: 2px solid #46109c;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .options input {
+            margin-right: 5px;
+        }
+
+        .options a {
+            color: #4a11a5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            background: #4a14af;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #3b129c;
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #6a1b9a;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="avatar">
+                <img src="" alt="User Icon">
+            </div>
+            <h2>WEANT</h2>
+            <form id="login-form">
+                <div class="textbox">
+                    <input type="text" placeholder="Login" name="username" id="username" required>
+                </div>
+                <div class="textbox">
+                    <input type="password" placeholder="Senha" name="password" id="password" required>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox" name="remember"> Remember Me
+                    </label>
+                    <a href="#">Esqueci minha senha</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="signup-link">
+                <p>Não possui cadastro? <a href="#">Cadastrar</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simulação de autenticação (usuário e senha fixos para exemplo)
+            if (username === 'admin' && password === 'admin') {
+                // Redirecionamento para o dashboard após login bem-sucedido
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Usuário ou senha incorretos');
+            }
+        });
+    </script>
+</body>
+
+</html>
