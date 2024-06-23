@@ -1,0 +1,113 @@
+/* Estilos para o corpo da página */
+body {
+    font-family: 'Arial', sans-serif; /* Define a fonte padrão */
+    background-color: #f4f4f4; /* Define a cor de fundo */
+    margin: 0; /* Remove as margens padrão */
+    padding: 20px; /* Adiciona espaçamento interno */
+}
+
+/* Estilos para o título h1 */
+h1 {
+    color: #333; /* Define a cor do texto */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilos para o calendário */
+.calendar {
+    display: grid; /* Utiliza display grid para organização */
+    grid-template-columns: repeat(7, 1fr); /* Divide em 7 colunas iguais */
+    gap: 10px; /* Define o espaçamento entre os elementos */
+    max-width: 900px; /* Define a largura máxima */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background: white; /* Define o fundo branco */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+}
+
+/* Estilos para os dias do calendário */
+.calendar div {
+    display: flex; /* Utiliza flexbox para organização */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border: 1px solid #ddd; /* Adiciona borda */
+    cursor: pointer; /* Define o cursor como ponteiro */
+}
+
+/* Estilos para os dias de cabeçalho do calendário */
+.calendar div.header {
+    background: #f39c12; /* Define o fundo laranja */
+    color: white; /* Define a cor do texto como branco */
+    font-weight: bold; /* Define negrito */
+}
+
+/* Estilos para os dias normais do calendário */
+.calendar div.day {
+    background: #fff; /* Define o fundo branco */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: background 0.3s; /* Adiciona transição suave */
+}
+
+/* Estilos ao passar o mouse sobre os dias do calendário */
+.calendar div.day:hover {
+    background: #f1f1f1; /* Muda o fundo ao passar o mouse */
+}
+
+/* Estilos para o modal de detalhes da escala */
+.modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fixa a posição na tela */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Centraliza totalmente */
+    background: white; /* Define o fundo branco */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+    max-width: 500px; /* Define a largura máxima */
+    width: 100%; /* Define a largura total */
+}
+
+/* Estilos para o cabeçalho do modal */
+.modal-header {
+    display: flex; /* Utiliza flexbox para organização */
+    justify-content: space-between; /* Distribui o espaço entre os itens */
+    align-items: center; /* Alinha verticalmente */
+    border-bottom: 1px solid #ddd; /* Adiciona borda inferior */
+    margin-bottom: 10px; /* Adiciona espaçamento inferior */
+    padding-bottom: 10px; /* Adiciona espaçamento inferior */
+}
+
+/* Estilos para o título do modal */
+.modal-header h2 {
+    margin: 0; /* Remove margem do título */
+}
+
+/* Estilos para o botão de fechar o modal */
+.modal-header span {
+    cursor: pointer; /* Define o cursor como ponteiro */
+    font-size: 1.5rem; /* Define o tamanho da fonte */
+}
+
+/* Estilos para o corpo do modal */
+.modal-body {
+    padding: 10px 0; /* Adiciona espaçamento interno */
+}
+
+/* Estilos para a lista de funcionários no modal */
+.modal-body ul {
+    list-style: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove espaçamento interno da lista */
+}
+
+/* Estilos para cada item da lista de funcionários no modal */
+.modal-body ul li {
+    background: #f9f9f9; /* Define o fundo cinza claro */
+    margin: 5px 0; /* Adiciona espaçamento externo */
+    padding: 10px; /* Adiciona espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    display: flex; /* Utiliza flexbox para organização */
+    justify-content: space-between; /* Distribui espaço entre os itens */
+    align-items: center; /* Alinha verticalmente */
+}
