@@ -12,6 +12,12 @@
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required>
 
+                <label for="nome">Login:</label>
+                <input type="text" id="login" name="login" required>
+
+                <label for="nome">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
                 <label for="telefone">Telefone:</label>
                 <input type="tel" id="telefone" name="telefone" required>
 
@@ -25,7 +31,11 @@
                 <input type="funcao" id="funcao" name="funcao" required>
 
                 <label for="tipodeusuario">Tipo de Usuário:</label>
-                <input type="tipodeusuario" id="tipodeusuario" name="tipodeusuario" required>
+                <select name="tipodeusuario">
+                        <option value="1" selected>Operador</option>
+                        <option value="2">Gestor</option>
+                        <option value="3">Administrador</option>
+                      </select>
 
                 <button type="submit">Enviar</button>
         </form>
