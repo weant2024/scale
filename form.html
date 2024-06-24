@@ -105,7 +105,11 @@
                     </div>
                     <div class="form-group">
                         <label for="tipodeusuario">Tipo de Usuário:</label>
-                        <input type="text" class="form-control" id="tipodeusuario" name="tipodeusuario" required>
+                        <select name="tipodeusuario" id="tipodeusuario" class="form-control" required>
+                                <option value="1" selected>Operador</option>
+                                <option value="2">Gestor</option>
+                                <option value="3">Admin</option>
+                        </select>   
                     </div>
                     <div class="form-group">
                         <label for="login">Login:</label>

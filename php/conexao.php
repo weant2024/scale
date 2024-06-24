@@ -1,9 +1,9 @@
 <?php
 // Define as informações de conexão com o banco de dados
 $servername = "localhost"; // Endereço do servidor MySQL (normalmente localhost se estiver rodando localmente)
-$username = "seu_usuario"; // Nome de usuário do MySQL
-$password = "sua_senha"; // Senha do MySQL
-$dbname = "seu_banco_de_dados"; // Nome do banco de dados que deseja se conectar
+$username = "weant2024"; // Nome de usuário do MySQL
+$password = "W34nt@2014!"; // Senha do MySQL
+$dbname = "scale"; // Nome do banco de dados que deseja se conectar
 
 // Cria a conexão com o banco de dados utilizando o construtor mysqli
 $conn = new mysqli($servername, $username, $password, $dbname);
