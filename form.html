@@ -1,172 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Contato</title>
-	<!-- Link para o favicon -->
-    <link rel="icon" href="imagens/favicon.ico" type="image/x-icon">
-	<!-- Link para o arquivo CSS externo -->
-    <link rel="stylesheet" href="css/styles_form.css">
+    <meta charset="UTF-8"> <!-- Declaração do charset UTF-8 para suportar caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Meta tag para controle de viewport -->
+    <title>Formulário de Contato</title> <!-- Título da página -->
+    <link rel="icon" href="imagens/favicon.ico" type="image/x-icon"> <!-- Ícone da página (favicon) -->
+    <link rel="stylesheet" href="css/styles_form.css"> <!-- Link para o arquivo CSS externo -->
 </head>
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 side-menu">
-                <nav class="nav flex-column">
-                    <a class="nav-link active" href="#">Editar Perfis</a>
-                    <a class="nav-link" href="#">Adicionar Perfis</a>
-                    <a class="nav-link" href="#">Excluir Perfis</a>
+    <div class="container"> <!-- Container principal da página -->
+        <div class="row"> <!-- Linha para estruturação com Bootstrap -->
+            <div class="col-md-3 side-menu"> <!-- Coluna lateral de menu -->
+                <nav class="nav flex-column"> <!-- Menu de navegação vertical -->
+                    <a class="nav-link active" href="#">Editar Perfis</a> <!-- Item de menu ativo -->
+                    <a class="nav-link" href="#">Adicionar Perfis</a> <!-- Item de menu -->
+                    <a class="nav-link" href="#">Excluir Perfis</a> <!-- Item de menu -->
                 </nav>
             </div>
-            <div class="col-md-9 form-container">
+            <div class="col-md-9 form-container"> <!-- Coluna principal para formulário -->
                 <form action="config/submit-form.php" method="POST" id="perfilForm">
-                    <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
-                        <div id="nome-error" class="error-message">Nome já cadastrado</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="tel" class="form-control" id="telefone" name="telefone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                        <div id="email-error" class="error-message">Email já cadastrado</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="cpf">CPF:</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" required>
-                        <div id="cpf-error" class="error-message">CPF inválido</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="funcao">Função:</label>
-                        <input type="text" class="form-control" id="funcao" name="funcao" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tipodeusuario">Tipo de Usuário:</label>
-                        <select name="tipodeusuario" id="tipodeusuario" class="form-control" required>
-                                <option value="1" selected>Operador</option>
-                                <option value="2">Gestor</option>
-                                <option value="3">Admin</option>
-                        </select>   
-                    </div>
-                    <div class="form-group">
-                        <label for="login">Login:</label>
-                        <input type="text" class="form-control" id="login" name="login" required>
-                        <div id="login-error" class="error-message">Login já cadastrado</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="senha">Senha:</label>
-                        <input type="password" class="form-control" id="senha" name="senha" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                    <!-- Seu formulário será inserido aqui -->
                 </form>
             </div>
-        </div>
-    </div>
+        </div> <!-- Fim da linha -->
+    </div> <!-- Fim do container principal -->
 
-    <script>
-        // Validação de CPF
-        document.getElementById('cpf').addEventListener('input', function () {
-            const cpfInput = this.value;
-            const errorMessage = document.getElementById('cpf-error');
+    <!-- Scripts personalizados -->
+    <script src="js/script_cpf_validation.js"></script> <!-- Script para validação de CPF -->
+    <script src="js/script_form_validation.js"></script> <!-- Script para validação de campos do formulário -->
 
-            this.value = cpfInput.replace(/[^\d]/g, '');
-
-            if (this.value.length === 11) {
-                if (isCPFValid(this.value)) {
-                    errorMessage.style.display = 'none';
-                } else {
-                    errorMessage.style.display = 'block';
-                }
-            } else {
-                errorMessage.style.display = 'none';
-            }
-        });
-
-        function isCPFValid(cpf) {
-            cpf = cpf.replace(/[^\d]+/g,'');
-            if(cpf === '') return false;
-            if (cpf.length !== 11 || 
-                cpf === "00000000000" || 
-                cpf === "11111111111" || 
-                cpf === "22222222222" || 
-                cpf === "33333333333" || 
-                cpf === "44444444444" || 
-                cpf === "55555555555" || 
-                cpf === "66666666666" || 
-                cpf === "77777777777" || 
-                cpf === "88888888888" || 
-                cpf === "99999999999")
-                return false;
-            let add = 0;
-            for (let i = 0; i < 9; i++) 
-                add += parseInt(cpf.charAt(i)) * (10 - i);
-            let rev = 11 - (add % 11);
-            if (rev === 10 || rev === 11) 
-                rev = 0;
-            if (rev !== parseInt(cpf.charAt(9))) 
-                return false;
-            add = 0;
-            for (let i = 0; i < 10; i++) 
-                add += parseInt(cpf.charAt(i)) * (11 - i);
-            rev = 11 - (add % 11);
-            if (rev === 10 || rev === 11) 
-                rev = 0;
-            if (rev !== parseInt(cpf.charAt(10)))
-                return false;
-            return true;
-        }
-
-        // Validação de campos únicos (Nome, Email, Login)
-        document.getElementById('perfilForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const login = document.getElementById('login').value;
-
-            // Simulação de validação (substituir com validação real no servidor)
-            let dadosValidos = true;
-
-            // Verificar nome único (simulação com nome 'João' já existente)
-            if (nome === 'João') {
-                document.getElementById('nome-error').style.display = 'block';
-                dadosValidos = false;
-            } else {
-                document.getElementById('nome-error').style.display = 'none';
-            }
-
-            // Verificar email único (simulação com email 'joao@example.com' já existente)
-            if (email === 'joao@example.com') {
-                document.getElementById('email-error').style.display = 'block';
-                dadosValidos = false;
-            } else {
-                document.getElementById('email-error').style.display = 'none';
-            }
-
-            // Verificar login único (simulação com login 'joao123' já existente)
-            if (login === 'joao123') {
-                document.getElementById('login-error').style.display = 'block';
-                dadosValidos = false;
-            } else {
-                document.getElementById('login-error').style.display = 'none';
-            }
-
-            // Se todos os dados são válidos, submeter o formulário
-            if (dadosValidos) {
-                // Aqui você pode submeter o formulário via AJAX ou normalmente
-                alert('Formulário enviado com sucesso!');
-                document.getElementById('perfilForm').submit(); // Isso envia o formulário
-            }
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Scripts do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- jQuery Slim -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> <!-- Popper.js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JavaScript -->
 </body>
 </html>
