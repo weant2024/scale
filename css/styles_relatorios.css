@@ -1,0 +1,74 @@
+/* Estilos gerais para o body */
+body {
+    font-family: Arial, sans-serif; /* Define a fonte para o corpo do documento */
+    background-color: #f4f4f4; /* Define a cor de fundo do body */
+    margin: 0; /* Remove margem padrão do body */
+    padding: 20px; /* Adiciona um espaço interno de 20px em todas as direções */
+}
+
+/* Estilos para os títulos h1 e h2 */
+h1, h2 {
+    color: #333; /* Define a cor do texto para um tom de cinza escuro */
+    text-align: center; /* Alinha o texto ao centro */
+    margin-bottom: 20px; /* Adiciona margem inferior de 20px */
+}
+
+/* Estilos para as etiquetas de entrada e seleção */
+label {
+    display: block; /* Faz com que as etiquetas sejam exibidas em blocos (uma abaixo da outra) */
+    margin: 10px 0 5px; /* Define margens superior, inferior e inferior */
+}
+
+/* Estilos para os inputs, select e botões */
+input, select, button {
+    padding: 10px; /* Adiciona preenchimento interno de 10px */
+    width: 100%; /* Define a largura como 100% para preencher o contêiner pai */
+    margin-bottom: 20px; /* Adiciona margem inferior de 20px */
+    border: 1px solid #ddd; /* Adiciona borda de 1px sólida com uma cor cinza claro */
+    border-radius: 5px; /* Adiciona borda arredondada */
+}
+
+/* Estilos específicos para botões */
+button {
+    background-color: #f39c12; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto como branco */
+    cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+    border: none; /* Remove a borda do botão */
+}
+
+/* Estilos de hover para botões */
+button:hover {
+    background-color: #e67e22; /* Altera a cor de fundo ao passar o mouse */
+}
+
+/* Estilos para a tabela de relatório */
+table {
+    width: 100%; /* Define a largura da tabela como 100% */
+    border-collapse: collapse; /* Remove a separação entre as bordas das células */
+    margin-top: 20px; /* Adiciona margem superior de 20px */
+    background-color: white; /* Define a cor de fundo da tabela como branco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave à tabela */
+}
+
+/* Estilos para as células de cabeçalho da tabela */
+th {
+    background-color: #f39c12; /* Define a cor de fundo do cabeçalho da tabela */
+    color: white; /* Define a cor do texto do cabeçalho como branco */
+}
+
+/* Estilos para as células da tabela */
+th, td {
+    border: 1px solid #ddd; /* Adiciona borda de 1px sólida com uma cor cinza claro */
+    padding: 15px; /* Adiciona preenchimento interno de 15px nas células */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+/* Estilos para linhas alternadas da tabela */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Define a cor de fundo para linhas pares */
+}
+
+/* Estilos de hover para as linhas da tabela */
+tr:hover {
+    background-color: #f1f1f1; /* Altera a cor de fundo ao passar o mouse sobre a linha */
+}

@@ -1,0 +1,34 @@
+/* Estilos para o formulário de contato */
+form {
+    margin: 20px; /* Margem ao redor do formulário */
+}
+
+/* Estilos para os rótulos (labels) do formulário */
+label {
+    display: block; /* Exibe os rótulos em blocos separados */
+    margin-bottom: 5px; /* Espaçamento abaixo dos rótulos */
+}
+
+/* Estilos para os campos de entrada (inputs) do formulário */
+input {
+    width: 100%; /* Largura total do campo */
+    padding: 8px; /* Espaçamento interno */
+    margin-bottom: 10px; /* Espaçamento abaixo dos campos */
+    border-radius: 5px; /* Bordas arredondadas */
+    border: 1px solid #ccc; /* Borda cinza */
+}
+
+/* Estilos para o botão de envio (submit) do formulário */
+button[type="submit"] {
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white; /* Cor do texto branco */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+}
+
+/* Estilos para o botão de envio ao passar o mouse */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Cor de fundo verde mais escura ao passar o mouse */
+}

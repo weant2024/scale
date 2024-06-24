@@ -1,0 +1,63 @@
+/* Estilos para o corpo da página */
+body {
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+    background-color: #f4f4f4; /* Cor de fundo */
+    margin: 0; /* Remove margens */
+    padding: 20px; /* Espaçamento interno */
+}
+
+/* Estilos para os títulos h1 e h2 */
+h1, h2 {
+    color: #333; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilos para a lista de funcionários */
+ul {
+    list-style-type: none; /* Remove marcadores */
+    padding: 0; /* Remove o espaçamento padrão */
+    text-align: center; /* Centraliza o texto */
+}
+
+ul li {
+    background: #f39c12; /* Cor de fundo laranja */
+    color: white; /* Cor do texto branco */
+    padding: 10px; /* Espaçamento interno */
+    margin: 5px 0; /* Espaçamento externo */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Estilos para a tabela de detalhes dos funcionários */
+table {
+    width: 100%; /* Largura total */
+    margin-top: 20px; /* Espaçamento acima */
+    border-collapse: collapse; /* Colapso das bordas */
+    background-color: white; /* Cor de fundo branca */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ao redor */
+}
+
+/* Estilos para as células de cabeçalho e dados da tabela */
+table, th, td {
+    border: 1px solid #ddd; /* Bordas cinza */
+}
+
+th, td {
+    padding: 15px; /* Espaçamento interno */
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+/* Estilos para as células de cabeçalho */
+th {
+    background-color: #f39c12; /* Cor de fundo laranja */
+    color: white; /* Cor do texto branco */
+}
+
+/* Estilos para linhas pares da tabela */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor de fundo cinza claro */
+}
+
+/* Estilos para linhas ao passar o mouse */
+tr:hover {
+    background-color: #f1f1f1; /* Cor de fundo cinza claro ao passar o mouse */
+}

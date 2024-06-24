@@ -1,0 +1,238 @@
+/* Define o estilo básico do corpo da página */
+body {
+    /* Define a fonte padrão */
+    font-family: Arial, sans-serif;
+    /* Define a cor de fundo da página */
+    background-color: #f0f2f5;
+    /* Centraliza o conteúdo horizontal e verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Define a altura total da página */
+    height: 100vh;
+    /* Remove as margens padrão */
+    margin: 0;
+}
+
+/* Centraliza o conteúdo do login */
+.login-container {
+    /* Centraliza o texto dentro do container */
+    text-align: center;
+}
+
+/* Estilo da caixa de login */
+.login-box {
+    /* Define a cor de fundo da caixa de login */
+    background: #fff;
+    /* Define as bordas arredondadas */
+    border-radius: 10px;
+    /* Adiciona uma sombra à caixa de login */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Define o preenchimento interno da caixa */
+    padding: 40px;
+    /* Define a largura da caixa */
+    width: 300px;
+    /* Centraliza a caixa horizontalmente */
+    margin: 20px auto;
+}
+
+/* Estilo do logo */
+.logo {
+    /* Adiciona um espaço abaixo do logo */
+    margin-bottom: 20px;
+}
+
+.logo img {
+    /* Define a largura e altura do logo */
+    width: 90px;
+    height: 90px;
+    /* Define as bordas arredondadas (circular) */
+    border-radius: 50%;
+}
+
+/* Estilo dos títulos */
+h1 {
+    /* Adiciona um espaço abaixo do título */
+    margin-bottom: 20px;
+}
+
+h2 {
+    /* Adiciona um espaço abaixo do título */
+    margin-bottom: 30px;
+    /* Define a cor do texto */
+    color: #270f91;
+}
+
+/* Estilo das caixas de texto */
+.textbox {
+    /* Define a posição relativa */
+    position: relative;
+    /* Adiciona um espaço abaixo da caixa de texto */
+    margin-bottom: 30px;
+}
+
+.textbox input {
+    /* Define a largura total */
+    width: 100%;
+    /* Define o preenchimento interno */
+    padding: 10px;
+    /* Remove a borda padrão */
+    border: none;
+    /* Adiciona uma borda inferior */
+    border-bottom: 2px solid #d9d9d9;
+    /* Remove o contorno padrão */
+    outline: none;
+    /* Define o fundo transparente */
+    background: none;
+    /* Define o tamanho da fonte */
+    font-size: 18px;
+    /* Define a cor do texto */
+    color: #333;
+}
+
+/* Estilo da caixa de texto ao focar */
+.textbox input:focus {
+    /* Altera a cor da borda inferior ao focar */
+    border-bottom: 2px solid #46109c;
+}
+
+/* Estilo das opções (lembrar senha e link de esqueci minha senha) */
+.options {
+    /* Exibe os elementos lado a lado */
+    display: flex;
+    /* Distribui o espaço uniformemente entre os elementos */
+    justify-content: space-between;
+    /* Alinha os itens ao centro */
+    align-items: center;
+    /* Adiciona um espaço abaixo das opções */
+    margin-bottom: 30px;
+}
+
+.options label {
+    /* Exibe os elementos lado a lado */
+    display: flex;
+    /* Alinha os itens ao centro */
+    align-items: center;
+    /* Define o tamanho da fonte */
+    font-size: 14px;
+}
+
+.options input {
+    /* Adiciona um espaço à direita do checkbox */
+    margin-right: 5px;
+}
+
+.options a {
+    /* Define a cor do link */
+    color: #4a11a5;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+    /* Define o tamanho da fonte */
+    font-size: 14px;
+}
+
+/* Estilo do botão de login */
+.btn {
+    /* Define a largura total do botão */
+    width: 100%;
+    /* Define a cor de fundo do botão */
+    background: #4a14af;
+    /* Remove a borda padrão */
+    border: none;
+    /* Define o preenchimento interno */
+    padding: 15px;
+    /* Define as bordas arredondadas */
+    border-radius: 5px;
+    /* Define a cor do texto */
+    color: #fff;
+    /* Define o tamanho da fonte */
+    font-size: 16px;
+    /* Define o cursor do mouse como ponteiro */
+    cursor: pointer;
+    /* Adiciona uma transição suave ao fundo */
+    transition: background 0.3s ease;
+}
+
+/* Estilo do botão ao passar o mouse */
+.btn:hover {
+    /* Altera a cor de fundo ao passar o mouse */
+    background: #3b129c;
+}
+
+/* Estilo do link de cadastro */
+.signup-link {
+    /* Adiciona um espaço acima do link */
+    margin-top: 20px;
+    /* Define o tamanho da fonte */
+    font-size: 14px;
+}
+
+.signup-link a {
+    /* Define a cor do link */
+    color: #6a1b9a;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+}
+
+/* Estilo do link de cadastro ao passar o mouse */
+.signup-link a:hover {
+    /* Adiciona sublinhado ao link ao passar o mouse */
+    text-decoration: underline;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .login-box {
+        width: 80%; /* Ajusta a largura da caixa de login */
+        max-width: 400px; /* Define a largura máxima */
+    }
+
+    .logo img {
+        width: 70px; /* Ajusta a largura do logo */
+        height: 70px; /* Ajusta a altura do logo */
+    }
+
+    h2 {
+        margin-bottom: 20px; /* Ajusta a margem inferior do título h2 */
+    }
+
+    .textbox input {
+        font-size: 16px; /* Ajusta o tamanho da fonte da caixa de texto */
+    }
+
+    .btn {
+        font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+    }
+}
+
+@media (max-width: 576px) {
+    .login-box {
+        padding: 30px; /* Ajusta o preenchimento interno da caixa de login */
+    }
+
+    .logo img {
+        width: 60px; /* Ajusta a largura do logo */
+        height: 60px; /* Ajusta a altura do logo */
+    }
+
+    h1 {
+        font-size: 24px; /* Ajusta o tamanho da fonte do título h1 */
+        margin-bottom: 10px; /* Ajusta a margem inferior do título h1 */
+    }
+
+    h2 {
+        font-size: 18px; /* Ajusta o tamanho da fonte do título h2 */
+        margin-bottom: 20px; /* Ajusta a margem inferior do título h2 */
+    }
+
+    .textbox input {
+        font-size: 14px; /* Ajusta o tamanho da fonte da caixa de texto */
+        padding: 8px; /* Ajusta o preenchimento interno da caixa de texto */
+        margin-bottom: 20px; /* Ajusta a margem inferior da caixa de texto */
+    }
+
+    .btn {
+        font-size: 12px; /* Ajusta o tamanho da fonte do botão */
+        padding: 12px; /* Ajusta o preenchimento interno do botão */
+    }
+}
