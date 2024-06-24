@@ -1,0 +1,174 @@
+/* Estilos gerais */
+
+/* Reset de margens e preenchimentos, definição de fonte e cor de fundo */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #c6cedd;
+}
+
+/* Container para centralizar conteúdo */
+.container {
+    width: 100%; /* Largura total */
+    margin: 0 auto; /* Centraliza na página */
+}
+
+/* Estilos do header */
+header {
+    background-color: #34495e; /* Cor de fundo do cabeçalho */
+    color: #ecf0f1; /* Cor do texto */
+    padding: 20px 0; /* Espaçamento interno */
+    width: 100%; /* Largura total */
+    display: flex; /* Exibe em linha */
+    justify-content: space-between; /* Distribui o espaço entre os elementos */
+    align-items: center; /* Alinha verticalmente */
+}
+
+/* Estilos específicos para o conteúdo dentro do container do header */
+header .container {
+    display: flex; /* Exibe em linha */
+    justify-content: space-between; /* Distribui o espaço entre os elementos */
+    align-items: center; /* Alinha verticalmente */
+    width: 50%; /* Largura */
+}
+
+header h2 {
+    margin: 0; /* Remove margens */
+}
+
+header button {
+    background-color: #2980b9; /* Cor de fundo do botão */
+    color: #ecf0f1; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor ao passar por cima */
+    margin-left: 80px; /* Margem à esquerda */
+}
+
+header button:hover {
+    background-color: #3498db; /* Cor de fundo do botão ao passar o mouse */
+}
+
+/* Estilos da sidebar */
+.sidebar {
+    width: 180px; /* Largura da sidebar */
+    background-color: #f7f5fa; /* Cor de fundo da sidebar */
+    position: fixed; /* Fixa a posição */
+    top: 0; /* Alinha ao topo */
+    left: 0; /* Alinha à esquerda */
+    height: 100%; /* Altura total */
+    overflow-y: auto; /* Habilita rolagem vertical */
+    padding-top: 120px; /* Espaçamento interno no topo */
+    border: 1px solid #ddd; /* Borda */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.user-info {
+    text-align: center; /* Alinha o texto ao centro */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+.user-info img {
+    border-radius: 50%; /* Borda arredondada */
+    width: 100px; /* Largura da imagem */
+    height: 100px; /* Altura da imagem */
+}
+
+.sidebar ul {
+    list-style: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove preenchimento */
+}
+
+.sidebar ul li {
+    padding: 10px 20px; /* Espaçamento interno */
+    border-bottom: 1px solid #270c72; /* Borda inferior */
+}
+
+.sidebar ul li:last-child {
+    border-bottom: none; /* Remove borda inferior do último item */
+}
+
+.sidebar ul li a {
+    color: #050404; /* Cor do texto do link */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+/* Estilos do conteúdo principal */
+main {
+    margin-left: 250px; /* Margem à esquerda */
+    padding: 20px; /* Espaçamento interno */
+}
+
+main h2 {
+    color: #333; /* Cor do título */
+    border-bottom: 1px solid #130e0e; /* Borda inferior */
+    padding-bottom: 5px; /* Espaçamento inferior */
+}
+
+/* Estilos da tabela de horários */
+table {
+    width: 100%; /* Largura total */
+    border-collapse: collapse; /* Colapso das bordas da tabela */
+}
+
+th,
+td {
+    border: 1px solid #bdc3c7; /* Borda das células */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+}
+
+thead {
+    background-color: #f39c12; /* Cor de fundo do cabeçalho da tabela */
+    color: #fff; /* Cor do texto do cabeçalho */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ecf0f1; /* Cor de fundo de linhas ímpares */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #bdc3c7; /* Cor de fundo de linhas pares */
+}
+
+.date-inputs {
+    display: flex; /* Exibe em linha */
+    align-items: center; /* Alinha verticalmente */
+}
+
+.date-inputs input {
+    margin-left: 10px; /* Margem à esquerda */
+    padding: 5px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+}
+
+/* Estilos do campo de pesquisa */
+.search-bar {
+    margin-top: 20px; /* Espaçamento superior */
+    display: flex; /* Exibe em linha */
+    align-items: center; /* Alinha verticalmente */
+}
+
+#searchInput {
+    padding: 8px; /* Espaçamento interno */
+    margin-right: 10px; /* Margem à direita */
+    width: 200px; /* Largura */
+}
+
+#searchButton {
+    background-color: #2980b9; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 8px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor ao passar por cima */
+}
+
+#searchButton:hover {
+    background-color: #3498db; /* Cor de fundo do botão ao passar o mouse */
+}
