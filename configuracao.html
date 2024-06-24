@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Define o conjunto de caracteres como UTF-8 -->
     <meta charset="UTF-8">
+    <!-- Configura a viewport para garantir que a página seja responsiva -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define o título da página -->
     <title>Configuração</title>
+    <!-- Define o ícone da página -->
     <link rel="icon" href="imagens/favicon.ico" type="image/x-icon">
+    <!-- Inclui o arquivo CSS para estilização -->
     <link rel="stylesheet" href="css/styles_configuracao.css">
 </head>
 <body>
+    <!-- Contêiner principal para a seção de configuração -->
     <div class="container">
+        <!-- Título da seção de configuração -->
         <h1>Configuração</h1>
+        <!-- Formulário de configuração com id "configForm" -->
         <form id="configForm">
+            <!-- Grupo de formulário para o nome de usuário -->
             <div class="form-group">
+                <!-- Rótulo para o campo de nome de usuário -->
                 <label for="username">Nome de Usuário:</label>
+                <!-- Campo de entrada para o nome de usuário -->
                 <input type="text" id="username" name="username" required>
             </div>
+            <!-- Grupo de formulário para o email -->
             <div class="form-group">
+                <!-- Rótulo para o campo de email -->
                 <label for="email">Email:</label>
+                <!-- Campo de entrada para o email -->
                 <input type="email" id="email" name="email" required>
             </div>
+            <!-- Grupo de formulário para a senha -->
             <div class="form-group">
+                <!-- Rótulo para o campo de senha -->
                 <label for="password">Senha:</label>
+                <!-- Campo de entrada para a senha -->
                 <input type="password" id="password" name="password" required>
             </div>
+            <!-- Div para exibição de feedback, inicialmente oculta -->
             <div id="feedback" class="feedback hidden"></div>
+            <!-- Botão para submeter o formulário -->
             <button type="submit">Salvar</button>
         </form>
     </div>
+    <!-- Inclui o arquivo JavaScript para funcionalidade -->
     <script src="js/script_configuracao.js"></script>
 </body>
 </html>
