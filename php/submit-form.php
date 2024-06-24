@@ -1,30 +1,40 @@
 <?php
-// Inclui o arquivo de conexão com o banco de dados
+// Inclui o arquivo 'conexao.php' que contém a conexão com o banco de dados
 include 'conexao.php';
 
-// Obtém os dados do formulário via método POST
-$nome = $_POST['nome']; // Obtém o valor do campo 'nome' do formulário
-$telefone = $_POST['telefone']; // Obtém o valor do campo 'telefone' do formulário
-$email = $_POST['email']; // Obtém o valor do campo 'email' do formulário
-$cpf = $_POST['cpf']; // Obtém o valor do campo 'cpf' do formulário
-$funcao = $_POST['funcao']; // Obtém o valor do campo 'funcao' do formulário
-$tipodeusuario = $_POST['tipodeusuario']; // Obtém o valor do campo 'tipodeusuario' do formulário
+// Obtém os dados enviados pelo formulário através do método POST
+$nome = $_POST['nome'];
+$login = $_POST['login'];
+$senha = $_POST['senha'];
+$telefone = $_POST['telefone'];
+$email = $_POST['email'];
+$cpf = $_POST['cpf'];
+$funcao = $_POST['funcao'];
+$tipodeusuario = $_POST['tipodeusuario'];
 
-// Prepara a instrução SQL para inserir os dados no banco de dados
-$sql = "INSERT INTO usuarios (nome, telefone, email, cpf, funcao, tipodeusuario) VALUES (?, ?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql); // Prepara a instrução SQL para execução
-$stmt->bind_param("ssssss", $nome, $telefone, $email, $cpf, $funcao, $tipodeusuario); // Associa os parâmetros da instrução SQL com as variáveis PHP
+// Prepara a consulta SQL para inserção dos dados na tabela 'usuarios'
+$sql = "INSERT INTO usuarios (nome, login, senha, telefone, email, cpf, funcao, tipodeusuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-// Executa a instrução preparada
-if ($stmt->execute()) { // Se a execução for bem-sucedida
-    header("Location: ../form.html"); // Redireciona para a página 'form.html'
-    exit(); // Encerra o script
+// Prepara a consulta para execução
+$stmt = $conn->prepare($sql);
+
+// Associa os parâmetros recebidos do formulário à consulta preparada
+// 'ssssssss' indica que todos os parâmetros são do tipo string
+$stmt->bind_param("ssssssss", $nome, $login, $senha, $telefone, $email, $cpf, $funcao, $tipodeusuario);
+
+// Executa a consulta e verifica se foi bem-sucedida
+if ($stmt->execute()) {
+    // Redireciona para a página 'index.html' em caso de sucesso
+    header("Location: ../index.html");
+    exit();
 } else {
-    // Caso ocorra um erro na execução da instrução SQL
-    echo "Erro: " . $sql . "<br>" . $conn->error; // Exibe a mensagem de erro específica
+    // Em caso de erro, exibe a mensagem de erro
+    echo "Erro: " . $sql . "<br>" . $conn->error;
 }
 
-// Fecha o statement e a conexão com o banco de dados
-$stmt->close(); // Fecha o statement preparado
-$conn->close(); // Fecha a conexão com o banco de dados
+// Fecha a instrução preparada
+$stmt->close();
+
+// Fecha a conexão com o banco de dados
+$conn->close();
 ?>
