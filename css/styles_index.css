@@ -18,6 +18,13 @@ body {
 .login-container {
     /* Centraliza o texto dentro do container */
     text-align: center;
+    /* Define a largura máxima do container */
+    width: 100%;
+    max-width: 400px;
+    /* Adiciona preenchimento interno */
+    padding: 20px;
+    /* Garante que o conteúdo se ajuste ao tamanho do container */
+    box-sizing: border-box;
 }
 
 /* Estilo da caixa de login */
@@ -31,9 +38,13 @@ body {
     /* Define o preenchimento interno da caixa */
     padding: 40px;
     /* Define a largura da caixa */
-    width: 300px;
+    width: 100%;
+    /* Define a largura máxima da caixa */
+    max-width: 400px;
     /* Centraliza a caixa horizontalmente */
     margin: 20px auto;
+    /* Garante que o conteúdo se ajuste ao tamanho da caixa */
+    box-sizing: border-box;
 }
 
 /* Estilo do logo */
@@ -180,59 +191,65 @@ h2 {
     text-decoration: underline;
 }
 
-/* Estilos responsivos */
+/* Estilos responsivos para telas menores que 768px */
 @media (max-width: 768px) {
-    .login-box {
-        width: 80%; /* Ajusta a largura da caixa de login */
-        max-width: 400px; /* Define a largura máxima */
-    }
-
     .logo img {
-        width: 70px; /* Ajusta a largura do logo */
-        height: 70px; /* Ajusta a altura do logo */
+        /* Ajusta a largura e altura do logo */
+        width: 70px;
+        height: 70px;
     }
 
     h2 {
-        margin-bottom: 20px; /* Ajusta a margem inferior do título h2 */
+        /* Ajusta a margem inferior do título h2 */
+        margin-bottom: 20px;
     }
 
     .textbox input {
-        font-size: 16px; /* Ajusta o tamanho da fonte da caixa de texto */
+        /* Ajusta o tamanho da fonte da caixa de texto */
+        font-size: 16px;
     }
 
     .btn {
-        font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+        /* Ajusta o tamanho da fonte do botão */
+        font-size: 14px;
     }
 }
 
+/* Estilos responsivos para telas menores que 576px */
 @media (max-width: 576px) {
     .login-box {
-        padding: 30px; /* Ajusta o preenchimento interno da caixa de login */
+        /* Ajusta o preenchimento interno da caixa de login */
+        padding: 30px;
     }
 
     .logo img {
-        width: 60px; /* Ajusta a largura do logo */
-        height: 60px; /* Ajusta a altura do logo */
+        /* Ajusta a largura e altura do logo */
+        width: 60px;
+        height: 60px;
     }
 
     h1 {
-        font-size: 24px; /* Ajusta o tamanho da fonte do título h1 */
-        margin-bottom: 10px; /* Ajusta a margem inferior do título h1 */
+        /* Ajusta o tamanho da fonte e a margem inferior do título h1 */
+        font-size: 24px;
+        margin-bottom: 10px;
     }
 
     h2 {
-        font-size: 18px; /* Ajusta o tamanho da fonte do título h2 */
-        margin-bottom: 20px; /* Ajusta a margem inferior do título h2 */
+        /* Ajusta o tamanho da fonte e a margem inferior do título h2 */
+        font-size: 18px;
+        margin-bottom: 20px;
     }
 
     .textbox input {
-        font-size: 14px; /* Ajusta o tamanho da fonte da caixa de texto */
-        padding: 8px; /* Ajusta o preenchimento interno da caixa de texto */
-        margin-bottom: 20px; /* Ajusta a margem inferior da caixa de texto */
+        /* Ajusta o tamanho da fonte, o preenchimento interno e a margem inferior da caixa de texto */
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 20px;
     }
 
     .btn {
-        font-size: 12px; /* Ajusta o tamanho da fonte do botão */
-        padding: 12px; /* Ajusta o preenchimento interno do botão */
+        /* Ajusta o tamanho da fonte e o preenchimento interno do botão */
+        font-size: 12px;
+        padding: 12px;
     }
 }
