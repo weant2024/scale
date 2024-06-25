@@ -17,19 +17,34 @@
     <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Buscar por nome ou CPF...">
 
     <!-- Lista de funcionários -->
-    <ul>
-        <li>Ana</li>
-        <li>João</li>
-        <li>Maria</li>
-        <li>Carlos</li>
-        <li>Lúcia</li>
+    <ul id="employeeList">
+        <li>
+            Ana 
+            <button onclick="showDetails('Ana')">Detalhes</button>
+        </li>
+        <li>
+            João 
+            <button onclick="showDetails('João')">Detalhes</button>
+        </li>
+        <li>
+            Maria 
+            <button onclick="showDetails('Maria')">Detalhes</button>
+        </li>
+        <li>
+            Carlos 
+            <button onclick="showDetails('Carlos')">Detalhes</button>
+        </li>
+        <li>
+            Lúcia 
+            <button onclick="showDetails('Lúcia')">Detalhes</button>
+        </li>
     </ul>
 
     <!-- Título secundário para os detalhes dos funcionários -->
     <h2>Detalhes dos Funcionários</h2>
 
     <!-- Tabela de detalhes dos funcionários -->
-    <table>
+    <table id="employeeDetails">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -78,7 +93,8 @@
         </tbody>
     </table>
 
-    <!-- Incluindo o arquivo JavaScript externo -->
-    <script src="js/script_funcionarios.js"></script>
+    <!-- Incluindo os arquivos JavaScript externos -->
+    <script src="js/script_search.js"></script>
+    <script src="js/script_showdetails.js"></script>
 </body>
 </html>
