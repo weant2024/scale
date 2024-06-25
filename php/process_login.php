@@ -8,19 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Simulação de autenticação (usuário e senha fixos para exemplo)
     if ($username === 'admin' && $password === 'admin') {
         logMessage("Usuário $username fez login com sucesso");
-        // Redirecionar para o dashboard após login bem-sucedido
-        header('Location: dashboard.html');
-        exit;
+        // Retorna uma resposta JSON indicando sucesso
+        echo json_encode(['success' => true]);
     } else {
         logMessage("Falha na tentativa de login para o usuário $username", 'ERROR');
-        // Redirecionar de volta ao login com uma mensagem de erro
-        header('Location: index.html?error=1');
-        exit;
+        // Retorna uma resposta JSON indicando falha
+        echo json_encode(['success' => false]);
     }
 } else {
     logMessage('Tentativa de acesso direto ao script de login', 'WARNING');
-    // Redirecionar de volta ao login
-    header('Location: index.html');
-    exit;
+    // Retorna uma resposta JSON indicando falha
+    echo json_encode(['success' => false]);
 }
 ?>
