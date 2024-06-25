@@ -25,8 +25,12 @@
             </div>
             <!-- Título principal -->
             <h2>WEANT</h2>
+            <!-- Verifica se há um parâmetro de erro na URL e exibe uma mensagem -->
+            <?php if (isset($_GET['error'])): ?>
+                <p class="error">Usuário ou senha incorretos</p>
+            <?php endif; ?>
             <!-- Formulário de login -->
-            <form id="login-form">
+            <form id="login-form" action="process_login.php" method="post">
                 <!-- Campo de entrada para o nome de usuário -->
                 <div class="textbox">
                     <input type="text" placeholder="Login" name="username" id="username" required>
