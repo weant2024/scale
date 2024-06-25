@@ -1,7 +1,7 @@
 /* Estilos para o corpo da página */
 body {
     font-family: 'Arial', sans-serif; /* Fonte padrão */
-    background-color: #f4f4f4; /* Cor de fundo */
+    background-color: #f0f2f5; /* Cor de fundo */
     margin: 0; /* Remove margens */
     padding: 20px; /* Espaçamento interno */
 }
@@ -20,7 +20,7 @@ ul {
 }
 
 ul li {
-    background: #f39c12; /* Cor de fundo laranja */
+    background: #4a14af; /* Cor de fundo roxa */
     color: white; /* Cor do texto branco */
     padding: 10px; /* Espaçamento interno */
     margin: 5px 0; /* Espaçamento externo */
@@ -48,7 +48,7 @@ th, td {
 
 /* Estilos para as células de cabeçalho */
 th {
-    background-color: #f39c12; /* Cor de fundo laranja */
+    background-color: #4a14af; /* Cor de fundo roxa */
     color: white; /* Cor do texto branco */
 }
 
@@ -60,4 +60,37 @@ tr:nth-child(even) {
 /* Estilos para linhas ao passar o mouse */
 tr:hover {
     background-color: #f1f1f1; /* Cor de fundo cinza claro ao passar o mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Ajusta o espaçamento interno */
+    }
+
+    ul li {
+        padding: 8px; /* Ajusta o espaçamento interno dos itens da lista */
+    }
+
+    th, td {
+        padding: 10px; /* Ajusta o espaçamento interno das células da tabela */
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 5px; /* Ajusta o espaçamento interno */
+    }
+
+    ul li {
+        padding: 6px; /* Ajusta o espaçamento interno dos itens da lista */
+    }
+
+    th, td {
+        padding: 8px; /* Ajusta o espaçamento interno das células da tabela */
+    }
+
+    table {
+        font-size: 14px; /* Ajusta o tamanho da fonte para caber em telas menores */
+    }
 }
