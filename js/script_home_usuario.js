@@ -35,3 +35,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exibe a seção inicial (pode ser ajustada conforme necessário)
     showSection('introducao');
 });
+
