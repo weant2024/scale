@@ -1,0 +1,96 @@
+/* Estilos para o corpo da página */
+body {
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+    background-color: #f0f2f5; /* Cor de fundo */
+    margin: 0; /* Remove margens */
+    padding: 20px; /* Espaçamento interno */
+}
+
+/* Estilos para os títulos h1 e h2 */
+h1, h2 {
+    color: #333; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilos para a lista de funcionários */
+ul {
+    list-style-type: none; /* Remove marcadores */
+    padding: 0; /* Remove o espaçamento padrão */
+    text-align: center; /* Centraliza o texto */
+}
+
+ul li {
+    background: #4a14af; /* Cor de fundo roxa */
+    color: white; /* Cor do texto branco */
+    padding: 10px; /* Espaçamento interno */
+    margin: 5px 0; /* Espaçamento externo */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Estilos para a tabela de detalhes dos funcionários */
+table {
+    width: 100%; /* Largura total */
+    margin-top: 20px; /* Espaçamento acima */
+    border-collapse: collapse; /* Colapso das bordas */
+    background-color: white; /* Cor de fundo branca */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ao redor */
+}
+
+/* Estilos para as células de cabeçalho e dados da tabela */
+table, th, td {
+    border: 1px solid #ddd; /* Bordas cinza */
+}
+
+th, td {
+    padding: 15px; /* Espaçamento interno */
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+/* Estilos para as células de cabeçalho */
+th {
+    background-color: #4a14af; /* Cor de fundo roxa */
+    color: white; /* Cor do texto branco */
+}
+
+/* Estilos para linhas pares da tabela */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor de fundo cinza claro */
+}
+
+/* Estilos para linhas ao passar o mouse */
+tr:hover {
+    background-color: #f1f1f1; /* Cor de fundo cinza claro ao passar o mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Ajusta o espaçamento interno */
+    }
+
+    ul li {
+        padding: 8px; /* Ajusta o espaçamento interno dos itens da lista */
+    }
+
+    th, td {
+        padding: 10px; /* Ajusta o espaçamento interno das células da tabela */
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 5px; /* Ajusta o espaçamento interno */
+    }
+
+    ul li {
+        padding: 6px; /* Ajusta o espaçamento interno dos itens da lista */
+    }
+
+    th, td {
+        padding: 8px; /* Ajusta o espaçamento interno das células da tabela */
+    }
+
+    table {
+        font-size: 14px; /* Ajusta o tamanho da fonte para caber em telas menores */
+    }
+}

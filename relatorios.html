@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags para definições básicas do documento -->
+     <!-- Define o conjunto de caracteres como UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Configura a viewport para garantir que a página seja responsiva -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página -->
+    <title>Gerar Relatórios de Funcionários</title>
+	<!-- Link para o favicon -->
+    <link rel="icon" href="imagens/favicon.ico" type="image/x-icon">
+	<!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="css/styles_relatorios.css">
+    <!-- Link para a biblioteca jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Link para o arquivo JS -->
+    <script src="js/relatorios.js"></script>
+</head>
+<body>
+    <!-- Título principal -->
+    <h1>Gerar Relatórios de Funcionários</h1>
+    <!-- Formulário para seleção do funcionário -->
+    <label for="employeeName">Nome do Funcionário</label>
+    <select id="employeeName">
+        <option value="Ana Silva">Ana Silva</option>
+        <option value="João Souza">João Souza</option>
+        <option value="Maria Oliveira">Maria Oliveira</option>
+        <option value="Carlos Pereira">Carlos Pereira</option>
+        <option value="Lucia Santos">Lucia Santos</option>
+    </select>
+    <!-- Botões para gerar relatório e exportar para PDF -->
+    <button onclick="generateReport()">Gerar Relatório</button>
+    <button onclick="exportToPDF()">Exportar para PDF</button>
+
+    <!-- Título secundário -->
+    <h2>Relatório do Funcionário</h2>
+    <!-- Tabela para exibir os dados do relatório -->
+    <table>
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <td id="reportName"></td>
+            </tr>
+            <tr>
+                <th>Horário de Entrada</th>
+                <td id="reportEntrada"></td>
+            </tr>
+            <tr>
+                <th>Horário de Saída</th>
+                <td id="reportSaida"></td>
+            </tr>
+            <tr>
+                <th>Horário de Intervalo</th>
+                <td id="reportIntervalo"></td>
+            </tr>
+            <tr>
+                <th>Horas Trabalhadas</th>
+                <td id="reportHorasTrabalhadas"></td>
+            </tr>
+            <tr>
+                <th>Horas de Pausa</th>
+                <td id="reportHorasPausa"></td>
+            </tr>
+            <tr>
+                <th>Horas Trabalhadas na Semana</th>
+                <td id="reportHorasSemana"></td>
+            </tr>
+            <tr>
+                <th>Banco de Horas</th>
+                <td id="reportBancoHoras"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

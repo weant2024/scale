@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+     <!-- Define o conjunto de caracteres como UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Configura a viewport para garantir que a página seja responsiva -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Link para o favicon -->
+    <link rel="icon" href="imagens/favicon.ico" type="image/x-icon">
+    <!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="css/styles_dashboard.css">
+    <!-- Link para o FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <!-- Cabeçalho da página -->
+    <header>
+        <!-- Container para centralizar o conteúdo -->
+        <div class="container">
+            <!-- Título da página com o intervalo de datas -->
+            <h2 id="date-range"></h2>
+            <!-- Input de data inicial -->
+            <label for="start-date">Data inicial</label>
+            <input type="date" id="start-date">
+            <!-- Input de data final -->
+            <label for="end-date">Data Final:</label>
+            <input type="date" id="end-date">
+            <!-- Botões de ação -->
+            <button id="updateDateBtn">Atualizar</button>
+            <button id="printBtn">Gerar PDF</button>
+            <button id="sendBtn">Enviar</button>
+        </div>
+    </header>
+
+    <!-- Container principal do dashboard -->
+    <div class="dashboard-container">
+        <!-- Painel lateral (sidebar) -->
+        <div class="sidebar" id="sidebar">
+            <!-- Informações do usuário -->
+            <div class="user-info">
+                <!-- Aqui você pode adicionar o nome do usuário e imagem -->
+            </div>
+            <!-- Lista de links da sidebar -->
+            <ul>
+                <li><a href="usuario.html"><i class="fas fa-user"></i> Usuário</a></li>
+                <!-- Adicione outros links conforme necessário -->
+            </ul>
+        </div>
+        <!-- Conteúdo principal -->
+        <main>
+            <!-- Container para a barra de pesquisa e tabela -->
+            <div class="container">
+                <!-- Barra de pesquisa -->
+                <div class="search-bar">
+                    <label for="searchInput">Pesquisar:</label>
+                    <input type="text" id="searchInput" placeholder="Digite o nome de usuário ou CPF">
+                    <select id="searchType">
+                        <option value="username">Nome de Usuário</option>
+                        <option value="cpf">CPF</option>
+                    </select>
+                    <button id="searchButton">Pesquisar</button>
+                </div>
+                <!-- Tabela de horários -->
+                <table>
+                    <thead>
+                        <!-- Cabeçalho da tabela -->
+                        <tr>
+                            <th>Horários</th>
+                            <th>Nome de Usuário</th>
+                            <th>CPF</th>
+                            <th>Segunda</th>
+                            <th>Terça</th>
+                            <!-- Adicione os demais dias da semana conforme necessário -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas da tabela com os horários e colaboradores -->
+                        <!-- Preencha com os dados reais -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script JavaScript para interatividade -->
+    <script src="js/script_dashboard.js"></script>
+</body>
+
+</html>
