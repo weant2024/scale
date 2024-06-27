@@ -1,0 +1,51 @@
+my-app/
+├── public/
+│   ├── index.html
+│   ├── home_usuario.html
+│   ├── home_gestor.html
+│   ├── home_admin.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Layout/
+│   │   │   ├── Header.js
+│   │   │   ├── Footer.js
+│   │   │   └── Content.js
+│   │   ├── Escala/
+│   │   │   ├── EscalaMensal.js
+│   │   │   ├── EscalaSemanal.js
+│   │   │   ├── EscalaPessoal.js
+│   │   │   ├── EscalaContrato.js
+│   │   │   └── EscalaDia.js
+│   │   ├── Informacoes/
+│   │   │   ├── QuantidadeHorasTrabalhadas.js
+│   │   │   ├── BancoHoras.js
+│   │   │   └── Ferias.js
+│   │   ├── Configuracao/
+│   │   │   ├── AtualizarCadastro.js
+│   │   │   └── ConfigPersonalizada.js
+│   │   └── NotFound.js
+│   ├── App.js
+│   ├── index.js
+│   ├── index.css
+│   ├── styles/
+│   │   ├── styles_home_usuario.css
+│   │   ├── styles_home_gestor.css
+│   │   ├── styles_home_admin.css
+│   │   └── styles_index.css
+│   ├── assets/
+│   │   ├── imagens/
+│   │   │   ├── logo.png
+│   │   │   └── favicon.ico
+│   │   └── ...
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── script_home_usuario.js
+│   │   ├── script_home_gestor.js
+│   │   └── script_home_admin.js
+│   ├── php/
+│   │   ├── conexao.php
+│   │   ├── sec_tipo.php
+│   │   └── ...
+│   └── ...
+└── ...

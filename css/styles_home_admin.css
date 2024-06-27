@@ -1,9 +1,9 @@
-/* Estilos para a página Home do Usuário */
+/* Estilos para a página Home do Administrador */
 
 /* Estilo global para o corpo da página */
 body {
-  font-family: Arial, sans-serif; /* Define a fonte padrão para todo o documento */
-  background-color: #f0f0f0; /* Cor de fundo para a página */
+  font-family: 'Arial', sans-serif; /* Define a fonte padrão para todo o documento */
+  background-color: #fff; /* Cor de fundo para a página */
   margin: 0; /* Remove margens padrão */
   padding: 0; /* Remove preenchimento padrão */
 }
@@ -37,11 +37,11 @@ nav ul li a:hover {
   background-color: #555; /* Cor de fundo ao passar o mouse sobre os links */
 }
 
-/* Estilo para a seção principal */
-.main-section {
-  margin: 20px; /* Margem externa da seção principal */
-  padding: 20px; /* Preenchimento interno da seção principal */
-  background-color: #fff; /* Cor de fundo da seção principal */
-  border: 1px solid #ddd; /* Borda da seção principal */
-  border-radius: 5px; /* Borda arredondada da seção principal */
+/* Estilo para a seção de administração */
+.admin-section {
+  margin: 20px; /* Margem externa da seção de administração */
+  padding: 20px; /* Preenchimento interno da seção de administração */
+  background-color: #fff; /* Cor de fundo da seção de administração */
+  border: 1px solid #ddd; /* Borda da seção de administração */
+  border-radius: 5px; /* Borda arredondada da seção de administração */
 }
