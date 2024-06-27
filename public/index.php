@@ -4,7 +4,7 @@ session_start();
 session_destroy(); // Apenas para fins ilustrativos, destrói a sessão existente
 
 // Inclui configuração e outros arquivos necessários
-include "php/config.php"; // Aqui você pode inicializar configurações, como conexão com o banco de dados
+include "../php/conexão.php"; // Aqui você pode inicializar configurações, como conexão com o banco de dados
 ?>
 
 <!DOCTYPE html>

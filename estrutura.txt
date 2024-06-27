@@ -1,6 +1,7 @@
 my-app/
 ├── public/
-│   ├── index.html
+│   ├── index.php
+│   ├── template.html
 │   ├── home_usuario.html
 │   ├── home_gestor.html
 │   ├── home_admin.html
@@ -27,25 +28,26 @@ my-app/
 │   │   └── NotFound.js
 │   ├── App.js
 │   ├── index.js
-│   ├── index.css
-│   ├── styles/
-│   │   ├── styles_home_usuario.css
-│   │   ├── styles_home_gestor.css
-│   │   ├── styles_home_admin.css
-│   │   └── styles_index.css
-│   ├── assets/
-│   │   ├── imagens/
-│   │   │   ├── logo.png
-│   │   │   └── favicon.ico
-│   │   └── ...
-│   ├── js/
-│   │   ├── app.js
-│   │   ├── script_home_usuario.js
-│   │   ├── script_home_gestor.js
-│   │   └── script_home_admin.js
-│   ├── php/
-│   │   ├── conexao.php
-│   │   ├── sec_tipo.php
-│   │   └── ...
+│   └── index.css
+│
+├── styles/
+│      ├── styles_home_usuario.css
+│      ├── styles_home_gestor.css
+│      ├── styles_home_admin.css
+│      └── stles_index.css
+├── imagens/
+│      ├── logo.png
+│      └── favicon.ico
+│      
+├── js/
+│   ├── app.js
+│   ├── script_home_usuario.js
+│   ├── script_home_gestor.js
+│   └── script_home_admin.js
+├── php/
+│   ├── conexao.php
+│   ├── sec_tipo.php
+│   ├── data.php
 │   └── ...
+│   
 └── ...
