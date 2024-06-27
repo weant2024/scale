@@ -3,7 +3,7 @@
 <head>
 <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CSC eGTI</title>
+<title>Scale</title>
 
 <?php
  session_start(); // Inicia a sessão

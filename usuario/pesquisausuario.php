@@ -87,16 +87,23 @@ $pnivelusuario = $dados["pnivel"];
         <td width="10%"><?php if ( $dados["pnivel"] == 'Usuario' ) {
 			echo "Usuário";
 		}
-		elseif ( $dados["pnivel"] == 'Tecnico' ) {
-			echo "Técnico";
+		elseif ( $dados["pnivel"] == 'Gestor' ) {
+			echo "Gestor";
 		}
-		elseif ( $dados["pnivel"] == 'Administrador' ) {
-			echo "Administrador";
+		elseif ( $dados["pnivel"] == 'Admin' ) {
+			echo "Admin";
 		}		
 		?>						  
 			</td>
         <td width="11%" align="center"><?php echo "$dados[pativo]<br />";?>	</td>
-      	<td width="4%"  align="center"><a class="texteditar" href="editarusuario.php?id=<?php echo $dados['id'] ?>">DETALHAR</a></td>		
+		<td width="4%"  align="center">
+			<?php
+			$nivel = $_SESSION['UsuarioNivel']; 
+			if ($nivel > 2) {
+				echo '<a class="texteditar" href="editarusuario.php?id=' . $dados['id'] . '">DETALHAR</a>';
+			}
+			?>
+      	</td>		
 	</tr>	
 <?php
 }

@@ -1,9 +1,9 @@
 <?php
 $local = "localhost";
-$usuario = "weant2024";
-$senha = "W34nt@2024!";
+$userdb = "weant2024";
+$passdb = "W34nt@2024!";
 $banco = "scale";
-$conn = new mysqli($local, $usuario, $senha, $banco);
+$conn = new mysqli($local, $userdb, $passdb, $banco);
 
 // Verificar conexão
 if ($conn->connect_error) {

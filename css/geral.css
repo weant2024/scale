@@ -1,0 +1,229 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+  margin: 0 auto;
+  padding: 0 auto;
+  background-image:url(../img/bg-inicial.jpg);
+  background-attachment:fixed;
+  background-size:cover;  
+  /* background: -webkit-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Safari 5.1-6*/
+  /* background: -o-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Opera 11.1-12*/
+  /* background: -moz-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Fx 3.6-15*/
+  /* background: linear-gradient(to top, rgba(100,100,100,1), rgba(0,0,0,1)); /*Standard*/
+  /* text-shadow:#333 0px 0px 0.5px; */
+}
+
+.boxform{
+  border: #000 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  width: 800px;
+  background-color: rgba(245, 255, 255,0.5);
+}
+
+.textos{
+	font-size: 18px;
+	color: #000;
+}
+
+.numos{
+	font-size: 18px;
+	font-weight: 100;
+	color: #00F;
+	text-shadow:#000 0px 0px 0.5px;
+}
+
+.texttable{
+	font-size: 16px;
+	font-weight: 200;
+	color: #000;
+	/*text-shadow:#000 0px 0px 0.5px;*/
+	text-decoration:none;
+}
+
+.texteditar{
+	font:"Courier New", Courier, monospace;
+	color:#2E9AFE;
+	text-shadow: #000 1px 1px 1;	
+	font-size: 16px;
+	font-weight: 200;
+	text-decoration:none;
+}
+
+textarea{
+  overflow:none;
+  margin: 0px; 
+  min-height: 50px; 
+  min-width: 268px;	
+  max-height: 50px; 
+  max-width: 268px;	
+}
+
+#observacao{  
+  max-width: 640px;
+  min-width: 640px;
+  overflow:auto;
+}
+
+#status{
+  max-width: 200px;
+  min-width: 200px;			
+}
+
+.tabelacolorida tr:nth-child(even) {
+    background-color:rgba(255,255,255,0.1);
+}
+
+#linkborda {
+	background-color:rgba(0, 0, 0, 0.5); 
+	border: 2px solid #CCC;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    float:left; 
+}
+
+#linkpag { 
+    text-decoration:none;
+	font-size:10px;
+	font:"Courier New", Courier, monospace;
+	color:#25EFFA;
+	text-shadow: #000 1px 1px 4px;	
+}
+
+#linkatual { 
+    text-decoration:none;
+	font-size:10px;
+	font:"Courier New", Courier, monospace;
+	color:#FFF;
+	text-shadow: #000 1px 1px 4px;
+}
+
+#linkdembranco {
+	background-color:rgba(0, 0, 0, 0.5); 
+	border: 2px solid #CCC;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 32px;
+    text-decoration:none;
+	color:#FFF;
+	text-shadow: #000 1px 1px 4px;
+}
+
+#descricao{
+	overflow:auto;
+	margin: 0px; 
+	min-height: 50px; 
+	min-width: 750px;	
+	max-height: 50px; 
+	max-width: 750px;	
+}
+
+#nosi { 
+	width: 100%; 
+}
+#nivelusuario { 
+	width: 100%; 
+}
+#ativousuario { 
+	width: 100%; 
+}
+
+#laudo{
+	overflow:none;
+	margin: 0px; 
+	min-height: 50px; 
+	min-width: 775px;	
+	max-height: 50px; 
+	max-width: 775px;	
+}
+
+#conclusao{
+	overflow:none;
+	margin: 0px; 
+	min-height: 50px; 
+	min-width: 775px;	
+	max-height: 50px; 
+	max-width: 775px;	
+}
+
+#termodegarantia{
+	overflow:none;
+	margin: 0px; 
+	min-height: 50px; 
+	min-width: 775px;	
+	max-height: 50px; 
+	max-width: 775px;	
+}
+
+.imagemheldesk {	
+	width: 64px; 
+    height: 64px;		
+    outline:none;
+}
+
+#rodape {
+	margin-top:40px;
+	width:100%;
+	height:30px;
+	background:#F2F2F2;
+	position:fixed;
+	bottom:0;
+	opacity:0.50;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=70);
+	text-decoration: none;
+}
+
+.button {
+display: inline-block;
+background: -webkit-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Safari 5.1-6*/
+background: -o-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Opera 11.1-12*/
+background: -moz-linear-gradient(to top, rgba(245,245,245,1), rgba(238,238,238,1)); /*Fx 3.6-15*/
+background: linear-gradient(to top, rgba(200,200,200,1), rgba(255,255,255,1)); /*Standard*/
+color: #444;
+padding: 8px;
+text-decoration: none;
+box-sizing: border-box;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 14px;
+border: 0px;
+border-radius: 5px;
+box-shadow: 1px 1px 1px #999;
+} 
+
+ .button:hover{
+	 cursor:  pointer; 
+    }
+
+ .button:active{
+     box-shadow: inset 0 0 7px rgba(0, 0, 0, .2);
+     top: 4px;
+	 cursor:  wait; 
+    }
+
+
+	
+
+#escritaini { 	
+	width: 100%;
+	color: #FFFFFF;
+	text-shadow: #000 0px 0px 4px;
+	background-color:rgba(0, 0, 0, 0.5); 
+	border: 2px solid #CCC;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+}

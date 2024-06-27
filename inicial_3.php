@@ -16,7 +16,9 @@ if ( $nivel < 3 )
 
 <body>
 
-Aqui é o conteúdo da página inicial 1
+Aqui é o conteúdo da página inicial 3 (ADMIN)
+
+<a href="usuario/inicialusuario.php">Inicial Usuário</a>
 
 </body>
 </html>
