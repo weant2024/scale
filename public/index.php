@@ -1,7 +1,7 @@
 <?php
   session_start(); // Inicia a sessão
   session_destroy(); // Destrói a sessão limpando todos os valores salvos
-  include "php/config.php"; 
+  include "php/conexao.php"; 
   include "php/data.php"; 
 
   if ($dias < 1){
