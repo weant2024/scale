@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário de Funcionários</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .calendar div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .calendar div.header {
+            background: #f39c12;
+            color: white;
+            font-weight: bold;
+        }
+        .calendar div.day {
+            background: #fff;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .calendar div.day:hover {
+            background: #f1f1f1;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-header span {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .modal-body {
+            padding: 10px 0;
+        }
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+        .modal-body ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendário</h1>
+    <div class="calendar">
+        <div class="header">Dom</div>
+        <div class="header">Seg</div>
+        <div class="header">Ter</div>
+        <div class="header">Qua</div>
+        <div class="header">Qui</div>
+        <div class="header">Sex</div>
+        <div class="header">Sáb</div>
+
+        <!-- Dias do mês (exemplo para junho de 2024) -->
+        <div></div><div></div><div></div><div></div><div></div><div></div><div class="day" onclick="showDetails(1)">1</div>
+        <div class="day" onclick="showDetails(2)">2</div>
+        <div class="day" onclick="showDetails(3)">3</div>
+        <div class="day" onclick="showDetails(4)">4</div>
+        <div class="day" onclick="showDetails(5)">5</div>
+        <div class="day" onclick="showDetails(6)">6</div>
+        <div class="day" onclick="showDetails(7)">7</div>
+        <div class="day" onclick="showDetails(8)">8</div>
+        <div class="day" onclick="showDetails(9)">9</div>
+        <div class="day" onclick="showDetails(10)">10</div>
+        <div class="day" onclick="showDetails(11)">11</div>
+        <div class="day" onclick="showDetails(12)">12</div>
+        <div class="day" onclick="showDetails(13)">13</div>
+        <div class="day" onclick="showDetails(14)">14</div>
+        <div class="day" onclick="showDetails(15)">15</div>
+        <div class="day" onclick="showDetails(16)">16</div>
+        <div class="day" onclick="showDetails(17)">17</div>
+        <div class="day" onclick="showDetails(18)">18</div>
+        <div class="day" onclick="showDetails(19)">19</div>
+        <div class="day" onclick="showDetails(20)">20</div>
+        <div class="day" onclick="showDetails(21)">21</div>
+        <div class="day" onclick="showDetails(22)">22</div>
+        <div class="day" onclick="showDetails(23)">23</div>
+        <div class="day" onclick="showDetails(24)">24</div>
+        <div class="day" onclick="showDetails(25)">25</div>
+        <div class="day" onclick="showDetails(26)">26</div>
+        <div class="day" onclick="showDetails(27)">27</div>
+        <div class="day" onclick="showDetails(28)">28</div>
+        <div class="day" onclick="showDetails(29)">29</div>
+        <div class="day" onclick="showDetails(30)">30</div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-header">
+            <h2>Detalhes da Escala em <span id="modalDate"></span></h2>
+            <span onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <ul id="employeeList">
+                <!-- Lista de funcionários -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos funcionários escalados
+        let employeesSchedule = JSON.parse(localStorage.getItem('employeesSchedule')) || {
+            1: [{ name: 'Ana Silva', hours: '08:00 - 17:00' }],
+            2: [{ name: 'João Souza', hours: '09:00 - 18:00' }],
+            3: [{ name: 'Maria Oliveira', hours: '08:00 - 17:00' }, { name: 'Carlos Pereira', hours: '10:00 - 19:00' }],
+            // ... adicionar mais dados conforme necessário
+        };
+
+        function showDetails(day) {
+            const modal = document.getElementById('modal');
+            const modalDate = document.getElementById('modalDate');
+            const employeeList = document.getElementById('employeeList');
+
+            modalDate.innerText = `${day}/06/2024`;
+            employeeList.innerHTML = '';
+
+            if (employeesSchedule[day]) {
+                employeesSchedule[day].forEach((employee) => {
+                    const li = document.createElement('li');
+                    li.innerText = `${employee.name} - ${employee.hours}`;
+                    employeeList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.innerText = 'Nenhum funcionário escalado.';
+                employeeList.appendChild(li);
+            }
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala Noc - Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c6cedd;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Estilos do header */
+        header {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%;
+        }
+
+        header h2 {
+            margin: 0;
+            color: #ecf0f1;
+        }
+
+        .date-inputs {
+            display: flex;
+            align-items: center;
+        }
+
+        .date-inputs label {
+            margin-right: 10px;
+            color: #ecf0f1;
+        }
+
+        .date-inputs input {
+            margin-right: 10px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        header button {
+            background-color: #2980b9;
+            color: #ecf0f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        header button:hover {
+            background-color: #3498db;
+        }
+
+        /* Estilos do painel lateral */
+        .sidebar {
+            width: 250px;
+            background-color: #f7f5fa;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 120px;
+            border-right: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar ul li a {
+            color: #050404;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos do conteúdo principal */
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        main h2 {
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #2980b9;
+            color: #ecf0f1;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ecf0f1;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #bdc3c7;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h2 id="date-range"></h2>
+            <div class="date-inputs">
+                <label for="start-date">Data inicial:</label>
+                <input type="date" id="start-date" class="form-control">
+                <label for="end-date">Data Final:</label>
+                <input type="date" id="end-date" class="form-control">
+                <button onclick="updateDateRange()" class="btn btn-primary">Atualizar</button>
+                <button onclick="printPage()" class="btn btn-primary">PDF</button>
+                <button onclick="sendViaWhatsApp()" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 sidebar" id="sidebar">
+                <div class="user-info">
+                    <!-- Adicione nome de usuário e imagem aqui -->
+                </div>
+                <ul>
+                    <li><a href="usuario.html"><i class="fas fa-user"></i> Usuário</a></li>
+                    <li><a href="editar_escala.html"><i class="fas fa-calendar-alt"></i> Editar escala</a></li>
+                    <li><a href="nova_escala.html"><i class="fas fa-plus"></i> Nova escala</a></li>
+                    <li><a href="calendario.html"><i class="fas fa-calendar"></i> Calendário</a></li>
+                    <li><a href="funcionarios.html"><i class="fas fa-users"></i> Funcionários</a></li>
+                    <li><a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
+                    <li><a href="auditoria.html"><i class="fas fa-search"></i> Auditoria</a></li>
+                    <li><a href="configuracao.html"><i class="fas fa-cog"></i> Configuração</a></li>
+                    <li><a href="sair.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </div>
+            <main class="col-md-9">
+                <div class="container">
+                    <h2>Tabela de Escalas</h2>
+                    <table id="table-escalas" class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Horários</th>
+                                <th>Segunda</th>
+                                <th>Terça</th>
+                                <th>Quarta</th>
+                                <th>Quinta</th>
+                                <th>Sexta</th>
+                                <th>Sábado</th>
+                                <th>Domingo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="escalas-body">
+                            <!-- Conteúdo da tabela será preenchido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Função para formatar a data no formato dd/mm/yyyy
+        function formatDate(date) {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // Função para atualizar o intervalo de datas no cabeçalho
+        function updateDateRange() {
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (!isNaN(startDate) && !isNaN(endDate) && startDate <= endDate) {
+                const formattedStartDate = formatDate(startDate);
+                const formattedEndDate = formatDate(endDate);
+                document.getElementById('date-range').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+
+                // Atualiza a tabela de escalas para o intervalo de datas selecionado
+                updateSchedulesTable(startDate, endDate);
+            } else {
+                alert('Por favor, selecione datas válidas e certifique-se de que a data inicial seja anterior ou igual à data final.');
+            }
+        }
+
+        // Função para atualizar a tabela de escalas com base no intervalo de datas
+        function updateSchedulesTable(startDate, endDate) {
+            // Exemplo de escalas simuladas - você deve implementar a lógica para obter as escalas do backend
+            const schedules = [
+                { date: '2024-06-21', startTime: '08:00', endTime: '15:00', employeeName: 'Funcionário A' },
+                { date: '2024-06-22', startTime: '09:00', endTime: '16:00', employeeName: 'Funcionário B' },
+                { date: '2024-06-23', startTime: '10:00', endTime: '17:00', employeeName: 'Funcionário C' },
+                { date: '2024-06-24', startTime: '11:00', endTime: '18:00', employeeName: 'Funcionário D' },
+                { date: '2024-06-25', startTime: '12:00', endTime: '19:00', employeeName: 'Funcionário E' },
+                { date: '2024-06-26', startTime: '13:00', endTime: '20:00', employeeName: 'Funcionário F' },
+                { date: '2024-06-27', startTime: '14:00', endTime: '21:00', employeeName: 'Funcionário G' }
+                // Adicione mais escalas conforme necessário
+            ];
+
+            const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+            const tableBody = document.getElementById('escalas-body');
+            tableBody.innerHTML = '';
+
+            // Itera sobre cada dia no intervalo de datas
+            let currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+                const formattedDate = currentDate.toISOString().split('T')[0];
+
+                // Encontra a escala correspondente para a data atual
+                const scheduleForDate = schedules.find(schedule => schedule.date === formattedDate);
+
+                // Cria uma nova linha na tabela para a escala encontrada
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${formatDate(currentDate)}</td>`;
+
+                // Preenche as células com as escalas encontradas para cada dia da semana
+                daysOfWeek.forEach(day => {
+                    let cellContent = '-';
+                    if (scheduleForDate && scheduleForDate.date === formattedDate) {
+                        const startTime = scheduleForDate.startTime;
+                        const endTime = scheduleForDate.endTime;
+                        const employeeName = scheduleForDate.employeeName;
+                        cellContent = `${startTime} - ${endTime}<br>${employeeName}`;
+                    }
+                    row.innerHTML += `<td>${cellContent}</td>`;
+                });
+
+                tableBody.appendChild(row);
+
+                // Avança para o próximo dia
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        }
+
+        // Inicializa a tabela de escalas para o intervalo de datas inicial
+        const initialStartDate = new Date();
+        const initialEndDate = new Date();
+        initialEndDate.setDate(initialEndDate.getDate() + 6); // Exibe uma semana de escalas inicialmente
+
+        // Define os valores iniciais nos inputs de data
+        document.getElementById('start-date').valueAsDate = initialStartDate;
+        document.getElementById('end-date').valueAsDate = initialEndDate;
+
+        // Atualiza o intervalo de datas no cabeçalho e a tabela de escalas inicialmente
+        updateDateRange();
+
+        // Função para imprimir a página
+        function printPage() {
+            window.print();
+        }
+
+        // Função para enviar via WhatsApp (exemplo)
+        function sendViaWhatsApp() {
+            alert('Enviar via WhatsApp não implementado nesta versão de exemplo.');
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

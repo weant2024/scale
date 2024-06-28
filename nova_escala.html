@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala Noc - Nova Escala</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f5fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #2980b9;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #3498db;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Nova Escala</h2>
+        <form id="nova-escala-form">
+            <div class="form-group">
+                <label for="start-time">Horário de Início:</label>
+                <input type="time" id="start-time" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="end-time">Horário de Término:</label>
+                <input type="time" id="end-time" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="employee-name">Nome do Funcionário:</label>
+                <input type="text" id="employee-name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Data da Escala:</label>
+                <input type="date" id="date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="dashboard.html" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const novaEscalaForm = document.getElementById('nova-escala-form');
+
+            novaEscalaForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Recupera os valores do formulário
+                const startTime = document.getElementById('start-time').value;
+                const endTime = document.getElementById('end-time').value;
+                const employeeName = document.getElementById('employee-name').value;
+                const date = document.getElementById('date').value;
+
+                // Validação básica - implemente validações mais robustas conforme necessário
+                if (!startTime || !endTime || !employeeName || !date) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+
+                // Cria um objeto para a nova escala
+                const newSchedule = {
+                    startTime: startTime,
+                    endTime: endTime,
+                    employeeName: employeeName,
+                    date: date
+                };
+
+                // Recupera as escalas armazenadas ou inicializa uma nova array
+                let schedules = localStorage.getItem('schedules');
+                schedules = schedules ? JSON.parse(schedules) : [];
+
+                // Adiciona a nova escala ao array
+                schedules.push(newSchedule);
+
+                // Salva as escalas atualizadas no localStorage
+                localStorage.setItem('schedules', JSON.stringify(schedules));
+
+                // Redireciona de volta para o dashboard
+                window.location.href = 'dashboard.html';
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
