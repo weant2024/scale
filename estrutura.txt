@@ -7,7 +7,7 @@ WEANT
 │   ├── 
 │   └── ...
 │
-├── styles/
+├── css/
 │      ├── .css
 │      ├── .css
 │      ├── .css
