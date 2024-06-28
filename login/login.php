@@ -1,5 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,7 +11,7 @@ include "../sec/config.php";
 include "../sec/data.php"; 
 
 if ($dias < 1){
-	header ("Location: ../pagamento.php"); exit;
+	header ("Location: ../php/pagamento.php"); exit;
 }
 
 ?>

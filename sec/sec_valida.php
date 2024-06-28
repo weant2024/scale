@@ -11,17 +11,19 @@ $usuario = mysqli_real_escape_string($conn, $_POST['login']);
 $senha = mysqli_real_escape_string($conn, $_POST['senha']);
     
 // Validação do usuário/senha digitados
-$sql = "SELECT `id`, `login`, `nivel` FROM `usuario` WHERE (`login` = '". $usuario ."') AND (`senha` = '". ($senha) ."') AND (`ativo` = 1) LIMIT 1";
+$sql = "SELECT `id`, `login`, `nivel`, `ativo` FROM `usuario` WHERE (`login` = '". $usuario ."') AND (`senha` = '". ($senha) ."')";
 $query = $conn->query($sql);
+$resultado = $query->fetch_assoc();
 
+if ($resultado['ativo'] == 0) {
+  header("Location: ../login/login_desativado.php"); exit;
+}
 
-if ($query->num_rows != 1) {
+else if ($query->num_rows != 1) {
   // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
   header("Location: ../login/login_invalido.php"); exit;
-} else {
-  // Salva os dados encontados na variável $resultado
-  $resultado = $query->fetch_assoc();
-}
+} 
+
   // Se a sessão não existir, inicia uma
   if (!isset($_SESSION)) session_start();
 
