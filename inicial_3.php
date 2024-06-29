@@ -26,14 +26,13 @@ if ( $nivel < 3 )
                     <!-- Adicione nome de usuário e imagem aqui -->
                 </div>
                 <ul>
-                    <li><a href="usuario.html"><i class="fas fa-user"></i> Usuário</a></li>
                     <li><a href="editar_escala.html"><i class="fas fa-calendar-alt"></i> Editar escala</a></li>
                     <li><a href="nova_escala.html"><i class="fas fa-plus"></i> Nova escala</a></li>
                     <li><a href="calendario.html"><i class="fas fa-calendar"></i> Calendário</a></li>
                     <li><a href="funcionarios.html"><i class="fas fa-users"></i> Funcionários</a></li>
                     <li><a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
                     <li><a href="usuario/registrousuario.php"><i class="fas fa-search"></i> Auditoria</a></li>
-                    <li><a href="configuracao.html"><i class="fas fa-cog"></i> Configuração</a></li>
+                    <li><a href="usuario/configuracao.php"><i class="fas fa-cog"></i> Configuração</a></li>
                     <li><a href="login/logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                 </ul>
             </div>

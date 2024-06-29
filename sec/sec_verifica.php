@@ -20,4 +20,11 @@ $query = $conn->query($sqlc);
 $dados = $query->fetch_assoc();
 
 $idlogado = $dados['id'];
+$nomelogado = $dados['nome'];
+$usuariologado = $dados['login'];
+$emaillogado = $dados['email'];
+$telefonelogado = $dados['telefone'];
+$rglogado = $dados['rg'];
+$matriculalogado = $dados['matricula'];
+
 ?>

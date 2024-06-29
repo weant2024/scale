@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<?php
+include "../sec/config.php"; 
+include "../sec/sec_verifica.php";
+if ( $nivel < 3 ) 
+{
+	header("Location: ../sec/sec_tipo.php"); exit;
+}
+?>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,13 +93,13 @@
     </div>
     <div class="user-details">
       <h3>Informações Pessoais</h3>
-      <p><strong>Nome:</strong> Colaborador 1</p>
-      <p><strong>Login:</strong> Colaborador@etc</p>
-      <p><strong>CPF:</strong> 123.456.789-00</p>
-      <p><strong>Telefone:</strong> (11) 999999999</p>
-      <p><strong>Endereço:</strong> </p>
-      <p><strong>Email:</strong> colaborador@exemplo.com</p>
-      <p><strong>Data de Nascimento:</strong> 01/01/1990</p>
+      <p><strong>Nome:</strong> <?php echo $nomelogado ?></p>
+      <p><strong>Login:</strong> <?php echo $usuariologado?></p>
+      <p><strong>CPF: (!corrigir código e BD porque está MATRICULA!)</strong> <?php echo $matriculalogado ?></p>
+      <p><strong>Telefone:</strong> <?php echo $telefonelogado ?></p>
+      <p><strong>Endereço:</strong> (!Verificar necessidade!)</p>
+      <p><strong>Email:</strong> <?php echo $emaillogado ?></p>
+      <p><strong>Data de Nascimento:</strong> (!Verificar necessidade!)</p>
       <br>
       <div class="edit-button">
         <button onclick="editarInformacoes()">Editar Informações</button>
