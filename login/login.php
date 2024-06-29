@@ -18,7 +18,7 @@ if ($dias < 1){
 ?>
 </head>
 
-<body>
+<body style="background: #333; display: flex; align-items: center; justify-content: center;">
 
 <!-- <form method="post" action="../sec/sec_valida.php">
 <input type="text" style="text-align:center" name="login" id="login" maxlength="50" class="input-inicial" onFocus="if(this.value == 'USUARIO') this.value = '';" onBlur="if(this.value=='') this.value='USUARIO';" value="USUARIO" />
@@ -40,7 +40,7 @@ if ($dias < 1){
                 <img src="" alt="User Icon">
             </div>
             <h2>WEANT</h2>
-            <form id="login-form">
+            <form id="login-form" method="post" action="../sec/sec_valida.php">
                 <div class="textbox">
                     <input type="text" placeholder="Login" name="login" id="login" required>
                 </div>
@@ -60,6 +60,8 @@ if ($dias < 1){
             </div>
         </div>
     </div>
+
+     
 
 
 

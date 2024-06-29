@@ -1,0 +1,125 @@
+/* Estilos gerais */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Centralização do container de login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #f3f4f6;
+}
+
+.login-box {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.login-box p {
+    margin: 0 0 20px;
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.login-box input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+.login-box .button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-box .button:hover {
+    background-color: #2563eb;
+}
+
+#linkdembranco {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #d32f2f;
+}
+
+/* Estilo do rodapé */
+#rodape {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rodape-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.rodape-content span {
+    color: #555;
+    font-size: 14px;
+}
+
+.rodape-content .right {
+    text-align: right;
+}
+
+.rodape-content a {
+    color: #009900;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.rodape-content a:hover {
+    text-decoration: underline;
+}
+
+
