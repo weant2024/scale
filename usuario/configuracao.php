@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+include "../sec/config.php"; 
+include "../sec/sec_verifica.php";
+if ( $nivel < 3 ) 
+{
+	header("Location: ../sec/sec_tipo.php"); exit;
+}
+?>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -133,38 +141,26 @@
     <div class="container">
         <aside class="sidebar">
             <ul>
-                <li><a href="usuario.html"><i class="fas fa-user"></i> Meu Usuário</a></li>
-                <li>Configurações</li>
-                <li><a href="form.html"><i class="fas fa-user"></i> Usuarios</a></li>
-                <li>Privacidade e segurança</li>
-                <li>Acessos</li>
-                <li>Aparência</li>
-                <li>Inicialização</li>
-                <li>Sistema</li>
-                
+                <li><a href="form.html"><i class="fas fa-user"></i> Usuários</a></li>
             </ul>
         </aside>
         <main class="main-content">
-            <div class="search-bar">
-                <input type="text" placeholder="Pesquisar nas configurações">
-            </div>
             <section class="settings-section">
                 <div class="user-info">
                     <div class="user-avatar">F</div>
                     <div class="user-details">
-                        <p class="user-name">Fulano</p>
-                        <p class="user-email">Conectado como fulano@hotmail.com</p>
+                        <p class="user-name"><?php echo $nomelogado ?></p>
+                        <p class="user-email">Conectado como <?php echo $usuariologado ?></p>
                     </div>
-                    <button class="sync-button">nao sei ainda</button>
                 </div>
                 <ul class="settings-links">
-                    <li>Meus dados</li>
-                    <li>Minhas permissoes</li>
-                    <li>Meus relatorios gerados</li>
-                    <li>Historico de solicitacoes</li>
-                    <li>Historico de escalas geradas</li>
-                    <li>Historico de edicoes</li>
-                    <li></li>
+                    <p><strong>Nome:</strong> <?php echo $nomelogado ?></p>
+                    <p><strong>Login:</strong> <?php echo $usuariologado?></p>
+                    <p><strong>CPF: (!corrigir código e BD porque está MATRICULA!)</strong> <?php echo $matriculalogado ?></p>
+                    <p><strong>Telefone:</strong> <?php echo $telefonelogado ?></p>
+                    <p><strong>Endereço:</strong> (!Verificar necessidade!)</p>
+                    <p><strong>Email:</strong> <?php echo $emaillogado ?></p>
+                    <p><strong>Data de Nascimento:</strong> (!Verificar necessidade!)</p>
                 </ul>
             </section>
         </main>
