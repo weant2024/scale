@@ -9,7 +9,7 @@ if ( $nivel < 2 )
 <head>
 <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel='stylesheet' type='text/css' href='../css/geral.css' />
+<link rel='stylesheet' type='text/css' href='../css/exibirregistrousuario.css' />
 <title>Scale</title>
 </head>
 

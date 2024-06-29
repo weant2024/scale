@@ -1,0 +1,69 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4d769e, #fff, #38628b);
+    margin: 0;
+    padding: 0;
+    color: #333; /* Cor do texto principal */
+}
+
+/* Estilo para links */
+#linkpag a, #linkatual {
+    font-size: 16px;
+    color: #0a0a0a;
+    text-decoration: none;
+    margin: 0 5px; /* Espaçamento entre os links */
+    padding: 5px 10px; /* Adiciona padding para melhorar a visibilidade e interação */
+    border: 1px solid #ccc; /* Adiciona uma borda sólida cinza */
+    border-radius: 5px; /* Borda arredondada */
+    transition: border-color 0.3s, background-color 0.3s; /* Transições suaves para a borda e cor de fundo */
+}
+
+#linkpag a:hover, #linkatual:hover {
+    text-decoration: underline;
+    border-color: #999; /* Cor da borda ao passar o mouse */
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para tabelas */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Borda das tabelas */
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilo para cabeçalhos de tabela */
+th {
+    background-color: #CECECE; /* Cor de fundo dos cabeçalhos */
+    color: #fff; /* Cor do texto dos cabeçalhos */
+    text-align: center;
+}
+
+/* Estilo para caixas de formulário */
+.boxform {
+    width: 80%;
+    background-color: #f9f9f9; /* Cor de fundo da caixa de formulário */
+    border: 1px solid #ccc; /* Borda da caixa de formulário */
+    border-radius: 5px; /* Borda arredondada */
+    padding: 20px;
+    margin: 20px auto;
+}
+
+/* Estilo para rodapé */
+#rodape {
+    background-color: #444; /* Cor de fundo do rodapé */
+    color: #fff; /* Cor do texto do rodapé */
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

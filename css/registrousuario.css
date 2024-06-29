@@ -1,0 +1,146 @@
+/* Estilos gerais para o body e html */
+body, html {
+    height: 100%; /* Ajusta a altura para ocupar toda a tela */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4d769e, #fff, #38628b);
+}
+
+/* Container principal centralizado */
+.container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+}
+
+/* Estilos para a caixa de login */
+.login-box {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%; /* Agora ocupa a largura máxima do container */
+    max-width: 400px; /* Largura máxima para evitar que fique muito largo em telas grandes */
+    margin: 20px auto;
+    border: 2px solid #444;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Estilos para links na barra de navegação */
+#linkborda {
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(70, 130, 180, 0.1);
+    margin-bottom: 20px; /* Adiciona margem inferior para separar do próximo elemento */
+}
+
+#linkpag a, #linkatual {
+    font-size: 16px;
+    color: #0a0a0a;
+    text-decoration: none;
+    margin: 0 5px; /* Espaçamento entre os links */
+    padding: 5px 10px; /* Adiciona padding para melhorar a visibilidade e interação */
+    border: 1px solid #ccc; /* Adiciona uma borda sólida cinza */
+    border-radius: 5px; /* Borda arredondada */
+    transition: border-color 0.3s, background-color 0.3s; /* Transições suaves para a borda e cor de fundo */
+}
+
+#linkpag a:hover, #linkatual:hover {
+    text-decoration: underline;
+    border-color: #999; /* Cor da borda ao passar o mouse */
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+
+
+/* Estilos para o formulário */
+.boxform {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Espaçamento inferior para separar do próximo elemento */
+}
+
+.boxform p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilos para campos de entrada */
+input[type="text"], input[type="password"] {
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #46109c;
+    box-shadow: 0 0 5px rgba(70, 16, 156, 0.5);
+}
+
+/* Estilos para botão de pesquisa */
+input[type="submit"] {
+    padding: 12px 20px; /* Ajusta o padding para aumentar o tamanho do botão */
+    font-size: 16px; /* Ajusta o tamanho da fonte */
+    background-color: #46109c; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Adiciona bordas arredondadas */
+    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+    transition: background-color 0.3s; /* Adiciona uma transição suave na mudança de cor de fundo */
+}
+
+/* Ajuste para centralizar o botão e os inputs na célula da tabela */
+
+
+input[type="submit"]:hover {
+    background-color: #46109c; /* Cor de fundo do botão ao passar o mouse */
+}
+
+/* Estilos para rodapé */
+#rodape {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#rodape table {
+    width: 100%;
+}
+
+#rodape td {
+    font-size: 12px;
+    color: #46109c;
+}
+
+#rodape td div {
+    font-size: 10px;
+}
+
+
+
