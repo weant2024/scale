@@ -32,9 +32,9 @@ if ( $nivel < 3 )
                     <li><a href="calendario.html"><i class="fas fa-calendar"></i> Calendário</a></li>
                     <li><a href="funcionarios.html"><i class="fas fa-users"></i> Funcionários</a></li>
                     <li><a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a></li>
-                    <li><a href="auditoria.html"><i class="fas fa-search"></i> Auditoria</a></li>
+                    <li><a href="usuario/registrousuario.php"><i class="fas fa-search"></i> Auditoria</a></li>
                     <li><a href="configuracao.html"><i class="fas fa-cog"></i> Configuração</a></li>
-                    <li><a href="sair.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                    <li><a href="login/logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                 </ul>
             </div>
             <main class="col-md-9">

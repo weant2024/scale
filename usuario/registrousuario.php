@@ -129,7 +129,7 @@ $ativousuario = $dados["ativo"];
 			<?php
 			$nivel = $_SESSION['UsuarioNivel']; 
 			if ($nivel > 2) {
-				echo '<a class="texteditar" href="editarusuario.php?id=' . $dados['id'] . '">DETALHAR</a>';
+				echo '<a class="texteditar" href="exibirregistrousuario.php?id=' . $dados['id'] . '">DETALHAR</a>';
 			}
 			?>
       	</td>		
