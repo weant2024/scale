@@ -18,7 +18,7 @@ if ($dias < 1){
 ?>
 </head>
 
-<body style="background: #333; display: flex; align-items: center; justify-content: center;">
+<body style="background: linear-gradient(135deg, #001f3f, #fff, #001f3f); display: flex; align-items: center; justify-content: center;">
 
 <!-- <form method="post" action="../sec/sec_valida.php">
 <input type="text" style="text-align:center" name="login" id="login" maxlength="50" class="input-inicial" onFocus="if(this.value == 'USUARIO') this.value = '';" onBlur="if(this.value=='') this.value='USUARIO';" value="USUARIO" />
@@ -49,7 +49,7 @@ if ($dias < 1){
                 </div>
                 <div class="options">
                     <label>
-                        <input type="checkbox" name="remember"> Remember Me
+                        <input type="checkbox" name="remember"> Lembre me
                     </label>
                     <a href="#">Esqueci minha senha</a>
                 </div>
