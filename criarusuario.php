@@ -150,12 +150,12 @@ if ( $nivel < 2 )
                       <div class="collapse" id="subnav1">
                         <ul class="nav nav-collapse subnav">
                           <li>
-                            <a href="#">
+                            <a href="criarusuario.php">
                               <span class="sub-item">Criar Usuários</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="pesquisarusuario.php">
                               <span class="sub-item">Editar Usuários</span>
                             </a>
                           </li>

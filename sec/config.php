@@ -13,6 +13,9 @@ if ($conn->connect_error) {
 
 <?php
 $urllogin = "http://localhost/hml-scale/login.php";
+$urlzabbix = "http://localhost/hml-scale/login.php";
+$urlgrafana = "http://localhost/hml-scale/login.php";
+$urlitsm = "http://localhost/hml-scale/login.php";
 @$criptografada = md5($senha);
 @$criptografadacpf = md5($rg);
 ?>
