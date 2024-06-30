@@ -15,9 +15,7 @@
     include "sec/config.php"; 
     include "sec/data.php"; 
 
-    if ($dias < 1){
-        header ("Location: sec/pagamento.php"); exit;
-    }
+    
     ?>    
 </head>
 <body>
