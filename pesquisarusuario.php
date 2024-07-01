@@ -260,104 +260,91 @@ if ( $nivel < 2 )
 
         <div class="container">
           <div class="page-inner">    
-            <!-- INICIA CONTEÚDO -->   
+              <!-- INICIA CONTEÚDO -->   
 
-            <div align="center">
-              <form action="" method="post">
-                <table width="auto"> 
-                  <tr align="center">
-                    <td>
-                      <select name="filtro">                                               
-                        <option value="login">Login</option> 
-                        <option value="nome">Nome</option>  
-                        <option value="cpf">CPF</option>  
-                        <option value="telefone">Celular</option>                        
-                        <option value="pnivel">Nível</option> 
-                        <option value="pativo">Status</option> 
-                      </select>
-                    </td>                  
-                    <td> <input type="text" name="palavra" size="auto" id="palavra"/> </td>
-                    <td> <input type="submit" Value="Pesquisar" /> </td>
-                  </tr>
-                </table> 
-              </form> 
-              
-              <?php
-              $filtro = @$_POST['filtro'];
-              $busca = @$_POST['palavra'];
-              
-              $busca_query = "SELECT * FROM usuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
-              $result = $conn->query($busca_query);
+              <div align="center">
+                  <!-- Formulário de pesquisa -->
+                  <form action="" method="post">
+                      <table class="search-table"> <!-- Adicionada classe para estilização -->
+                          <tr align="center">
+                              <td>
+                                  <select name="filtro" class="search-select" > <!-- Adicionada classe para estilização -->                                             
+                                      <option value="login">Login</option> 
+                                      <option value="nome">Nome</option>  
+                                      <option value="cpf">CPF</option>  
+                                      <option value="telefone">Celular</option>                        
+                                      <option value="pnivel">Nível</option> 
+                                      <option value="pativo">Status</option> 
+                                  </select>
+                              </td>                  
+                              <td> 
+                                  <input type="text" name="palavra" id="palavra" class="search-input" /> <!-- Adicionada classe para estilização -->
+                              </td>
+                              <td> 
+                              <button type="submit" class="search-btn" >Pesquisar</button>
+                              <!-- Adicionada classe para estilização -->
+                              </td>
+                          </tr>
+                      </table> 
+                  </form> 
+                  
+                  <?php
+                  $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : '';
+                  $busca = isset($_POST['palavra']) ? $_POST['palavra'] : '';
+                  
+                  if (!empty($filtro) && !empty($busca)) {
+                      $busca_query = "SELECT * FROM usuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
+                      $result = $conn->query($busca_query);
 
-              
-              if (@$result->num_rows < 1) { //Se nao achar nada, lança essa mensagem
-                echo "Nenhum registro encontrado.";
-              }
-              
-              else {
-              ?>
-              <table class="legenda" width="100%">                
-                  <tr width="100%">                    
-                    <?php 
-                              if ($filtro == "login") { 
-                                echo '<td width="100%"><b>Login</b></td>';
+                      if ($result && $result->num_rows > 0) {
+                          ?>
+                          <!-- Tabela de resultados -->
+                          <table class="result-table">
+                              <tr>                    
+                                  <?php 
+                                  if ($filtro == "login") { 
+                                      echo '<th>Login</th>';
+                                  }
+                                  elseif ($filtro == "cpf") { 
+                                      echo '<th>Login</th><th>CPF</th>';
+                                  }
+                                  elseif ($filtro == "pativo") { 
+                                      echo '<th>Login</th><th>Status</th>';
+                                  }
+                                  else {
+                                      $uppercaseFiltro = ucfirst($filtro);
+                                      echo '<th>Login</th><th>'. $uppercaseFiltro . '</th>';
+                                  }
+                                  ?>          
+                              </tr>
+                              <?php      
+                              while ($dados = $result->fetch_assoc()) {                                 
+                              ?>              
+                                  <tr>    
+                                      <?php
+                                      if ($filtro == "login") { 
+                                          echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td>';
+                                      } else {
+                                          echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td><td>' . $dados[$filtro] . '</td>';
+                                      }
+                                      ?>                      
+                                  </tr>	
+                              <?php               
                               }
-                              elseif ($filtro == "cpf") { 
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>CPF</b></td>';
-                              }
-                              elseif ($filtro == "pativo") { 
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>Status</b></td>';
-                              }
-                              else {
-                                $upercasefiltro = ucfirst($filtro);
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>'. $upercasefiltro . '</b></td>';
-                              }
-                    ?>          
-                  </tr>
-              <?php      
-              // quando existir algo em '$busca_query' ele realizará o script abaixo.
-                while ($dados = $result->fetch_assoc()) {                                 
-                ?>              
-                
-                    <tr width="100%">	
-                      <?php
-                      if ($filtro == "login") { 
-                        echo '<td width="100%"><a href="editarusuario.php?id=' . $dados['id'] . '"> ' . $dados['login'] . '<br /></a></td>';
+                              ?>	
+                          </table>
+                          <?php
+                          echo "<p><b>" . $result->num_rows . " registros</b></p>";
+                      } else {
+                          echo "<p>Nenhum registro encontrado.</p>";
                       }
-                      else {
-                        echo '<td width="50%"><a href="editarusuario.php?id=' . $dados['id'] . '"> '. $dados['login'] . '<br /></a></td><td width="50%">'. $dados[$filtro] . '</td>';
-                      }
-                      ?>                      
-                    </tr>	
-                <?php               
-                ?>    
-                <?php
-                }
-              }
-                ?>	
-              
-                </table>                
-            </div>
-
-            <?php
-            if (@$result->num_rows > 0) { 
-            ?> 
-            <table class="legenda" width="100%">
-              <tr>
-                <td align="right">
-                  <?php 
-                    $num_rows = @$result->num_rows;
-                    echo "<b>$num_rows registros</b>";
+                  }
                   ?>
-                </td>
-              </tr>  
-            </table>
-            <?php
-            }
-            ?>
 
-            <!-- FINALIZA CONTEÚDO -->  
-            </div>
+              </div>
+
+              <!-- FINALIZA CONTEÚDO -->  
+          </div>
         </div>
 
         <footer class="footer">
