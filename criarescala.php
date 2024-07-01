@@ -1,10 +1,7 @@
 <?php
 include "sec/config.php"; 
 include "sec/sec_verifica.php";
-if ( $nivel < 2 ) 
-{
-	header("Location: sem_acesso.php"); exit;
-}
+
 ?>
 <html lang="br">
   <head>
@@ -37,7 +34,7 @@ if ( $nivel < 2 )
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="assets/css/usuarios.css" />
+    <link rel="stylesheet" href="assets/css/calendario.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -245,7 +242,7 @@ if ( $nivel < 2 )
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <a class="dropdown-item" href="#">Meu perfil</a>
+                        <a class="dropdown-item" href="meu_perfil.php">Meu perfil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>
@@ -262,171 +259,99 @@ if ( $nivel < 2 )
           <div class="page-inner">  
             <!-- INICIA CONTEÚDO -->   
 
-            <?php
-
-              $id = $_GET['id'];
-
-              $sqlc = "SELECT * FROM registrousuario WHERE id='$id'"; //faz a busca com as palavras enviadas
-              $result = $conn->query($sqlc);
-              $dados = $result->fetch_assoc();
-
-              $login = $dados["login"];
-              $senha = $dados["senha"];
-              $nome = $dados["nome"];
-              $cpf = $dados["cpf"];
-              $nascimento = $dados["nascimento"];              
-              $email = $dados["email"];
-              $nivelusuario = $dados["nivel"];
-              $ativousuario = $dados["ativo"];
-              $gerasenha = $dados["gerasenha"];
-              $horario = $dados["horario"];
-              $dia = $dados["dia"];
-              $semana = $dados["semana"];
-              $mes = $dados["mes"];
-              $ano =$dados["ano"];
-              $operador = $dados["operador"];
-
-            ?>
-
-              <div align="center">   
-                  <table border="1" width="40%">
-                      <tbody>
-                      <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">ID:</font></td>
-                              <td width="90%" align="left"><?php echo  $dados['id_usuario']; ?></td>
-                          </tr>
-                      <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Login:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="login" size="50" id="login" value="<?php echo $dados["login"]; ?>" /></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Senha:</font></td>
-                              <td width="90%" align="left"><?php echo $criptografada; ?></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Nome:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="nome" size="50" id="nome" value="<?php echo $dados["nome"]; ?>" /></td>
-                          </tr>	
-                        
-              <!--       <tr>
-                        <td width="10%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">RG:</font></td>
-                            <td width="90%" style="left">
-                                <table width="200" border="0">
-                                  <tr>
-                                    <td><input type="text" readonly name="rg" size="13" id="rg" onKeyPress="return SomenteNumero(event);" onKeyUp="this.value = this.value.toUpperCase();" value="<?php echo $dados["rg"]; ?>" /></td>
-                                    <td width="6%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">ORGÃO:</font></td>
-                                    <td><input type="text" readonly name="rgorgao" size="7" id="rgorgao" onKeyPress="return SomenteLetra(event);" onKeyUp="this.value = this.value.toUpperCase();" onBlur="this.value = this.value.toUpperCase();" value="<?php echo $dados["rgorgao"]; ?>" /></td>
-                                    <td width="6%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">UF:</font></td>
-                                    <td><input type="text" readonly name="rguf" size="5" id="rguf" onKeyPress="return SomenteLetra(event);" onKeyUp="this.value = this.value.toUpperCase();" onBlur="this.value = this.value.toUpperCase();" value="<?php echo $dados["rguf"]; ?>" /></td>
-                                  </tr>
-                              </table></td>                
-                          </tr>			
-              -->			<tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">RG:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="cpf" size="50" id="rg" value="<?php echo $dados["cpf"]; ?>" /></td>
-                          </tr>
+            <div class="calendar">
+              <header>
+                  <h2 id="month-year">Julho 2024</h2>
+                  <div class="nav">
+                      <button onclick="prevMonth()">Anterior</button>
+                      <button onclick="nextMonth()">Próximo</button>
+                  </div>
+              </header>
+              <table>
+                <thead>
                     <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Email:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["email"]; ?>" /></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Telefone:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="telefone" size="50" id="telefone"  class="inputcssn" title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>" /></td>
-                          </tr>
-              <!-- 		<tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Cargo:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["cargo"]; ?>" /></td>
-                          </tr>
-                    <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Departamento:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["departamento"]; ?>" /></td>
-                          </tr>
-              -->         <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Nível:</font></td>
-                              <td width="90%" align="left"><?php if ( $nivelusuario == 1 ) 
-              {
-              echo "Usuário";
-              }
-              if ( $nivelusuario == 2 ) 
-              {
-              echo "Gestor";
-              }
-              if ( $nivelusuario == 3 ) 
-              {
-              echo "Admin";
-              }
-              ?>
-              </td>
-                          </tr> 			
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Status:</font></td>
-                              <td width="90%" align="left">
-              <?php if ( $ativousuario == 1 ) 
-              {
-              echo "Ativo";
-              }
-              if ( $ativousuario == 0 ) 
-              {
-              echo "Desativado";
-              }
-              ?>
-              </td>
-                          </tr> 
-                        </tbody>
-                  </table>	
-                <br />
-                <?php if ( $gerasenha == 1 ){
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI GERADA UMA NOVA SENHA PELO OPERADOR</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 2 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI GERADA UMA NOVA SENHA PELO USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 3 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI CRIADO O USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 4 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI ALTERADO O USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              ?>
-              <br />
-                <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
-                <tr>
-                  <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
-                  <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
-                </tr> 	
+                        <th>Dom</th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                    </tr>
+                </thead>
+                  <tbody id="calendar-body">
+                      <!-- Os dias do calendário serão gerados aqui -->
+                  </tbody>
               </table>
-              <br />
-                  </td>
-                </tr>
-              </table>
-              </div>
+            </div>
+    
+            <script>
+              const calendarBody = document.getElementById('calendar-body');
+              const monthYear = document.getElementById('month-year');
+              let currentMonth = 6; // Julho (meses em JavaScript são baseados em 0)
+              let currentYear = 2024;
+
+              function generateCalendar(month, year) {
+                  // Limpa o calendário
+                  calendarBody.innerHTML = '';
+
+                  // Número de dias no mês
+                  const daysInMonth = new Date(year, month + 1, 0).getDate();
+                  const firstDay = new Date(year, month, 1).getDay();
+
+                  // Atualiza o cabeçalho do mês e ano
+                  const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                  monthYear.innerHTML = `${monthNames[month]} ${year}`;
+
+                  // Cria as células do calendário
+                  let data = 1;
+                  for (let i = 0; i < 6; i++) {
+                      const row = document.createElement('tr');
+
+                      for (let j = 0; j < 7; j++) {
+                          const cell = document.createElement('td');
+                          if (i === 0 && j < firstDay) {
+                              cell.innerHTML = '';
+                          } else if (data > daysInMonth) {
+                              break;
+                          } else {
+                              cell.innerHTML = data;
+                              cell.classList.add('day');
+                              const cellDate = new Date(year, month, data);
+                              const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                              const formattedDate = cellDate.toLocaleDateString('pt-BR', options).split('/').join('-'); // Formato DD-MM-YYYY
+                              cell.onclick = () => {
+                                  window.location.href = `criarescalaetapa.php?data=${formattedDate}`;
+                              };
+                              data++;
+                          }
+                          row.appendChild(cell);
+                      }
+                      calendarBody.appendChild(row);
+                  }
+              }
+
+              function prevMonth() {
+                  currentMonth--;
+                  if (currentMonth < 0) {
+                      currentMonth = 11;
+                      currentYear--;
+                  }
+                  generateCalendar(currentMonth, currentYear);
+              }
+
+              function nextMonth() {
+                  currentMonth++;
+                  if (currentMonth > 11) {
+                      currentMonth = 0;
+                      currentYear++;
+                  }
+                  generateCalendar(currentMonth, currentYear);
+              }
+
+              // Gera o calendário inicial
+              generateCalendar(currentMonth, currentYear);
+            </script>
 
             <!-- FINALIZA CONTEÚDO -->  
           </div>

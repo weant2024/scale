@@ -50,7 +50,7 @@ if ( $nivel < 2 )
           <div class="logo-header" data-background-color="dark">
             <a class="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src="assets/img/kaiadmin/logo_light.png"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
@@ -89,7 +89,7 @@ if ( $nivel < 2 )
                 <div class="collapse" id="escala">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
+                      <a href="criarescala.php">
                         <span class="sub-item">Criar Scala</span>
                       </a>
                     </li>
@@ -298,7 +298,7 @@ if ( $nivel < 2 )
                 <option value="0">Desativado</option>
               </select>
                           
-              <button class="bnt" type="submit" name="enviar" type="submit" value="Cadastrar">CADASTRAR USUÁRIO</button>
+              <button class="bnt" type="submit" name="enviar" value="Cadastrar">CADASTRAR USUÁRIO</button>
               
             </form>
 
