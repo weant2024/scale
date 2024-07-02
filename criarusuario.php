@@ -37,6 +37,7 @@ if ( $nivel < 2 )
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="assets/css/usuarios.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -320,11 +321,11 @@ if ( $nivel < 2 )
                     <option selected value="1">Ativo</option>
                     <option value="0">Desativado</option>
                   </select>
-                </div>
-
-                <div class="form-group">
-                  <button class="btn-submit" type="submit" name="enviar" value="Cadastrar">CADASTRAR USUÁRIO</button>
-                </div>
+                </div>   
+                  
+                  <div class="form-group">                    
+                    <button class="botao" type="submit">CADASTRAR USUÁRIO</button>                    
+                  </div>                
             </form>
 
             <!-- FINALIZA CONTEÚDO -->  
