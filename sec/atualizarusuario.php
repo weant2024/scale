@@ -3,7 +3,7 @@ include "config.php";
 include "sec_verifica.php";
 if ( $nivel < 2 ) 
 {
-	header("Location: ../em_acesso.php"); exit;
+	header("Location: ../sem_acesso.php"); exit;
 }
 ?>
 

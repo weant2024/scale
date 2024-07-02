@@ -285,7 +285,7 @@ if ( $nivel < 2 )
               $ano = $dados["ano"];
               $operador = $_SESSION["UsuarioLogin"];
 
-              $sqlc1 = "SELECT * FROM registroequipamento WHERE operador='$operador'"; //faz a busca com as palavras enviadas
+              $sqlc1 = "SELECT * FROM usuario WHERE operador='$operador'"; //faz a busca com as palavras enviadas
               $query1 = $conn->query($sqlc1);
               $dados1 = $query1->fetch_assoc();
             ?>

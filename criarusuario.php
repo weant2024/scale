@@ -297,6 +297,15 @@ if ( $nivel < 2 )
                 </div>
 
                 <div class="form-group">
+                  <label for="genero">Nascimento:</label>
+                  <select class="form-select form-control" id="defaultSelect" name="genero">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Não definido">Não definido</option> 
+                  </select>  
+                </div>
+
+                <div class="form-group">
                   <label for="nivelusuario">Nível:</label>
                   <select name="nivelusuario" id="nivelusuario" class="form-control">
                     <option selected value="1">Usuário</option>
