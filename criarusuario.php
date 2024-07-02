@@ -265,41 +265,57 @@ if ( $nivel < 2 )
               <b>CRIAR USUÁRIO</b>
             </p>
                 
-            <form method='post' name="contato" action="sec/enviarusuario.php">  
+            <form method='post' name="contato" action="sec/enviarusuario.php" class="user-form">
+                    <div class="form-group">
+                    <label for="login">Login:</label>
+                    <input type="text" name="login" id="login" class="form-control" />
+                    </div>
 
-              Login:
-              <input type="text" name="login"/>
-              
-              Nome:
-              <input type="text" name="nome" id="nome"/>
+                    <div class="form-group">
+                    <label for="nome">Nome:</label>
+                  <input type="text" name="nome" id="nome" class="form-control" />
+                </div>
 
-              CPF:
-              <input type="text" name="cpf" id="cpf"/>              
+                <div class="form-group">
+                  <label for="cpf">CPF:</label>
+                  <input type="text" name="cpf" id="cpf" class="form-control" />
+                </div>
 
-              Email:
-              <input type="text" name="email" id="email"/>
-              
-              Celular:
-              <input type="text" name="telefone" id="telefone" placeholder="xx xxxxx-xxxx"/>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="text" name="email" id="email" class="form-control" />
+                </div>
 
-              Data de Nascimento:
-              <input type="date" name="nascimento" id="nascimento" placeholder="xx/xx/xxxx"/>
-              
-              Nível:
-              <select name="nivelusuario" id="nivelusuario">
-                <option selected value="1">Usuário</option>
-                <option value="2">Gestor</option>
-                <option value="3">Admin</option>
-              </select>
-              
-              Status:
-              <select name="ativousuario" id="ativousuario">
-                <option selected value="1">Ativo</option>
-                <option value="0">Desativado</option>
-              </select>
-                          
-              <button class="bnt" type="submit" name="enviar" value="Cadastrar">CADASTRAR USUÁRIO</button>
-              
+                <div class="form-group">
+                  <label for="telefone">Celular:</label>
+                  <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" />
+                </div>
+
+                <div class="form-group">
+                  <label for="nascimento">Data de Nascimento:</label>
+                  <input type="date" name="nascimento" id="nascimento" class="form-control" placeholder="xx/xx/xxxx" />
+                </div>
+
+                <div class="form-group">
+                  <label for="nivelusuario">Nível:</label>
+                  <select name="nivelusuario" id="nivelusuario" class="form-control">
+                    <option selected value="1">Usuário</option>
+                    <option value="2">Gestor</option>
+                    <option value="3">Admin</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="ativousuario">Status:</label>
+                  <select name="ativousuario" id="ativousuario" class="form-control">
+                    <option selected value="1">Ativo</option>
+                    <option value="0">Desativado</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn-submit" type="submit" name="enviar" value="Cadastrar">CADASTRAR USUÁRIO</button>
+                </div>
             </form>
 
             <!-- FINALIZA CONTEÚDO -->  
