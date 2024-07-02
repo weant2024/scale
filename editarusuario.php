@@ -272,7 +272,8 @@ if ( $nivel < 2 )
               $login = $dados["login"];           
               $nome = $dados["nome"];
               $cpf = $dados["cpf"];
-              $nascimento = $dados["nascimento"];              
+              $nascimento = $dados["nascimento"];  
+              $genero = $dados["genero"];             
               $email = $dados["email"];
               $cargo = $dados["cargo"];
               $departamento = $dados["departamento"];
@@ -316,6 +317,40 @@ if ( $nivel < 2 )
                   <tr>
                     <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Nascimento:</font></td>
                     <td width="94%" align="left"><input type="text" name="nascimento" id="nascimento" value="<?php echo $dados["nascimento"]; ?>" /></td>
+                  <tr>
+                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Gênero:</font></td>
+                    <td width="94%" align="left">
+                      <select name="genero" id="genero">
+                        <option <?php if ( $genero == "Masculino" ) 
+                        {
+                        echo "selected";
+                        }
+                        else 
+                        {
+                        echo "";
+                        }
+                        ?> value="Masculino">Masculino</option>
+                        <option <?php if ( $genero == "Feminino" ) 
+                        {
+                        echo "selected";
+                        }
+                        else 
+                        {
+                        echo "" ;
+                        }
+                        ?> value="Feminino">Feminino</option>
+                        <option <?php if ( $genero == "Não definido" ) 
+                        {
+                        echo "selected";
+                        }
+                        else 
+                        {
+                        echo "" ;
+                        }
+                        ?> value="Não definido">Não definido</option>
+                      </select>
+                    </td>
+                  </tr>
                   </tr>
                   <tr>
                     <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Email:</font></td>
@@ -399,6 +434,7 @@ if ( $nivel < 2 )
                       <input type="hidden" name="nome" id="nome" value="<?php echo $dados["nome"]; ?>" />
                       <input type="hidden" name="rg" id="rg" value="<?php echo $dados["cpf"]; ?>" />
                       <input type="hidden" name="nascimento" id="nascimento" value="<?php echo $dados["nascimento"]; ?>" />
+                      <input type="hidden" name="genero" id="genero" value="<?php echo $dados["genero"]; ?>" />
                       <input type="hidden" name="email" id="email" value="<?php echo $dados["email"]; ?>" />
                       <input type="hidden" name="telefone" id="telefone" value="<?php echo $dados["telefone"]; ?>" />
                       <input type="hidden" name="nivelusuario" id="nivelusario" value="<?php echo $dados["nivel"]; ?>" />
@@ -406,6 +442,11 @@ if ( $nivel < 2 )
                       <button type="submit" name="gerarsenha" value="gerarsenhausuar">Gerar nova senha</button>
                     </form>
                     </td>
+                     <td>
+                      <form method="POST" action='afastamentousuario.php?id=<?php echo $dados['id']?>'>
+                        <button type="submit">Afastamento</button>
+                      </form>
+                     </td> 
                  </tr>            
                 </table>	
 	            <br /> 

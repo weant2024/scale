@@ -262,68 +262,27 @@ if ( $nivel < 2 )
             <!-- INICIA CONTEÚDO -->   
 
             <p align="center">
-              <b>CRIAR USUÁRIO</b>
+              <b>REGISTRO DE AFASTAMENTO</b>
             </p>
                 
-            <form method='post' name="contato" action="sec/enviarusuario.php" class="user-form">
+            <form method='post' action="sec/enviarafastamento.php?id=<?php echo $dados['id'];?>" class="user-form">
                     <div class="form-group">
-                    <label for="login">Login:</label>
-                    <input type="text" name="login" id="login" class="form-control" />
+                    <label for="motivo">Motivo:</label>
+                    <input type="text" name="motivo" id="motivo" class="form-control" />
                     </div>
 
                     <div class="form-group">
-                    <label for="nome">Nome:</label>
-                  <input type="text" name="nome" id="nome" class="form-control" />
+                    <label for="datainicial">Data inicial:</label>
+                  <input type="date" name="datainicial" id="datainicial" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                  <label for="cpf">CPF:</label>
-                  <input type="text" name="cpf" id="cpf" class="form-control" />
+                  <label for="datafinal">Data final:</label>
+                  <input type="date" name="datafinal" id="datafinal" class="form-control" />
                 </div>
-
+                
                 <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="text" name="email" id="email" class="form-control" />
-                </div>
-
-                <div class="form-group">
-                  <label for="telefone">Celular:</label>
-                  <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" />
-                </div>
-
-                <div class="form-group">
-                  <label for="nascimento">Data de Nascimento:</label>
-                  <input type="date" name="nascimento" id="nascimento" class="form-control" placeholder="xx/xx/xxxx" />
-                </div>
-
-                <div class="form-group">
-                  <label for="genero">Gênero:</label>
-                  <select class="form-select form-control" id="defaultSelect" name="genero">
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Não definido">Não definido</option> 
-                  </select>  
-                </div>
-
-                <div class="form-group">
-                  <label for="nivelusuario">Nível:</label>
-                  <select name="nivelusuario" id="nivelusuario" class="form-control">
-                    <option selected value="1">Usuário</option>
-                    <option value="2">Gestor</option>
-                    <option value="3">Admin</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="ativousuario">Status:</label>
-                  <select name="ativousuario" id="ativousuario" class="form-control">
-                    <option selected value="1">Ativo</option>
-                    <option value="0">Desativado</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <button class="btn-submit" type="submit" name="enviar" value="Cadastrar">CADASTRAR USUÁRIO</button>
+                  <button class="btn-submit" type="submit">CADASTRAR</button>
                 </div>
             </form>
 
