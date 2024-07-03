@@ -322,7 +322,7 @@ if ( $nivel < 2 )
                             <div class="form-group">                        
                                 <div class="selecionar">    
                                     <div class="nav">
-                                        <button type="submit">Enviar</button>
+                                    <button type="submit" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;"onmouseover="this.style.backgroundColor='#8800ff'"onmouseout="this.style.backgroundColor='#2a2f5b'">Enviar</button>
                                     </div>
                                 </div>   
                             </div>  
