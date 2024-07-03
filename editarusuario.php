@@ -13,6 +13,78 @@ if ( $nivel < 2 )
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #009879;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #007f63;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+
+        div.align-center {
+            text-align: center;
+        }
+
+        div.align-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -424,7 +496,7 @@ if ( $nivel < 2 )
                 <table border="0" width="40%">   
                   <tr>
                     <td width="50%" align="left" valign="top">
-                    <button type="submit" onClick="submitbutton( this.form );return false;" name="enviar" type="submit" value="cadastrar">Alterar</button>    
+                    <button type="submit" onClick="submitbutton( this.form ); return false;" name="enviar" value="cadastrar" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Alterar</button>    
               </form>
                     </td>
                     <td width="50%" align="right" valign="top">
@@ -439,12 +511,12 @@ if ( $nivel < 2 )
                       <input type="hidden" name="telefone" id="telefone" value="<?php echo $dados["telefone"]; ?>" />
                       <input type="hidden" name="nivelusuario" id="nivelusario" value="<?php echo $dados["nivel"]; ?>" />
                       <input type="hidden" name="ativousuario" id="ativousuario" value="<?php echo $dados["ativo"]; ?>" />
-                      <button type="submit" name="gerarsenha" value="gerarsenhausuar">Gerar nova senha</button>
+                      <button type="submit" name="gerarsenha" value="gerarsenhausuar" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Gerar nova senha</button>
                     </form>
                     </td>
                      <td>
                       <form method="POST" action='afastamentousuario.php?id=<?php echo $dados['id']?>'>
-                        <button type="submit">Afastamento</button>
+                      <button type="submit" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Afastamento</button>
                       </form>
                      </td> 
                  </tr>            
