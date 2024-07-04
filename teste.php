@@ -375,7 +375,7 @@ if ( $nivel < 2 )
                   // Envia as datas selecionadas para o PHP
                   if (selectedDates.length > 0) {
                       const selectedDatesStr = selectedDates.join(',');
-                      window.location.href = `sec/enviateste.php?dates=${selectedDatesStr}`;
+                      window.location.href = `testeetapanome.php?dates=${selectedDatesStr}`;
                   } else {
                       alert('Selecione pelo menos uma data!');
                   }

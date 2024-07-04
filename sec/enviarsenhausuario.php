@@ -14,13 +14,13 @@ $sqlc = "SELECT * FROM usuario WHERE id='$id'"; //faz a busca com as palavras en
 $result = $conn->query($sqlc);
 $dados = $result->fetch_assoc();
 
-$login = $_POST["login"];
-$senha = $_POST["senha"];
-$nome = $_POST["nome"];
-$cpf = $_POST["cpf"];
-$nascimento = $_POST["nascimento"];
-$email = $_POST["email"];
-$telefone = $_POST["telefone"];
+$login = $dados["login"];
+$senha = $dados["senha"];
+$nome = $dados["nome"];
+$cpf = $dados["cpf"];
+$nascimento = $dados["nascimento"];
+$email = $dados["email"];
+$telefone = $dados["telefone"];
 $cargousuario = $dados["cargo"];
 $departamentousuario = $dados["departamento"];
 $nivelusuario = $dados["nivel"];
@@ -92,6 +92,7 @@ $result = $conn->query($query);
 
 $query2 = "UPDATE usuario SET senha='$cpf' WHERE id='$id'"; 
 $result2 = $conn->query($query2);
+
 
 $msg = "Reset de senha realizado com sucesso!";
 echo "<script>alert( '$msg ' );; window.location = '../pesquisarusuario.php';</script>";

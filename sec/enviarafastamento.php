@@ -74,7 +74,7 @@ case 6: $semana = "Sábado"; break;
 // Supondo que a conexão com o banco de dados está em $conn
 
 // Preparando a primeira query
-$query = "INSERT INTO afastamento (id_usuario, motivo, datanicial, datafinal) 
+$query = "INSERT INTO afastamento (id_usuario, motivo, datainicial, datafinal) 
 VALUES (?, ?, ?, ?)";
 
 $stmt = $conn->prepare($query);

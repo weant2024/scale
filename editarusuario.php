@@ -13,78 +13,6 @@ if ( $nivel < 2 )
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 1em;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-
-        table thead tr {
-            background-color: #009879;
-            color: #ffffff;
-            text-align: left;
-        }
-
-        table th,
-        table td {
-            padding: 12px 15px;
-            border: 1px solid #dddddd;
-        }
-
-        table tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-
-        table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
-        table tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
-        }
-
-        /* Button Styles */
-        button {
-            background-color: #009879;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #007f63;
-        }
-
-        select,
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 10px;
-            border: 1px solid #dddddd;
-            border-radius: 5px;
-        }
-
-        div.align-center {
-            text-align: center;
-        }
-
-        div.align-right {
-            text-align: right;
-        }
-    </style>
-</head>
-<body>
-
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -344,6 +272,7 @@ if ( $nivel < 2 )
               $login = $dados["login"];           
               $nome = $dados["nome"];
               $cpf = $dados["cpf"];
+              $telefone = $dados["telefone"];
               $nascimento = $dados["nascimento"];  
               $genero = $dados["genero"];             
               $email = $dados["email"];
@@ -363,37 +292,45 @@ if ( $nivel < 2 )
               $dados1 = $query1->fetch_assoc();
             ?>
 
-            <form method='post' name="contato" action="sec/atualizarusuario.php?id=<?php echo $id;?>"  onsubmit="return validar();">  
-              <div align="center">   
-                <table border="1" width="40%">              
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">ID:</font></td>
-                    <td width="94%" align="left"><?php echo  $dados['id']; ?></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Login:</font></td>
-                      <td width="94%" align="left"><input type="text" name="login" id="login" onKeyPress="return SomenteLetra(event)" value="<?php echo $dados["login"]; ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Senha:</font></td>
-                    <td width="94%" align="left"><?php echo $criptografada; ?></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nome:</font></td>
-                    <td width="94%" align="left"><input type="text" name="nome" id="nome" onKeyPress="return SomenteLetra(event)" value="<?php echo $dados["nome"]; ?>" /></td>
-                  </tr>	                  
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">CPF:</font></td>
-                    <td width="94%" align="left"><input type="text" name="cpf" id="cpf" value="<?php echo $dados["cpf"]; ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nascimento:</font></td>
-                    <td width="94%" align="left"><input type="text" name="nascimento" id="nascimento" value="<?php echo $dados["nascimento"]; ?>" /></td>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Gênero:</font></td>
-                    <td width="94%" align="left">
-                      <select name="genero" id="genero">
-                        <option <?php if ( $genero == "Masculino" ) 
+            <div class="form-group">
+                <label for="id"><b>ID:</b></label>
+                <?php echo $id;?>
+            </div>
+
+            <div class="form-group">
+                <label for="login"><b>Login:</b></label>
+                <input type="text" name="login" id="login" class="form-control" Value="<?php echo $login;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" class="form-control" Value="<?php echo $nome;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" name="cpf" id="cpf" class="form-control" Value="<?php echo $cpf;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control" Value="<?php echo $email;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Celular:</label>
+                <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" Value="<?php echo $telefone;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="nascimento">Data de Nascimento:</label>
+                <input type="text" name="nascimento" id="nascimento" class="form-control" Value="<?php echo $nascimento;?>"/>
+            </div>
+
+            <div class="form-group">
+                <label for="genero">Gênero:</label>
+                <select class="form-select form-control" id="defaultSelect" name="genero">
+                <option <?php if ( $genero == "Masculino" ) 
                         {
                         echo "selected";
                         }
@@ -402,41 +339,31 @@ if ( $nivel < 2 )
                         echo "";
                         }
                         ?> value="Masculino">Masculino</option>
-                        <option <?php if ( $genero == "Feminino" ) 
+                <option <?php if ( $genero == "Feminino" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
                         ?> value="Feminino">Feminino</option>
-                        <option <?php if ( $genero == "Não definido" ) 
+                <option <?php if ( $genero == "Não definido" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
-                        ?> value="Não definido">Não definido</option>
-                      </select>
-                    </td>
-                  </tr>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Email:</font></td>
-                    <td width="94%" align="left"><input type="text" name="email" id="email" value="<?php echo $dados["email"]; ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Telefone:</font></td>
-                    <td width="94%" align="left"><input type="text" name="telefone" id="telefone"  title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nível:</font></td>
-                    <td width="94%" align="left">
-                      <select name="nivelusuario" id="nivelusuario">
-                        <option <?php if ( $nivelusuario == 1 ) 
+                        ?> value="Não definido">Não definido</option> 
+                </select>  
+            </div>
+
+            <div class="form-group">
+                <label for="nivelusuario">Nível:</label>
+                <select name="nivelusuario" id="nivelusuario" class="form-control">
+                <option <?php if ( $nivelusuario == "1" ) 
                         {
                         echo "selected";
                         }
@@ -445,91 +372,67 @@ if ( $nivel < 2 )
                         echo "";
                         }
                         ?> value="1">Usuário</option>
-                        <option <?php if ( $nivelusuario == 2 ) 
+                <option <?php if ( $nivelusuario == "2" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
                         ?> value="2">Gestor</option>
-                        <option <?php if ( $nivelusuario == 3 ) 
+                <option <?php if ( $nivelusuario == "3" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
-                        ?> value="3">Administrador</option>
-                      </select>
-                  </td>
-                  </tr> 
-                  <tr>
-                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Status:</font></td>
-                    <td width="94%" align="left">
-                      <select name="ativousuario" id="ativousuario">
-                        <option <?php if ( $ativousuario == 1 ) 
+                        ?> value="3">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ativousuario">Status:</label>
+                <select name="ativousuario" id="ativousuario" class="form-control">
+                <option <?php if ( $ativousuario == "1" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
                         ?> value="1">Ativo</option>
-                        <option <?php if ( $ativousuario == 0 ) 
+                <option <?php if ( $ativousuario == "0" ) 
                         {
                         echo "selected";
                         }
                         else 
                         {
-                        echo "" ;
+                        echo "";
                         }
                         ?> value="0">Desativado</option>
-                      </select>
-                    </td>
-                  </tr> 
-                </table>
+                </select>
+            </div> 
 
-                <table border="0" width="40%">   
-                  <tr>
-                    <td width="50%" align="left" valign="top">
-                    <button type="submit" onClick="submitbutton( this.form ); return false;" name="enviar" value="cadastrar" style="background-color: #2a2f5b; color: white; border: none; padding: 20px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Confirmar alteração</button>    
-              </form>
-                    </td>
-                    <td width="50%" align="right" valign="top">
-                    <form id="gerar" align="center" method='post' name="gerar" action="sec/enviarsenhausuario.php?id=<?php echo $id;?>">
-                      <input type="hidden" name="login" id="login" value="<?php echo $dados["login"]; ?>" />
-                      <input type="hidden" name="senha" id="senha" value="<?php echo $dados["senha"]; ?>" />
-                      <input type="hidden" name="nome" id="nome" value="<?php echo $dados["nome"]; ?>" />
-                      <input type="hidden" name="rg" id="rg" value="<?php echo $dados["cpf"]; ?>" />
-                      <input type="hidden" name="nascimento" id="nascimento" value="<?php echo $dados["nascimento"]; ?>" />
-                      <input type="hidden" name="genero" id="genero" value="<?php echo $dados["genero"]; ?>" />
-                      <input type="hidden" name="email" id="email" value="<?php echo $dados["email"]; ?>" />
-                      <input type="hidden" name="telefone" id="telefone" value="<?php echo $dados["telefone"]; ?>" />
-                      <input type="hidden" name="nivelusuario" id="nivelusario" value="<?php echo $dados["nivel"]; ?>" />
-                      <input type="hidden" name="ativousuario" id="ativousuario" value="<?php echo $dados["ativo"]; ?>" />
-                      <button type="submit" name="gerarsenha" value="gerarsenhausuar" style="background-color: #2a2f5b; color: white; border: none; padding: 20px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Gerar nova senha</button>
-                    </form>
-                    </td>
-                     <td>
-                      <form method="POST" action='afastamentousuario.php?id=<?php echo $dados['id']?>'>
-                      <button type="submit" style="background-color: #2a2f5b; color: white; border: none; padding: 15px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Cadastrar afastamento</button>
-                      </form>
-                     </td> 
-                 </tr>            
-                </table>	
+                <div class="form-group" align="center">                                   
+                <a href="sec/atualizarusuario.php?id=<?php echo $id;?>"><button class="botao" >CADASTRAR USUÁRIO</button></a>
+                <a href="sec/enviarsenhausuario.php?id=<?php echo $id;?>"><button class="botao">GERAR NOVA SENHA</button></a>
+                <a href="afastamentousuario.php?id=<?php echo $id;?>"><button class="botao">CADASTRAR AFASTAMENTO</button></a>
+                           
+                </div>
+
 	            <br /> 
               <b>HISTÓRICO DO USUÁRIO</b>
               <table width="100%" border="0">
-                <tr width="100%" bgcolor="#CECECE">	
-                  <td width="37%"><b>Operador</b></td> 			
-                  <td width="10%"><b>Horário</b></td>
-                  <td width="5%"><b>Dia</b></td>
-                  <td width="20%"><b>Mês</b></td>
-                  <td width="5%"><b>Ano</b></td>                  
+                <tr bgcolor="#CECECE">	
+                  <td><b>Operador</b></td> 			
+                  <td><b>Horário</b></td>
+                  <td><b>Dia</b></td>
+                  <td><b>Mês</b></td>
+                  <td><b>Ano</b></td>                  
                 </tr>
                 <?php
 
@@ -551,12 +454,12 @@ if ( $nivel < 2 )
 
                 ?>
 
-                <tr width="100%">		
-                  <td width="37%"><?php echo '<a href="exibirregistrousuario.php?id=' . $dados1['id'] . '"> '. $dados1['operador'] . '<br /></a>';?></td>       
-                  <td width="10%"><?php echo "$dados1[horario]";?></td>
-                  <td width="5%"><?php echo "$dados1[dia]";?></td>	
-                  <td width="20%"><?php echo "$dados1[mes]";?></td>
-                  <td width="5%"><?php echo "$dados1[ano]";?></td>                  	
+                <tr>		
+                  <td><?php echo '<a href="exibirregistrousuario.php?id=' . $dados1['id'] . '"> '. $dados1['operador'] . '<br /></a>';?></td>       
+                  <td><?php echo "$dados1[horario]";?></td>
+                  <td><?php echo "$dados1[dia]";?></td>	
+                  <td><?php echo "$dados1[mes]";?></td>
+                  <td><?php echo "$dados1[ano]";?></td>                  	
                 </tr>
                 <?php
                 }
@@ -580,7 +483,7 @@ if ( $nivel < 2 )
             <?php
             }
             ?>
-
+          
             <!-- FINALIZA CONTEÚDO -->  
           </div>
         </div>

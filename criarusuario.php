@@ -267,13 +267,13 @@ if ( $nivel < 2 )
             </p>
                 
             <form method='post' name="contato" action="sec/enviarusuario.php" class="user-form">
-                    <div class="form-group">
-                    <label for="login">Login:</label>
-                    <input type="text" name="login" id="login" class="form-control" />
-                    </div>
+                <div class="form-group">
+                  <label for="login">Login:</label>
+                  <input type="text" name="login" id="login" class="form-control" />
+                </div>
 
-                    <div class="form-group">
-                    <label for="nome">Nome:</label>
+                <div class="form-group">
+                  <label for="nome">Nome:</label>
                   <input type="text" name="nome" id="nome" class="form-control" />
                 </div>
 

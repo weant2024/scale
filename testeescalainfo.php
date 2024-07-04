@@ -37,7 +37,8 @@ if ( $nivel < 2 )
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="assets/css/calendario.css" />
+    <link rel="stylesheet" href="assets/css/usuarios.css" />
+    <link rel="stylesheet" href="assets/css/escala.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -269,30 +270,14 @@ if ( $nivel < 2 )
                     $dates = explode(',', $datesStr);
                     // Separar a data usando o delimitador "-" 
                     include "sec/infoescala.php";
-
+                } else {
+                    echo "Nenhuma data fornecida!";
+                } 
             ?>
             <form method="POST" action="sec/infoescala.php?dates=<?php echo $_GET['dates'];?>">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
-                            <div class="form-group">
-                                <?php      
-                                    // Exibe as datas selecionadas                                    
-                                    foreach ($dates as $date) {
-                                        include "sec/infoescaladata.php";   
-                                        if ("$dataescala" == "$aniversario"){
-                                            echo "<b>Data: </b>$date <font color='red'>Escalado no aniversário</font></br>";
-                                        }
-                                        else {
-                                            echo "<b>Data: </b>$date </br>";
-                                        }                                                                               
-                                    }                                          
-                                    
-                                } else {
-                                    echo "Nenhuma data fornecida!";
-                                }
-                                ?>
-                            </div>    
                             <div class="form-group">                            
                                 <?php
                                     echo "<b>Nome:</b> $nome";
@@ -307,13 +292,10 @@ if ( $nivel < 2 )
                                 <?php
                                     echo "<b>Local:</b> $localdetrabalho";
                                 ?>                                                        
-                            </div>      
-                            <div class="form-group">                        
-                                <div class="selecionar">    
-                                    <div class="nav">
-                                        <button type="submit">Enviar</button>
-                                    </div>
-                                </div>   
+                            </div>  
+
+                            <div class="form-group"> 
+                              <button class="botao" type="submit">CADASTRAR ESCALA</button>
                             </div>  
                         </div>
                     </div>

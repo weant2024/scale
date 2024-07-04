@@ -20,31 +20,60 @@ foreach ($dates as $date) {
         $allItems[] = array('dia' => $escaladia, 'mes' => $escalames, 'ano' => $escalaano);
 
         $dataescala = "$escaladia-$escalames";  
+        $dataescalacompleta = "$escaladia/$escalames/$escalaano";        
         include "infoescaladata.php";   
-            if ("$dataescala" == "$aniversario"){
-                echo "<b>Data: </b>$date <font color='red'>Escalado no aniversário</font></br>";
-            }
-            else {
-                echo "<b>Data: </b>$date </br>";
-            }  
-        $buscaescalahorario = "SELECT * FROM escala WHERE id_usuario='$idusuario' AND dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
-        $queryescalahorario = $conn->query($buscaescalahorario);
-        $dadosescalahorario = $queryescalahorario->fetch_assoc();
-            if (@$queryescalahorario->num_rows < 1) {  
-                echo "U:$idusuario H:$inicioexpediente D:$escaladia M:$escalames A:$escalaano</br>";
-                echo "<b>Início de expediente:</b> $inicioexpediente</br>";
-                echo "<b>Início de intervalo:</b> $iniciointervalo</br>";
-                echo "<b>Final de intervalo:</b> $finalintervalo</br>";
-                echo "<b>Final de expediente:</b> $finalexpediente</br></br>"; 
-
+            
+        $buscaescalaafastamento = "SELECT * FROM afastamento WHERE id_usuario = '$idusuario' AND '$dataescalacompleta' BETWEEN datainicial AND datafinal;";
+        $queryescalaafastamento = $conn->query($buscaescalaafastamento);  
+        $dadosescalaafastamento = $queryescalaafastamento->fetch_assoc();    
+        @$afastamentomotivo = $dadosescalaafastamento['motivo'];
+        @$afastamentodatainicial = $dadosescalaafastamento['datainicial'];    
+        @$afastamentodatafinal = $dadosescalaafastamento['datafinal'];                 
                 
+                
+        $buscaescalahorario = "SELECT * FROM escala WHERE dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
+        $queryescalahorario = $conn->query($buscaescalahorario);
+        $dadosescalahorario = $queryescalahorario->fetch_assoc();       
+
+        $buscausuarioescalado = "SELECT * FROM usuario WHERE id='$idusuario'";
+        $queryusuarioescalado = $conn->query($buscausuarioescalado);
+        $buscausuarioescalado = $queryusuarioescalado->fetch_assoc();
+        $nomeusuarioescalado = $buscausuarioescalado['nome'];
+        $loginusuarioescalado = $buscausuarioescalado['login'];
+
+            echo "</br><b>Data: </b>$dataescalacompleta </br>";
+            echo "<b>Início de expediente:</b> $inicioexpediente</br>";
+            echo "<b>Início de intervalo:</b> $iniciointervalo</br>";
+            echo "<b>Final de intervalo:</b> $finalintervalo</br>";
+            echo "<b>Final de expediente:</b> $finalexpediente</br>";
+        ?>
+        <div class="alertaescalavermelho">
+        <?php
+        
+            if (@$queryescalahorario->num_rows > 0) {                  
+                echo "$loginusuarioescalado está escalado</br>";                                          
             }
-            else {
-                echo "<b>Início de expediente:</b> $inicioexpediente <font color='red'>Já escalado</font></br>";
-                echo "<b>Início de intervalo:</b> $iniciointervalo <font color='red'>Já escalado</font></br>";
-                echo "<b>Final de intervalo:</b> $finalintervalo <font color='red'>Já escalado</font></br>";
-                echo "<b>Final de expediente:</b> $finalexpediente <font color='red'>Já escalado</font></br></br>"; 
-            }
+
+        ?>
+        </div>
+        <div class="alertaescalavermelho">
+        <?php    
+
+            if ($queryescalaafastamento->num_rows > 0){
+                echo " $afastamentomotivo entre $afastamentodatainicial e $afastamentodatafinal</br>";
+            } 
+
+        ?>
+        </div>
+        <div class="alertaescalavermelho">
+        <?php  
+
+            if ("$dataescala" == "$aniversario"){
+                echo "Escalado no aniversário</br>";                  
+            }            
+        ?>
+        </div>
+        <?php
     }
 }
 ?>
