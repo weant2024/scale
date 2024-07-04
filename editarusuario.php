@@ -291,138 +291,138 @@ if ( $nivel < 2 )
               $query1 = $conn->query($sqlc1);
               $dados1 = $query1->fetch_assoc();
             ?>
-
-            <div class="form-group">
-                <label for="id"><b>ID:</b></label>
-                <?php echo $id;?>
-            </div>
-
-            <div class="form-group">
-                <label for="login"><b>Login:</b></label>
-                <input type="text" name="login" id="login" class="form-control" Value="<?php echo $login;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" class="form-control" Value="<?php echo $nome;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="text" name="cpf" id="cpf" class="form-control" Value="<?php echo $cpf;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" name="email" id="email" class="form-control" Value="<?php echo $email;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="telefone">Celular:</label>
-                <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" Value="<?php echo $telefone;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="nascimento">Data de Nascimento:</label>
-                <input type="text" name="nascimento" id="nascimento" class="form-control" Value="<?php echo $nascimento;?>"/>
-            </div>
-
-            <div class="form-group">
-                <label for="genero">Gênero:</label>
-                <select class="form-select form-control" id="defaultSelect" name="genero">
-                <option <?php if ( $genero == "Masculino" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="Masculino">Masculino</option>
-                <option <?php if ( $genero == "Feminino" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="Feminino">Feminino</option>
-                <option <?php if ( $genero == "Não definido" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="Não definido">Não definido</option> 
-                </select>  
-            </div>
-
-            <div class="form-group">
-                <label for="nivelusuario">Nível:</label>
-                <select name="nivelusuario" id="nivelusuario" class="form-control">
-                <option <?php if ( $nivelusuario == "1" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="1">Usuário</option>
-                <option <?php if ( $nivelusuario == "2" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="2">Gestor</option>
-                <option <?php if ( $nivelusuario == "3" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="3">Admin</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="ativousuario">Status:</label>
-                <select name="ativousuario" id="ativousuario" class="form-control">
-                <option <?php if ( $ativousuario == "1" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="1">Ativo</option>
-                <option <?php if ( $ativousuario == "0" ) 
-                        {
-                        echo "selected";
-                        }
-                        else 
-                        {
-                        echo "";
-                        }
-                        ?> value="0">Desativado</option>
-                </select>
-            </div> 
-
-                <div class="form-group" align="center">                                   
-                <a href="sec/atualizarusuario.php?id=<?php echo $id;?>"><button class="botao" >CADASTRAR USUÁRIO</button></a>
-                <a href="sec/enviarsenhausuario.php?id=<?php echo $id;?>"><button class="botao">GERAR NOVA SENHA</button></a>
-                <a href="afastamentousuario.php?id=<?php echo $id;?>"><button class="botao">CADASTRAR AFASTAMENTO</button></a>
-                           
+            <form method="POST" action="sec/atualizarusuario.php?id=<?php echo $id;?>">
+                <div class="form-group">
+                    <label for="id"><b>ID:</b></label>
+                    <?php echo $id;?>
                 </div>
+
+                <div class="form-group">
+                    <label for="login"><b>Login:</b></label>
+                    <input type="text" name="login" id="login" class="form-control" Value="<?php echo $login;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" id="nome" class="form-control" Value="<?php echo $nome;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" name="cpf" id="cpf" class="form-control" Value="<?php echo $cpf;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control" Value="<?php echo $email;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Celular:</label>
+                    <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" Value="<?php echo $telefone;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="nascimento">Data de Nascimento:</label>
+                    <input type="text" name="nascimento" id="nascimento" class="form-control" Value="<?php echo $nascimento;?>"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Gênero:</label>
+                    <select class="form-select form-control" id="defaultSelect" name="genero">
+                    <option <?php if ( $genero == "Masculino" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="Masculino">Masculino</option>
+                    <option <?php if ( $genero == "Feminino" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="Feminino">Feminino</option>
+                    <option <?php if ( $genero == "Não definido" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="Não definido">Não definido</option> 
+                    </select>  
+                </div>
+
+                <div class="form-group">
+                    <label for="nivelusuario">Nível:</label>
+                    <select name="nivelusuario" id="nivelusuario" class="form-control">
+                    <option <?php if ( $nivelusuario == "1" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="1">Usuário</option>
+                    <option <?php if ( $nivelusuario == "2" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="2">Gestor</option>
+                    <option <?php if ( $nivelusuario == "3" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="3">Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ativousuario">Status:</label>
+                    <select name="ativousuario" id="ativousuario" class="form-control">
+                    <option <?php if ( $ativousuario == "1" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="1">Ativo</option>
+                    <option <?php if ( $ativousuario == "0" ) 
+                            {
+                            echo "selected";
+                            }
+                            else 
+                            {
+                            echo "";
+                            }
+                            ?> value="0">Desativado</option>
+                    </select>
+                </div> 
+
+                    <div class="form-group" align="center">                                   
+                    <button type="submit" class="botao" >EDITAR USUÁRIO</button>
+                    <a href="sec/enviarsenhausuario.php?id=<?php echo $id;?>"><button class="botao">GERAR NOVA SENHA</button></a>
+                    <a href="afastamentousuario.php?id=<?php echo $id;?>"><button class="botao">CADASTRAR AFASTAMENTO</button></a>                           
+                    </div>
+            </form>
 
 	            <br /> 
               <b>HISTÓRICO DO USUÁRIO</b>

@@ -33,13 +33,14 @@ foreach ($dates as $date) {
                 
         $buscaescalahorario = "SELECT * FROM escala WHERE dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
         $queryescalahorario = $conn->query($buscaescalahorario);
-        $dadosescalahorario = $queryescalahorario->fetch_assoc();       
+        $dadosescalahorario = $queryescalahorario->fetch_assoc();  
+        @$loginescalahorario = $dadosescalahorario['id_usuario'];    
 
-        $buscausuarioescalado = "SELECT * FROM usuario WHERE id='$idusuario'";
+        $buscausuarioescalado = "SELECT * FROM usuario WHERE id='$loginescalahorario'";
         $queryusuarioescalado = $conn->query($buscausuarioescalado);
         $buscausuarioescalado = $queryusuarioescalado->fetch_assoc();
-        $nomeusuarioescalado = $buscausuarioescalado['nome'];
-        $loginusuarioescalado = $buscausuarioescalado['login'];
+        @$nomeusuarioescalado = $buscausuarioescalado['nome'];
+        @$loginusuarioescalado = $buscausuarioescalado['login'];
 
             echo "</br><b>Data: </b>$dataescalacompleta </br>";
             echo "<b>Início de expediente:</b> $inicioexpediente</br>";
@@ -51,7 +52,7 @@ foreach ($dates as $date) {
         <?php
         
             if (@$queryescalahorario->num_rows > 0) {                  
-                echo "$loginusuarioescalado está escalado</br>";                                          
+                echo "$loginusuarioescalado já está escalado nesta data e horário</br>";                                          
             }
 
         ?>
@@ -65,7 +66,7 @@ foreach ($dates as $date) {
 
         ?>
         </div>
-        <div class="alertaescalavermelho">
+        <div class="alertaescalaverde">
         <?php  
 
             if ("$dataescala" == "$aniversario"){

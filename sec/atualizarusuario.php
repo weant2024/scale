@@ -16,19 +16,16 @@ $dados = $query->fetch_assoc();
 $nivelusuario = $dados["nivel"];
 
 $login = $_POST["login"];
-$senha = $_POST["senha"];
 $nome = $_POST["nome"];
 $cpf = $_POST["cpf"];
-$nascimento = $_POST["nascimento"];
-$matricula = $_POST["matricula"];
 $email = $_POST["email"];
 $telefone = $_POST["telefone"];
-$cargousuario = $_POST["cargousuario"];
-$departamentousuario = $_POST["departamentousuario"];
-
-$pnivel = $_POST["pnivel"];
-$ativousuario = $_POST["ativousuario"];
-$pativo = $_POST["pativo"];
+$nascimento = $_POST["nascimento"];
+$genero = $_POST['genero'];
+$nivelusuario = $_POST['nivelusuario'];
+$ativousuario = $_POST['ativousuario'];
+@$cargousuario = $_POST["cargousuario"];
+@$departamentousuario = $_POST["departamentousuario"];
 $gerasenha = "4";
 $horario = date('H:i:s');
 $dia = date('d');
@@ -89,10 +86,10 @@ elseif  ($ativousuario == 0){
 }
 ?>
 <?php
-$query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$nascimento', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
+$query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `genero`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$nascimento', '$genero', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
 $result1 = $conn->query($query1);
 
-$query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$nascimento', email='$email', telefone='$telefone', departamento='$departamentousuario', cargo='$cargousuario', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
+$query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$nascimento', genero='$genero', email='$email', telefone='$telefone', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
 $result2 = $conn->query($query2);
 
 $msg = "Alteração do usuário realizado com sucesso!";
