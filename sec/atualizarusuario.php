@@ -43,7 +43,7 @@ switch ($mes){
 
 case 1: $mes = "Janeiro"; break;
 case 2: $mes = "Fevereiro"; break;
-case 3: $mes = "Mar�o"; break;
+case 3: $mes = "Março"; break;
 case 4: $mes = "Abril"; break;
 case 5: $mes = "Maio"; break;
 case 6: $mes = "Junho"; break;
@@ -61,11 +61,11 @@ switch ($semana) {
 
 case 0: $semana = "Domingo"; break;
 case 1: $semana = "Segunda"; break;
-case 2: $semana = "Ter�a"; break;
+case 2: $semana = "Terça"; break;
 case 3: $semana = "Quarta"; break;
 case 4: $semana = "Quinta"; break;
 case 5: $semana = "Sexta"; break;
-case 6: $semana = "S�bado"; break;
+case 6: $semana = "Sábado"; break;
 
 }
 ?>
