@@ -13,6 +13,51 @@ if ( $nivel < 2 )
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
+    <style>
+    /* Estilos para a tabela */
+    table.custom-table {
+        width: 40%;
+        border-collapse: collapse;
+        margin: 0 auto; /* Centraliza a tabela na tela */
+        margin-bottom: 20px; /* Espaçamento abaixo da tabela */
+        background-color: #1f283e;
+        color: #ffffff;
+    }
+    table.custom-table th, table.custom-table td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+    table.custom-table th {
+        background-color: #2a2f5b; /* Cor de fundo do cabeçalho */
+        color: #ffffff;
+    }
+
+    /* Estilos para os inputs */
+    table.custom-table input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        background-color: #f0f0f0;
+    }
+
+    /* Estilos para as mensagens informativas */
+    .info-message {
+        border-radius: 8px;
+        background-color: rgba(70,130,180,0.7);
+        padding: 10px;
+        margin-bottom: 20px; /* Espaçamento abaixo da mensagem */
+        font-weight: bold;
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        text-align: center;
+    }
+</style>
+
+
+
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -288,145 +333,131 @@ if ( $nivel < 2 )
 
             ?>
 
-              <div align="center">   
-                  <table border="1" width="40%">
-                      <tbody>
-                      <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">ID:</font></td>
-                              <td width="90%" align="left"><?php echo  $dados['id_usuario']; ?></td>
-                          </tr>
-                      <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Login:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="login" size="50" id="login" value="<?php echo $dados["login"]; ?>" /></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Senha:</font></td>
-                              <td width="90%" align="left"><?php echo $criptografada; ?></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Nome:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="nome" size="50" id="nome" value="<?php echo $dados["nome"]; ?>" /></td>
-                          </tr>	
-                        
-              <!--       <tr>
-                        <td width="10%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">RG:</font></td>
-                            <td width="90%" style="left">
-                                <table width="200" border="0">
-                                  <tr>
-                                    <td><input type="text" readonly name="rg" size="13" id="rg" onKeyPress="return SomenteNumero(event);" onKeyUp="this.value = this.value.toUpperCase();" value="<?php echo $dados["rg"]; ?>" /></td>
-                                    <td width="6%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">ORGÃO:</font></td>
-                                    <td><input type="text" readonly name="rgorgao" size="7" id="rgorgao" onKeyPress="return SomenteLetra(event);" onKeyUp="this.value = this.value.toUpperCase();" onBlur="this.value = this.value.toUpperCase();" value="<?php echo $dados["rgorgao"]; ?>" /></td>
-                                    <td width="6%" style='background-color:rgba(70,130,180,0.7)' align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">UF:</font></td>
-                                    <td><input type="text" readonly name="rguf" size="5" id="rguf" onKeyPress="return SomenteLetra(event);" onKeyUp="this.value = this.value.toUpperCase();" onBlur="this.value = this.value.toUpperCase();" value="<?php echo $dados["rguf"]; ?>" /></td>
-                                  </tr>
-                              </table></td>                
-                          </tr>			
-              -->			<tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">RG:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="cpf" size="50" id="rg" value="<?php echo $dados["cpf"]; ?>" /></td>
-                          </tr>
-                    <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Email:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["email"]; ?>" /></td>
-                          </tr>
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Telefone:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="telefone" size="50" id="telefone"  class="inputcssn" title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>" /></td>
-                          </tr>
-              <!-- 		<tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Cargo:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["cargo"]; ?>" /></td>
-                          </tr>
-                    <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Departamento:</font></td>
-                              <td width="90%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["departamento"]; ?>" /></td>
-                          </tr>
-              -->         <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Nível:</font></td>
-                              <td width="90%" align="left"><?php if ( $nivelusuario == 1 ) 
-              {
-              echo "Usuário";
-              }
-              if ( $nivelusuario == 2 ) 
-              {
-              echo "Gestor";
-              }
-              if ( $nivelusuario == 3 ) 
-              {
-              echo "Admin";
-              }
-              ?>
-              </td>
-                          </tr> 			
-                          <tr>
-                      <td width="10%" style="background-color:rgba(70,130,180,0.7)" align="right" style="text-shadow: #000 1px 1px 4px;"><font color="#FFFFFF">Status:</font></td>
-                              <td width="90%" align="left">
-              <?php if ( $ativousuario == 1 ) 
-              {
-              echo "Ativo";
-              }
-              if ( $ativousuario == 0 ) 
-              {
-              echo "Desativado";
-              }
-              ?>
-              </td>
-                          </tr> 
-                        </tbody>
-                  </table>	
-                <br />
-                <?php if ( $gerasenha == 1 ){
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI GERADA UMA NOVA SENHA PELO OPERADOR</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 2 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI GERADA UMA NOVA SENHA PELO USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 3 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI CRIADO O USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              elseif ( $gerasenha == 4 )
-              {
-              echo "<table style='border-radius:8px; background-color:rgba(70,130,180,0.7)' cellpadding='5px'>
-                  <tr>
-                    <td>
-                      <font color='#FFFFFF'  style='font-weight:bold;font-family: Verdana, Geneva, sans-serif;font-size:12px'>FOI ALTERADO O USUÁRIO</font>
-                    </td>
-                  </tr>
-                  </table>";
-              }
-              ?>
-              <br />
-                <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
-                <tr>
-                  <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
-                  <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
-                </tr> 	
-              </table>
-              <br />
-                  </td>
-                </tr>
-              </table>
-              </div>
+<div align="center" style="margin-top: 20px; background-color: #f0f0f0; padding: 20px;">
+    <style>
+        .custom-table {
+            width: 100%;
+            background-color: #1f283e;
+            color: #ffffff;
+            border-collapse: collapse;
+        }
+        .custom-table td {
+            padding: 10px;
+            text-align: right;
+        }
+        .custom-table td:first-child {
+            background-color: #1f283e;
+            width: 20%;
+        }
+        .custom-table td:nth-child(2) {
+            background-color: #f0f0f0;
+            color: #1f283e;
+            width: 80%;
+            padding: 10px;
+        }
+        .custom-table input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #dddddd;
+            background-color: #f0f0f0;
+        }
+        .info-message {
+            border-radius: 8px;
+            background-color: rgba(70, 130, 180, 0.7);
+            padding: 5px;
+            margin-top: 10px;
+            color: #ffffff;
+            font-weight: bold;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 12px;
+        }
+        .info-message b {
+            color: #ffffff;
+        }
+    </style>
+
+    <table border="1" width="40%" class="custom-table">
+        <tbody>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>ID</b></font></td>
+                <td width="80%" align="left"><?php echo $dados['id_usuario']; ?></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Login</b></font></td>
+                <td width="80%" align="left"><input type="text" readonly name="login" size="50" id="login" value="<?php echo $dados["login"]; ?>"></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Senha</b></font></td>
+                <td width="80%" align="left"><?php echo $criptografada; ?></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Nome</b></font></td>
+                <td width="80%" align="left"><input type="text" readonly name="nome" size="50" id="nome" value="<?php echo $dados["nome"]; ?>"></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>RG</b></font></td>
+                <td width="80%" align="left"><input type="text" readonly name="cpf" size="50" id="rg" value="<?php echo $dados["cpf"]; ?>"></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Email</b></font></td>
+                <td width="80%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["email"]; ?>"></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Telefone</b></font></td>
+                <td width="80%" align="left"><input type="text" readonly name="telefone" size="50" id="telefone" class="inputcssn" title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>"></td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Nível</b></font></td>
+                <td width="80%" align="left">
+                    <?php
+                        if ($nivelusuario == 1) {
+                            echo "Usuário";
+                        } elseif ($nivelusuario == 2) {
+                            echo "Gestor";
+                        } elseif ($nivelusuario == 3) {
+                            echo "Admin";
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td width="20%"><font color="#FFFFFF"><b>Status</b></font></td>
+                <td width="80%" align="left">
+                    <?php
+                        if ($ativousuario == 1) {
+                            echo "Ativo";
+                        } elseif ($ativousuario == 0) {
+                            echo "Desativado";
+                        }
+                    ?>
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+
+    <?php
+    if ($gerasenha == 1) {
+        echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO OPERADOR</div>";
+    } elseif ($gerasenha == 2) {
+        echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO USUÁRIO</div>";
+    } elseif ($gerasenha == 3) {
+        echo "<div class='info-message'>FOI CRIADO O USUÁRIO</div>";
+    } elseif ($gerasenha == 4) {
+        echo "<div class='info-message'>FOI ALTERADO O USUÁRIO</div>";
+    }
+    ?>
+
+    <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
+        <tr>
+            <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
+            <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
+        </tr> 	
+    </table>
+</div>
+
+
+
 
             <!-- FINALIZA CONTEÚDO -->  
           </div>
