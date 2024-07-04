@@ -316,13 +316,13 @@ if ( $nivel < 2 )
               $dados = $result->fetch_assoc();
 
               $login = $dados["login"];
-              $senha = $dados["senha"];
               $nome = $dados["nome"];
               $cpf = $dados["cpf"];
+              $telefone = $dados["telefone"];
               $nascimento = $dados["nascimento"];              
               $email = $dados["email"];
-              $nivelusuario = $dados["nivel"];
-              $ativousuario = $dados["ativo"];
+              $pnivel = $dados["pnivel"];
+              $pativo = $dados["pativo"];
               $gerasenha = $dados["gerasenha"];
               $horario = $dados["horario"];
               $dia = $dados["dia"];
@@ -333,135 +333,65 @@ if ( $nivel < 2 )
 
             ?>
 
-<div align="center" style="margin-top: 20px; background-color: #f0f0f0; padding: 20px;">
-    <style>
-        .custom-table {
-            width: 100%;
-            background-color: #1f283e;
-            color: #ffffff;
-            border-collapse: collapse;
-        }
-        .custom-table td {
-            padding: 10px;
-            text-align: right;
-        }
-        .custom-table td:first-child {
-            background-color: #1f283e;
-            width: 20%;
-        }
-        .custom-table td:nth-child(2) {
-            background-color: #f0f0f0;
-            color: #1f283e;
-            width: 80%;
-            padding: 10px;
-        }
-        .custom-table input[type="text"] {
-            width: calc(100% - 16px);
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #dddddd;
-            background-color: #f0f0f0;
-        }
-        .info-message {
-            border-radius: 8px;
-            background-color: rgba(70, 130, 180, 0.7);
-            padding: 5px;
-            margin-top: 10px;
-            color: #ffffff;
-            font-weight: bold;
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: 12px;
-        }
-        .info-message b {
-            color: #ffffff;
-        }
-    </style>
+            <div class="form-group">
+                <label><b>Login:</b></label>
+                <?php echo $login;?>
+            </div>
 
-    <table border="1" width="40%" class="custom-table">
-        <tbody>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>ID</b></font></td>
-                <td width="80%" align="left"><?php echo $dados['id_usuario']; ?></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Login</b></font></td>
-                <td width="80%" align="left"><input type="text" readonly name="login" size="50" id="login" value="<?php echo $dados["login"]; ?>"></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Senha</b></font></td>
-                <td width="80%" align="left"><?php echo $criptografada; ?></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Nome</b></font></td>
-                <td width="80%" align="left"><input type="text" readonly name="nome" size="50" id="nome" value="<?php echo $dados["nome"]; ?>"></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>RG</b></font></td>
-                <td width="80%" align="left"><input type="text" readonly name="cpf" size="50" id="rg" value="<?php echo $dados["cpf"]; ?>"></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Email</b></font></td>
-                <td width="80%" align="left"><input type="text" readonly name="email" size="50" id="email" value="<?php echo $dados["email"]; ?>"></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Telefone</b></font></td>
-                <td width="80%" align="left"><input type="text" readonly name="telefone" size="50" id="telefone" class="inputcssn" title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>"></td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Nível</b></font></td>
-                <td width="80%" align="left">
-                    <?php
-                        if ($nivelusuario == 1) {
-                            echo "Usuário";
-                        } elseif ($nivelusuario == 2) {
-                            echo "Gestor";
-                        } elseif ($nivelusuario == 3) {
-                            echo "Admin";
-                        }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td width="20%"><font color="#FFFFFF"><b>Status</b></font></td>
-                <td width="80%" align="left">
-                    <?php
-                        if ($ativousuario == 1) {
-                            echo "Ativo";
-                        } elseif ($ativousuario == 0) {
-                            echo "Desativado";
-                        }
-                    ?>
-                </td>
-            </tr> 
-        </tbody>
-    </table>
+            <div class="form-group">
+                <label><b>Nome:</b></label>
+                <?php echo $nome;?>
+            </div>
 
-    <?php
-    if ($gerasenha == 1) {
-        echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO OPERADOR</div>";
-    } elseif ($gerasenha == 2) {
-        echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO USUÁRIO</div>";
-    } elseif ($gerasenha == 3) {
-        echo "<div class='info-message'>FOI CRIADO O USUÁRIO</div>";
-    } elseif ($gerasenha == 4) {
-        echo "<div class='info-message'>FOI ALTERADO O USUÁRIO</div>";
-    }
-    ?>
+            <div class="form-group">
+                <label><b>CPF:</b></label>
+                <?php echo $cpf;?>
+            </div>
 
-    <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
-        <tr>
-            <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
-            <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
-        </tr> 	
-    </table>
-</div>
+            <div class="form-group">
+                <label><b>Email:</b></label>
+                <?php echo $email;?>
+            </div>
 
+            <div class="form-group">
+                <label><b>Celular:</b></label>
+                <?php echo $telefone;?>
+            </div>
 
+            <div class="form-group">
+                <label><b>Nivel:</b></label>
+                <?php echo $pnivel;?>
+            </div>
 
+            <div class="form-group">
+                <label><b>Status:</b></label>
+                <?php echo $pativo;?>
+            </div>
 
-            <!-- FINALIZA CONTEÚDO -->  
-          </div>
-        </div>
+            <div align="center" style="margin-top: 20px;">
+              <?php
+              if ($gerasenha == 1) {
+                  echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO OPERADOR</div>";
+              } elseif ($gerasenha == 2) {
+                  echo "<div class='info-message'>FOI GERADA UMA NOVA SENHA PELO USUÁRIO</div>";
+              } elseif ($gerasenha == 3) {
+                  echo "<div class='info-message'>FOI CRIADO O USUÁRIO</div>";
+              } elseif ($gerasenha == 4) {
+                  echo "<div class='info-message'>FOI ALTERADO O USUÁRIO</div>";
+              }
+              ?>
+
+              <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
+                  <tr>
+                      <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
+                      <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
+                  </tr> 	
+              </table>
+            </div>
+
+         <!-- FINALIZA CONTEÚDO -->  
+      </div>
+    </div>
 
         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">
