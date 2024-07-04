@@ -367,30 +367,30 @@ if ( $nivel < 2 )
               <div align="center">   
                 <table border="1" width="40%">              
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">ID:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">ID:</font></td>
                     <td width="94%" align="left"><?php echo  $dados['id']; ?></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Login:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Login:</font></td>
                       <td width="94%" align="left"><input type="text" name="login" id="login" onKeyPress="return SomenteLetra(event)" value="<?php echo $dados["login"]; ?>" /></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Senha:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Senha:</font></td>
                     <td width="94%" align="left"><?php echo $criptografada; ?></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Nome:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nome:</font></td>
                     <td width="94%" align="left"><input type="text" name="nome" id="nome" onKeyPress="return SomenteLetra(event)" value="<?php echo $dados["nome"]; ?>" /></td>
                   </tr>	                  
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">CPF:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">CPF:</font></td>
                     <td width="94%" align="left"><input type="text" name="cpf" id="cpf" value="<?php echo $dados["cpf"]; ?>" /></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Nascimento:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nascimento:</font></td>
                     <td width="94%" align="left"><input type="text" name="nascimento" id="nascimento" value="<?php echo $dados["nascimento"]; ?>" /></td>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Gênero:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Gênero:</font></td>
                     <td width="94%" align="left">
                       <select name="genero" id="genero">
                         <option <?php if ( $genero == "Masculino" ) 
@@ -425,15 +425,15 @@ if ( $nivel < 2 )
                   </tr>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Email:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Email:</font></td>
                     <td width="94%" align="left"><input type="text" name="email" id="email" value="<?php echo $dados["email"]; ?>" /></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Telefone:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Telefone:</font></td>
                     <td width="94%" align="left"><input type="text" name="telefone" id="telefone"  title="Digite o celular" maxlength="16" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" value="<?php echo $dados["telefone"]; ?>" /></td>
                   </tr>
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Nível:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Nível:</font></td>
                     <td width="94%" align="left">
                       <select name="nivelusuario" id="nivelusuario">
                         <option <?php if ( $nivelusuario == 1 ) 
@@ -467,7 +467,7 @@ if ( $nivel < 2 )
                   </td>
                   </tr> 
                   <tr>
-                    <td width="6%" style="background-color:rgba(70,130,180,0.7)" align="right" ><font color="#FFFFFF">Status:</font></td>
+                    <td width="6%" style="background-color:#1f283e" align="right" ><font color="#FFFFFF">Status:</font></td>
                     <td width="94%" align="left">
                       <select name="ativousuario" id="ativousuario">
                         <option <?php if ( $ativousuario == 1 ) 
@@ -496,7 +496,7 @@ if ( $nivel < 2 )
                 <table border="0" width="40%">   
                   <tr>
                     <td width="50%" align="left" valign="top">
-                    <button type="submit" onClick="submitbutton( this.form ); return false;" name="enviar" value="cadastrar" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Alterar</button>    
+                    <button type="submit" onClick="submitbutton( this.form ); return false;" name="enviar" value="cadastrar" style="background-color: #2a2f5b; color: white; border: none; padding: 20px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Confirmar alteração</button>    
               </form>
                     </td>
                     <td width="50%" align="right" valign="top">
@@ -511,12 +511,12 @@ if ( $nivel < 2 )
                       <input type="hidden" name="telefone" id="telefone" value="<?php echo $dados["telefone"]; ?>" />
                       <input type="hidden" name="nivelusuario" id="nivelusario" value="<?php echo $dados["nivel"]; ?>" />
                       <input type="hidden" name="ativousuario" id="ativousuario" value="<?php echo $dados["ativo"]; ?>" />
-                      <button type="submit" name="gerarsenha" value="gerarsenhausuar" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Gerar nova senha</button>
+                      <button type="submit" name="gerarsenha" value="gerarsenhausuar" style="background-color: #2a2f5b; color: white; border: none; padding: 20px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Gerar nova senha</button>
                     </form>
                     </td>
                      <td>
                       <form method="POST" action='afastamentousuario.php?id=<?php echo $dados['id']?>'>
-                      <button type="submit" style="background-color: #2a2f5b; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Afastamento</button>
+                      <button type="submit" style="background-color: #2a2f5b; color: white; border: none; padding: 15px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin-top: 10px; cursor: pointer; border-radius: 4px;" onmouseover="this.style.backgroundColor='#8800ff'" onmouseout="this.style.backgroundColor='#2a2f5b'">Cadastrar afastamento</button>
                       </form>
                      </td> 
                  </tr>            
