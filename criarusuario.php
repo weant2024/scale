@@ -33,6 +33,9 @@ if ( $nivel < 2 )
       });
     </script>
 
+    <!-- JS Files -->
+    <script src="assets/js/usuarios.js"></script>
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
@@ -289,7 +292,10 @@ if ( $nivel < 2 )
 
                 <div class="form-group">
                   <label for="telefone">Celular:</label>
-                  <input type="text" name="telefone" id="telefone" class="form-control" placeholder="xx xxxxx-xxxx" />
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">+55</span>
+                    <input type="text" class="form-control" placeholder="xx xxxxx-xxxx" maxlength="12" onKeyPress="Mascaracelular(this); return SomenteNumero(event);"/>
+                  </div>
                 </div>
 
                 <div class="form-group">

@@ -30,8 +30,7 @@ foreach ($dates as $date) {
         @$afastamentomotivo = $dadosescalaafastamento['motivo'];
         @$afastamentodatainicial = $dadosescalaafastamento['datainicial'];    
         @$afastamentodatafinal = $dadosescalaafastamento['datafinal'];                 
-                
-                
+                                
         $buscaescalahorario = "SELECT * FROM escala WHERE dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
         $queryescalahorario = $conn->query($buscaescalahorario);
         $dadosescalahorario = $queryescalahorario->fetch_assoc();  
@@ -76,7 +75,7 @@ foreach ($dates as $date) {
         ?>
         </div>
 
-        <div class="alertaescalavermelho">
+        <div class="alertaescalaverde">
             <?php            
                 $busca7dias = "
                 SET @nova_data = '$dataescalatratada';
@@ -132,10 +131,14 @@ foreach ($dates as $date) {
                     // Loop através dos resultados
                     while($row7dias = $resultadobusca7dias->fetch_assoc()) {
                         $primeirodiabusca7dias = $row7dias['primeiro_dia'];
-                        $ultimodiabusca7dias = $row7dias['ultimo_dia'];                      
-                        
+                        $ultimodiabusca7dias = $row7dias['ultimo_dia'];
+
+                        // Converte a data para o formato DD/MM/AAAA
+                        $primeirodia_formatado = DateTime::createFromFormat('Y-m-d', $primeirodiabusca7dias)->format('d/m/Y');
+                        $ultimodia_formatado = DateTime::createFromFormat('Y-m-d', $ultimodiabusca7dias)->format('d/m/Y'); 
                         // Exemplo de uso das variáveis
-                        echo "Escalado 7 dias seguidos, entre $primeirodiabusca7dias a $ultimodiabusca7dias</br>";                           
+                        echo "Escalado 7 dias seguidos, entre $primeirodia_formatado e $ultimodia_formatado</br>";
+                                                      
                     }
                 }
             ?>            

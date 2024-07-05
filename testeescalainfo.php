@@ -280,7 +280,8 @@ if ( $nivel < 2 )
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">                            
                                 <?php
-                                    echo "<b>Nome:</b> $nome";
+                                    echo "<b>Nome:</b> $nome</br>";
+                                    include "sec/infoescalausuario.php";
                                 ?>                                
                             </div>    
                             <div class="form-group">
