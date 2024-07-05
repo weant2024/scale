@@ -274,7 +274,7 @@ if ( $nivel < 2 )
                     echo "Nenhuma data fornecida!";
                 } 
             ?>
-            <form method="POST" action="sec/infoescala.php?dates=<?php echo $_GET['dates'];?>">
+            <form method="POST" action="sec/testeenviaescala.php?dates=<?php echo $_GET['dates'];?>&hexp=<?php echo $horarioexpediente;?>&local=<?php echo $localdetrabalho;?>&id=<?php echo $idusuario;?>">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">

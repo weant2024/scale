@@ -326,7 +326,7 @@ if ( $nivel < 2 )
                             <div class="form-group">                        
                                 <div class="selecionar">    
                                     <div class="nav">
-                                        <button type="submit">Enviar</button>
+                                        <button class="botao" type="submit">Selecionar</button>
                                     </div>
                                 </div>   
                             </div>  

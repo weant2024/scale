@@ -4,3 +4,15 @@
 .alertaescalaverde {   
     color: green;
 }
+.botao  {
+    padding: 5px 10px; 
+    margin-top: 20px; 
+    border: none;
+    background-color: #2a2f5b;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.botao:hover {
+    background-color: #8800ff;
+}
