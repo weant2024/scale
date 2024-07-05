@@ -3,14 +3,19 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/07/2024 às 18:06
+-- Tempo de geração: 05/07/2024 às 03:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "-03:00";
+SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Banco de dados: `scale`
@@ -66,20 +71,20 @@ CREATE TABLE `escala` (
 --
 
 INSERT INTO `escala` (`id`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `operador`) VALUES
-(1, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '01', '07', '2024', 'admin'),
-(2, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '02', '07', '2024', 'admin'),
-(3, '9', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '03', '07', '2024', 'admin'),
+(1, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '29', '06', '2024', 'admin'),
+(2, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '02', '07', '2024', 'admin'),
+(3, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '03', '07', '2024', 'admin'),
 (4, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '04', '07', '2024', 'admin'),
-(5, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '05', '07', '2024', 'admin'),
-(6, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '06', '07', '2024', 'admin'),
+(5, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '05', '07', '2024', 'admin'),
+(6, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '06', '07', '2024', 'admin'),
 (7, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '22', '07', '2024', 'admin'),
 (8, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '23', '07', '2024', 'admin'),
 (9, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '24', '07', '2024', 'admin'),
 (10, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '25', '07', '2024', 'admin'),
 (11, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '26', '07', '2024', 'admin'),
 (12, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '27', '07', '2024', 'admin'),
-(98, '4', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(99, '1', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin');
+(98, '1', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin'),
+(99, '1', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '10', '07', '2024', 'admin');
 
 -- --------------------------------------------------------
 
@@ -193,6 +198,59 @@ CREATE TABLE `registrousuario` (
   `operador` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Despejando dados para a tabela `registrousuario`
+--
+
+INSERT INTO `registrousuario` (`id`, `id_usuario`, `login`, `senha`, `nome`, `cpf`, `nascimento`, `genero`, `email`, `telefone`, `departamento`, `cargo`, `nivel`, `pnivel`, `ativo`, `pativo`, `gerasenha`, `horario`, `dia`, `semana`, `mes`, `ano`, `operador`) VALUES
+(1, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '123', '14/11/1986', 'Masculino', 'alessadro.aalbuquerque', '1111111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '19:33:58', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(2, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '123', '14/11/1986', 'Masculino', 'alessadro.aalbuquerque', '1111111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '19:34:05', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(3, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '123', '14/11/1986', '', 'alessadro.aalbuquerque', '1111111111111', '', '', '3', 'Administrador', '1', 'Ativado', '1', '20:05:38', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(4, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '123', '14/11/1986', '', 'alessadro.aalbuquerque', '1111111111111', '', '', '3', 'Administrador', '1', 'Ativado', '1', '20:08:42', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(5, 1, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', '', '', '', '', '', '', '', '', 'Desativado', '4', '20:10:01', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(6, 1, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', '', '', '', '', '', '', '', '', 'Desativado', '4', '20:11:50', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(7, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '1', 'Usuario', '1', 'Ativado', '4', '20:20:35', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(8, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '20:20:45', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `testeescala`
+--
+
+CREATE TABLE `testeescala` (
+  `id` int(11) NOT NULL,
+  `id_usuario` varchar(60) NOT NULL,
+  `horarioinicio` varchar(60) NOT NULL,
+  `intervaloinicio` varchar(60) NOT NULL,
+  `intervalofim` varchar(60) NOT NULL,
+  `horariofim` varchar(60) NOT NULL,
+  `local` varchar(60) NOT NULL,
+  `data` varchar(60) NOT NULL,
+  `operador` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `testeescala`
+--
+
+INSERT INTO `testeescala` (`id`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `data`, `operador`) VALUES
+(1, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '30/06/2024', '[admin]'),
+(2, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '01/07/2024', '[admin]'),
+(3, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '02/07/2024', '[admin]'),
+(4, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '03/07/2024', '[admin]'),
+(5, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '04/07/2024', '[admin]'),
+(6, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '05/07/2024', '[admin]'),
+(7, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '06/07/2024', '[admin]'),
+(8, '1', '[123]', '[123]', '[123]', '[123]', '[123]', '30/07/2024', '[admin]'),
+(9, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '10/07/2024', '[value-9]'),
+(10, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '11/07/2024', '[value-9]'),
+(11, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '12/07/2024', '[value-9]'),
+(12, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '13/07/2024', '[value-9]'),
+(13, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '14/07/2024', '[value-9]'),
+(14, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '15/07/2024', '[value-9]'),
+(15, '2', '[value-3]', '[value-4]', '[value-5]', '[value-6]', '[value-7]', '16/07/2024', '[value-9]');
+
 -- --------------------------------------------------------
 
 --
@@ -229,7 +287,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `login`, `senha`, `nome`, `cpf`, `nascimento`, `genero`, `email`, `telefone`, `departamento`, `cargo`, `nivel`, `pnivel`, `ativo`, `pativo`, `gerasenha`, `horario`, `dia`, `semana`, `mes`, `ano`, `operador`) VALUES
-(1, 'alessandro.albuquerque', '123', 'Alessandro Almeida de Albuquerque', '123', '14/11/1986', 'Masculino', 'alessadro.aalbuquerque', '1111111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativo', '0', '05:14', '30', 'Domingo', 'Junho', '2024', 'Banco de Dados'),
+(1, 'alessandro.albuquerque', '123', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '4', '05:14', '30', 'Domingo', 'Junho', '2024', 'Banco de Dados'),
 (2, 'admin', '123', 'admin local', '123', '17/03/1984', 'Feminino', '11111111111', '1111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '21:57:50', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (3, 'gestor', '123', 'gestor local', '123', '17/03/1984', 'Não definido', '111111111', '11111111111', NULL, NULL, '2', 'Gestor', '1', 'Ativado', '3', '21:58:08', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (4, 'usuario', '123', 'usuario local', '123', '17/03/1984', 'Masculino', '11111111111111111', '1111111111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '21:58:35', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
@@ -273,6 +331,12 @@ ALTER TABLE `registrousuario`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `testeescala`
+--
+ALTER TABLE `testeescala`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -292,7 +356,7 @@ ALTER TABLE `afastamento`
 -- AUTO_INCREMENT de tabela `escala`
 --
 ALTER TABLE `escala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
@@ -310,18 +374,19 @@ ALTER TABLE `registroafastamento`
 -- AUTO_INCREMENT de tabela `registrousuario`
 --
 ALTER TABLE `registrousuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `testeescala`
+--
+ALTER TABLE `testeescala`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- Banco de dados: `test`
---
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

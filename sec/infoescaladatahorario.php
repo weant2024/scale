@@ -20,7 +20,8 @@ foreach ($dates as $date) {
         $allItems[] = array('dia' => $escaladia, 'mes' => $escalames, 'ano' => $escalaano);
 
         $dataescala = "$escaladia-$escalames";  
-        $dataescalacompleta = "$escaladia/$escalames/$escalaano";        
+        $dataescalacompleta = "$escaladia/$escalames/$escalaano";      
+        $dataescalatratada = "$escalaano-$escalames-$escaladia";  
         include "infoescaladata.php";   
             
         $buscaescalaafastamento = "SELECT * FROM afastamento WHERE id_usuario = '$idusuario' AND '$dataescalacompleta' BETWEEN datainicial AND datafinal;";
@@ -46,7 +47,7 @@ foreach ($dates as $date) {
             echo "<b>Início de expediente:</b> $inicioexpediente</br>";
             echo "<b>Início de intervalo:</b> $iniciointervalo</br>";
             echo "<b>Final de intervalo:</b> $finalintervalo</br>";
-            echo "<b>Final de expediente:</b> $finalexpediente</br>";
+            echo "<b>Final de expediente:</b> $finalexpediente</br>";           
         ?>
         <div class="alertaescalavermelho">
         <?php
@@ -74,6 +75,72 @@ foreach ($dates as $date) {
             }            
         ?>
         </div>
+
+        <div class="alertaescalavermelho">
+            <?php            
+                $busca7dias = "
+                SET @nova_data = '$dataescalatratada';
+                WITH DateSeries AS (
+                    SELECT
+                        id_usuario,
+                        DATE(CONCAT_WS('-', ano, LPAD(mes, 2, '0'), LPAD(dia, 2, '0'))) AS data
+                    FROM
+                        escala
+                    WHERE
+                        id_usuario = $idusuario
+                    UNION ALL
+                    SELECT
+                        $idusuario AS id_usuario, -- Associando a nova data ao usuário especificado
+                        @nova_data AS data
+                ),
+                OrderedDates AS (
+                    SELECT
+                        id_usuario,
+                        data,
+                        LEAD(data, 1) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_1,
+                        LEAD(data, 2) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_2,
+                        LEAD(data, 3) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_3,
+                        LEAD(data, 4) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_4,
+                        LEAD(data, 5) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_5,
+                        LEAD(data, 6) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_6
+                    FROM
+                        DateSeries
+                )
+                SELECT
+                    id_usuario,
+                    data AS primeiro_dia,
+                    DATE_ADD(data, INTERVAL 6 DAY) AS ultimo_dia
+                FROM
+                    OrderedDates
+                WHERE
+                    next_day_1 = DATE_ADD(data, INTERVAL 1 DAY)
+                    AND next_day_2 = DATE_ADD(data, INTERVAL 2 DAY)
+                    AND next_day_3 = DATE_ADD(data, INTERVAL 3 DAY)
+                    AND next_day_4 = DATE_ADD(data, INTERVAL 4 DAY)
+                    AND next_day_5 = DATE_ADD(data, INTERVAL 5 DAY)
+                    AND next_day_6 = DATE_ADD(data, INTERVAL 6 DAY);
+                ";
+
+                // Executa a query e verifica erros
+                $resultadobusca7dias = $conn->multi_query($busca7dias);
+
+                // Avança para o próximo conjunto de resultados
+                $conn->next_result();
+                $resultadobusca7dias = $conn->store_result();
+
+                if ($resultadobusca7dias->num_rows > 0) {
+                    // Loop através dos resultados
+                    while($row7dias = $resultadobusca7dias->fetch_assoc()) {
+                        $primeirodiabusca7dias = $row7dias['primeiro_dia'];
+                        $ultimodiabusca7dias = $row7dias['ultimo_dia'];                      
+                        
+                        // Exemplo de uso das variáveis
+                        echo "Escalado 7 dias seguidos, entre $primeirodiabusca7dias a $ultimodiabusca7dias</br>";                           
+                    }
+                }
+            ?>            
+        </div>
+
         <?php
     }
 }

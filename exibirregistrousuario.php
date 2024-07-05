@@ -381,10 +381,12 @@ if ( $nivel < 2 )
               }
               ?>
 
-              <table width="640px" cellpadding="2px" cellspacing="2px" border="0">
+              <table width="100%" cellpadding="2px" cellspacing="2px" border="0">
                   <tr>
-                      <td align="left"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
-                      <td align="right"><b>Operador:</b><?php echo " $operador";?></td>
+                      <td align="center"><b>Data:</b><?php echo " $horario, $dia de $mes de $ano";?></td>
+                  </tr>
+                  <tr>
+                      <td align="center"><b>Operador:</b><?php echo " $operador";?></td>
                   </tr> 	
               </table>
             </div>

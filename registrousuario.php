@@ -272,7 +272,8 @@ if ( $nivel < 2 )
                         <option value="nome">Nome</option>  
                         <option value="cpf">CPF</option>  
                         <option value="telefone">Celular</option>
-                        <option value="horario">Horário</option>                         
+                        <option value="horario">Horário</option> 
+                        <option value="dia">Dia</option>                        
                         <option value="mes">Mês</option> 
                         <option value="ano">Ano</option> 
                         <option value="pnivel">Nível</option> 

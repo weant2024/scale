@@ -14,3 +14,11 @@
 .botao:hover {
     background-color: #8800ff;
 }
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+.form-inline label,
+.form-inline input {
+    margin-right: 10px;
+}

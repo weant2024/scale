@@ -33,6 +33,9 @@ if ( $nivel < 2 )
       });
     </script>
 
+    <!-- JS Files -->
+    <script src="assets/js/usuarios.js"></script>
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
@@ -41,6 +44,7 @@ if ( $nivel < 2 )
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
+
   </head>
   <body>
     <div class="wrapper">
@@ -291,7 +295,8 @@ if ( $nivel < 2 )
               $query1 = $conn->query($sqlc1);
               $dados1 = $query1->fetch_assoc();
             ?>
-            <form method="POST" action="sec/atualizarusuario.php?id=<?php echo $id;?>">
+
+            <form method="POST" action='sec/atualizarusuario.php?id=<?php echo $dados['id']; ?>)'>
                 <div class="form-group">
                     <label for="id"><b>ID:</b></label>
                     <?php echo $id;?>
@@ -418,16 +423,19 @@ if ( $nivel < 2 )
                 </div> 
 
                     <div class="form-group" align="center">                                   
-                    <button type="submit" class="botao" >EDITAR USUÁRIO</button>
-                    <a href="sec/enviarsenhausuario.php?id=<?php echo $id;?>"><button class="botao">GERAR NOVA SENHA</button></a>
-                    <a href="afastamentousuario.php?id=<?php echo $id;?>"><button class="botao">CADASTRAR AFASTAMENTO</button></a>                           
-                    </div>
+                      <button class="botao" type="submit">EDITAR USUÁRIO</button>
             </form>
+                      <button class="botao" onclick="redirectTo('sec/enviarsenhausuario.php', <?php echo $dados['id']; ?>)">GERAR NOVA SENHA</button>
+                      <button class="botao" onclick="redirectTo('afastamentousuario.php', <?php echo $dados['id']; ?>)">CADASTRAR AFASTAMENTO</button>                         
+                    </div>
+            </div>
 
-	            <br /> 
-              <b>HISTÓRICO DO USUÁRIO</b>
-              <table width="100%" border="0">
-                <tr bgcolor="#CECECE">	
+	            <br />
+
+                <b>HISTÓRICO DO USUÁRIO</b>
+            
+              <table class="legenda" width="100%" border="0">
+                <tr>	
                   <td><b>Operador</b></td> 			
                   <td><b>Horário</b></td>
                   <td><b>Dia</b></td>
@@ -466,7 +474,7 @@ if ( $nivel < 2 )
                 ?>
                 <br /> 
               </table>              
-            </div>
+            
             <?php
             if (@$result->num_rows > 0) { 
             ?> 
