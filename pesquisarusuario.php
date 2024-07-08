@@ -258,107 +258,154 @@ if ( $nivel < 2 )
           <!-- End Navbar -->
         </div>
 
-        <div class="container">
-          <div class="page-inner">    
-            <!-- INICIA CONTEÚDO -->   
+        <!DOCTYPE html>
+<?php
+include "sec/config.php"; 
+include "sec/sec_verifica.php";
+if ( $nivel < 2 ) 
+{
+	header("Location: sem_acesso.php"); exit;
+}
+?>
+<html lang="br">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Inicial</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+  <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
-            <div align="center">
-              <form action="" method="post">
-                <table width="auto"> 
-                  <tr align="center">
-                    <td>
-                      <select name="filtro">                                               
-                        <option value="login">Login</option> 
-                        <option value="nome">Nome</option>  
-                        <option value="cpf">CPF</option>  
-                        <option value="telefone">Celular</option>                        
-                        <option value="pnivel">Nível</option> 
-                        <option value="pativo">Status</option> 
-                      </select>
-                    </td>                  
-                    <td> <input type="text" name="palavra" size="auto" id="palavra"/> </td>
-                    <td> <input type="submit" Value="Pesquisar" /> </td>
-                  </tr>
-                </table> 
-              </form> 
-              
-              <?php
-              $filtro = @$_POST['filtro'];
-              $busca = @$_POST['palavra'];
-              
-              $busca_query = "SELECT * FROM usuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
-              $result = $conn->query($busca_query);
+  <!-- Fonts and icons -->
+  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
 
-              
-              if (@$result->num_rows < 1) { //Se nao achar nada, lança essa mensagem
-                echo "Nenhum registro encontrado.";
-              }
-              
-              else {
-              ?>
-              <table class="legenda" width="100%">                
-                  <tr width="100%">                    
-                    <?php 
-                              if ($filtro == "login") { 
-                                echo '<td width="100%"><b>Login</b></td>';
-                              }
-                              elseif ($filtro == "cpf") { 
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>CPF</b></td>';
-                              }
-                              elseif ($filtro == "pativo") { 
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>Status</b></td>';
-                              }
-                              else {
-                                $upercasefiltro = ucfirst($filtro);
-                                echo '<td width="50%"><b>Login</b></td><td width="50%"><b>'. $upercasefiltro . '</b></td>';
-                              }
-                    ?>          
-                  </tr>
-              <?php      
-              // quando existir algo em '$busca_query' ele realizará o script abaixo.
-                while ($dados = $result->fetch_assoc()) {                                 
-                ?>              
-                
-                    <tr width="100%">	
-                      <?php
-                      if ($filtro == "login") { 
-                        echo '<td width="100%"><a href="editarusuario.php?id=' . $dados['id'] . '"> ' . $dados['login'] . '<br /></a></td>';
-                      }
-                      else {
-                        echo '<td width="50%"><a href="editarusuario.php?id=' . $dados['id'] . '"> '. $dados['login'] . '<br /></a></td><td width="50%">'. $dados[$filtro] . '</td>';
-                      }
-                      ?>                      
-                    </tr>	
-                <?php               
-                ?>    
-                <?php
-                }
-              }
-                ?>	
-              
-                </table>                
-            </div>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="assets/css/teste.css" />
 
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" href="assets/css/demo.css" />
+  <style>body { font-family: 'Public Sans', sans-serif; background-color: #f0f0f0; } .container { max-width: 800px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); } .page-inner { padding: 20px; } form { margin-bottom: 20px; } table { width: 100%; border-collapse: collapse; margin-bottom: 20px; } table, th, td { border: 1px solid #ddd; } th, td { padding: 10px; text-align: left; } th { background-color: #f2f2f2; font-weight: bold; } td a { text-decoration: none; color: #333; } td a:hover { text-decoration: underline; } .resultado { margin-top: 10px; } .resultados-count { text-align: right; margin-top: 10px; }</style>
+
+</head>
+<body>
+      <div class="container">
+        <div class="page-inner">
+          <!-- INICIA CONTEÚDO -->
+          
+          <div align="center">
+            <form action="" method="post">
+              <table style="width: 100%;">
+                <tr align="center">
+                  <td style="width: 30%;">
+                    <select name="filtro" style="width: 100%;">                                               
+                      <option value="login">Login</option> 
+                      <option value="nome">Nome</option>  
+                      <option value="cpf">CPF</option>  
+                      <option value="telefone">Celular</option>                        
+                      <option value="pnivel">Nível</option> 
+                      <option value="pativo">Status</option> 
+                    </select>
+                  </td>                  
+                  <td style="width: 50%;"> 
+                    <input type="text" name="palavra" style="width: 100%; box-sizing: border-box; padding: 5px 8px; font-size: 14px;" id="palavra"/> 
+                  </td>
+                  <td style="width: 20%; vertical-align: middle;"> 
+                  <input type="submit" Value="Pesquisar" style="width: 100%; padding: 6px; font-size: 14px; background-color: #0f2e57; border: none; color: white; cursor: pointer;" onmouseover="this.style.backgroundColor='#5C55BF';" onmouseout="this.style.backgroundColor='#0f2e57';"/>
+
+                  </td>
+                </tr>
+              </table>
+            </form> 
+            
             <?php
-            if (@$result->num_rows > 0) { 
-            ?> 
-            <table class="legenda" width="100%">
+            $filtro = @$_POST['filtro'];
+            $busca = @$_POST['palavra'];
+            
+            $busca_query = "SELECT * FROM usuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
+            $result = $conn->query($busca_query);
+
+            
+            if (@$result->num_rows < 1) { // Se não achar nada, lança essa mensagem
+              echo "<p>Nenhum registro encontrado.</p>";
+            } else {
+            ?>
+            <table style="width: 100%;">
               <tr>
-                <td align="right">
-                  <?php 
-                    $num_rows = @$result->num_rows;
-                    echo "<b>$num_rows registros</b>";
-                  ?>
-                </td>
-              </tr>  
+                <?php 
+                  if ($filtro == "login") { 
+                    echo '<th>Login</th>';
+                  } elseif ($filtro == "cpf") { 
+                    echo '<th>Login</th><th>CPF</th>';
+                  } elseif ($filtro == "pativo") { 
+                    echo '<th>Login</th><th>Status</th>';
+                  } else {
+                    $upercasefiltro = ucfirst($filtro);
+                    echo '<th>Login</th><th>'. $upercasefiltro . '</th>';
+                  }
+                ?>          
+              </tr>
+              <?php      
+              while ($dados = $result->fetch_assoc()) {                                 
+              ?>              
+                <tr>  
+                  <?php
+                  if ($filtro == "login") { 
+                    echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td>';
+                  } else {
+                    echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td><td>'. $dados[$filtro] . '</td>';
+                  }
+                  ?>                      
+                </tr> 
+              <?php               
+              }
+              ?>  
             </table>
             <?php
             }
             ?>
 
-            <!-- FINALIZA CONTEÚDO -->  
+            <?php
+            if (@$result->num_rows > 0) { 
+            ?> 
+            <div class="resultados-count">
+              <?php 
+                $num_rows = @$result->num_rows;
+                echo "<p><b>$num_rows registros</b></p>";
+              ?>
             </div>
+            <?php
+            }
+            ?>
+
+            <!-- FINALIZA CONTEÚDO -->  
+          </div>
         </div>
+      </div>
+
+
+
+
+</body>
+</html>
+
 
         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">
