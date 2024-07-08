@@ -17,7 +17,7 @@
 <div class="alertaescalaverde">
     <?php    
         if (@$querydomingousuario->num_rows < 1) {                  
-            echo "Ainda não teve um Domingo de folga no mês atual</br>";                                          
+            echo ".Ainda não teve um Domingo de folga no mês atual</br>";                                          
         }
     ?>
 </div>

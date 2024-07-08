@@ -2689,7 +2689,7 @@ label {
   margin-bottom: 0;
   padding: 10px; }
 
-.form-group label,
+.form-group label {}
 .form-check label {
   margin-bottom: 0.5rem;
   color: #495057;

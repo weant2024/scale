@@ -24,14 +24,17 @@ foreach ($dates as $date) {
         $dataescalatratada = "$escalaano-$escalames-$escaladia";  
         include "infoescaladata.php";   
             
-        $buscaescalaafastamento = "SELECT * FROM afastamento WHERE id_usuario = '$idusuario' AND '$dataescalacompleta' BETWEEN datainicial AND datafinal;";
+        $buscaescalaafastamento = "SELECT * FROM afastamento 
+            WHERE id_usuario = '$idusuario' 
+            AND STR_TO_DATE('$dataescalacompleta', '%d/%m/%Y') BETWEEN STR_TO_DATE(datainicial, '%d/%m/%Y') AND STR_TO_DATE(datafinal, '%d/%m/%Y');";
         $queryescalaafastamento = $conn->query($buscaescalaafastamento);  
         $dadosescalaafastamento = $queryescalaafastamento->fetch_assoc();    
         @$afastamentomotivo = $dadosescalaafastamento['motivo'];
         @$afastamentodatainicial = $dadosescalaafastamento['datainicial'];    
         @$afastamentodatafinal = $dadosescalaafastamento['datafinal'];                 
+                
                                 
-        $buscaescalahorario = "SELECT * FROM escala WHERE dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
+        $buscaescalahorario = "SELECT * FROM escala WHERE local='$localdetrabalho' AND dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
         $queryescalahorario = $conn->query($buscaescalahorario);
         $dadosescalahorario = $queryescalahorario->fetch_assoc();  
         @$loginescalahorario = $dadosescalahorario['id_usuario'];    
@@ -52,7 +55,7 @@ foreach ($dates as $date) {
         <?php
         
             if (@$queryescalahorario->num_rows > 0) {                  
-                echo "$loginusuarioescalado já está escalado nesta data e horário</br>";                                          
+                echo ".$nomeusuarioescalado já está escalado nesta data, horário no $localdetrabalho</br>";                                          
             }
 
         ?>
@@ -61,7 +64,7 @@ foreach ($dates as $date) {
         <?php    
 
             if ($queryescalaafastamento->num_rows > 0){
-                echo " $afastamentomotivo entre $afastamentodatainicial e $afastamentodatafinal</br>";
+                echo ".$afastamentomotivo entre $afastamentodatainicial e $afastamentodatafinal</br>";
             } 
 
         ?>
@@ -70,7 +73,7 @@ foreach ($dates as $date) {
         <?php  
 
             if ("$dataescala" == "$aniversario"){
-                echo "Escalado no aniversário</br>";                  
+                echo ".Escalado no aniversário</br>";                  
             }            
         ?>
         </div>
@@ -78,47 +81,52 @@ foreach ($dates as $date) {
         <div class="alertaescalaverde">
             <?php            
                 $busca7dias = "
-                SET @nova_data = '$dataescalatratada';
-                WITH DateSeries AS (
-                    SELECT
-                        id_usuario,
-                        DATE(CONCAT_WS('-', ano, LPAD(mes, 2, '0'), LPAD(dia, 2, '0'))) AS data
-                    FROM
-                        escala
-                    WHERE
-                        id_usuario = $idusuario
-                    UNION ALL
-                    SELECT
-                        $idusuario AS id_usuario, -- Associando a nova data ao usuário especificado
-                        @nova_data AS data
-                ),
-                OrderedDates AS (
-                    SELECT
-                        id_usuario,
-                        data,
-                        LEAD(data, 1) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_1,
-                        LEAD(data, 2) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_2,
-                        LEAD(data, 3) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_3,
-                        LEAD(data, 4) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_4,
-                        LEAD(data, 5) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_5,
-                        LEAD(data, 6) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_6
-                    FROM
-                        DateSeries
-                )
-                SELECT
-                    id_usuario,
-                    data AS primeiro_dia,
-                    DATE_ADD(data, INTERVAL 6 DAY) AS ultimo_dia
-                FROM
-                    OrderedDates
-                WHERE
-                    next_day_1 = DATE_ADD(data, INTERVAL 1 DAY)
-                    AND next_day_2 = DATE_ADD(data, INTERVAL 2 DAY)
-                    AND next_day_3 = DATE_ADD(data, INTERVAL 3 DAY)
-                    AND next_day_4 = DATE_ADD(data, INTERVAL 4 DAY)
-                    AND next_day_5 = DATE_ADD(data, INTERVAL 5 DAY)
-                    AND next_day_6 = DATE_ADD(data, INTERVAL 6 DAY);
-                ";
+                SET @nova_datas = '$dataescalatratada'; -- Lista de datas separadas por vírgulas
+
+WITH DateSeries AS (
+    SELECT
+        id_usuario,
+        DATE(CONCAT_WS('-', ano, LPAD(mes, 2, '0'), LPAD(dia, 2, '0'))) AS data
+    FROM
+        escala
+    WHERE
+        id_usuario = $idusuario
+    UNION ALL
+    SELECT
+        $idusuario AS id_usuario,
+        STR_TO_DATE(SUBSTRING_INDEX(SUBSTRING_INDEX(@nova_datas, ',', numbers.n), ',', -1), '%d/%m/%Y') AS data
+    FROM
+        (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7) numbers
+    WHERE
+        CHAR_LENGTH(@nova_datas) - CHAR_LENGTH(REPLACE(@nova_datas, ',', '')) >= numbers.n - 1
+),
+OrderedDates AS (
+    SELECT
+        id_usuario,
+        data,
+        LEAD(data, 1) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_1,
+        LEAD(data, 2) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_2,
+        LEAD(data, 3) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_3,
+        LEAD(data, 4) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_4,
+        LEAD(data, 5) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_5,
+        LEAD(data, 6) OVER (PARTITION BY id_usuario ORDER BY data) AS next_day_6
+    FROM
+        DateSeries
+)
+SELECT
+    id_usuario,
+    data AS primeiro_dia,
+    DATE_ADD(data, INTERVAL 6 DAY) AS ultimo_dia
+FROM
+    OrderedDates
+WHERE
+    next_day_1 = DATE_ADD(data, INTERVAL 1 DAY)
+    AND next_day_2 = DATE_ADD(data, INTERVAL 2 DAY)
+    AND next_day_3 = DATE_ADD(data, INTERVAL 3 DAY)
+    AND next_day_4 = DATE_ADD(data, INTERVAL 4 DAY)
+    AND next_day_5 = DATE_ADD(data, INTERVAL 5 DAY)
+    AND next_day_6 = DATE_ADD(data, INTERVAL 6 DAY);
+";
 
                 // Executa a query e verifica erros
                 $resultadobusca7dias = $conn->multi_query($busca7dias);
@@ -137,11 +145,12 @@ foreach ($dates as $date) {
                         $primeirodia_formatado = DateTime::createFromFormat('Y-m-d', $primeirodiabusca7dias)->format('d/m/Y');
                         $ultimodia_formatado = DateTime::createFromFormat('Y-m-d', $ultimodiabusca7dias)->format('d/m/Y'); 
                         // Exemplo de uso das variáveis
-                        echo "Escalado 7 dias seguidos, entre $primeirodia_formatado e $ultimodia_formatado</br>";
-                                                      
+                        echo ".Escalado 7 dias seguidos, entre $primeirodia_formatado e $ultimodia_formatado</br>";
+                                                                              
                     }
-                }
-            ?>            
+                } 
+            ?>  
+
         </div>
 
         <?php

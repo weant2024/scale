@@ -284,17 +284,16 @@ if ( $nivel < 2 )
                                     include "sec/infoescalausuario.php";
                                 ?>                                
                             </div>    
-                            <div class="form-group">
-                                <?php 
-                                    include "sec/infoescaladatahorario.php";                               
-                                ?>  
-                            </div>                            
                             <div class="form-group"> 
                                 <?php
                                     echo "<b>Local:</b> $localdetrabalho";
                                 ?>                                                        
+                            </div> 
+                            <div class="form-group">
+                                <?php 
+                                    include "sec/infoescaladatahorario.php";                               
+                                ?>  
                             </div>  
-
                             <div class="form-group"> 
                               <button class="botao" type="submit">CADASTRAR ESCALA</button>
                             </div>  
