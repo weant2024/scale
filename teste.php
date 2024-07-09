@@ -9,7 +9,7 @@ if ( $nivel < 2 )
 <html lang="br">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Auditoria</title>
+    <title>Inicial</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
@@ -37,7 +37,7 @@ if ( $nivel < 2 )
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="assets/css/usuarios.css" />
+    <link rel="stylesheet" href="assets/css/teste.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -74,7 +74,7 @@ if ( $nivel < 2 )
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a href="inicial.php">
                   <i class="fas fa-home"></i>
                   <p>Inicial</p>
@@ -135,7 +135,7 @@ if ( $nivel < 2 )
                 </div>
               </li>
               
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#configuracoes">
                   <i class="fas fa-bars"></i>
                   <p>Configurações</p>
@@ -245,7 +245,7 @@ if ( $nivel < 2 )
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <a class="dropdown-item" href="#">Meu perfil</a>
+                        <a class="dropdown-item" href="meu_perfil.php">Meu perfil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>
@@ -258,153 +258,163 @@ if ( $nivel < 2 )
           <!-- End Navbar -->
         </div>
 
-        <!DOCTYPE html>
-<?php
-include "sec/config.php"; 
-include "sec/sec_verifica.php";
-if ( $nivel < 2 ) 
-{
-	header("Location: sem_acesso.php"); exit;
-}
-?>
-<html lang="br">
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Inicial</title>
-  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
-  <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
-
-  <!-- Fonts and icons -->
-  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
-  <script>
-    WebFont.load({
-      google: { families: ["Public Sans:300,400,500,600,700"] },
-      custom: {
-        families: [
-          "Font Awesome 5 Solid",
-          "Font Awesome 5 Regular",
-          "Font Awesome 5 Brands",
-          "simple-line-icons",
-        ],
-        urls: ["assets/css/fonts.min.css"],
-      },
-      active: function () {
-        sessionStorage.fonts = true;
-      },
-    });
-  </script>
-
-  <!-- CSS Files -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/plugins.min.css" />
-  <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-  <link rel="stylesheet" href="assets/css/teste.css" />
-
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link rel="stylesheet" href="assets/css/demo.css" />
-  <style>body { font-family: 'Public Sans', sans-serif; background-color: #f0f0f0; } .container { max-width: 800px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); } .page-inner { padding: 20px; } form { margin-bottom: 20px; } table { width: 100%; border-collapse: collapse; margin-bottom: 20px; } table, th, td { border: 1px solid #ddd; } th, td { padding: 10px; text-align: left; } th { background-color: #f2f2f2; font-weight: bold; } td a { text-decoration: none; color: #333; } td a:hover { text-decoration: underline; } .resultado { margin-top: 10px; } .resultados-count { text-align: right; margin-top: 10px; }</style>
-
-</head>
-<body>
-      <div class="container">
-        <div class="page-inner">
-          <!-- INICIA CONTEÚDO -->
-          
-          <div align="center">
-            <form action="" method="post">
-              <table style="width: 100%;">
-                <tr align="center">
-                  <td style="width: 30%;">
-                    <select name="filtro" style="width: 100%;">                                               
-                      <option value="login">Login</option> 
-                      <option value="nome">Nome</option>  
-                      <option value="cpf">CPF</option>  
-                      <option value="telefone">Celular</option>                        
-                      <option value="pnivel">Nível</option> 
-                      <option value="pativo">Status</option> 
-                    </select>
-                  </td>                  
-                  <td style="width: 50%;"> 
-                    <input type="text" name="palavra" style="width: 100%; box-sizing: border-box; padding: 5px 8px; font-size: 14px;" id="palavra"/> 
-                  </td>
-                  <td style="width: 20%; vertical-align: middle;"> 
-                  <input type="submit" Value="Pesquisar" style="width: 100%; padding: 6px; font-size: 14px; background-color: #0f2e57; border: none; color: white; cursor: pointer;" onmouseover="this.style.backgroundColor='#5C55BF';" onmouseout="this.style.backgroundColor='#0f2e57';"/>
-
-                  </td>
-                </tr>
-              </table>
-            </form> 
-            
-            <?php
-            $filtro = @$_POST['filtro'];
-            $busca = @$_POST['palavra'];
-            
-            $busca_query = "SELECT * FROM usuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
-            $result = $conn->query($busca_query);
-
-            
-            if (@$result->num_rows < 1) { // Se não achar nada, lança essa mensagem
-              echo "<p>Nenhum registro encontrado.</p>";
-            } else {
-            ?>
-            <table style="width: 100%;">
-              <tr>
-                <?php 
-                  if ($filtro == "login") { 
-                    echo '<th>Login</th>';
-                  } elseif ($filtro == "cpf") { 
-                    echo '<th>Login</th><th>CPF</th>';
-                  } elseif ($filtro == "pativo") { 
-                    echo '<th>Login</th><th>Status</th>';
-                  } else {
-                    $upercasefiltro = ucfirst($filtro);
-                    echo '<th>Login</th><th>'. $upercasefiltro . '</th>';
-                  }
-                ?>          
-              </tr>
-              <?php      
-              while ($dados = $result->fetch_assoc()) {                                 
-              ?>              
-                <tr>  
-                  <?php
-                  if ($filtro == "login") { 
-                    echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td>';
-                  } else {
-                    echo '<td><a href="editarusuario.php?id=' . $dados['id'] . '">' . $dados['login'] . '</a></td><td>'. $dados[$filtro] . '</td>';
-                  }
-                  ?>                      
-                </tr> 
-              <?php               
-              }
-              ?>  
+        <div class="container">
+    <div class="page-inner">
+        <!-- INICIA CONTEÚDO -->
+        <div class="calendar">
+            <header>
+                <h2 id="month-year">Julho 2024</h2>
+                <div class="nav">
+                    <button onclick="prevMonth()">Anterior</button>
+                    <button onclick="nextMonth()">Próximo</button>
+                </div>
+            </header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dom</th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                    <!-- Os dias do calendário serão gerados aqui -->
+                </tbody>
             </table>
-            <?php
-            }
-            ?>
-
-            <?php
-            if (@$result->num_rows > 0) { 
-            ?> 
-            <div class="resultados-count">
-              <?php 
-                $num_rows = @$result->num_rows;
-                echo "<p><b>$num_rows registros</b></p>";
-              ?>
-            </div>
-            <?php
-            }
-            ?>
-
-            <!-- FINALIZA CONTEÚDO -->  
-          </div>
+            <footer>
+                <div class="nav">
+                    <button onclick="enviarDatas()">Enviar Datas Selecionadas</button>
+                </div>
+            </footer>
         </div>
-      </div>
+
+        <div id="tooltip" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px; z-index:1000;"></div>
+
+        <script>
+            const calendarBody = document.getElementById('calendar-body');
+            const monthYear = document.getElementById('month-year');
+            const tooltip = document.getElementById('tooltip');
+            let today = new Date();
+            let currentMonth = today.getMonth(); // Mês atual
+            let currentYear = today.getFullYear(); // Ano atual
+            let selectedDates = [];
+
+            function generateCalendar(month, year) {
+                // Limpa o calendário
+                calendarBody.innerHTML = '';
+
+                // Número de dias no mês
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const firstDay = new Date(year, month, 1).getDay();
+
+                // Atualiza o cabeçalho do mês e ano
+                const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                monthYear.innerHTML = `${monthNames[month]} ${year}`;
+
+                // Cria as células do calendário
+                let date = 1;
+                for (let i = 0; i < 6; i++) {
+                    const row = document.createElement('tr');
+
+                    for (let j = 0; j < 7; j++) {
+                        const cell = document.createElement('td');
+                        if (i === 0 && j < firstDay) {
+                            cell.innerHTML = '';
+                        } else if (date > daysInMonth) {
+                            break;
+                        } else {
+                            cell.innerHTML = date;
+                            cell.classList.add('day');
+                            const formattedDate = `${String(date).padStart(2, '0')}-${String(month + 1).padStart(2, '0')}-${year}`; // Formato dd-mm-yyyy
+
+                            // Marca a célula como selecionada se a data estiver no array de datas selecionadas
+                            if (selectedDates.includes(formattedDate)) {
+                                cell.classList.add('selected');
+                            }
+
+                            // Adiciona ou remove a classe 'selected' ao clicar para marcar/desmarcar a seleção
+                            cell.onclick = () => {
+                                if (cell.classList.contains('selected')) {
+                                    cell.classList.remove('selected');
+                                    selectedDates = selectedDates.filter(d => d !== formattedDate);
+                                } else {
+                                    cell.classList.add('selected');
+                                    selectedDates.push(formattedDate);
+                                }
+                            };
+
+                            // Adiciona eventos de mouseover e mouseout para mostrar/esconder o tooltip
+                            cell.addEventListener('mouseover', (e) => showTooltip(e, date, month + 1, year));
+                            cell.addEventListener('mouseout', hideTooltip);
+
+                            date++;
+                        }
+                        row.appendChild(cell);
+                    }
+                    calendarBody.appendChild(row);
+                }
+            }
+
+            function prevMonth() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+            }
+
+            function nextMonth() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
+            }
+
+            function showTooltip(event, day, month, year) {
+                const exampleEmployees = [
+                    { nome: "Funcionário 1", horario: "08:00 - 17:00" },
+                    { nome: "Funcionário 2", horario: "09:00 - 18:00" }
+                ];
+
+                tooltip.innerHTML = `<p>Funcionários escalados em ${String(day).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}:</p>`;
+                exampleEmployees.forEach(employee => {
+                    tooltip.innerHTML += `<p>${employee.nome} - ${employee.horario}</p>`;
+                });
+
+                tooltip.style.display = 'block';
+                tooltip.style.left = event.pageX + 10 + 'px';
+                tooltip.style.top = event.pageY + 10 + 'px';
+            }
+
+            function hideTooltip() {
+                tooltip.style.display = 'none';
+            }
+
+            function enviarDatas() {
+                // Envia as datas selecionadas para o PHP
+                if (selectedDates.length > 0) {
+                    const selectedDatesStr = selectedDates.join(',');
+                    window.location.href = `testeetapanome.php?dates=${selectedDatesStr}`;
+                } else {
+                    alert('Selecione pelo menos uma data!');
+                }
+            }
+
+            // Gera o calendário inicial
+            generateCalendar(currentMonth, currentYear);
+        </script>
+        <!-- FINALIZA CONTEÚDO -->
+    </div>
+</div>
 
 
-
-
-</body>
-</html>
 
 
         <footer class="footer">
@@ -456,4 +466,3 @@ if ( $nivel < 2 )
     
   </body>
 </html>
-       
