@@ -242,7 +242,7 @@ include "sec/sec_verifica.php";
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <a class="dropdown-item" href="meu_perfil.php?id=<?php echo $usuariologado ?>">Meu perfil</a>
+                        <a class="dropdown-item" href="meu_perfil.php">Meu perfil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>

@@ -59,8 +59,9 @@ include "tudo_cima.php";
             <div class="form-group">                   
                 <form method="POST" action="sec/alterarsenha.php"> 
                     <input type="pass" name="senhaatual" placeholder="Senha atual"> </br>
-                    <input type="pass" name="senhanova" placeholder="Nova atual"> </br>                            
-                    <button class="botao" type="submit">Alterar senha</button>                    
+                    <input type="pass" name="senhanova" placeholder="Nova atual"> </br>    
+                    <div style="color: red;">Senha não confere!</div> </br>       
+                    <button class="botao" type="submit">Alterar senha</button>   
                 </form>                    
             </div>
             
