@@ -1,5 +1,9 @@
 <?php 
 include "tudo_cima.php";
+if ( $nivel < 2 ) 
+{
+	header("Location: sem_acesso.php"); exit;
+}
 ?>
             <!-- INICIA CONTEÚDO -->   
 

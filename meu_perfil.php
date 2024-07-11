@@ -9,6 +9,51 @@ include "sec/sec_verifica.php";
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
+    <style>
+    /* Estilos para a tabela */
+    table.custom-table {
+        width: 40%;
+        border-collapse: collapse;
+        margin: 0 auto; /* Centraliza a tabela na tela */
+        margin-bottom: 20px; /* Espaçamento abaixo da tabela */
+        background-color: #1f283e;
+        color: #ffffff;
+    }
+    table.custom-table th, table.custom-table td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+    table.custom-table th {
+        background-color: #2a2f5b; /* Cor de fundo do cabeçalho */
+        color: #ffffff;
+    }
+
+    /* Estilos para os inputs */
+    table.custom-table input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        background-color: #f0f0f0;
+    }
+
+    /* Estilos para as mensagens informativas */
+    .info-message {
+        border-radius: 8px;
+        background-color: rgba(70,130,180,0.7);
+        padding: 10px;
+        margin-bottom: 20px; /* Espaçamento abaixo da mensagem */
+        font-weight: bold;
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        text-align: center;
+    }
+</style>
+
+
+
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -33,6 +78,7 @@ include "sec/sec_verifica.php";
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="assets/css/usuarios.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -240,7 +286,7 @@ include "sec/sec_verifica.php";
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <a class="dropdown-item" href="meu_perfil.php">Meu perfil</a>
+                        <a class="dropdown-item" href="#">Meu perfil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>
@@ -257,11 +303,70 @@ include "sec/sec_verifica.php";
           <div class="page-inner">  
             <!-- INICIA CONTEÚDO -->   
 
-            CRIE O CONTEÚDO AQUI
+            <?php
 
-            <!-- FINALIZA CONTEÚDO -->  
-          </div>
-        </div>
+              $id = $_GET['id'];
+
+              $sqlc = "SELECT * FROM registrousuario WHERE id='$id'"; //faz a busca com as palavras enviadas
+              $result = $conn->query($sqlc);
+              $dados = $result->fetch_assoc();
+
+              $login = $dados["login"];
+              $nome = $dados["nome"];
+              $cpf = $dados["cpf"];
+              $telefone = $dados["telefone"];
+              $nascimento = $dados["nascimento"];              
+              $email = $dados["email"];
+              $pnivel = $dados["pnivel"];
+              $pativo = $dados["pativo"];
+              $gerasenha = $dados["gerasenha"];
+              $horario = $dados["horario"];
+              $dia = $dados["dia"];
+              $semana = $dados["semana"];
+              $mes = $dados["mes"];
+              $ano =$dados["ano"];
+              $operador = $dados["operador"];
+
+            ?>
+
+            <div class="form-group">
+                <label><b>Login:</b></label>
+                <?php echo $login;?>
+            </div>
+
+            <div class="form-group">
+                <label><b>Nome:</b></label>
+                <?php echo $nome;?>
+            </div>
+
+            <div class="form-group">
+                <label><b>CPF:</b></label>
+                <?php echo $cpf;?>
+            </div>
+
+            <div class="form-group">
+                <label><b>Email:</b></label>
+                <?php echo $email;?>
+            </div>
+
+            <div class="form-group">
+                <label><b>Celular:</b></label>
+                <?php echo $telefone;?>
+            </div>
+
+            <div class="form-group">
+                <label><b>Nivel:</b></label>
+                <?php echo $pnivel;?>
+            </div>
+
+            <div class="form-group">                    
+              <button class="botao" type="submit">Alterar senha</button>                    
+            </div>
+            
+         <!-- FINALIZA CONTEÚDO -->
+
+      </div>
+    </div>
 
         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">

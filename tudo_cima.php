@@ -1,10 +1,6 @@
 <?php
 include "sec/config.php"; 
 include "sec/sec_verifica.php";
-if ( $nivel < 2 ) 
-{
-	header("Location: sem_acesso.php"); exit;
-}
 ?>
 <html lang="br">
   <head>
