@@ -22,3 +22,45 @@
 .form-inline input {
     margin-right: 10px;
 }
+
+/* Início Estilos para a tabela exibirregistrousuario.php*/
+table.custom-table {
+    width: 40%;
+    border-collapse: collapse;
+    margin: 0 auto; /* Centraliza a tabela na tela */
+    margin-bottom: 20px; /* Espaçamento abaixo da tabela */
+    background-color: #1f283e;
+    color: #ffffff;
+}
+table.custom-table th, table.custom-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+table.custom-table th {
+    background-color: #2a2f5b; /* Cor de fundo do cabeçalho */
+    color: #ffffff;
+}
+
+/* Estilos para os inputs */
+table.custom-table input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    background-color: #f0f0f0;
+}
+
+/* Estilos para as mensagens informativas */
+.info-message {
+    border-radius: 8px;
+    background-color: rgba(70,130,180,0.7);
+    padding: 10px;
+    margin-bottom: 20px; /* Espaçamento abaixo da mensagem */
+    font-weight: bold;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+}
+/* Fim Estilos para a tabela exibirregistrousuario.php*/

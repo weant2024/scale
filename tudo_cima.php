@@ -33,7 +33,8 @@ include "sec/sec_verifica.php";
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="assets/css/teste.css" />
+    <link rel="stylesheet" href="assets/css/calendario.css" />
+    <link rel="stylesheet" href="assets/css/usuarios.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -241,7 +242,7 @@ include "sec/sec_verifica.php";
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <a class="dropdown-item" href="meu_perfil.php">Meu perfil</a>
+                        <a class="dropdown-item" href="meu_perfil.php?id=<?php echo $usuariologado ?>">Meu perfil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>
