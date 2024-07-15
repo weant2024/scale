@@ -1,24 +1,11 @@
 <?php 
 include "tudo_cima.php";
-{
-	header("Location: sem_acesso.php"); exit;
-}
+if ( $nivel < 2 ) 
+    {
+        header("Location: sem_acesso.php"); exit;
+    }
 ?>
 <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
   .container {
     flex: 1;
     width: 80%;
@@ -95,7 +82,7 @@ include "tudo_cima.php";
   }
 </style>
 
-<div class="container">
+
   <div class="search-form">
     <form action="" method="post" style="display: flex; width: 100%;">
       <select name="filtro">
@@ -159,7 +146,7 @@ include "tudo_cima.php";
       echo "<p><b>$num_rows registros</b></p>";
     ?>
   </div>
-</div>
+
 <?php
 }
 ?>

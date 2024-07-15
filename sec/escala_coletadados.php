@@ -64,7 +64,7 @@
                                 // Combina o dia e o mês em uma nova string
                                 @$aniversario_selecionado_tratado = "$dianascimento_selecionado-$mesnascimento_selecionado";
 ?>
-<div class="alertaescalaverde"> 
+<div class="alertaescalavermelho"> 
 <?php  
             $query_domingousuario = "SELECT *
                 FROM afastamento

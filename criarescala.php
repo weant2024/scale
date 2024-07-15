@@ -92,7 +92,7 @@ if ( $nivel < 2 )
                       <!-- As datas selecionadas serão exibidas aqui -->
                   </div>
 
-                  <div id="formulario-php" class="hidden">
+                  <div id="formulario-php">
                       <!-- O formulário PHP será exibido aqui -->
                   </div>
                 </div>
@@ -120,21 +120,21 @@ if ( $nivel < 2 )
         }
     });   
 
-    document.getElementById('botaovalidacaoinfo').addEventListener('click', function() {
-      var validacaoinfo = document.getElementById('validacaoinfo');
-      var botaovalidacaoinfo = document.getElementById('botaovalidacaoinfo');
-      if (validacaoinfo.style.display === 'none' || validacaoinfo.style.display === '') {
-          validacaoinfo.style.display = 'block';
-          botaovalidacaoinfo.textContent = 'Atenção +';
-          botaovalidacaoinfo.style.color = 'green'; // Cor de fundo vermelho
-      } else {
-          validacaoinfo.style.display = 'none';
-          botaovalidacaoinfo.textContent = '-';
-          botaovalidacaoinfo.style.color = 'red'; // Cor de fundo verde
-      }
-      botaovalidacaoinfo.style.backgroundColor = 'transparent'; // Remove a cor de fundo do botão
-      botaovalidacaoinfo.style.border = 'none'; // Sem borda
-  });
+//     document.getElementById('botaovalidacaoinfo').addEventListener('click', function() {
+//       var validacaoinfo = document.getElementById('validacaoinfo');
+//       var botaovalidacaoinfo = document.getElementById('botaovalidacaoinfo');
+//       if (validacaoinfo.style.display === 'none' || validacaoinfo.style.display === '') {
+//           validacaoinfo.style.display = 'block';
+//           botaovalidacaoinfo.textContent = 'Atenção +';
+//           botaovalidacaoinfo.style.color = 'green'; // Cor de fundo vermelho
+//       } else {
+//           validacaoinfo.style.display = 'none';
+//           botaovalidacaoinfo.textContent = '-';
+//           botaovalidacaoinfo.style.color = 'red'; // Cor de fundo verde
+//       }
+//       botaovalidacaoinfo.style.backgroundColor = 'transparent'; // Remove a cor de fundo do botão
+//       botaovalidacaoinfo.style.border = 'none'; // Sem borda
+//   });
 
 
 const calendarBody = document.getElementById('calendar-body');

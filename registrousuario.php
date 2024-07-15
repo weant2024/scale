@@ -1,18 +1,13 @@
 <?php 
 include "tudo_cima.php";
-{
-	header("Location: sem_acesso.php"); exit;
-}
+if ( $nivel < 2 ) 
+    {
+        header("Location: sem_acesso.php"); exit;
+    }
 ?>  
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-  }
-
   .container {
+    flex: 1;
     width: 80%;
     margin: auto;
     background-color: #fff;
@@ -23,6 +18,9 @@ include "tudo_cima.php";
 
   .search-form {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .search-form select, .search-form input[type="text"], .search-form input[type="submit"] {
@@ -31,6 +29,14 @@ include "tudo_cima.php";
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+  }
+
+  .search-form select {
+    width: 150px;
+  }
+
+  .search-form input[type="text"] {
+    flex: 1;
   }
 
   .search-form input[type="submit"] {
@@ -76,31 +82,25 @@ include "tudo_cima.php";
   }
 </style>
 
-<div class="container">
   <div class="search-form">
-    <form action="" method="post">
-      <table width="auto"> 
-        <tr align="center">
-          <td>
-            <select name="filtro">                                               
-              <option value="login">Login</option> 
-              <option value="nome">Nome</option>  
-              <option value="cpf">CPF</option>  
-              <option value="telefone">Celular</option>
-              <option value="horario">Horário</option> 
-              <option value="dia">Dia</option>                        
-              <option value="mes">Mês</option> 
-              <option value="ano">Ano</option> 
-              <option value="pnivel">Nível</option> 
-              <option value="pativo">Status</option> 
-            </select>
-          </td>                  
-          <td> <input type="text" name="palavra" size="auto" id="palavra"/> </td>
-          <td> <input type="submit" Value="Pesquisar" /> </td>
-        </tr>
-      </table> 
+    <form action="" method="post" style="display: flex; width: 100%;">
+      <select name="filtro">
+        <option value="login">Login</option> 
+        <option value="nome">Nome</option>  
+        <option value="cpf">CPF</option>  
+        <option value="telefone">Celular</option>
+        <option value="horario">Horário</option> 
+        <option value="dia">Dia</option>                        
+        <option value="mes">Mês</option> 
+        <option value="ano">Ano</option> 
+        <option value="pnivel">Nível</option> 
+        <option value="pativo">Status</option> 
+      </select>                
+      <input type="text" name="palavra" id="palavra"/> 
+      <input type="submit" Value="Pesquisar"/>
     </form>               
   </div>
+
   
   <?php
   $filtro = @$_POST['filtro'];
@@ -140,7 +140,7 @@ include "tudo_cima.php";
       echo "<b>$num_rows registros</b>";
     ?>
   </div>
-</div>
+
 <?php
 }
 ?>
