@@ -5,6 +5,11 @@ if ( $nivel < 2 )
 	header("Location: sem_acesso.php"); exit;
 }
 ?>
+<script>
+function redirectTo(url, id) {
+    window.location.href = url + '?id=' + id;
+}
+</script>
 
             <!-- INICIA CONTEÚDO -->   
 
@@ -167,8 +172,8 @@ if ( $nivel < 2 )
                     <div class="form-group" align="center">                                   
                       <button class="botao" type="submit">EDITAR USUÁRIO</button>
             </form>
-                      <button class="botao" onclick="redirectTo('sec/enviarsenhausuario.php', <?php echo $dados['id']; ?>)">GERAR NOVA SENHA</button>
-                      <button class="botao" onclick="redirectTo('afastamentousuario.php', <?php echo $dados['id']; ?>)">CADASTRAR AFASTAMENTO</button>                         
+                      <button class="botao" type="button" onclick="redirectTo('sec/enviarsenhausuario.php', <?php echo $dados['id']; ?>)">GERAR NOVA SENHA</button>
+                      <button class="botao" type="button" onclick="redirectTo('afastamentousuario.php', <?php echo $dados['id']; ?>)">CADASTRAR AFASTAMENTO</button>                         
                     </div>
             </div>
 

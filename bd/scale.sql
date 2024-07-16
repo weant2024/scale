@@ -26,6 +26,12 @@ USE `scale`;
 -- --------------------------------------------------------
 
 --
+-- Banco de dados: `scale`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `afastamento`
 --
 
@@ -44,7 +50,9 @@ CREATE TABLE `afastamento` (
 INSERT INTO `afastamento` (`id`, `id_usuario`, `motivo`, `datainicial`, `datafinal`) VALUES
 (1, 1, 'Licença', '14/11/2024', '15/11/2024'),
 (2, 1, 'Atestado', '03/07/2024', '10/07/2024'),
-(6, 1, 'Férias', '12/07/2024', '12/08/2024');
+(6, 1, 'Férias', '12/07/2024', '12/08/2024'),
+(7, 1, 'Folga', '21/07/2024', '21/07/2024'),
+(8, 1, 'Folga', '04/08/2024', '04/08/2024');
 
 -- --------------------------------------------------------
 
@@ -71,20 +79,31 @@ CREATE TABLE `escala` (
 --
 
 INSERT INTO `escala` (`id`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `operador`) VALUES
-(1, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '29', '06', '2024', 'admin'),
-(2, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '02', '07', '2024', 'admin'),
-(3, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '03', '07', '2024', 'admin'),
-(4, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '04', '07', '2024', 'admin'),
-(5, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '05', '07', '2024', 'admin'),
-(6, '1', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '06', '07', '2024', 'admin'),
-(7, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '22', '07', '2024', 'admin'),
-(8, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '23', '07', '2024', 'admin'),
-(9, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '24', '07', '2024', 'admin'),
-(10, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '25', '07', '2024', 'admin'),
-(11, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '26', '07', '2024', 'admin'),
-(12, '3', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ\"', '27', '07', '2024', 'admin'),
-(98, '1', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(99, '1', '01:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '10', '07', '2024', 'admin');
+(1, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', 'admin'),
+(2, '10', '07:00:00', '10:00:00', '10:15:00', '13:00:00', 'TJ', '01', '07', '2024', 'admin'),
+(3, '9', '13:00:00', '16:00:00', '16:15:00', '19:00:00', 'TJ', '01', '07', '2024', 'admin'),
+(4, '6', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin'),
+(5, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', 'admin'),
+(6, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '03', '07', '2024', 'admin'),
+(7, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '04', '07', '2024', 'admin'),
+(8, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '05', '07', '2024', 'admin'),
+(9, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '06', '07', '2024', 'admin'),
+(10, '6', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '14', '11', '2024', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `jornada`
+--
+
+CREATE TABLE `jornada` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(60) NOT NULL,
+  `tipo_de_escala` varchar(60) NOT NULL,
+  `inicio_de_expediente` varchar(60) NOT NULL,
+  `fim_de_expediente` varchar(60) NOT NULL,
+  `contrato` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -149,7 +168,8 @@ INSERT INTO `registroafastamento` (`id`, `id_usuario`, `motivo`, `datanicial`, `
 
 CREATE TABLE `registroescala` (
   `id` int(11) NOT NULL,
-  `id_usuario` varchar(60) NOT NULL,
+  `id_escala` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `horarioinicio` varchar(60) NOT NULL,
   `intervaloinicio` varchar(60) NOT NULL,
   `intervalofim` varchar(60) NOT NULL,
@@ -165,6 +185,23 @@ CREATE TABLE `registroescala` (
   `logano` varchar(60) NOT NULL,
   `operador` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `registroescala`
+--
+
+INSERT INTO `registroescala` (`id`, `id_escala`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
+(1, 1, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '01:59:55', '16', 'Terça', 'Julho', '2024', 'admin'),
+(2, 2, 10, '07:00:00', '10:00:00', '10:15:00', '13:00:00', 'TJ', '01', '07', '2024', '02:00:06', '16', 'Terça', 'Julho', '2024', 'admin'),
+(3, 3, 9, '13:00:00', '16:00:00', '16:15:00', '19:00:00', 'TJ', '01', '07', '2024', '02:00:18', '16', 'Terça', 'Julho', '2024', 'admin'),
+(4, 4, 6, '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', '02:00:25', '16', 'Terça', 'Julho', '2024', 'admin'),
+(5, 5, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(6, 6, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '03', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(7, 7, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '04', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(8, 8, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '05', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(9, 9, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '06', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(10, 1, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '03:15:24', '16', 'Terça', 'Julho', '2024', 'admin'),
+(11, 10, 6, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '14', '11', '2024', '05:47:05', '16', 'Terça', 'Julho', '2024', 'admin');
 
 -- --------------------------------------------------------
 
@@ -210,7 +247,22 @@ INSERT INTO `registrousuario` (`id`, `id_usuario`, `login`, `senha`, `nome`, `cp
 (5, 1, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', '', '', '', '', '', '', '', '', 'Desativado', '4', '20:10:01', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
 (6, 1, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', '', '', '', '', '', '', '', '', 'Desativado', '4', '20:11:50', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
 (7, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '1', 'Usuario', '1', 'Ativado', '4', '20:20:35', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
-(8, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '20:20:45', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque');
+(8, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '20:20:45', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque'),
+(9, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '15:04:55', '05', 'Sexta', 'Julho', '2024', 'alessandro.albuquerque'),
+(10, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', '', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '1', '15:05:05', '05', 'Sexta', 'Julho', '2024', 'alessandro.albuquerque'),
+(11, 1, 'alessandro.albuquerque', 'd41d8cd98f00b204e9800998ecf8427e', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', '', '', '3', 'Administrador', '1', 'Ativado', '4', '15:05:05', '05', 'Sexta', 'Julho', '2024', 'alessandro.albuquerque'),
+(12, 2, 'admin', 'd41d8cd98f00b204e9800998ecf8427e', 'admin local', '123', '17/03/1984', '', '11111111111', '1111111111', '', '', '', 'Administrador', '', 'Desativado', '4', '01:14:35', '12', 'Sexta', 'Julho', '2024', 'admin'),
+(13, 2, 'admin', 'd41d8cd98f00b204e9800998ecf8427e', 'admin local', '123', '17/03/1984', '', '11111111111', '1111111111', '', '', '', 'Administrador', '', 'Desativado', '4', '01:15:55', '12', 'Sexta', 'Julho', '2024', 'admin'),
+(14, 2, 'admin', 'd41d8cd98f00b204e9800998ecf8427e', 'admin local', '123', '17/03/1984', '', '11111111111', '1111111111', '', '', '', 'Administrador', '', 'Desativado', '4', '01:16:45', '12', 'Sexta', 'Julho', '2024', 'admin'),
+(15, 2, 'admin', 'd41d8cd98f00b204e9800998ecf8427e', 'admin local', '123', '17/03/1984', '', '11111111111', '1111111111', '', '', '2', 'Gestor', '1', 'Ativado', '4', '01:18:46', '12', 'Sexta', 'Julho', '2024', 'admin'),
+(16, 11, 'thor.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Thor Ragnarok', '123', '1970-07-20', 'Masculino', '123@123.com', '1111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '15:13:56', '16', 'Terça', 'Julho', '2024', 'admin'),
+(17, 11, 'odin.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Odin Ragnarok', '321', '1960-07-20', 'Não definido', '321@123.com', '123456', '', '', '2', 'Gestor', '0', 'Desativado', '4', '15:16:47', '16', 'Terça', 'Julho', '2024', 'admin'),
+(18, 11, 'odin.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Odin Ragnarok', '321', '1960-07-20', 'Não definido', '321@123.com', '123456', '', '', '2', 'Gestor', '0', 'Desativado', '4', '15:17:06', '16', 'Terça', 'Julho', '2024', 'admin'),
+(19, 11, 'odin.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Odin Ragnarok', '321', '1960-07-20', 'Não definido', '321@123.com', '123456', '', '', '2', 'Gestor', '0', 'Desativado', '4', '15:19:48', '16', 'Terça', 'Julho', '2024', 'admin'),
+(20, 11, 'odin.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Odin Ragnarok', '321', '1960-07-20', '', '321@123.com', '123456', '', '', '2', 'Tecnico', '0', 'Desativado', '1', '15:24:30', '16', 'Terça', 'Julho', '2024', 'admin'),
+(21, 12, 'thor.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Thor Ragnarok', '123', '1980-07-20', 'Masculino', '123@123.com', '1111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '15:26:01', '16', 'Terça', 'Julho', '2024', 'admin'),
+(22, 13, 'lagertha.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Lagertha Ragnarok', '123', '1990-07-21', 'Feminino', '123@123.com', '1111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '15:26:59', '16', 'Terça', 'Julho', '2024', 'admin'),
+(23, 14, 'freya.ragnarok', 'd41d8cd98f00b204e9800998ecf8427e', 'Freya Ragnarok', '123', '1970-07-22', 'Feminino', '123@123.com', '1111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '15:27:44', '16', 'Terça', 'Julho', '2024', 'admin');
 
 -- --------------------------------------------------------
 
@@ -287,14 +339,18 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `login`, `senha`, `nome`, `cpf`, `nascimento`, `genero`, `email`, `telefone`, `departamento`, `cargo`, `nivel`, `pnivel`, `ativo`, `pativo`, `gerasenha`, `horario`, `dia`, `semana`, `mes`, `ano`, `operador`) VALUES
-(1, 'alessandro.albuquerque', '123', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '4', '05:14', '30', 'Domingo', 'Junho', '2024', 'Banco de Dados'),
-(2, 'admin', '123', 'admin local', '123', '17/03/1984', 'Feminino', '11111111111', '1111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '21:57:50', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
+(1, 'alessandro.albuquerque', '111111111111', 'Alessandro Almeida de Albuquerque', '111111111111', '14/11/1986', 'Masculino', '123@123.com', '+55 11 111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '4', '05:14', '30', 'Domingo', 'Junho', '2024', 'Banco de Dados'),
+(2, 'admin', '123', 'admin local', '123', '17/03/1984', '', '11111111111', '1111111111', NULL, NULL, '2', 'Gestor', '1', 'Ativado', '4', '21:57:50', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (3, 'gestor', '123', 'gestor local', '123', '17/03/1984', 'Não definido', '111111111', '11111111111', NULL, NULL, '2', 'Gestor', '1', 'Ativado', '3', '21:58:08', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (4, 'usuario', '123', 'usuario local', '123', '17/03/1984', 'Masculino', '11111111111111111', '1111111111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '21:58:35', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (5, 'desativado', '123', 'desativado local', '123', '28/02/1990', 'Não definido', '123@123.com', '123123123', '', '', '1', 'Usuario', '0', 'Desativado', '4', '21:59:33', '30', 'Domingo', 'Junho', '2024', 'alessandro.albuquerque'),
 (6, 'wagner.caldas', '123', 'Wagner Rocha Caldas', '123', '17/03/1984', '', '123@asd.com', '111111111', NULL, NULL, '2', 'Gestor', '1', 'Ativado', '3', '20:32:43', '02', 'Ter?a', 'Julho', '2024', 'alessandro.albuquerque'),
 (9, 'nikolas.giordani', '111111111111', 'Nikolas Giordani', '111111111111', '11/05/1994', 'Masculino', '123@123.com', '+55 11 111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '22:13:48', '02', 'Ter?a', 'Julho', '2024', 'admin'),
-(10, 'eduardo.goncalves', '111111111111', 'Eduardo Gonçalves', '111111111111', '16/09/1996', 'Masculino', '123@123', '1111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '22:18:48', '02', 'Terça', 'Julho', '2024', 'admin');
+(10, 'eduardo.goncalves', '111111111111', 'Eduardo Gonçalves', '111111111111', '16/09/1996', 'Masculino', '123@123', '1111111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '22:18:48', '02', 'Terça', 'Julho', '2024', 'admin'),
+(11, 'odin.ragnarok', '321', 'Odin Ragnarok', '321', '1960-07-20', 'Não definido', '321@123.com', '123456', NULL, NULL, '2', 'Gestor', '0', 'Desativado', '4', '15:13:56', '16', 'Terça', 'Julho', '2024', 'admin'),
+(12, 'thor.ragnarok', '123', 'Thor Ragnarok', '123', '1980-07-20', 'Masculino', '123@123.com', '1111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '15:26:01', '16', 'Terça', 'Julho', '2024', 'admin'),
+(13, 'lagertha.ragnarok', '123', 'Lagertha Ragnarok', '123', '1990-07-21', 'Feminino', '123@123.com', '1111111', NULL, NULL, '1', 'Usuario', '1', 'Ativado', '3', '15:26:59', '16', 'Terça', 'Julho', '2024', 'admin'),
+(14, 'freya.ragnarok', '123', 'Freya Ragnarok', '123', '1970-07-22', 'Feminino', '123@123.com', '1111111', NULL, NULL, '3', 'Administrador', '1', 'Ativado', '3', '15:27:44', '16', 'Terça', 'Julho', '2024', 'admin');
 
 --
 -- Índices para tabelas despejadas
@@ -313,6 +369,12 @@ ALTER TABLE `escala`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `jornada`
+--
+ALTER TABLE `jornada`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
@@ -322,6 +384,12 @@ ALTER TABLE `pagamento`
 -- Índices de tabela `registroafastamento`
 --
 ALTER TABLE `registroafastamento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `registroescala`
+--
+ALTER TABLE `registroescala`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -350,13 +418,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `afastamento`
 --
 ALTER TABLE `afastamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `escala`
 --
 ALTER TABLE `escala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `jornada`
+--
+ALTER TABLE `jornada`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
@@ -371,10 +445,16 @@ ALTER TABLE `registroafastamento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de tabela `registroescala`
+--
+ALTER TABLE `registroescala`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de tabela `registrousuario`
 --
 ALTER TABLE `registrousuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `testeescala`
@@ -386,7 +466,7 @@ ALTER TABLE `testeescala`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

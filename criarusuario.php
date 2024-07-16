@@ -36,7 +36,7 @@ if ( $nivel < 2 )
                   <label for="telefone">Celular:</label>
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">+55</span>
-                    <input type="text" class="form-control" placeholder="xx xxxxx-xxxx" maxlength="12" onKeyPress="Mascaracelular(this); return SomenteNumero(event);"/>
+                    <input type="text" class="form-control" placeholder="xx xxxxx-xxxx" maxlength="12" onKeyPress="Mascaracelular(this); return SomenteNumero(event);" id="celular" name="celular"/>
                   </div>
                 </div>
 

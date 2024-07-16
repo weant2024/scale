@@ -23,7 +23,7 @@ $nascimento = $_POST['nascimento'];
 
 $genero = $_POST['genero'];
 $email = $_POST['email'];
-$telefone = $_POST['telefone'];
+$telefone = $_POST['celular'];
 #$cargousuario = $_POST["cargousuario"];
 #$departamentousuario = $_POST["departamentousuario"];
 $nivelusuario = $_POST["nivelusuario"];
@@ -90,7 +90,32 @@ elseif  ($ativousuario == 0){
 ?>
 
 <?php
-// Supondo que a conexão com o banco de dados está em $conn
+// // Função para verificar se uma variável está definida e não é vazia
+// function verificarVariavel($var, $nomeVar) {
+//     if (!isset($var) || empty($var)) {
+//         die("Por favor, preencha o campo obrigatório: $nomeVar.");
+//     }
+// }
+
+// // Verificando se todas as variáveis necessárias estão definidas e não são vazias
+// verificarVariavel($login, 'login');
+// verificarVariavel($nome, 'nome');
+// verificarVariavel($cpf, 'cpf');
+// verificarVariavel($nascimento, 'nascimento');
+// verificarVariavel($genero, 'genero');
+// verificarVariavel($email, 'email');
+// verificarVariavel($telefone, 'telefone');
+// verificarVariavel($nivelusuario, 'nivel');
+// verificarVariavel($pnivel, 'pnivel');
+// verificarVariavel($ativousuario, 'ativo');
+// verificarVariavel($pativo, 'pativo');
+// verificarVariavel($gerasenha, 'gerasenha');
+// verificarVariavel($horario, 'horario');
+// verificarVariavel($dia, 'dia');
+// verificarVariavel($semana, 'semana');
+// verificarVariavel($mes, 'mes');
+// verificarVariavel($ano, 'ano');
+// verificarVariavel($operador, 'operador');
 
 // Preparando a primeira query
 $query = "INSERT INTO usuario (login, senha, nome, cpf, nascimento, genero, email, telefone, departamento, cargo, nivel, pnivel, ativo, pativo, gerasenha, horario, dia, semana, mes, ano, operador) 
@@ -102,14 +127,13 @@ if ($stmt === false) {
     die('Erro na preparação da query: ' . $conn->error);
 }
 
-$stmt->bind_param("sssssssssssssssssssss", $login, $cpf, $nome, $cpf, $enviaaniversario, $genero, $email, $telefone, $departamentousuario, $cargousuario, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt->bind_param("sssssssssssssssssssss", $login, $cpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt->execute()) {
     die('Erro na execução da query: ' . $stmt->error);
 }
 
 $idusuario = $stmt->insert_id;
-
 
 // Preparando a segunda query
 $query1 = "INSERT INTO registrousuario (id_usuario, login, senha, nome, cpf, nascimento, genero, email, telefone, departamento, cargo, nivel, pnivel, ativo, pativo, gerasenha, horario, dia, semana, mes, ano, operador) 
@@ -121,7 +145,7 @@ if ($stmt1 === false) {
     die('Erro na preparação da query1: ' . $conn->error);
 }
 
-$stmt1->bind_param("isssssssssssssssssssss", $idusuario, $login, $criptografadacpf, $nome, $cpf, $enviaaniversario, $genero, $email, $telefone, $departamentousuario, $cargousuario, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt1->bind_param("isssssssssssssssssssss", $idusuario, $login, $criptografadacpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt1->execute()) {
     die('Erro na execução da query1: ' . $stmt1->error);
@@ -131,8 +155,9 @@ $stmt->close();
 $stmt1->close();
 
 $msg = "Usuário cadastrado com sucesso!";
-echo "<script>alert( '$msg' );; window.location = '../criarusuario.php';</script>";
+echo "<script>alert('$msg'); window.location = '../criarusuario.php';</script>";
 ?>
+
 
 
 
