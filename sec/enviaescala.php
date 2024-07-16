@@ -129,10 +129,12 @@ case 6: $semana = "Sábado"; break;
                             die('Erro na execução da query: ' . $stmt->error);
                         }
 
+                        $id_escala = $stmt->insert_id;
+
                         
                         // Preparando a segunda query
-                        $query1 = "INSERT INTO registroescala (id_usuario, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        $query1 = "INSERT INTO registroescala (id_escala, id_usuario, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         $stmt1 = $conn->prepare($query1);
 
@@ -140,7 +142,7 @@ case 6: $semana = "Sábado"; break;
                             die('Erro na preparação da query1: ' . $conn->error);
                         }
 
-                        $stmt1->bind_param("issssssssssssss", $idusuario, $inicioexpediente, $iniciointervalo, $finalintervalo, $finalexpediente, $localdetrabalho, $escaladia, $escalames, $escalaano, $horario, $dia, $semana, $mes, $ano, $operador);
+                        $stmt1->bind_param("iissssssssssssss", $id_escala, $idusuario, $inicioexpediente, $iniciointervalo, $finalintervalo, $finalexpediente, $localdetrabalho, $escaladia, $escalames, $escalaano, $horario, $dia, $semana, $mes, $ano, $operador);
 
                         if (!$stmt1->execute()) {
                             die('Erro na execução da query1: ' . $stmt1->error);

@@ -64,7 +64,7 @@
                                 // Combina o dia e o mês em uma nova string
                                 @$aniversario_selecionado_tratado = "$dianascimento_selecionado-$mesnascimento_selecionado";
 ?>
-<div class="alertaescalavermelho"> 
+<div class="alertaescalaverde"> 
 <?php  
             $query_domingousuario = "SELECT *
                 FROM afastamento
@@ -86,7 +86,7 @@
                         }
 ?>
 </div>
-<div class="alertaescalavermelho">
+<div class="alertaescalavermelho">  
 <?php            
 
             // Definir a variável @novas_datas
@@ -163,14 +163,15 @@
                         $ultimodia_7dias_formatado = DateTime::createFromFormat('d-m-Y', $ultimodiabusca7dias)->format('d/m/Y');
                         
                         // Exemplo de uso das variáveis
-                        echo "Escalado 7 dias seguidos, entre $primeirodia_7dias_formatado e $ultimodia_7dias_formatado</br>";
+                        echo "Escalando 7 dias seguidos, entre $primeirodia_7dias_formatado e $ultimodia_7dias_formatado</br>";
                     }
                 } 
             } 
             // Limpar a tabela temporária
             $conn->query("DROP TEMPORARY TABLE IF EXISTS temp_datas");
 ?>
-  
+</div>
+
             <?php                                        
                 // Exibe as datas selecionadas                                    
                 foreach ($dates as $date) {             
@@ -203,7 +204,8 @@
                                     @$nome_usuarioescalado = $dados_usuarioescalado['nome'];
                                     @$login_usuarioescalado = $dados_usuarioescalado['login']; 
 
-            ?>            
+            ?>     
+<div class="alertaescalavermelho">         
                         <?php
                     
                             if (@$resultado_escalahorario->num_rows > 0) {                  
@@ -211,16 +213,17 @@
                             }
 
                         ?>
-
+</div> 
+<div class="alertaescalaverde"> 
                         <?php  
                         
                             if ("$dataescala_tratada" == "$aniversario_selecionado_tratado"){
-                                echo "$nome_selecionado escalado no aniversário em $datacompleta_selecionado</br>";                  
+                                echo "Escalando no aniversário em $datacompleta_selecionado</br>";                  
                             }   
 
                         ?>
-
-                </div> 
+</div> 
+                
 
             <?php
                     }    

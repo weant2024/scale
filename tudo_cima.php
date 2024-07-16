@@ -92,7 +92,7 @@ include "sec/sec_verifica.php";
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="pesquisaescala.php">
                         <span class="sub-item">Editar Scala</span>
                       </a>
                     </li>

@@ -94,9 +94,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.botao:hover {
-    background-color: #8800ff;
-}
 .alertaescalavermelho {   
     color: red;
 }
