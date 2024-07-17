@@ -5,6 +5,12 @@ if ( $nivel < 2 )
         header("Location: sem_acesso.php"); exit;
     }
 ?>
+
+
+<p align="center">
+ <b>PESQUISAR USUÁRIO</b>
+</p>
+
 <style>
   .container {
     flex: 1;
