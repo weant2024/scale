@@ -12,20 +12,24 @@ if (!isset($_SESSION['UsuarioID'])) {
   header("Location: $urllogin"); exit;
 }
 
- $nivel = $_SESSION['UsuarioNivel'];
+$nivel = $_SESSION['UsuarioNivel'];
  
  
 $sqlc = "SELECT * FROM usuario WHERE id=" . $_SESSION['UsuarioID']; //faz a busca com as palavras enviadas
-$query = $conn->query($sqlc);
-$dados = $query->fetch_assoc();
+  $query = $conn->query($sqlc);
+    $dados = $query->fetch_assoc();
+      $idlogado = $dados['id'];
+      $usuariologado = $dados['login'];
+      $nomelogado = $dados['nome'];
+      $cpflogado = $dados['cpf'];
+      $emaillogado = $dados['email'];
+      $telefonelogado = $dados['telefone'];
+      $departamentologado = $dados['departamento'];
+      $cargologado = $dados['cargo'];
 
-$idlogado = $dados['id'];
-$usuariologado = $dados['login'];
-$nomelogado = $dados['nome'];
-$cpflogado = $dados['cpf'];
-$emaillogado = $dados['email'];
-$telefonelogado = $dados['telefone'];
-$departamentologado = $dados['departamento'];
-$cargologado = $dados['cargo'];
-
+$query_vdl_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
+  $resultado_vdl_licenca = $conn->query($query_vdl_licenca);
+    $dados_vdl_licenca = $resultado_vdl_licenca->fetch_assoc();  
+      $id_cliente_vdl_licenca = $dados_vdl_licenca['id_cliente']; 
+      $tipo_vdl_licenca = $dados_vdl_licenca['tipo']; 
 ?>

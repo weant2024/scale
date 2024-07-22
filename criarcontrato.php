@@ -26,6 +26,20 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
     </div>    
 
     <div class="form-group">
+        <label>Status:</label><br />
+        <div class="d-flex">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="1" checked/>
+            <label class="form-check-label" for="1">Ativado</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="0"/>
+            <label class="form-check-label" for="0">Desativado</label>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="form-label">Vincule ao(s) profissional(is):</label> </br>
         <?php include 'sec/pesquisa_coletausuarios.php';?>
     </div>

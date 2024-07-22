@@ -12,10 +12,11 @@ $id_cliente = $_GET['cliente'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Receber e sanitizar o nome do contrato
     $contrato = isset($_POST['contrato']) ? htmlspecialchars($_POST['contrato']) : '';
+    $statuscontrato = $_POST['statuscontrato'];
 
      // Query para contrato
-     $query_contrato = "INSERT INTO contrato (nome) 
-     VALUES (?)";
+     $query_contrato = "INSERT INTO contrato (nome, status) 
+     VALUES (?, ?)";
      
          $stmt_contrato = $conn->prepare($query_contrato);
      
@@ -23,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  die('Erro na preparação da query: ' . $conn->error);
              }
      
-                 $stmt_contrato->bind_param("s", $contrato);
+                 $stmt_contrato->bind_param("si", $contrato, $statuscontrato);
      
                      if (!$stmt_contrato->execute()) {
                          die('Erro na execução da query: ' . $stmt_contrato->error);
@@ -44,12 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $locais[$key] = htmlspecialchars($value);
         }
     }
-
-
-    $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$id'";
-    $resultado_validacao_licenca = $conn->query($query_validacao_licenca);
-        $dados_validacao_licenca = $resultado_validacao_licenca->fetch_assoc();  
-            $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente']; 
        
     // Query para relação de profissionais x cliente x contrato    
     foreach ($profissionais as $profissional) {
@@ -63,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         die('Erro na preparação da query: ' . $conn->error);
                     }
             
-                        $stmt_ricc->bind_param("iii", $id_cliente_validacao_licenca, $retorno_idcontrato, $profissional);
+                        $stmt_ricc->bind_param("iii", $id_cliente, $retorno_idcontrato, $profissional);
             
                             if (!$stmt_ricc->execute()) {
                                 die('Erro na execução da query: ' . $stmt_ricc->error);

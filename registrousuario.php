@@ -105,7 +105,17 @@ $filtro = @$_POST['filtro'];
 $busca = @$_POST['palavra'];
 
 if (!empty($filtro) && !empty($busca)) {
-  $busca_query = "SELECT * FROM registrousuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
+  if (($nivel > 2 ) && ($tipo_vdl_licenca > 5)){
+    $busca_query = "SELECT * FROM registrousuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
+  }
+  else {
+  $busca_query = "SELECT DISTINCT u.*
+                  FROM registrousuario u
+                  JOIN licenca rc ON u.id_usuario = rc.id_usuario
+                  WHERE rc.id_cliente = $id_cliente_vdl_licenca AND u.$filtro LIKE '%$busca%'
+                  ORDER BY u.id DESC";
+  }
+
   $result = $conn->query($busca_query);              
 
   if (@$result->num_rows < 1) { //Se nao achar nada, lança essa mensagem

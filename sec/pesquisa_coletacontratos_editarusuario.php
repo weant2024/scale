@@ -5,7 +5,7 @@
     $resultado_validacao_contrato = $conn->query($query_validacao_contrato);
     if ($resultado_validacao_contrato->num_rows > 0){
         while($dados_validacao_contrato = $resultado_validacao_contrato->fetch_assoc()){
-            $id_contrato_validacao_contrato = $dados_validacao_contrato['id_contrato'];                  
+            $id_cliente_validacao_contrato = $dados_validacao_contrato['id_cliente'];                  
 
             $query_contrato = "SELECT * FROM contrato WHERE id = '$id_contrato_validacao_contrato'";
             $resultado_contrato = $conn->query($query_contrato);
