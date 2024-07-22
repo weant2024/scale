@@ -12,7 +12,6 @@
     <?php
     session_start(); // Inicia a sessão
     session_destroy(); // Destrói a sessão limpando todos os valores salvos
- 
     ?>    
 </head>
 <body>
@@ -24,6 +23,7 @@
             <input type="password" name="senha" placeholder="Digite sua senha" />
             <a href="/" align="center">Esqueci minha senha</a>
             <input type="submit" value="Acessar" class="btn" />
+            <b align="center"> LOGIN SEM LICENÇA </b>
         </form>
     </div>
 </body>

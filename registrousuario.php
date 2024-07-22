@@ -1,9 +1,8 @@
 <?php 
 include "tudo_cima.php";
-if ( $nivel < 2 ) 
-    {
-        header("Location: sem_acesso.php"); exit;
-    }
+if ($nivel < 2) {
+    header("Location: sem_acesso.php"); exit;
+}
 ?>  
 <style>
   .container {
@@ -82,66 +81,69 @@ if ( $nivel < 2 )
   }
 </style>
 
-  <div class="search-form">
-    <form action="" method="post" style="display: flex; width: 100%;">
-      <select name="filtro">
-        <option value="login">Login</option> 
-        <option value="nome">Nome</option>  
-        <option value="cpf">CPF</option>  
-        <option value="telefone">Celular</option>
-        <option value="horario">Horário</option> 
-        <option value="dia">Dia</option>                        
-        <option value="mes">Mês</option> 
-        <option value="ano">Ano</option> 
-        <option value="pnivel">Nível</option> 
-        <option value="pativo">Status</option> 
-      </select>                
-      <input type="text" name="palavra" id="palavra"/> 
-      <input type="submit" Value="Pesquisar"/>
-    </form>               
-  </div>
+<div class="search-form">
+  <form action="" method="post" style="display: flex; width: 100%;">
+    <select name="filtro">
+      <option value="login">Login</option> 
+      <option value="nome">Nome</option>  
+      <option value="cpf">CPF</option>  
+      <option value="telefone">Celular</option>
+      <option value="horario">Horário</option> 
+      <option value="dia">Dia</option>                        
+      <option value="mes">Mês</option> 
+      <option value="ano">Ano</option> 
+      <option value="pnivel">Nível</option> 
+      <option value="pativo">Status</option> 
+    </select>                
+    <input type="text" name="palavra" id="palavra"/> 
+    <input type="submit" Value="Pesquisar"/>
+  </form>               
+</div>
 
-  
-  <?php
-  $filtro = @$_POST['filtro'];
-  $busca = @$_POST['palavra'];
-  
+<?php
+$filtro = @$_POST['filtro'];
+$busca = @$_POST['palavra'];
+
+if (!empty($filtro) && !empty($busca)) {
   $busca_query = "SELECT * FROM registrousuario WHERE $filtro LIKE '%$busca%' ORDER BY id DESC";
   $result = $conn->query($busca_query);              
-  
+
   if (@$result->num_rows < 1) { //Se nao achar nada, lança essa mensagem
     echo "<p>Nenhum registro encontrado.</p>";
   } else {
-  ?>
-  <table class="legenda">                
-    <tr>                    
-      <th>Login</th>                     
-      <th>Horário</th>
-      <th>Mês</th>
-      <th>Ano</th>                    
-    </tr>
-  <?php      
+?>
+<table class="legenda">                
+  <tr>                    
+    <th>Login</th>                     
+    <th>Horário</th>
+    <th>Mês</th>
+    <th>Ano</th>                    
+  </tr>
+<?php      
   // quando existir algo em '$busca_query' ele realizará o script abaixo.
-    while ($dados = $result->fetch_assoc()) {                             
-    ?>              
-    <tr>	
-      <td><?php echo "<a href='exibirregistrousuario.php?id=" . $dados['id'] . "'>$dados[login]</a>";?></td>		                    		
-      <td><?php echo "$dados[horario]";?></td>
-      <td><?php echo "$dados[mes]";?></td>
-      <td><?php echo "$dados[ano]";?></td>                     
-    </tr>	
-    <?php
-    }
+  while ($dados = $result->fetch_assoc()) {                             
+?>              
+  <tr>  
+    <td><?php echo "<a href='exibirregistrousuario.php?id=" . $dados['id'] . "'>$dados[login]</a>";?></td>                    
+    <td><?php echo "$dados[horario]";?></td>
+    <td><?php echo "$dados[mes]";?></td>
+    <td><?php echo "$dados[ano]";?></td>                     
+  </tr>  
+<?php
+  }
+?>
+</table>
+<div class="record-count">
+  <?php 
+    $num_rows = @$result->num_rows;
+    echo "<b>$num_rows registros</b>";
   ?>
-  </table>
-  <div class="record-count">
-    <?php 
-      $num_rows = @$result->num_rows;
-      echo "<b>$num_rows registros</b>";
-    ?>
-  </div>
+</div>
 
 <?php
+  }
+} else {
+  echo "<p>Nenhum registro encontrado.</p>";
 }
 ?>
 

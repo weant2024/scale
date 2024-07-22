@@ -1,11 +1,26 @@
 <?php
 include "tudo_cima.php"; 
-if ( $nivel < 2 ) 
-{
-	header("Location: sem_acesso.php"); exit;
+
+
+// Buscar datas do banco de dados
+$query_pesquisaescala = "SELECT dia, mes, ano FROM escala WHERE id_usuario = '$idlogado'";
+$resultado_pesquisaescala = $conn->query($query_pesquisaescala);
+
+$datesWithData = [];
+if ($resultado_pesquisaescala->num_rows > 0) {
+    while ($row = $resultado_pesquisaescala->fetch_assoc()) {
+        $datesWithData[] = sprintf('%02d-%02d-%04d', $row['dia'], $row['mes'], $row['ano']);
+    }
 }
+
+$conn->close();
 ?>
-            
+
+<script>
+// Passa as datas do PHP para o JavaScript
+const datesWithData = <?php echo json_encode($datesWithData); ?>;
+</script>
+
             <!-- INICIA CONTEÚDO -->  
 
             <div class="selecionar">
@@ -44,13 +59,6 @@ if ( $nivel < 2 )
                     </footer>
                 </div>
 
-                <div class="selecionar">
-                  <div class="nav">
-                       <!--<button class="botao" onclick="cadastrarDatas()">Cadastrar escala</button> -->
-                      <!--  <button style="color: green; background-color: transparent; border: none; padding: 5px 10px; margin-top: 20px;" id="botaovalidacaoinfo">+</button> -->
-                  </div>
-                </div>
-
                 <div id="validacaoinfo">
                   <div id="selected-dates" class="hidden">
                       <!-- As datas selecionadas serão exibidas aqui -->
@@ -64,42 +72,18 @@ if ( $nivel < 2 )
             </div>
 
 <script>
-    // Adiciona listeners aos selects para chamar enviarDatas() ao alterar o valor
-    window.onload = function() {
-            document.getElementById('nome').addEventListener('change', enviarDatas);
-            document.getElementById('horarioexpediente').addEventListener('change', enviarDatas);
-            document.getElementById('localdetrabalho').addEventListener('change', enviarDatas);
-            generateCalendar(currentMonth, currentYear);
-        };
     
-    document.getElementById('botaoexibircalendario').addEventListener('click', function() {
-        var calendar = document.getElementById('calendar');
-        var botaoexibircalendario = document.getElementById('botaoexibircalendario');
-        if (calendar.style.display === 'none' || calendar.style.display === '') {
-            calendar.style.display = 'block';
-            botaoexibircalendario.textContent = 'Esconder Calendário';
-        } else {
-            calendar.style.display = 'none';
-            botaoexibircalendario.textContent = 'Mostrar Calendário';
-        }
-    });   
-
-//     document.getElementById('botaovalidacaoinfo').addEventListener('click', function() {
-//       var validacaoinfo = document.getElementById('validacaoinfo');
-//       var botaovalidacaoinfo = document.getElementById('botaovalidacaoinfo');
-//       if (validacaoinfo.style.display === 'none' || validacaoinfo.style.display === '') {
-//           validacaoinfo.style.display = 'block';
-//           botaovalidacaoinfo.textContent = 'Atenção +';
-//           botaovalidacaoinfo.style.color = 'green'; // Cor de fundo vermelho
-//       } else {
-//           validacaoinfo.style.display = 'none';
-//           botaovalidacaoinfo.textContent = '-';
-//           botaovalidacaoinfo.style.color = 'red'; // Cor de fundo verde
-//       }
-//       botaovalidacaoinfo.style.backgroundColor = 'transparent'; // Remove a cor de fundo do botão
-//       botaovalidacaoinfo.style.border = 'none'; // Sem borda
-//   });
-
+document.getElementById('botaoexibircalendario').addEventListener('click', function() {
+    var calendar = document.getElementById('calendar');
+    var botaoexibircalendario = document.getElementById('botaoexibircalendario');
+    if (calendar.style.display === 'none' || calendar.style.display === '') {
+        calendar.style.display = 'block';
+        botaoexibircalendario.textContent = 'Esconder Calendário';
+    } else {
+        calendar.style.display = 'none';
+        botaoexibircalendario.textContent = 'Mostrar Calendário';
+    }
+});   
 
 const calendarBody = document.getElementById('calendar-body');
 const monthYear = document.getElementById('month-year');
@@ -136,9 +120,10 @@ function generateCalendar(month, year) {
                 cell.classList.add('day');
                 const formattedDate = `${String(date).padStart(2, '0')}-${String(month + 1).padStart(2, '0')}-${year}`; // Formato dd-mm-yyyy
 
-                // Marca a célula como selecionada se a data estiver no array de datas selecionadas
-                if (selectedDates.includes(formattedDate)) {
-                    cell.classList.add('selected');
+                // Verifica se a data tem dados no banco de dados
+                if (datesWithData.includes(formattedDate)) {
+                    cell.style.backgroundColor = 'blue'; // Marca a célula em azul
+                    cell.style.color = 'white'; // Ajusta a cor do texto para melhor visibilidade
                 }
 
                 // Adiciona ou remove a classe 'selected' ao clicar para marcar/desmarcar a seleção
@@ -179,36 +164,6 @@ function nextMonth() {
     generateCalendar(currentMonth, currentYear);
 }
 
-
-function enviarDatas() {
-    const selectedDatesElement = document.getElementById('selected-dates');
-    selectedDatesElement.innerHTML = ''; // Limpa qualquer conteúdo anterior
-
-    if (selectedDates.length > 0) {
-        const selectedDatesStr = selectedDates.join(',');
-
-        // Envia as datas selecionadas via AJAX
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Exibe o formulário PHP na mesma página
-                    const formularioPhp = document.getElementById('formulario-php');
-                    formularioPhp.innerHTML = xhr.responseText;
-                } else {
-                    console.error('Erro ao processar requisição.');
-                }
-            }
-        };
-        xhr.open('POST', 'sec/pesquisa_coletaescala.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(`dates=${selectedDatesStr}`);
-    } else {
-        selectedDatesElement.textContent = 'Nenhuma data selecionada.';
-    }
-}
-
-
 // Gera o calendário inicial
 generateCalendar(currentMonth, currentYear);
 
@@ -219,4 +174,4 @@ generateCalendar(currentMonth, currentYear);
 
 <?php
 include "tudo_baixo.php";
-?>            
+?>

@@ -45,7 +45,7 @@ $query_usuarioescalado = "SELECT * FROM usuario WHERE id='$id_usuario_escala'";
             $nome_usuarioescalado = $dados_usuarioescalado['nome'];
 ?>
 
-    <form method="POST" action="sec/atualizaescala.php?id=<?php echo "$id_escala"; ?>&dia=<?php echo "$dia_escala"; ?>&mes=<?php echo "$mes_escala"; ?>&ano=<?php echo "$ano_escala"; ?>">
+    <form method="POST" action="sec/atualizaturno.php?id=<?php echo "$id_escala"; ?>&dia=<?php echo "$dia_escala"; ?>&mes=<?php echo "$mes_escala"; ?>&ano=<?php echo "$ano_escala"; ?>">
         <div class="form-group form-group-default">
             <label><b>Nome:</b></label>
                 <select class="form-select" id="nome" name="nome">
@@ -126,7 +126,7 @@ $query_usuarioescalado = "SELECT * FROM usuario WHERE id='$id_usuario_escala'";
 
         <div class="selecionar">
             <div class="nav">
-                <button class="botao" type="submit">Cadastrar turno</button>        
+                <button class="botao" type="submit">Editar turno</button>        
             </div>
         </div>
     </form>

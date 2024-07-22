@@ -1,11 +1,11 @@
 <?php
-include "sec/config.php"; 
-include "sec/sec_verifica.php";
-?>
+include "sec/sec_verifica.php"; 
+?> 
+
 <html lang="br">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Inicial</title>
+    <title>WeAnt</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     <link rel="icon" href="assets/img/kaiadmin/favicon_1.ico" type="image/x-icon"/>
 
@@ -35,6 +35,7 @@ include "sec/sec_verifica.php";
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
     <link rel="stylesheet" href="assets/css/calendario.css" />
     <link rel="stylesheet" href="assets/css/usuarios.css" />
+    <link rel="stylesheet" href="assets/css/contratos.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -85,25 +86,73 @@ include "sec/sec_verifica.php";
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="escala">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="criarescala.php">
-                        <span class="sub-item">Criar Scala</span>
-                      </a>
-                    </li>
+                  <ul class="nav nav-collapse">                           
                     <li>
                       <a href="pesquisaescala.php">
-                        <span class="sub-item">Editar Scala</span>
+                        <span class="sub-item">Pesquisar Escala</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Excluir Scala</span>
+                      <a data-bs-toggle="collapse" href="#subnav1">
+                        <span class="sub-item">Turnos</span>
+                        <span class="caret"></span>
                       </a>
+                      <div class="collapse" id="subnav1">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="criarturno.php">
+                              <span class="sub-item">Criar Turnos</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="pesquisarturno.php">
+                              <span class="sub-item">Pesquisar Turnos</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </li>
                   </ul>
                 </div>
               </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#itsm">
+                  <i class="fas fa-layer-group"></i>
+                  <p>ITSM</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="itsm">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Gestão de Requisições</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Gestão de Incidentes</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Gestão de Problemas</span>
+                      </a>
+                    </li> 
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Gestão de Mudanças</span>
+                      </a>
+                    </li>   
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Inventário</span>
+                      </a>
+                    </li>                 
+                  </ul>
+                </div>
+              </li>
+
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#observabilidade">
                   <i class="far fa-chart-bar"></i>
@@ -116,18 +165,12 @@ include "sec/sec_verifica.php";
                       <a href="#">
                         <span class="sub-item">Zabbix</span>
                       </a>
-
                     </li>
                     <li>
                       <a href="#">
                         <span class="sub-item">Grafana</span>
                       </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">ITSM</span>
-                      </a>
-                    </li>
+                    </li>                    
                   </ul>
                 </div>
               </li>
@@ -141,11 +184,11 @@ include "sec/sec_verifica.php";
                 <div class="collapse" id="configuracoes">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a data-bs-toggle="collapse" href="#subnav1">
+                      <a data-bs-toggle="collapse" href="#subnav2">
                         <span class="sub-item">Usuários</span>
                         <span class="caret"></span>
                       </a>
-                      <div class="collapse" id="subnav1">
+                      <div class="collapse" id="subnav2">
                         <ul class="nav nav-collapse subnav">
                           <li>
                             <a href="criarusuario.php">
@@ -154,18 +197,38 @@ include "sec/sec_verifica.php";
                           </li>
                           <li>
                             <a href="pesquisarusuario.php">
-                              <span class="sub-item">Editar Usuários</span>
+                              <span class="sub-item">Pesquisar Usuários</span>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </li>
                     <li>
-                      <a data-bs-toggle="collapse" href="#subnav2">
+                      <a data-bs-toggle="collapse" href="#subnav4">
+                        <span class="sub-item">Contratos</span>
+                        <span class="caret"></span>
+                      </a>
+                      <div class="collapse" id="subnav4">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="criarcontrato.php">
+                              <span class="sub-item">Criar Contratos</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="pesquisarcontrato.php">
+                              <span class="sub-item">Pesquisar Contratos</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <a data-bs-toggle="collapse" href="#subnav3">
                         <span class="sub-item">Logs</span>
                         <span class="caret"></span>
                       </a>
-                      <div class="collapse" id="subnav2">
+                      <div class="collapse" id="subnav3">
                         <ul class="nav nav-collapse subnav">
                           <li>
                             <a href="registrousuario.php">
@@ -179,7 +242,8 @@ include "sec/sec_verifica.php";
                       <a href="#">
                         <span class="sub-item">Documentações</span>
                       </a>
-                    </li>
+                    </li>                   
+                                               
                   </ul>
                 </div>
               </li>  

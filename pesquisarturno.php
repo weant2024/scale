@@ -8,42 +8,6 @@ if ( $nivel < 2 )
             
             <!-- INICIA CONTEÚDO -->  
 
-            <div class="form-group form-group-default">
-              <label><b>Nome:</b></label>
-              <select class="form-select" id="nome" name="nome">
-                  <?php
-                      // Preenche o dropdown com os usuários
-                      $query_usuarios = "SELECT * FROM usuario ORDER BY login ASC";
-                      $result_usuarios = $conn->query($query_usuarios);
-                      if ($result_usuarios->num_rows > 0) {
-                          while($row = $result_usuarios->fetch_assoc()) {
-                              echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
-                          }
-                      } else {
-                          echo '<option value="">Nenhum usuário encontrado</option>';
-                      }
-                  ?>
-              </select>
-            </div>
-
-            <div class="form-group form-group-default">
-                <label for="horarioexpediente"><b>Horário de expediente:</b></label>
-                <select class="form-select" id="horarioexpediente" name="horarioexpediente">
-                    <option value="01-07">01h as 07h</option>
-                    <option value="07-13">07h as 13h</option>
-                    <option value="13-19">13h as 19h</option>
-                    <option value="19-01">19h as 01h</option>
-                </select>
-            </div>
-
-            <div class="form-group form-group-default">
-                <label for="localdetrabalho"><b>Local:</b></label>
-                <select class="form-select" id="localdetrabalho" name="localdetrabalho">
-                    <option value="TJ">TJ</option>
-                    <option value="FC2">FC2</option>
-                </select>
-            </div>
-
             <div class="selecionar">
                 <div class="nav">
                     <button class="botao" id="botaoexibircalendario">Mostrar Calendário</button>
@@ -82,11 +46,11 @@ if ( $nivel < 2 )
 
                 <div class="selecionar">
                   <div class="nav">
-                      <button class="botao" onclick="cadastrarDatas()">Cadastrar escala</button>
+                       <!--<button class="botao" onclick="cadastrarDatas()">Cadastrar escala</button> -->
                       <!--  <button style="color: green; background-color: transparent; border: none; padding: 5px 10px; margin-top: 20px;" id="botaovalidacaoinfo">+</button> -->
                   </div>
                 </div>
-                    </br>
+
                 <div id="validacaoinfo">
                   <div id="selected-dates" class="hidden">
                       <!-- As datas selecionadas serão exibidas aqui -->
@@ -215,18 +179,6 @@ function nextMonth() {
     generateCalendar(currentMonth, currentYear);
 }
 
-function cadastrarDatas() {
-                  // Envia as datas selecionadas para o PHP
-                  if (selectedDates.length > 0) {
-                      const selectedDatesStr = selectedDates.join(',');
-                      const nome = document.getElementById('nome').value;
-                      const horarioExpediente = document.getElementById('horarioexpediente').value;
-                      const localDeTrabalho = document.getElementById('localdetrabalho').value;
-                      window.location.href = `sec/enviaescala.php?dates=${selectedDatesStr}&id=${nome}&horarioexpediente=${horarioExpediente}&localdetrabalho=${localDeTrabalho}`;
-                  } else {
-                      alert('Selecione pelo menos uma data!');
-                  }
-              }
 
 function enviarDatas() {
     const selectedDatesElement = document.getElementById('selected-dates');
@@ -234,9 +186,6 @@ function enviarDatas() {
 
     if (selectedDates.length > 0) {
         const selectedDatesStr = selectedDates.join(',');
-        const nome = document.getElementById('nome').value;
-        const horarioExpediente = document.getElementById('horarioexpediente').value;
-        const localDeTrabalho = document.getElementById('localdetrabalho').value;
 
         // Envia as datas selecionadas via AJAX
         const xhr = new XMLHttpRequest();
@@ -251,13 +200,14 @@ function enviarDatas() {
                 }
             }
         };
-        xhr.open('POST', 'sec/cria_coletadados.php', true);
+        xhr.open('POST', 'sec/pesquisa_coletaescala.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(`dates=${selectedDatesStr}&nome=${nome}&horarioexpediente=${horarioExpediente}&localdetrabalho=${localDeTrabalho}`);
+        xhr.send(`dates=${selectedDatesStr}`);
     } else {
         selectedDatesElement.textContent = 'Nenhuma data selecionada.';
     }
 }
+
 
 // Gera o calendário inicial
 generateCalendar(currentMonth, currentYear);

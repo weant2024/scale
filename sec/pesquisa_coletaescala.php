@@ -83,7 +83,7 @@
                                                 break;
                                         }            
 ?>
-                            <a href='editarescala.php?id=<?php echo "$id_escalahorario"; ?>'>
+                            <a href='editarturno.php?id=<?php echo "$id_escalahorario"; ?>'>
 <?php
                             echo "Nome: $nome_usuarioescalado </br>";  
                             echo "Data: $escaladia/$escalames/$escalaano </br>";   

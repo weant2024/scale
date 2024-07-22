@@ -70,22 +70,19 @@ case 6: $semana = "Sábado"; break;
 ?>
 
 <?php
-if ($nivelusuario == 3){
-    $pnivel = 'Administrador';
-}
-elseif  ($nivelusuario == 2){
-    $pnivel = 'Gestor';
-}
-elseif  ($nivelusuario == 1){
-    $pnivel = 'Usuario';
+switch ($nivelusuario) {
+
+    case 1: $pnivel = "Usuario"; break;
+    case 2: $pnivel = "Gestor"; break; 
+
 }
 ?>
 <?php
-if ($ativousuario == 1){
-    $pativo = 'Ativado';
-}
-elseif  ($ativousuario == 0){
-    $pativo = 'Desativado';
+switch ($ativousuario) {
+
+    case 0: $pativo = "Desativado"; break;
+    case 1: $pativo = "Ativo"; break; 
+
 }
 ?>
 
@@ -133,7 +130,7 @@ if (!$stmt->execute()) {
     die('Erro na execução da query: ' . $stmt->error);
 }
 
-$idusuario = $stmt->insert_id;
+$retorno_idusuario = $stmt->insert_id;
 
 // Preparando a segunda query
 $query1 = "INSERT INTO registrousuario (id_usuario, login, senha, nome, cpf, nascimento, genero, email, telefone, departamento, cargo, nivel, pnivel, ativo, pativo, gerasenha, horario, dia, semana, mes, ano, operador) 
@@ -145,10 +142,60 @@ if ($stmt1 === false) {
     die('Erro na preparação da query1: ' . $conn->error);
 }
 
-$stmt1->bind_param("isssssssssssssssssssss", $idusuario, $login, $criptografadacpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt1->bind_param("isssssssssssssssssssss", $retorno_idusuario, $login, $criptografadacpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt1->execute()) {
     die('Erro na execução da query1: ' . $stmt1->error);
+}
+?>
+
+<?php
+// Receber os contratos selecionados
+$contratos = isset($_POST['contratos']) ? $_POST['contratos'] : [];
+
+// Sanitizar e processar os IDs dos contratos
+$contratos = array_map('intval', $contratos);
+
+$query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
+    $resultado_validacao_licenca = $conn->query($query_validacao_licenca);
+        $dados_validacao_licenca = $resultado_validacao_licenca->fetch_assoc();              
+            $tipo_cliente_validacao_licenca = $dados_validacao_licenca['tipo']; 
+            $id_pagamento_validacao_licenca = $dados_validacao_licenca['id_pagamento'];  
+            $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente'];           
+
+// Query para relação de profissionais x cliente x contrato    
+foreach ($contratos as $contrato) {
+
+    $query_ricc = "INSERT INTO relacao_cliente (id_usuario, id_contrato, id_cliente) 
+        VALUES (?, ?, ?)";
+        
+            $stmt_ricc = $conn->prepare($query_ricc);
+        
+                if ($stmt_ricc === false) {
+                    die('Erro na preparação da query: ' . $conn->error);
+                }
+        
+                    $stmt_ricc->bind_param("iii",  $retorno_idusuario, $contrato, $id_cliente_validacao_licenca);
+        
+                        if (!$stmt_ricc->execute()) {
+                            die('Erro na execução da query: ' . $stmt_ricc->error);
+                        }
+}
+
+// Query para licença do usuário cadastrado
+$query = "INSERT INTO licenca (tipo, id_cliente, id_usuario, id_pagamento) 
+VALUES (?, ?, ?, ?)";
+
+$stmt = $conn->prepare($query);
+
+if ($stmt === false) {
+    die('Erro na preparação da query: ' . $conn->error);
+}
+
+$stmt->bind_param("iiii", $tipo_cliente_validacao_licenca, $id_cliente_validacao_licenca, $retorno_idusuario, $id_pagamento_validacao_licenca);
+
+if (!$stmt->execute()) {
+    die('Erro na execução da query: ' . $stmt->error);
 }
 
 $stmt->close();
