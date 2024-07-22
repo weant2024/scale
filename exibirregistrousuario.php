@@ -35,6 +35,7 @@ if ($nivel < 2) {
         border: 1px solid #bee5eb;
         border-radius: 5px;
         text-align: center; /* Centraliza o texto da mensagem */
+        color: #000; /* Define a cor do texto como preta */
     }
 
     .user-details .date-info {
