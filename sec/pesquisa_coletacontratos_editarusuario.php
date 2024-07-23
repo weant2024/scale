@@ -5,7 +5,7 @@
     $resultado_validacao_contrato = $conn->query($query_validacao_contrato);
     if ($resultado_validacao_contrato->num_rows > 0){
         while($dados_validacao_contrato = $resultado_validacao_contrato->fetch_assoc()){
-            $id_cliente_validacao_contrato = $dados_validacao_contrato['id_cliente'];                  
+            $id_contrato_validacao_contrato = $dados_validacao_contrato['id_contrato'];                  
 
             $query_contrato = "SELECT * FROM contrato WHERE id = '$id_contrato_validacao_contrato'";
             $resultado_contrato = $conn->query($query_contrato);
@@ -21,8 +21,7 @@
                                 type="checkbox"
                                 name="contratos[]"
                                 value="' . $id_contrato . '"
-                                class="selectgroup-input contratos"
-                                onchange="setCheckboxChanged()"
+                                class="selectgroup-input contratos"                                
                     ';
 
                     $query_validacao_relacao_cliente_contrato = "SELECT * FROM relacao_cliente WHERE id_usuario = '$id' AND id_contrato = '$id_contrato'";

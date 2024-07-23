@@ -11,11 +11,16 @@ if ( $nivel < 2 )
             <?php
 
               $id = $_GET['id'];
+              
+              $query_registro_usuario = "SELECT * FROM registrousuario WHERE id = '$id'";
+                $resultado_registro_usuario = $conn->query($query_registro_usuario);
+                    $dados_registro_usuario = $resultado_registro_usuario->fetch_assoc();
+                        $id_usuario_registro_usuario = $dados_registro_usuario['id_usuario'];
 
-              $query_get_licenca = "SELECT * FROM licenca WHERE id_usuario = '$id'";
+              $query_get_licenca = "SELECT * FROM licenca WHERE id_usuario = '$id_usuario_registro_usuario'";
                 $resultado_get_licenca = $conn->query($query_get_licenca);
                     $dados_get_licenca = $resultado_get_licenca->fetch_assoc();  
-                    $id_cliente_get_licenca = $dados_get_licenca['id_cliente']; 
+                        $id_cliente_get_licenca = $dados_get_licenca['id_cliente']; 
 
                 if (($id_cliente_vdl_licenca <> $id_cliente_get_licenca) && ($nivel < 3 ) && ($tipo_vdl_licenca < 6)){
                     echo "VOCÊ NÃO TEM PERMISSÃO!";

@@ -225,16 +225,16 @@ include "sec/sec_verifica.php";
                     </li>
                     <li>
                       <a data-bs-toggle="collapse" href="#subnav3">
-                        <span class="sub-item">Logs</span>
+                        <span class="sub-item">Auditoria</span>
                         <span class="caret"></span>
                       </a>
                       <div class="collapse" id="subnav3">
                         <ul class="nav nav-collapse subnav">
                           <li>
                             <a href="registrousuario.php">
-                              <span class="sub-item">Auditoria</span>
+                              <span class="sub-item">Log de Usuários</span>
                             </a>
-                          </li>
+                          </li>                          
                         </ul>
                       </div>
                     </li>

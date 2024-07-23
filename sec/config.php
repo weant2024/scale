@@ -12,10 +12,10 @@ if ($conn->connect_error) {
 ?>
 
 <?php
-$urllogin = "http://localhost/scale/login.php";
-$urlzabbix = "http://localhost/scale/login.php";
-$urlgrafana = "http://localhost/scale/login.php";
-$urlitsm = "http://localhost/scale/login.php";
+$urllogin = "http://3.21.89.6/login.php";
+$urlzabbix = "http://3.21.89.6/login.php";
+$urlgrafana = "http://3.21.89.6/login.php";
+$urlitsm = "http://3.21.89.6/login.php";
 @$criptografada = md5($senha);
 @$criptografadacpf = md5($rg);
 ?>

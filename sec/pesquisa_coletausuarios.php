@@ -13,7 +13,7 @@ include "sec_verifica.php";
                         while ($dados_coleta_usuarios = $resultado_coleta_usuarios->fetch_assoc()) {
                                 $id_coleta_usuarios = $dados_coleta_usuarios['id_usuario'];                       
 
-                            $query_validacao_usuario = "SELECT * FROM usuario WHERE id = '$id_coleta_usuarios' AND nivel = 1";
+                            $query_validacao_usuario = "SELECT * FROM usuario WHERE id = '$id_coleta_usuarios'";
                                 $resultado_validacao_usuario = $conn->query($query_validacao_usuario);
                                     while ($dados_validacao_usuario = $resultado_validacao_usuario->fetch_assoc()) {
                                         $id_validacao_usuario = $dados_validacao_usuario['id'];

@@ -99,7 +99,7 @@ if ($senhaatual == $senha) {
     echo "<script>alert( '$msg ' );; window.location = '../meu_perfil.php';</script>";
 }
 else {
-    header("Location: ../inicial.php"); exit;
+    header("Location: ../meu_perfil_senhainvalida.php"); exit;
 }
 ?>
 

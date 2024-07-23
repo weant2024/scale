@@ -84,6 +84,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if (!$stmt_local->execute()) {
                             die('Erro na execução da query: ' . $stmt_local->error);
                         }
+
+                        $retorno_idlocal = $stmt_local->insert_id;
+
+                            $query_relacao_contrato = "INSERT INTO relacao_contrato (id_cliente, id_contrato, id_local) 
+                            VALUES (?,?,?)";
+                            
+                                $stmt_relacao_contrato = $conn->prepare($query_relacao_contrato);
+                            
+                                    if ($stmt_relacao_contrato === false) {
+                                        die('Erro na preparação da query: ' . $conn->error);
+                                    }
+                            
+                                        $stmt_relacao_contrato->bind_param("iii", $id_cliente, $retorno_idcontrato, $retorno_idlocal);
+                            
+                                            if (!$stmt_relacao_contrato->execute()) {
+                                                die('Erro na execução da query: ' . $stmt_relacao_contratol->error);
+                                            }
     }
 
     $msg = "Contrato criado com sucesso!";

@@ -86,16 +86,16 @@ elseif  ($ativousuario == 0){
 }
 ?>
 <?php
-// $query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `genero`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$nascimento', '$genero', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
-// $result1 = $conn->query($query1);
+$query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `genero`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$nascimento', '$genero', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
+$result1 = $conn->query($query1);
 
-// $query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$nascimento', genero='$genero', email='$email', telefone='$telefone', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
-// $result2 = $conn->query($query2);
+$query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$nascimento', genero='$genero', email='$email', telefone='$telefone', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
+$result2 = $conn->query($query2);
 
-// $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
-//     $resultado_validacao_licenca = $conn->query($query_validacao_licenca);
-//         $dados_validacao_licenca = $resultado_validacao_licenca->fetch_assoc();  
-//             $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente']; 
+$query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
+    $resultado_validacao_licenca = $conn->query($query_validacao_licenca);
+        $dados_validacao_licenca = $resultado_validacao_licenca->fetch_assoc();  
+            $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente']; 
 
 $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
     $resultado_validacao_licenca = $conn->query($query_validacao_licenca);

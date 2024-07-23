@@ -28,14 +28,14 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
     <div class="form-group">
         <label>Status:</label><br />
         <div class="d-flex">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="1" checked/>
-            <label class="form-check-label" for="1">Ativado</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="0"/>
-            <label class="form-check-label" for="0">Desativado</label>
-        </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="1" checked/>
+                <label class="form-check-label" for="1">Ativado</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="statuscontrato" id="statuscontrato" value="0"/>
+                <label class="form-check-label" for="0">Desativado</label>
+            </div>
         </div>
     </div>
 
@@ -78,17 +78,6 @@ function addInput() {
     `;
     document.getElementById('dynamic-inputs').appendChild(newInputDiv);
 }
-
-function removeSpecificInput(id) {
-    const dynamicInputs = document.getElementById('dynamic-inputs');
-    const inputToRemove = document.getElementById(`local${id}`).parentNode.parentNode;
-    if (inputToRemove) {
-        dynamicInputs.removeChild(inputToRemove);
-        inputCount--;
-    }
-}
-
-
 
 function removeSpecificInput(id) {
     const dynamicInputs = document.getElementById('dynamic-inputs');

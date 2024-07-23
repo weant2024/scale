@@ -149,11 +149,19 @@ $operador = $dados["operador"];
 
   <div class="form-group password-form">                   
     <form method="POST" action="sec/alterarsenha.php"> 
-      <input type="pass" name="senhaatual" placeholder="Senha atual">
+      <input type="pass" name="senhaatual" placeholder="Senha atual" autofocus="true">
       <input type="pass" name="senhanova" placeholder="Nova senha">
-      <button class="botao" type="submit">Alterar senha</button>
+      <div style="color: red;">Senha não confere!</div> </br> 
+      <button class="botao" type="submit">Alterar senha</button>      
     </form>                    
   </div>
+
+  <script>
+        // Rola a página até o final quando ela é carregada
+        window.onload = function() {
+            window.scrollTo(0, document.body.scrollHeight);
+        };
+  </script>
   <!-- FINALIZA CONTEÚDO -->
 </div>
 
