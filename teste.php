@@ -115,6 +115,11 @@
             return Array.from(dates).sort();
         }
 
+        function generateRandomSchedule() {
+            const schedules = ['08:00 - 16:00', '09:00 - 17:00', '10:00 - 18:00', '11:00 - 19:00'];
+            return schedules[Math.floor(Math.random() * schedules.length)];
+        }
+
         function generateCalendar() {
             const table = document.getElementById('calendarTable');
             let dates = getDatesInRange(dateRanges);
@@ -128,7 +133,7 @@
             users.forEach(user => {
                 let row = `<tr><td>${user}</td>`;
                 dates.forEach(() => {
-                    row += '<td></td>'; // Células vazias para o conteúdo dos usuários
+                    row += `<td>${generateRandomSchedule()}</td>`; // Adiciona horário fictício para cada célula
                 });
                 row += '</tr>';
                 table.innerHTML += row;
@@ -168,15 +173,10 @@
             const endDateInput = document.getElementById('endDateInput').value;
             
             if (startDateInput && endDateInput) {
-                const index = dateRanges.findIndex(range => range.start === startDateInput);
-                if (index !== -1) {
-                    dateRanges[index] = { start: startDateInput, end: endDateInput };
-                    generateCalendar();
-                } else {
-                    alert('Intervalo de datas não encontrado.');
-                }
+                dateRanges = [{ start: startDateInput, end: endDateInput }];
+                generateCalendar();
             } else {
-                alert('Dados inválidos.');
+                alert('Intervalo de datas inválido.');
             }
         }
 
@@ -189,7 +189,7 @@
         function getCurrentWeek() {
             const today = new Date();
             const start = new Date(today);
-            start.setDate(today.getDate() - today.getDay());
+            start.setDate(today.getDate() - today.getDay() + 1); // Ajuste para começar na segunda-feira
             const end = new Date(start);
             end.setDate(start.getDate() + 6);
 
