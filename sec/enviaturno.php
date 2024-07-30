@@ -162,7 +162,7 @@ case 6: $semana = "Sábado"; break;
 $nomeprofissional = $dados2['nome'];
 
 $msg = "Escala para $nomeprofissional criada com sucesso!";
-echo "<script>alert( '$msg' );; window.location = '../criarescala.php';</script>";                
+echo "<script>alert( '$msg' );; window.location = '../criarturno.php';</script>";                
 ?>
 
 

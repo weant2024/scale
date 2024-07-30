@@ -36,6 +36,7 @@ include "sec/sec_verifica.php";
     <link rel="stylesheet" href="assets/css/calendario.css" />
     <link rel="stylesheet" href="assets/css/usuarios.css" />
     <link rel="stylesheet" href="assets/css/contratos.css" />
+    <link rel="stylesheet" href="assets/css/geral.css" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
@@ -112,6 +113,28 @@ include "sec/sec_verifica.php";
                         </ul>
                       </div>
                     </li>
+
+                    <li>
+                      <a data-bs-toggle="collapse" href="#afastamento">
+                        <span class="sub-item">Afastamento</span>
+                        <span class="caret"></span>
+                      </a>
+                      <div class="collapse" id="afastamento">
+                        <ul class="nav nav-collapse subnav">
+                          <li>
+                            <a href="criarafastamentousuario.php">
+                              <span class="sub-item">Criar Afastamento</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="pesquisarafastamento.php">
+                              <span class="sub-item">Pesquisar Afastamento</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+
                   </ul>
                 </div>
               </li>

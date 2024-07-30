@@ -5,7 +5,7 @@ if ( $nivel < 2 )
 {
 	header("Location: sec_tipo.php"); exit;
 }
-$idrecebido = $_GET['id'];
+$id_usuario_selecionado = $_POST['nome'];
 $motivo = $_POST["motivo"];
 $datainicial = $_POST['datainicial'];
     $enviardatainicial = explode("-", $datainicial);
@@ -28,6 +28,22 @@ $datafinal = $_POST['datafinal'];
 
     // Monta a data no formato DD/MM/AAAA
     $enviardatafinaltratado = "$enviadiadatafinal/$enviamesdatafinal/$enviaanodatafinal";
+
+// Cria objetos DateTime para as datas inicial e final
+$dataInicialObj = new DateTime($datainicial);
+$dataFinalObj = new DateTime($datafinal);
+
+// Cria um intervalo de 1 dia
+$intervalo = new DateInterval('P1D');
+
+// Cria um período de datas baseado nas datas inicial e final
+$periodo = new DatePeriod($dataInicialObj, $intervalo, $dataFinalObj->modify('+1 day'));
+
+// Itera sobre o período e pega os dias no intervalo
+$diasNoIntervalo = [];
+foreach ($periodo as $data) {
+    $diasNoIntervalo[] = $data->format('d/m/Y');
+}
 
 $horario = date('H:i:s');
 $dia = date('d');
@@ -69,6 +85,20 @@ case 6: $semana = "Sábado"; break;
 }
 ?>
 
+<?php
+// // Exibe os dias no intervalo
+// foreach ($diasNoIntervalo as $dia) {
+//     echo $dia . "<br>";
+//      // Separar o dia, o mês e o ano
+//      list($diaSeparado, $mesSeparado, $anoSeparado) = explode('/', $dia);
+    
+//      // Exibe o dia, o mês e o ano separados
+//      echo "Dia: " . $diaSeparado . "<br>";
+//      echo "Mês: " . $mesSeparado . "<br>";
+//      echo "Ano: " . $anoSeparado . "<br><br>";
+// }
+?>
+
 
 <?php
 // Supondo que a conexão com o banco de dados está em $conn
@@ -83,18 +113,18 @@ if ($stmt === false) {
     die('Erro na preparação da query: ' . $conn->error);
 }
 
-$stmt->bind_param("isss", $idrecebido, $motivo, $enviardatainicialtratado, $enviardatafinaltratado);
+$stmt->bind_param("isss", $id_usuario_selecionado, $motivo, $enviardatainicialtratado, $enviardatafinaltratado);
 
 if (!$stmt->execute()) {
     die('Erro na execução da query: ' . $stmt->error);
 }
 
-$idusuario = $stmt->insert_id;
+$id_afastamento = $stmt->insert_id;
 
 
 // Preparando a segunda query
-$query1 = "INSERT INTO registroafastamento (id_usuario, motivo, datanicial, datafinal, loghorario, logdia, logsemana, logmes, logano, operador) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query1 = "INSERT INTO registroafastamento (id_afastamento, id_usuario, motivo, datanicial, datafinal, loghorario, logdia, logsemana, logmes, logano, operador) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt1 = $conn->prepare($query1);
 
@@ -102,17 +132,65 @@ if ($stmt1 === false) {
     die('Erro na preparação da query1: ' . $conn->error);
 }
 
-$stmt1->bind_param("isssssssss", $idrecebido, $motivo, $enviardatainicialtratado, $enviardatafinaltratado, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt1->bind_param("iisssssssss", $id_afastamento, $id_usuario_selecionado, $motivo, $enviardatainicialtratado, $enviardatafinaltratado, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt1->execute()) {
     die('Erro na execução da query1: ' . $stmt1->error);
+}
+?>
+
+
+
+<?php
+// Exibe os dias no intervalo
+foreach ($diasNoIntervalo as $dia) {
+    // Separar o dia, o mês e o ano
+    list($diaSeparado, $mesSeparado, $anoSeparado) = explode('/', $dia);  
+    $null_campos = "afastado";
+
+        // Preparando a primeira de escala
+        $query = "INSERT INTO escala (id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, operador) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($query);
+
+        if ($stmt === false) {
+            die('Erro na preparação da query: ' . $conn->error);
+        }
+
+        $stmt->bind_param("iisssssssss", $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $operador);
+
+        if (!$stmt->execute()) {
+            die('Erro na execução da query: ' . $stmt->error);
+        }
+
+        $id_escala = $stmt->insert_id;
+
+
+        // Preparando a segunda query
+        $query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt1 = $conn->prepare($query1);
+
+        if ($stmt1 === false) {
+            die('Erro na preparação da query1: ' . $conn->error);
+        }
+
+        $stmt1->bind_param("iiissssssssssssss", $id_escala, $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $horario, $dia, $semana, $mes, $ano, $operador);
+
+        if (!$stmt1->execute()) {
+            die('Erro na execução da query1: ' . $stmt1->error);
+        }
+
 }
 
 $stmt->close();
 $stmt1->close();
 
+
 $msg = "Afastamento registrado com sucesso!";
-echo "<script>alert( '$msg' );; window.location = '../afastamentousuario.php';</script>";
+echo "<script>alert( '$msg' );; window.location = '../criarafastamentousuario.php';</script>";
 ?>
 
 

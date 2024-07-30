@@ -314,7 +314,7 @@ else {
         <div class="form-group" align="center">                                   
             <button class="botao" type="submit">EDITAR USUÁRIO</button>
             <button class="botao" type="button" onclick="redirectTo('sec/enviarsenhausuario.php', <?php echo $dados['id']; ?>)">GERAR NOVA SENHA</button>
-            <button class="botao" type="button" onclick="redirectTo('afastamentousuario.php', <?php echo $dados['id']; ?>)">CADASTRAR AFASTAMENTO</button>                         
+            <!-- <button class="botao" type="button" onclick="redirectTo('afastamentousuario.php', <?php echo $dados['id']; ?>)">CADASTRAR AFASTAMENTO</button>                          -->
         </div>
     </form>
 

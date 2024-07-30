@@ -1,215 +1,82 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário com Usuários</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+<?php 
+include "tudo_cima.php";
+if ($nivel < 2) {
+    header("Location: sem_acesso.php"); exit;
+}
+?>
 
-        h1 {
-            background-color: #2a2f5b;
-            color: #fff;
-            padding: 20px;
-            margin: 0;
-        }
+<!-- INICIA CONTEÚDO -->   
 
-        .container {
-            padding: 20px;
-        }
+<form method="POST" action="teste3.php">
 
-        .input-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-            align-items: center;
-        }
+    <div class="form-group">
+        <label>Selecione o(s) contrato(s):</label>
+        <div class="d-flex">            
+            <div class="selectgroup selectgroup-pills">
+                <?php
+                $query_validacao_contrato = "SELECT * FROM relacao_cliente WHERE id_usuario = '$idlogado'";
+                $resultado_validacao_contrato = $conn->query($query_validacao_contrato);
+                if ($resultado_validacao_contrato->num_rows > 0) {
+                    while ($dados_validacao_contrato = $resultado_validacao_contrato->fetch_assoc()) {
+                        $id_contrato_validacao_contrato = $dados_validacao_contrato['id_contrato'];
 
-        button {
-            background-color: #2a2f5b;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+                        $query_contrato = "SELECT * FROM contrato WHERE id = '$id_contrato_validacao_contrato'";
+                        $resultado_contrato = $conn->query($query_contrato);
+                        if ($resultado_contrato->num_rows > 0) {
+                            while ($dados_contrato = $resultado_contrato->fetch_assoc()) {
+                                $id_contrato = $dados_contrato['id'];
+                                $nome_contrato = $dados_contrato['nome'];
 
-        button:hover {
-            background-color: #8800ff;
-        }
-
-        input[type="text"], input[type="date"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 150px;
-            box-sizing: border-box;
-            transition: background-color 0.3s;
-        }
-
-        input[type="text"]:hover, input[type="date"]:hover {
-            background-color: #8800ff;
-            color: #fff;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-            background-color: #fff;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
-</head>
-<body>
-    <h1>Calendário de Usuários</h1>
-    <div class="container">
-        <div class="input-container">
-            <input type="date" id="startDateInput" placeholder="Início (DD/MM/AAAA)" />
-            <input type="date" id="endDateInput" placeholder="Fim (DD/MM/AAAA)" />
-            <button id="addRemoveButton" onclick="handleAddRemove()">Adicionar Intervalo Personalizado</button>
-            <button onclick="updateDateRange()">Atualizar Intervalo</button>
+                                echo '
+                                <label class="selectgroup-item">
+                                    <input
+                                        type="checkbox"
+                                        name="contratos[]"
+                                        value="' . $id_contrato . '"
+                                        class="selectgroup-input contratos"
+                                    />
+                                    <span class="selectgroup-button">' . $nome_contrato . '</span>
+                                </label>
+                                ';
+                            }
+                        } else {
+                            echo "<b style='color:red'>Nenhum contrato vinculado ao usuário logado</b>";
+                        }
+                    }
+                } else {
+                    echo "<b style='color:red'>Nenhum contrato vinculado ao usuário logado</b>";
+                }
+                ?>
+            </div>
         </div>
-
-        <table id="calendarTable">
-            <!-- O conteúdo da tabela será gerado pelo JavaScript -->
-        </table>
     </div>
 
-    <script>
-        let dateRanges = [];
-        const users = ['Usuário 1', 'Usuário 2', 'Usuário 3'];
+    <div class="form-group">
+        <label>Selecione o(s) profissional(is):</label>
+        <div class="d-flex">        
+            <div class="selectgroup selectgroup-pills">
+                <div id="profissionais-container">
+                    <!-- Profissionais serão carregados aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-        function getToday() {
-            const today = new Date();
-            return today.toLocaleDateString('pt-BR');
-        }
+    <div id="conteudo-contratos">
+        <!-- Conteúdo do PHP será carregado aqui -->
+    </div>
 
-        function getDatesInRange(ranges) {
-            let dates = new Set();
-            ranges.forEach(range => {
-                let start = new Date(range.start.split('-').join('/'));
-                let end = new Date(range.end.split('-').join('/'));
-                while (start <= end) {
-                    dates.add(start.toLocaleDateString('pt-BR'));
-                    start.setDate(start.getDate() + 1);
-                }
-            });
-            return Array.from(dates).sort();
-        }
+    <script src="assets/js/calendario.js"></script>
+    <script src="assets/js/carregar-contrato-usuario.js"></script>
+    
+    <div class="form-group">
+        <button type="submit">SELECIONAR</button>
+    </div>
 
-        function generateRandomSchedule() {
-            const schedules = ['08:00 - 16:00', '09:00 - 17:00', '10:00 - 18:00', '11:00 - 19:00'];
-            return schedules[Math.floor(Math.random() * schedules.length)];
-        }
+</form>
 
-        function generateCalendar() {
-            const table = document.getElementById('calendarTable');
-            let dates = getDatesInRange(dateRanges);
-            let headerRow = '<tr><th>Usuários</th>';
-            dates.forEach(date => {
-                headerRow += `<th>${date}</th>`;
-            });
-            headerRow += '</tr>';
-            table.innerHTML = headerRow;
+<!-- FINALIZA CONTEÚDO -->  
 
-            users.forEach(user => {
-                let row = `<tr><td>${user}</td>`;
-                dates.forEach(() => {
-                    row += `<td>${generateRandomSchedule()}</td>`; // Adiciona horário fictício para cada célula
-                });
-                row += '</tr>';
-                table.innerHTML += row;
-            });
-        }
-
-        function handleAddRemove() {
-            const startDateInput = document.getElementById('startDateInput').value;
-            const endDateInput = document.getElementById('endDateInput').value;
-            const button = document.getElementById('addRemoveButton');
-            if (startDateInput && endDateInput) {
-                const exists = dateRanges.some(range => range.start === startDateInput && range.end === endDateInput);
-                if (exists) {
-                    removeCustomDateRange(startDateInput, endDateInput);
-                    button.textContent = "Adicionar Intervalo Personalizado";
-                } else {
-                    addCustomDateRange(startDateInput, endDateInput);
-                    button.textContent = "Remover Intervalo Personalizado";
-                }
-            } else {
-                alert('Intervalo de datas inválido.');
-            }
-        }
-
-        function addCustomDateRange(start, end) {
-            dateRanges.push({ start, end });
-            generateCalendar();
-        }
-
-        function removeCustomDateRange(start, end) {
-            dateRanges = dateRanges.filter(range => range.start !== start || range.end !== end);
-            generateCalendar();
-        }
-
-        function updateDateRange() {
-            const startDateInput = document.getElementById('startDateInput').value;
-            const endDateInput = document.getElementById('endDateInput').value;
-            
-            if (startDateInput && endDateInput) {
-                dateRanges = [{ start: startDateInput, end: endDateInput }];
-                generateCalendar();
-            } else {
-                alert('Intervalo de datas inválido.');
-            }
-        }
-
-        function initializeCalendar() {
-            const { start, end } = getCurrentWeek();
-            dateRanges.push({ start, end });
-            generateCalendar();
-        }
-
-        function getCurrentWeek() {
-            const today = new Date();
-            const start = new Date(today);
-            start.setDate(today.getDate() - today.getDay() + 1); // Ajuste para começar na segunda-feira
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6);
-
-            return { start: start.toLocaleDateString('pt-BR'), end: end.toLocaleDateString('pt-BR') };
-        }
-
-        initializeCalendar();
-
-        document.getElementById('startDateInput').addEventListener('input', updateButtonState);
-        document.getElementById('endDateInput').addEventListener('input', updateButtonState);
-
-        function updateButtonState() {
-            const startDateInput = document.getElementById('startDateInput').value;
-            const endDateInput = document.getElementById('endDateInput').value;
-            const button = document.getElementById('addRemoveButton');
-            if (startDateInput && endDateInput) {
-                const exists = dateRanges.some(range => range.start === startDateInput && range.end === endDateInput);
-                button.textContent = exists ? "Remover Intervalo Personalizado" : "Adicionar Intervalo Personalizado";
-            }
-        }
-    </script>
-</body>
-</html>
+<?php
+include "tudo_baixo.php";
+?>
