@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 ?>
 
 <?php
-$urllogin = "http://3.21.89.6/login.php";
+$urllogin = "http://localhost/login.php";
 $urlzabbix = "http://3.21.89.6/login.php";
 $urlgrafana = "http://3.21.89.6/login.php";
 $urlitsm = "http://3.21.89.6/login.php";

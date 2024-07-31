@@ -32,11 +32,11 @@ CREATE TABLE `afastamento` (
 --
 
 INSERT INTO `afastamento` (`id`, `id_usuario`, `motivo`, `datainicial`, `datafinal`) VALUES
-(1, 1, 'Licença', '14/11/2024', '15/11/2024'),
-(2, 1, 'Atestado', '03/07/2024', '10/07/2024'),
-(6, 1, 'Férias', '12/07/2024', '12/08/2024'),
-(7, 1, 'Folga', '21/07/2024', '21/07/2024'),
-(8, 1, 'Folga', '04/08/2024', '04/08/2024');
+(1, 1, 'Atestado1', '06/07/2024', '07/07/2024'),
+(2, 11, 'Licença paternidade', '01/07/2024', '06/07/2024'),
+(3, 11, 'Atestado', '30/07/2024', '01/08/2024'),
+(4, 6, 'Atestado', '10/07/2024', '19/07/2024'),
+(5, 15, 'Licença paternidade', '01/07/2024', '06/07/2024');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,10 @@ CREATE TABLE `contrato` (
 --
 
 INSERT INTO `contrato` (`id`, `nome`, `status`) VALUES
-(1, 'Ragnarok', 1);
+(1, 'Ragnarok', 1),
+(2, 'Las Vegas', 1),
+(3, 'Ragnarok', 1),
+(4, 'Ragnarok2', 1);
 
 -- --------------------------------------------------------
 
@@ -86,6 +89,7 @@ INSERT INTO `contrato` (`id`, `nome`, `status`) VALUES
 CREATE TABLE `escala` (
   `id` int(11) NOT NULL,
   `id_usuario` varchar(60) NOT NULL,
+  `id_afastamento` int(11) NOT NULL,
   `horarioinicio` varchar(60) NOT NULL,
   `intervaloinicio` varchar(60) NOT NULL,
   `intervalofim` varchar(60) NOT NULL,
@@ -101,17 +105,37 @@ CREATE TABLE `escala` (
 -- Despejando dados para a tabela `escala`
 --
 
-INSERT INTO `escala` (`id`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `operador`) VALUES
-(1, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(2, '10', '07:00:00', '10:00:00', '10:15:00', '13:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(3, '9', '13:00:00', '16:00:00', '16:15:00', '19:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(4, '6', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', 'admin'),
-(5, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', 'admin'),
-(6, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '03', '07', '2024', 'admin'),
-(7, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '04', '07', '2024', 'admin'),
-(8, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '05', '07', '2024', 'admin'),
-(9, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '06', '07', '2024', 'admin'),
-(10, '6', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '14', '11', '2024', 'admin');
+INSERT INTO `escala` (`id`, `id_usuario`, `id_afastamento`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `operador`) VALUES
+(7, '1', 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', 'alessandro.albuquerque'),
+(8, '1', 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '07', '07', '2024', 'alessandro.albuquerque'),
+(9, '1', 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', 'alessandro.albuquerque'),
+(10, '1', 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', 'alessandro.albuquerque'),
+(11, '1', 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '10', '07', '2024', 'alessandro.albuquerque'),
+(12, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '07', '2024', 'freya.ragnarok'),
+(13, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '07', '2024', 'freya.ragnarok'),
+(14, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '07', '2024', 'freya.ragnarok'),
+(15, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '07', '2024', 'freya.ragnarok'),
+(16, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '07', '2024', 'freya.ragnarok'),
+(17, '11', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', 'freya.ragnarok'),
+(18, '11', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '07', '2024', 'freya.ragnarok'),
+(19, '11', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '07', '2024', 'freya.ragnarok'),
+(20, '11', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '08', '2024', 'freya.ragnarok'),
+(21, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '10', '07', '2024', 'alessandro.albuquerque'),
+(22, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '11', '07', '2024', 'alessandro.albuquerque'),
+(23, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '12', '07', '2024', 'alessandro.albuquerque'),
+(24, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '13', '07', '2024', 'alessandro.albuquerque'),
+(25, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '14', '07', '2024', 'alessandro.albuquerque'),
+(26, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '15', '07', '2024', 'alessandro.albuquerque'),
+(27, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '16', '07', '2024', 'alessandro.albuquerque'),
+(28, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '17', '07', '2024', 'alessandro.albuquerque'),
+(29, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '18', '07', '2024', 'alessandro.albuquerque'),
+(30, '6', 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '19', '07', '2024', 'alessandro.albuquerque'),
+(31, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '07', '2024', 'freya.ragnarok'),
+(32, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '07', '2024', 'freya.ragnarok'),
+(33, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '07', '2024', 'freya.ragnarok'),
+(34, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '07', '2024', 'freya.ragnarok'),
+(35, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '07', '2024', 'freya.ragnarok'),
+(36, '15', 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -186,7 +210,17 @@ INSERT INTO `local` (`id`, `nome`, `id_contrato`) VALUES
 (5, 'Álfheim', 1),
 (6, 'Jotunheim', 1),
 (7, 'Svartalfheim', 1),
-(8, 'Niflheim', 1);
+(8, 'Niflheim', 1),
+(9, 'Cassino Royale', 2),
+(10, 'Hotel Grand Life', 2),
+(11, 'Asgard', 3),
+(12, 'Midgard', 3),
+(13, 'Niflheim', 3),
+(14, 'Jotunheim', 3),
+(15, 'Svartalfheim', 3),
+(16, 'Asgard2', 4),
+(17, 'Midgard2', 4),
+(18, 'Niflheim2', 4);
 
 -- --------------------------------------------------------
 
@@ -226,6 +260,7 @@ INSERT INTO `pagamento` (`id`, `cnpj_cpf`, `token`, `diasativo`, `horario`, `dia
 
 CREATE TABLE `registroafastamento` (
   `id` int(11) NOT NULL,
+  `id_afastamento` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `motivo` varchar(60) NOT NULL,
   `datanicial` varchar(60) NOT NULL,
@@ -242,11 +277,13 @@ CREATE TABLE `registroafastamento` (
 -- Despejando dados para a tabela `registroafastamento`
 --
 
-INSERT INTO `registroafastamento` (`id`, `id_usuario`, `motivo`, `datanicial`, `datafinal`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
-(1, 1, 'Doidera', '', '', '23:16:40', '02', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
-(2, 1, 'Doidera2', '03/07/2024', '09/07/2024', '23:35:13', '02', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
-(3, 1, 'asdawdasdw', '03/07/2024', '10/07/2024', '20:43:46', '03', 'Quarta', 'Julho', '2024', 'alessandro.albuquerque'),
-(4, 1, 'Férias', '12/07/2024', '12/08/2024', '15:02:48', '04', 'Quinta', 'Julho', '2024', 'alessandro.albuquerque');
+INSERT INTO `registroafastamento` (`id`, `id_afastamento`, `id_usuario`, `motivo`, `datanicial`, `datafinal`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
+(1, 1, 1, 'Atestado', '01/07/2024', '06/07/2024', '06:27:41', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(2, 1, 1, 'Atestado1', '06/07/2024', '07/07/2024', '06:28:09', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(3, 2, 11, 'Licença paternidade', '01/07/2024', '06/07/2024', '06:31:48', '30', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(4, 3, 11, 'Atestado', '30/07/2024', '01/08/2024', '06:54:39', '30', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(5, 4, 6, 'Atestado', '10/07/2024', '19/07/2024', '06:58:34', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(6, 5, 15, 'Licença paternidade', '01/07/2024', '06/07/2024', '06:59:57', '30', 'Terça', 'Julho', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -276,6 +313,7 @@ CREATE TABLE `registroescala` (
   `id` int(11) NOT NULL,
   `id_escala` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
+  `id_afastamento` int(11) NOT NULL,
   `horarioinicio` varchar(60) NOT NULL,
   `intervaloinicio` varchar(60) NOT NULL,
   `intervalofim` varchar(60) NOT NULL,
@@ -296,18 +334,43 @@ CREATE TABLE `registroescala` (
 -- Despejando dados para a tabela `registroescala`
 --
 
-INSERT INTO `registroescala` (`id`, `id_escala`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
-(1, 1, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '01:59:55', '16', 'Terça', 'Julho', '2024', 'admin'),
-(2, 2, 10, '07:00:00', '10:00:00', '10:15:00', '13:00:00', 'TJ', '01', '07', '2024', '02:00:06', '16', 'Terça', 'Julho', '2024', 'admin'),
-(3, 3, 9, '13:00:00', '16:00:00', '16:15:00', '19:00:00', 'TJ', '01', '07', '2024', '02:00:18', '16', 'Terça', 'Julho', '2024', 'admin'),
-(4, 4, 6, '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', '02:00:25', '16', 'Terça', 'Julho', '2024', 'admin'),
-(5, 5, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
-(6, 6, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '03', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
-(7, 7, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '04', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
-(8, 8, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '05', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
-(9, 9, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '06', '07', '2024', '03:04:30', '16', 'Terça', 'Julho', '2024', 'admin'),
-(10, 1, 1, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '03:15:24', '16', 'Terça', 'Julho', '2024', 'admin'),
-(11, 10, 6, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '14', '11', '2024', '05:47:05', '16', 'Terça', 'Julho', '2024', 'admin');
+INSERT INTO `registroescala` (`id`, `id_escala`, `id_usuario`, `id_afastamento`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
+(1, 1, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '07', '2024', '06:27:41', '01/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(2, 2, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '07', '2024', '06:27:41', '02/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(3, 3, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '07', '2024', '06:27:41', '03/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(4, 4, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '07', '2024', '06:27:41', '04/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(5, 5, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '07', '2024', '06:27:41', '05/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(6, 6, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', '06:27:41', '06/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(7, 7, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', '06:28:09', '06/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(8, 8, 1, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '07', '07', '2024', '06:28:09', '07/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(9, 9, 1, 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '06:29:19', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(10, 10, 1, 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', '06:29:19', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(11, 11, 1, 0, '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '10', '07', '2024', '06:29:19', '30', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(12, 12, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '07', '2024', '06:31:48', '01/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(13, 13, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '07', '2024', '06:31:48', '02/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(14, 14, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '07', '2024', '06:31:48', '03/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(15, 15, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '07', '2024', '06:31:48', '04/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(16, 16, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '07', '2024', '06:31:48', '05/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(17, 17, 11, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', '06:31:48', '06/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(18, 18, 11, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '07', '2024', '06:54:39', '30/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(19, 19, 11, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '07', '2024', '06:54:39', '31/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(20, 20, 11, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '08', '2024', '06:54:39', '01/08/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(21, 21, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '10', '07', '2024', '06:58:34', '10/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(22, 22, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '11', '07', '2024', '06:58:34', '11/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(23, 23, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '12', '07', '2024', '06:58:34', '12/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(24, 24, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '13', '07', '2024', '06:58:34', '13/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(25, 25, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '14', '07', '2024', '06:58:34', '14/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(26, 26, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '15', '07', '2024', '06:58:34', '15/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(27, 27, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '16', '07', '2024', '06:58:34', '16/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(28, 28, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '17', '07', '2024', '06:58:34', '17/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(29, 29, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '18', '07', '2024', '06:58:34', '18/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(30, 30, 6, 4, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '19', '07', '2024', '06:58:34', '19/07/2024', 'Terça', 'Julho', '2024', 'alessandro.albuquerque'),
+(31, 31, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '07', '2024', '06:59:57', '01/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(32, 32, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '07', '2024', '06:59:57', '02/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(33, 33, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '07', '2024', '06:59:57', '03/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(34, 34, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '07', '2024', '06:59:57', '04/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(35, 35, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '07', '2024', '06:59:57', '05/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok'),
+(36, 36, 15, 5, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '07', '2024', '06:59:57', '06/07/2024', 'Terça', 'Julho', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -393,11 +456,19 @@ CREATE TABLE `relacao_cliente` (
 --
 
 INSERT INTO `relacao_cliente` (`id`, `id_usuario`, `id_contrato`, `id_cliente`) VALUES
-(21, 11, 1, 2),
-(22, 12, 1, 2),
-(23, 13, 1, 2),
-(24, 14, 1, 2),
-(25, 32, 1, 2);
+(26, 1, 1, 1),
+(27, 1, 2, 1),
+(28, 6, 2, 1),
+(29, 10, 2, 1),
+(36, 12, 4, 2),
+(37, 13, 4, 2),
+(38, 14, 4, 2),
+(39, 32, 4, 2),
+(40, 11, 3, 2),
+(41, 13, 3, 2),
+(42, 14, 3, 2),
+(43, 32, 3, 2),
+(44, 15, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -417,11 +488,54 @@ CREATE TABLE `relacao_contrato` (
 --
 
 INSERT INTO `relacao_contrato` (`id`, `id_cliente`, `id_contrato`, `id_local`) VALUES
-(12, 2, 1, 1),
-(13, 2, 1, 2),
-(14, 2, 1, 6),
-(15, 2, 1, 7),
-(16, 2, 1, 8);
+(17, 1, 2, 9),
+(18, 1, 2, 10),
+(24, 2, 4, 16),
+(25, 2, 4, 17),
+(26, 2, 4, 18),
+(27, 2, 3, 11),
+(28, 2, 3, 12),
+(29, 2, 3, 13),
+(30, 2, 3, 14),
+(31, 2, 3, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `teste`
+--
+
+CREATE TABLE `teste` (
+  `id` int(11) NOT NULL,
+  `id_usuario` varchar(60) NOT NULL,
+  `horarioinicio` varchar(60) NOT NULL,
+  `intervaloinicio` varchar(60) NOT NULL,
+  `intervalofim` varchar(60) NOT NULL,
+  `horariofim` varchar(60) NOT NULL,
+  `local` varchar(60) NOT NULL,
+  `dia` varchar(60) NOT NULL,
+  `mes` varchar(60) NOT NULL,
+  `ano` varchar(60) NOT NULL,
+  `motivo` varchar(60) NOT NULL,
+  `operador` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Despejando dados para a tabela `teste`
+--
+
+INSERT INTO `teste` (`id`, `id_usuario`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `motivo`, `operador`) VALUES
+(1, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '01', '07', '2024', '', 'admin'),
+(2, '10', '07:00:00', '10:00:00', '10:15:00', '13:00:00', 'TJ', '01', '07', '2024', '', 'admin'),
+(3, '9', '13:00:00', '16:00:00', '16:15:00', '19:00:00', 'TJ', '01', '07', '2024', '', 'admin'),
+(4, '6', '19:00:00', '21:00:00', '21:15:00', '01:00:00', 'TJ', '01', '07', '2024', '', 'admin'),
+(5, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '02', '07', '2024', '', 'admin'),
+(6, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '03', '07', '2024', '', 'admin'),
+(7, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '04', '07', '2024', '', 'admin'),
+(8, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '05', '07', '2024', '', 'admin'),
+(9, '1', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '06', '07', '2024', '', 'admin'),
+(10, '6', '01:00:00', '04:00:00', '04:15:00', '07:00:00', 'TJ', '14', '11', '2024', '', 'admin'),
+(11, '1', '123', '123', '123', '123', 'teste', '30', '07', '2024', 'Folga', 'teste');
 
 -- --------------------------------------------------------
 
@@ -562,6 +676,12 @@ ALTER TABLE `relacao_contrato`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `teste`
+--
+ALTER TABLE `teste`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -575,7 +695,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `afastamento`
 --
 ALTER TABLE `afastamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
@@ -587,13 +707,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `contrato`
 --
 ALTER TABLE `contrato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `escala`
 --
 ALTER TABLE `escala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `jornada`
@@ -611,7 +731,7 @@ ALTER TABLE `licenca`
 -- AUTO_INCREMENT de tabela `local`
 --
 ALTER TABLE `local`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
@@ -623,7 +743,7 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT de tabela `registroafastamento`
 --
 ALTER TABLE `registroafastamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `registrocontrato`
@@ -635,7 +755,7 @@ ALTER TABLE `registrocontrato`
 -- AUTO_INCREMENT de tabela `registroescala`
 --
 ALTER TABLE `registroescala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `registrousuario`
@@ -647,13 +767,19 @@ ALTER TABLE `registrousuario`
 -- AUTO_INCREMENT de tabela `relacao_cliente`
 --
 ALTER TABLE `relacao_cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de tabela `relacao_contrato`
 --
 ALTER TABLE `relacao_contrato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de tabela `teste`
+--
+ALTER TABLE `teste`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`

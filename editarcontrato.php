@@ -37,6 +37,15 @@ $querycontrato = $conn->query($sqlcontrato);
 $dadoscontrato = $querycontrato->fetch_assoc();         
 $nomecontrato = $dadoscontrato["nome"];
 $statuscontrato = $dadoscontrato['status'];
+
+ $query_validacao_rlc_cliente = "SELECT * FROM relacao_cliente WHERE id_contrato = $id";
+              $result_validacao_rlc_cliente = $conn->query($query_validacao_rlc_cliente);
+                $dados_afastamento_validacao_rlc_cliente = $result_validacao_rlc_cliente->fetch_assoc();
+                  $id_cliente_validacao_rlc_cliente = $dados_afastamento_validacao_rlc_cliente['id_cliente'];
+
+                  if (($id_cliente_vdl_licenca != $id_cliente_validacao_rlc_cliente) && ($tipo_vdl_licenca < 6)) {
+                    echo "VOCÊ NÃO TEM PERMISSÃO";
+                  } else {
 ?>
 
 <form method="POST" action='sec/atualizarcontrato.php?id=<?php echo $id; ?>'>
@@ -183,6 +192,10 @@ $statuscontrato = $dadoscontrato['status'];
         <button class="botao" type="submit">EDITAR CONTRATO</button>                                
     </div>
 </form>
+
+<?php
+}
+?>
 
 <!-- FINALIZA CONTEÚDO -->  
 

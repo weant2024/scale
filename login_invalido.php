@@ -13,12 +13,8 @@
     session_start(); // Inicia a sessão
     session_destroy(); // Destrói a sessão limpando todos os valores salvos
 
-    include "sec/config.php"; 
-    include "sec/data.php"; 
-
-    if ($dias < 1){
-        header ("Location: sec/pagamento.php"); exit;
-    }
+    include "sec/config.php";     
+    
     ?>    
 </head>
 <body>

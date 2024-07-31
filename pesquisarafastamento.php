@@ -94,7 +94,7 @@ if ($nivel < 2) {
       <option value="data">Data</option>   
     </select>                
     <input type="text" name="palavra" id="palavra"/> 
-    <input type="submit" Value="Pesquisar"/>
+    <input type="submit" value="Pesquisar"/>
   </form>               
 </div>
 
@@ -115,33 +115,56 @@ function formatDate($date) {
   return '';
 }
 
-// Base da consulta para obter usuários com afastamento
-$busca_query = "SELECT u.*, a.motivo, a.datainicial, a.datafinal
-                FROM usuario u
-                JOIN afastamento a ON u.id = a.id_usuario";
-
-// Adiciona a condição de filtro, se necessário
-if (!empty($filtro) && !empty($busca)) {
-  if ($filtro == 'nome') {
-    $busca_query .= " WHERE u.nome LIKE '%$busca%'";
-  } elseif ($filtro == 'motivo') {
-    $busca_query .= " WHERE a.motivo LIKE '%$busca%'";
-  } elseif ($filtro == 'data') {
-    $data_formatada = formatDate($busca);
-    if ($data_formatada) {
-      $busca_query .= " WHERE STR_TO_DATE('$data_formatada', '%Y-%m-%d') BETWEEN STR_TO_DATE(a.datainicial, '%d/%m/%Y') AND STR_TO_DATE(a.datafinal, '%d/%m/%Y')";
+if (($nivel > 2 ) && ($tipo_vdl_licenca > 5)){
+  // Base da consulta para obter usuários com afastamento
+  $busca_query = "SELECT u.*, a.motivo, a.datainicial, a.datafinal
+                  FROM usuario u
+                  JOIN afastamento a ON u.id = a.id_usuario";
+  
+  // Adiciona a condição de filtro, se necessário
+  if (!empty($filtro) && !empty($busca)) {
+    if ($filtro == 'nome') {
+      $busca_query .= " WHERE u.nome LIKE '%$busca%'";
+    } elseif ($filtro == 'motivo') {
+      $busca_query .= " WHERE a.motivo LIKE '%$busca%'";
+    } elseif ($filtro == 'data') {
+      $data_formatada = formatDate($busca);
+      if ($data_formatada) {
+        $busca_query .= " WHERE STR_TO_DATE('$data_formatada', '%Y-%m-%d') BETWEEN STR_TO_DATE(a.datainicial, '%d/%m/%Y') AND STR_TO_DATE(a.datafinal, '%d/%m/%Y')";
+      }
     }
   }
+  
+  $busca_query .= " ORDER BY u.id DESC";
+} else {
+  // Base da consulta para obter usuários com afastamento
+  $busca_query = "SELECT u.*, a.motivo, a.datainicial, a.datafinal
+                  FROM usuario u
+                  JOIN afastamento a ON u.id = a.id_usuario
+                  JOIN relacao_cliente r ON r.id_usuario = u.id
+                  WHERE r.id_cliente = $id_cliente_vdl_licenca";
+  
+  // Adiciona a condição de filtro, se necessário
+  if (!empty($filtro) && !empty($busca)) {
+    if ($filtro == 'nome') {
+      $busca_query .= " AND u.nome LIKE '%$busca%'";
+    } elseif ($filtro == 'motivo') {
+      $busca_query .= " AND a.motivo LIKE '%$busca%'";
+    } elseif ($filtro == 'data') {
+      $data_formatada = formatDate($busca);
+      if ($data_formatada) {
+        $busca_query .= " AND STR_TO_DATE('$data_formatada', '%Y-%m-%d') BETWEEN STR_TO_DATE(a.datainicial, '%d/%m/%Y') AND STR_TO_DATE(a.datafinal, '%d/%m/%Y')";
+      }
+    }
+  }
+  
+  $busca_query .= " ORDER BY u.id DESC";
 }
 
-$busca_query .= " ORDER BY u.id DESC";
-
 $result = $conn->query($busca_query);
-
-if ($result->num_rows < 1) {
-  echo "<p>Nenhum registro encontrado.</p>";
-} else {
+if ($result->num_rows > 0) {    
 ?>
+
 <div id="croll-container">
   <table class="legenda">
     <tr>
@@ -154,7 +177,6 @@ if ($result->num_rows < 1) {
       $query_afastamento = "SELECT * FROM afastamento WHERE id_usuario = " . $dados['id'] . "";
         $result_afastamento = $conn->query($query_afastamento);
           $dados_afatasmento = $result_afastamento->fetch_assoc();
-
       echo '<tr>';
       echo '<td><a href="editarafastamento.php?id=' . $dados_afatasmento['id'] . '">' . $dados['nome'] . '</a></td>';
       echo '<td>' . $dados['motivo'] . '</td>';
@@ -173,7 +195,9 @@ if ($result->num_rows < 1) {
 </div>
 
 <?php
-} 
+} else {
+  echo "<p>Nenhum registro encontrado.</p>";
+}
 ?>
 
 <!-- FINALIZA CONTEÚDO -->  

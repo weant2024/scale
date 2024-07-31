@@ -54,6 +54,8 @@ else {
     $cpf = $dados["cpf"];
     $telefone = $dados["telefone"];
     $nascimento = $dados["nascimento"];  
+        $date = DateTime::createFromFormat('d/m/Y', $nascimento);
+        $formattedDate = $date->format('Y-m-d');
     $genero = $dados["genero"];             
     $email = $dados["email"];
     $cargo = $dados["cargo"];
@@ -93,7 +95,7 @@ else {
         </script>
 
         <div class="form-group">
-            <label for="nome">Nome:</label>
+            <label for="nome"><b>Nome:</b></label>
             <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $nome;?>"/>
         </div>
         <script>
@@ -112,7 +114,7 @@ else {
 
 
         <div class="form-group">
-            <label for="cpf">CPF:</label>
+            <label for="cpf"><b>CPF:</b></label>
             <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $cpf;?>"/>
         </div>
         <script>
@@ -131,7 +133,7 @@ else {
 
 
         <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email"><b>Email:</b></label>
             <input type="text" name="email" id="email" class="form-control" value="<?php echo $email;?>"/>
         </div>
         <script>
@@ -150,7 +152,7 @@ else {
 
 
         <div class="form-group">
-            <label for="telefone">Celular:</label>
+            <label for="telefone"><b>Celular:</b></label>
             <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(xx) xxxxx-xxxx" value="<?php echo $telefone;?>"/>
         </div>
         <script>
@@ -171,12 +173,12 @@ else {
 
 
         <div class="form-group">
-            <label for="nascimento">Data de Nascimento:</label>
-            <input type="text" name="nascimento" id="nascimento" class="form-control" value="<?php echo $nascimento;?>"/>
+            <label for="nascimento"><b>Data de Nascimento:</b></label>
+            <input type="date" name="nascimento" id="nascimento" class="form-control" value="<?php echo $formattedDate;?>"/>
         </div>
         <script>
             const nascimentoInput = document.getElementById('nascimento');
-            const nascimento = '<?php echo $nascimento; ?>'; // Substitua com o valor PHP adequado
+            const nascimento = '<?php echo $formattedDate; ?>'; // Substitua com o valor PHP adequado
 
             function checknascimento() {
                 if (nascimentoInput.value !== nascimento) {
@@ -192,7 +194,7 @@ else {
         
 
         <div class="form-group">
-            <label>Gênero:</label>
+            <label><b>Gênero:</b></label>
             <div class="d-flex">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="genero" id="generoMasculino" value="Masculino" <?php if ($genero == "Masculino") echo "checked"; ?>/>
@@ -232,7 +234,7 @@ else {
         
 
         <div class="form-group">
-            <label>Nível:</label><br />
+            <label><b>Nível:</b></label><br />
             <div class="d-flex">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="nivelusuario" id="nivelusuario" value="1" <?php if ($nivelusuario == "1") echo 'checked'; ?>/>
@@ -268,7 +270,7 @@ else {
 
             
         <div class="form-group">
-            <label>Status:</label><br />
+            <label><b>Status:</b></label><br />
             <div class="d-flex">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="ativousuario" id="ativousuario" value="1" <?php if ($ativousuario == "1") echo 'checked'; ?>/>
@@ -304,7 +306,7 @@ else {
 
         <input type="hidden" name="checkbox_changed" id="checkbox_changed" value="no">
         <div class="form-group">
-            <label>Vincule ao(s) contrato(s):</label>
+            <label><b>Vincule ao(s) contrato(s):</b></label>
             <div class="d-flex">               
                 <?php include 'sec/pesquisa_coletacontratos_editarusuario.php'; ?>       
             </div>

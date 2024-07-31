@@ -81,6 +81,10 @@ if ($nivel < 2) {
   }
 </style>
 
+<p align="center">
+    <b>LOG DE USUÁRIOS</b>
+</p>
+
 <div class="search-form">
   <form action="" method="post" style="display: flex; width: 100%;">
     <select name="filtro">

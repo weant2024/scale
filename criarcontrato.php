@@ -17,7 +17,7 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
             $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente']; 
 ?>
 
-<form method='post' action='sec/enviarcontrato.php?cliente=<?php echo "$id_cliente_validacao_licenca"; ?>' class="user-form">
+<form method='post' action='sec/enviarcontrato.php' class="user-form">
     <div class="form-group">
         <label for="contrato">Nome do Contrato:</label>
         <div style="display: flex; align-items: center;">
@@ -56,6 +56,8 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
 
     <div class="form-group"> 
     </div>
+
+    <input type="hidden" value="<?php echo "$id_cliente_validacao_licenca"; ?>">
     
     <div class="form-group">                    
         <button class="botao" type="submit">CADASTRAR CONTRATO</button>                    

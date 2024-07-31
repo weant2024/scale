@@ -119,16 +119,16 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = $id_validac
        header("Location: login_semlicenca.php"); exit; 
     }
 
+    if ($resultado['ativo'] == 0) {
+        header("Location: ../login_desativado.php"); exit;
+    }
+
     if ($dias > 0){
     // Redireciona o visitante
       header("Location: ../inicial.php"); exit;
     }
     else {
       header("Location: ../pagamento.php"); exit;
-    }
-
-    if ($resultado['ativo'] == 0) {
-      header("Location: ../login_desativado.php"); exit;
     }
 
 } else {

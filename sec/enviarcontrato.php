@@ -6,7 +6,7 @@ if ( $nivel < 2 )
 	header("Location: sec_tipo.php"); exit;
 }
 
-$id_cliente = $_GET['cliente'];
+$id_cliente = $_POST['cliente'];
 
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

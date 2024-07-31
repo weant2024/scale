@@ -21,6 +21,15 @@ $cpf = $_POST["cpf"];
 $email = $_POST["email"];
 $telefone = $_POST["telefone"];
 $nascimento = $_POST["nascimento"];
+    $enviarnascimento = explode("-", $nascimento);
+
+    // Pega o ano, mês e dia
+    $enviaanonascimento = $enviarnascimento[0];
+    $enviamesnascimento = $enviarnascimento[1];
+    $enviadianascimento = $enviarnascimento[2];
+
+    // Monta a data no formato DD/MM/AAAA
+    $enviaaniversario = "$enviadianascimento/$enviamesnascimento/$enviaanonascimento";
 $genero = $_POST['genero'];
 $nivelusuario = $_POST['nivelusuario'];
 $ativousuario = $_POST['ativousuario'];
@@ -67,14 +76,15 @@ case 6: $semana = "Sábado"; break;
 }
 ?>
 <?php
-if ($nivelusuario == 3){
-    $pnivel = 'Administrador';
-}
-elseif  ($nivelusuario == 2){
+if  ($nivelusuario == 2){
     $pnivel = 'Gestor';
 }
 elseif  ($nivelusuario == 1){
     $pnivel = 'Usuario';
+}
+else {
+    $nivelusuario = '3';
+    $pnivel = 'Administrador';
 }
 ?>
 <?php
@@ -86,10 +96,10 @@ elseif  ($ativousuario == 0){
 }
 ?>
 <?php
-$query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `genero`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$nascimento', '$genero', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
+$query1 = "INSERT INTO registrousuario ( `id_usuario` , `login` , `senha` , `nome` , `cpf` , `nascimento`, `genero`, `email` , `telefone` , `departamento` , `cargo` , `nivel` , `pnivel` , `ativo` , `pativo` , `gerasenha` , `horario` , `dia` , `semana` , `mes` , `ano` , `operador` ) VALUES ( '$id', '$login', '$criptografada', '$nome', '$cpf', '$enviaaniversario', '$genero', '$email', '$telefone', '$departamentousuario', '$cargousuario', '$nivelusuario', '$pnivel', '$ativousuario', '$pativo', '$gerasenha', '$horario', '$dia', '$semana', '$mes', '$ano', '$operador' )";
 $result1 = $conn->query($query1);
 
-$query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$nascimento', genero='$genero', email='$email', telefone='$telefone', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
+$query2 = "UPDATE usuario SET login='$login', nome='$nome', cpf='$cpf', nascimento='$enviaaniversario', genero='$genero', email='$email', telefone='$telefone', nivel='$nivelusuario', pnivel='$pnivel', ativo='$ativousuario', pativo='$pativo', gerasenha='$gerasenha' WHERE id='$id'"; 
 $result2 = $conn->query($query2);
 
 $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";

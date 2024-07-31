@@ -9,7 +9,7 @@ include "sec_verifica.php";
 
                     $query_contrato = "SELECT * FROM contrato WHERE id = '$id_contrato_validacao_contrato'";
                         $resultado_contrato = $conn->query($query_contrato);
-                        if ($resultado_contrato->num_rows >0){
+                        if ($resultado_contrato->num_rows > 0){
                             while ($dados_contrato = $resultado_contrato->fetch_assoc()) {
                                 $id_contrato = $dados_contrato['id'];
                                 $nome_contrato = $dados_contrato['nome'];
@@ -46,7 +46,7 @@ include "sec_verifica.php";
                                 
                             }
                         } else {
-                            echo "Nenhum local cadastrado para esse(s) contrato(s)";
+                            echo "Nenhum contrato cadastrado";
                         }
             }
         }

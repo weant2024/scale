@@ -124,7 +124,7 @@ if ($stmt === false) {
     die('Erro na preparação da query: ' . $conn->error);
 }
 
-$stmt->bind_param("sssssssssssssssssssss", $login, $cpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt->bind_param("sssssssssssssssssssss", $login, $cpf, $nome, $cpf, $enviaaniversario, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt->execute()) {
     die('Erro na execução da query: ' . $stmt->error);
@@ -142,7 +142,7 @@ if ($stmt1 === false) {
     die('Erro na preparação da query1: ' . $conn->error);
 }
 
-$stmt1->bind_param("isssssssssssssssssssss", $retorno_idusuario, $login, $criptografadacpf, $nome, $cpf, $nascimento, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt1->bind_param("isssssssssssssssssssss", $retorno_idusuario, $login, $criptografadacpf, $nome, $cpf, $enviaaniversario, $genero, $email, $telefone, $departamento, $cargo, $nivelusuario, $pnivel, $ativousuario, $pativo, $gerasenha, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt1->execute()) {
     die('Erro na execução da query1: ' . $stmt1->error);

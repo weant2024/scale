@@ -43,7 +43,7 @@
                     }
                 }
             } else {
-                echo "Nenhum local cadastrado para esse(s) contrato(s)";
+                echo "Nenhum contrato cadastrado";
             }
         }
     }

@@ -32,4 +32,10 @@ $query_vdl_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
     $dados_vdl_licenca = $resultado_vdl_licenca->fetch_assoc();  
       $id_cliente_vdl_licenca = $dados_vdl_licenca['id_cliente']; 
       $tipo_vdl_licenca = $dados_vdl_licenca['tipo']; 
+
+        $query_vdl_cliente = "SELECT * FROM cliente WHERE id = '$id_cliente_vdl_licenca'";
+          $resultado_vdl_cliente = $conn->query($query_vdl_cliente);
+            $dados_vdl_cliente = $resultado_vdl_cliente->fetch_assoc();  
+              $nome_cliente_vdl_cliente = $dados_vdl_cliente['cnpj_cpf']; 
+               
 ?>

@@ -18,7 +18,17 @@ if ( $nivel < 2 )
 
                         $datainicial = DateTime::createFromFormat('d/m/Y', $dados_afastamento['datainicial']);
                         $datafinal = DateTime::createFromFormat('d/m/Y', $dados_afastamento['datafinal']);
+            
+            $query_validacao_rlc_cliente = "SELECT * FROM licenca WHERE id_usuario = " . $dados_afastamento["id_usuario"] . "";
+              $result_validacao_rlc_cliente = $conn->query($query_validacao_rlc_cliente);
+                $dados_afastamento_validacao_rlc_cliente = $result_validacao_rlc_cliente->fetch_assoc();
+                  $id_cliente_validacao_rlc_cliente = $dados_afastamento_validacao_rlc_cliente['id_cliente'];
+
+                  if (($id_cliente_vdl_licenca != $id_cliente_validacao_rlc_cliente) && ($tipo_vdl_licenca < 6)) {
+                    echo "VOCÊ NÃO TEM PERMISSÃO";
+                  } else {
             ?>
+
 
             <p align="center">
               <b>EDITAR DE AFASTAMENTO</b>
@@ -54,6 +64,9 @@ if ( $nivel < 2 )
               <input type="hidden" name="id_usuario" value="<?php echo $dados_afastamento["id_usuario"]?>">              
            </form>
 
+            <?php
+                }
+            ?>
             <!-- FINALIZA CONTEÚDO -->  
 
 <?php

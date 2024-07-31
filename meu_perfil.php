@@ -137,12 +137,13 @@ $operador = $dados["operador"];
                         $nome_contrato = $dados_contrato['nome'];
                         echo "$nome_contrato </br>"; 
                     }
-                }
+                } else {
+                  echo "Usuário sem vínculo com contrato(s)";
+              }
             }
         } else {
-            echo "Nenhum contrato vinculado";
-        }
-        
+            echo "Usuário sem vínculo com cliente";
+        }        
       ?>
     </div>
   </div>
