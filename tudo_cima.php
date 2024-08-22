@@ -89,8 +89,8 @@ include "sec/sec_verifica.php";
                 <div class="collapse" id="escala">
                   <ul class="nav nav-collapse">                           
                     <li>
-                      <a href="pesquisaescala.php">
-                        <span class="sub-item">Pesquisar Escala</span>
+                      <a href="escala_semanal.php">
+                        <span class="sub-item">Escala Semanal</span>
                       </a>
                     </li>
                     <li>

@@ -138,7 +138,7 @@ if (($nivel > 2 ) && ($tipo_vdl_licenca > 5)){
   $busca_query .= " ORDER BY u.id DESC";
 } else {
   // Base da consulta para obter usuários com afastamento
-  $busca_query = "SELECT u.*, a.motivo, a.datainicial, a.datafinal
+  $busca_query = "SELECT DISTINCT u.*, a.motivo, a.datainicial, a.datafinal
                   FROM usuario u
                   JOIN afastamento a ON u.id = a.id_usuario
                   JOIN relacao_cliente r ON r.id_usuario = u.id

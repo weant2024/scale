@@ -57,7 +57,7 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
     <div class="form-group"> 
     </div>
 
-    <input type="hidden" value="<?php echo "$id_cliente_validacao_licenca"; ?>">
+    <input type="hidden" name="cliente" value="<?php echo "$id_cliente_validacao_licenca"; ?>">
     
     <div class="form-group">                    
         <button class="botao" type="submit">CADASTRAR CONTRATO</button>                    
