@@ -1,9 +1,18 @@
-<?php
-include "tudo_cima.php"; 
-?>
-            <!-- INICIA CONTEÚDO --> 
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Funcionários</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
         h1 {
             text-align: center;
             background-color: #2a2f5b;
@@ -12,7 +21,7 @@ include "tudo_cima.php";
             margin: 0;
         }
 
-        .conteudo {
+        .container {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 20px;
@@ -93,7 +102,7 @@ include "tudo_cima.php";
             color: #777;
         }
 
-        .button-conteudo {
+        .button-container {
             text-align: center;
             margin: 20px 0;
         }
@@ -113,7 +122,7 @@ include "tudo_cima.php";
             background-color: #8800ff;
         }
 
-        .navigation-conteudo {
+        .navigation-container {
             text-align: center;
             margin: 20px 0;
         }
@@ -145,120 +154,149 @@ include "tudo_cima.php";
         }
        
     </style>
-    <p align="center">
-     <b>ESCALA SEMANAL</b>
-    </p>
-
-
-    <div class="navigation-conteudo">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<h1>Escala Semanal</h1>
+    <div class="button-container">
+        <button class="button" onclick="sendWhatsApp()">Enviar via WhatsApp</button>
+        <button class="button" onclick="sendEmail()">Enviar via Email</button>
+        <button class="button" onclick="generatePDF()">Gerar PDF</button>
+    </div>
+    <div class="navigation-container">
         <button class="button" onclick="showPreviousWeek()">Semana Anterior</button>
         <button class="button" onclick="showNextWeek()">Próxima Semana</button>
     </div>
-    <div class="conteudo" id="weekContainer">
+    <div class="container" id="weekContainer">
         <!-- Conteúdo da semana será gerado dinamicamente -->
     </div>
+    <div class="button-container">
+        <button class="button" onclick="showMonthSchedule()">Mostrar Escala do Mês Completo</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Weant</p>
+    </footer>
 
     <script>
-    const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-    let currentWeekStart = new Date();
+        const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+        let currentWeekStart = new Date();
 
-    // Ajusta a data para a última segunda-feira
-    function adjustToMonday(date) {
-        const day = date.getDay();
-        const difference = (day === 0 ? -6 : 1) - day; // Ajusta para segunda (1) ou domingo (0)
-        date.setDate(date.getDate() + difference);
-        return date;
-    }
+        function sendWhatsApp() {
+            const schedule = getScheduleText();
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(schedule)}`;
+            window.open(url, '_blank');
+        }
 
-    currentWeekStart = adjustToMonday(new Date());
+        function sendEmail() {
+            const schedule = getScheduleText();
+            const subject = "Escala Semanal de Funcionários";
+            const body = encodeURIComponent(schedule);
+            const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
 
-    function getScheduleText() {
-        let schedule = "Escala semanal:\n";
-        employees.forEach(employee => {
-            if (employee.schedule.includes('afastado')) {
-                schedule += `${employee.name}: ${employee.schedule}\n`;
-            } else {
+        function generatePDF() {
+            const element = document.getElementById('weekContainer');
+            const options = {
+                margin: [20, 20, 20, 20],
+                filename: 'escala_semanal.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'px', format: [2100, 1200], orientation: 'landscape' }
+            };
+
+            html2pdf().from(element).set(options).toPdf().get('pdf').then(function(pdf) {
+                const title = 'Escala Semanal de Funcionários';
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const titleWidth = pdf.getTextWidth(title);
+                const titleX = (pageWidth - titleWidth) / 2;
+                pdf.setFontSize(22);
+                pdf.text(title, titleX, 50);
+                pdf.save();
+            });
+        }
+
+        function getScheduleText() {
+            let schedule = "Escala semanal:\n";
+            employees.forEach(employee => {
                 schedule += `${employee.name}: ${employee.schedule} | ${employee.location}\n`;
-            }
-        });
-        return schedule;
-    }
+            });
+            return schedule;
+        }
 
-    function showPreviousWeek() {
-        currentWeekStart.setDate(currentWeekStart.getDate() - 7);
-        generateWeek();
-    }
+        function showPreviousWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            generateWeek();
+        }
 
-    function showNextWeek() {
-        currentWeekStart.setDate(currentWeekStart.getDate() + 7);
-        generateWeek();
-    }
+        function showNextWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            generateWeek();
+        }
 
-    function generateWeek() {
-        const weekContainer = document.getElementById('weekContainer');
-        weekContainer.innerHTML = '';
+        function generateWeek() {
+            const weekContainer = document.getElementById('weekContainer');
+            weekContainer.innerHTML = '';
 
-        fetch(`sec/get_employee_schedule.php?start_date=${formatDate(currentWeekStart)}&end_date=${formatDate(addDays(currentWeekStart, 6))}`)
-            .then(response => response.json())
-            .then(data => {
-                for (let i = 0; i < 7; i++) {
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'day';
-                    const dayName = daysOfWeek[i];
-                    const date = new Date(currentWeekStart);
-                    date.setDate(currentWeekStart.getDate() + i);
-                    const dateString = date.toLocaleDateString('pt-BR');
-                    const dateLink = `criarturno_link.php?data=${dateString}`;
-                    dayElement.innerHTML = `<h2><a href="${dateLink}" class="date-link">${dayName}</a></h2><h2>${dateString}</h2>`;
+            fetch(`sec/get_employee_schedule.php?start_date=${formatDate(currentWeekStart)}&end_date=${formatDate(addDays(currentWeekStart, 6))}`)
+                .then(response => response.json())
+                .then(data => {
+                    for (let i = 0; i < 7; i++) {
+                        const dayElement = document.createElement('div');
+                        dayElement.className = 'day';
+                        const dayName = daysOfWeek[i];
+                        const date = new Date(currentWeekStart);
+                        date.setDate(currentWeekStart.getDate() + i);
+                        const dateString = date.toLocaleDateString('pt-BR');
+                        const dateLink = `criarturno_link.php?data=${dateString}`;
+                        dayElement.innerHTML = `<h2><a href="${dateLink}" class="date-link">${dayName}</a></h2><h2>${dateString}</h2>`;
 
-                    data.forEach(employee => {
-                        if (employee.date === dateString) {
-                            const employeeElement = document.createElement('div');
-                            employeeElement.className = 'employee';
-                            const avatar = `<div class="avatar">${employee.name[0]}</div>`;
+                        data.forEach(employee => {
+                            if (employee.date === dateString) {
+                                const employeeElement = document.createElement('div');
+                                employeeElement.className = 'employee';
+                                const avatar = `<div class="avatar">${employee.name[0]}</div>`;
 
-                            let scheduleLink;
-                            if (employee.schedule.includes('afastado')) {
-                                scheduleLink = `<a href="editarafastamento_link.php?id=${employee.id}&data=${dateString}" class="employee-schedule">${employee.schedule}</a>`;
-                            } else {
-                                scheduleLink = `<a href="editarafastamento_link.php?id=${employee.id}&data=${dateString}" class="employee-schedule">${employee.schedule} | ${employee.location}</a>`;
+                                let scheduleLink;
+                                if (employee.motivo_afastamento) {
+                                    scheduleLink = `<a href="editarafastamento_link.php?id=${employee.id}&data=${dateString}" class="employee-schedule">${employee.schedule}</a>`;
+                                } else {
+                                    scheduleLink = `<a href="editarturno_link.php?id=${employee.id}" class="employee-schedule">${employee.schedule} | ${employee.location}</a>`;
+                                }
+
+                                const employeeDetails = `
+                                    <div>
+                                        <span class="employee-name">${employee.name}</span>
+                                        ${scheduleLink}
+                                    </div>`;
+                                employeeElement.innerHTML = avatar + employeeDetails;
+                                dayElement.appendChild(employeeElement);
                             }
+                        });
 
-                            const employeeDetails = `
-                                <div>
-                                    <span class="employee-name">${employee.name}</span>
-                                    ${scheduleLink}
-                                </div>`;
-                            employeeElement.innerHTML = avatar + employeeDetails;
-                            dayElement.appendChild(employeeElement);
-                        }
-                    });
+                        weekContainer.appendChild(dayElement);
+                    }
+                })
+                .catch(error => console.error('Error fetching employee schedule:', error));
+        }
 
-                    weekContainer.appendChild(dayElement);
-                }
-            })
-            .catch(error => console.error('Error fetching employee schedule:', error));
-    }
+        function showMonthSchedule() {
+            alert('Mostrando escala do mês completo...');
+        }
 
-    function formatDate(date) {
-        return date.toISOString().split('T')[0];
-    }
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
 
-    function addDays(date, days) {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    }
+        function addDays(date, days) {
+            const result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
 
-    // Inicializar a semana ajustada para segunda-feira
-    generateWeek();
-</script>
-
-
-<!-- FINALIZA CONTEÚDO -->  
-          </div>
-        </div>
-
-<?php
-include "tudo_baixo.php"; 
-?>
+        // Inicializar a semana atual
+        generateWeek();
+    </script>
+</body>
+</html>

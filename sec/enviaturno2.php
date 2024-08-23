@@ -9,7 +9,7 @@ if ( $nivel < 2 )
 $data = $_POST['data'];
 list($escaladia, $escalames, $escalaano) = explode("/", $data);
 
-$contrato = $_POST['id_exibe_contratos'];
+$id_contrato = $_POST['id_exibe_contratos'];
 $localdetrabalho = $_POST['localdetrabalho'];
 $profissional = $_POST['profissional'];
 #$cargousuario = $_POST["cargousuario"];
@@ -123,8 +123,8 @@ $fimIntervaloFormatado = $fimIntervalo->format('H:i');
 <?php
 
 // Preparando a primeira query
-$query = "INSERT INTO escala (id_usuario, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, operador) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO escala (id_usuario, id_contrato, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, operador) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($query);
 
@@ -132,7 +132,7 @@ if ($stmt === false) {
     die('Erro na preparação da query: ' . $conn->error);
 }
 
-$stmt->bind_param("isssssssss", $profissional, $iniciodeexpediente, $inicioIntervaloFormatado, $fimIntervaloFormatado, $fimdeexpediente, $localdetrabalho, $escaladia, $escalames, $escalaano, $operador);
+$stmt->bind_param("iiissssssss", $profissional, $id_contrato, $localdetrabalho, $iniciodeexpediente, $inicioIntervaloFormatado, $fimIntervaloFormatado, $fimdeexpediente, $escaladia, $escalames, $escalaano, $operador);
 
 if (!$stmt->execute()) {
     die('Erro na execução da query: ' . $stmt->error);
@@ -142,8 +142,8 @@ $id_escala = $stmt->insert_id;
 
 
 // Preparando a segunda query
-$query1 = "INSERT INTO registroescala (id_escala, id_usuario, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_contrato, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt1 = $conn->prepare($query1);
 
@@ -151,7 +151,7 @@ if ($stmt1 === false) {
     die('Erro na preparação da query1: ' . $conn->error);
 }
 
-$stmt1->bind_param("iissssssssssssss", $id_escala, $profissional, $iniciodeexpediente, $inicioIntervaloFormatado, $fimIntervaloFormatado, $fimdeexpediente, $localdetrabalho, $escaladia, $escalames, $escalaano, $horario, $dia, $semana, $mes, $ano, $operador);
+$stmt1->bind_param("iiiisssssssssssss", $id_escala, $profissional, $id_contrato, $localdetrabalho, $iniciodeexpediente, $inicioIntervaloFormatado, $fimIntervaloFormatado, $fimdeexpediente, $escaladia, $escalames, $escalaano, $horario, $dia, $semana, $mes, $ano, $operador);
 
 if (!$stmt1->execute()) {
     die('Erro na execução da query1: ' . $stmt1->error);

@@ -8,7 +8,34 @@ if ($nivel < 2) {
 <!-- INICIA CONTEÚDO -->  
 
 <?php
-$data = $_GET ['data'];
+$id_escala = $_GET ['id'];
+
+$query_escala = "SELECT * FROM escala WHERE id = $id_escala";
+$resultado_escala = $conn->query($query_escala);
+$dados_escala = $resultado_escala->fetch_assoc();
+$id_local = $dados_escala['id_local'];
+$id_usuario_escala_selecionado = $dados_escala['id_usuario'];
+
+$query_usuario_escala_selecionado = "SELECT * FROM usuario WHERE id = $id_usuario_escala_selecionado";
+$resultado_usuario_escala_selecionado = $conn->query($query_usuario_escala_selecionado);
+$dados_usuario_escala_selecionado = $resultado_usuario_escala_selecionado->fetch_assoc();
+$login_usuario_escala_selecionado = $dados_usuario_escala_selecionado['login'];
+
+$query_local = "SELECT * FROM local WHERE id = $id_local";
+$resultado_local = $conn->query($query_local);
+$dados_local = $resultado_local->fetch_assoc();
+$nome_local = $dados_local['nome'];
+
+$query_relacao_contrato = "SELECT * FROM relacao_contrato WHERE id_local = $id_local";
+$resultado_relacao_contrato = $conn->query($query_relacao_contrato);
+$dados_relacao_contrato = $resultado_relacao_contrato->fetch_assoc();
+$id_contrato = $dados_relacao_contrato['id_contrato'];
+
+$query_contrato = "SELECT * FROM contrato WHERE id = $id_contrato";
+$resultado_contrato = $conn->query($query_contrato);
+$dados_contrato = $resultado_contrato->fetch_assoc();
+$nome_contrato = $dados_contrato['nome'];
+
 ?>
 
 <script>
@@ -32,7 +59,7 @@ $data = $_GET ['data'];
                 if (locais.length > 0) {
                     locais.forEach(function(local) {
                         var option = document.createElement('option');
-                        option.value = local.id;
+                        option.value = local.nome;
                         option.textContent = local.nome;
                         selectLocal.appendChild(option);
                     });
@@ -83,9 +110,9 @@ $data = $_GET ['data'];
     <div class="form-group form-group-default">
         <label><b>Contrato:</b></label>
         <select class="form-select" id="contrato" name="id_exibe_contratos" onchange="atualizarLocais();">
-            <option value="">Selecione um contrato</option>
             <?php
-            $query_coleta_contrato = "SELECT id_contrato FROM relacao_cliente WHERE id_usuario = '$idlogado'";
+            echo '<option value="' . $id_contrato . '">' . $nome_contrato . '</option>';
+            $query_coleta_contrato = "SELECT id_contrato FROM relacao_cliente WHERE id_usuario = '$idlogado' AND NOT id_contrato = $id_contrato";
             $resultado_coleta_contrato = $conn->query($query_coleta_contrato);
             
             if ($resultado_coleta_contrato->num_rows > 0) {
@@ -114,14 +141,18 @@ $data = $_GET ['data'];
     <div class="form-group form-group-default">
         <label><b>Local de trabalho:</b></label>
         <select class="form-select" id="localdetrabalho" name="localdetrabalho" onchange="atualizarProfissionais();">
-            <option value="">Selecione um contrato para ver os locais</option>
+            <?php
+                echo '<option value="' . $id_local . '">' . $nome_local . '</option>';
+            ?>
         </select>
     </div>
 
     <div class="form-group form-group-default">
         <label><b>Profissional:</b></label>
         <select class="form-select" id="profissional" name="profissional">
-            <option value="">Selecione um local para ver os profissionais</option>
+            <?php
+                echo '<option value="' . $id_usuario_escala_selecionado . '">' . $login_usuario_escala_selecionado . '</option>';
+            ?>
         </select>
     </div>
 
