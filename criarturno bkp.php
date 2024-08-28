@@ -6,130 +6,72 @@ if ( $nivel < 2 )
 }
 ?>
             
-            <!-- INICIA CONTEÚDO --> 
-
-            <script>
-                function atualizarLocais() {
-                    var idContrato = document.getElementById('contrato').value;
-                    var selectLocal = document.getElementById('localdetrabalho');
-                    
-                    // Limpar opções existentes
-                    selectLocal.innerHTML = '<option value="">Carregando...</option>';
-                    
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'sec/get_local_trabalho.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            var locais = JSON.parse(xhr.responseText);
-                            
-                            // Limpar opções existentes
-                            selectLocal.innerHTML = '';
-                            
-                            if (locais.length > 0) {
-                                locais.forEach(function(local) {
-                                    var option = document.createElement('option');
-                                    option.value = local.id;
-                                    option.textContent = local.nome;
-                                    selectLocal.appendChild(option);
-                                });
-                            } else {
-                                selectLocal.innerHTML = '<option value="">Nenhum local disponível</option>';
-                            }
-                        }
-                    };
-                    xhr.send('id_exibe_contratos=' + encodeURIComponent(idContrato));
-                    
-                    atualizarProfissionais(); // Atualiza a lista de profissionais ao selecionar o contrato
-                }
-
-                function atualizarProfissionais() {
-                    var idContrato = document.getElementById('contrato').value;
-                    var selectProfissional = document.getElementById('profissional');
-                    
-                    // Limpar opções existentes
-                    selectProfissional.innerHTML = '<option value="">Carregando...</option>';
-                    
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'sec/get_profissionais.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            var profissionais = JSON.parse(xhr.responseText);
-                            
-                            // Limpar opções existentes
-                            selectProfissional.innerHTML = '';
-                            
-                            if (profissionais.length > 0) {
-                                profissionais.forEach(function(profissional) {
-                                    var option = document.createElement('option');
-                                    option.value = profissional.id;
-                                    option.textContent = profissional.nome;
-                                    selectProfissional.appendChild(option);
-                                });
-                            } else {
-                                selectProfissional.innerHTML = '<option value="">Nenhum profissional disponível</option>';
-                            }
-                        }
-                    };
-                    xhr.send('id_exibe_contratos=' + encodeURIComponent(idContrato));
-                }
-            </script>
+            <!-- INICIA CONTEÚDO -->  
 
             <div class="form-group form-group-default">
-                <label><b>Contrato:</b></label>
-                <select class="form-select" id="contrato" name="id_exibe_contratos" onchange="atualizarLocais();">
-                    <option value="">Selecione um contrato</option>
-                    <?php
-                    $query_coleta_contrato = "SELECT id_contrato FROM relacao_cliente WHERE id_usuario = '$idlogado'";
-                    $resultado_coleta_contrato = $conn->query($query_coleta_contrato);
-                    
-                    if ($resultado_coleta_contrato->num_rows > 0) {
-                        while ($dados_coleta_contrato = $resultado_coleta_contrato->fetch_assoc()) {
-                            $id_coleta_contrato = $dados_coleta_contrato['id_contrato'];
-                            
-                            // Exibir contratos com status 1
-                            $query_exibe_contratos = "SELECT * FROM contrato WHERE id = '$id_coleta_contrato' AND status = 1";
-                            $resultado_exibe_contratos = $conn->query($query_exibe_contratos);
-                            
-                            if ($resultado_exibe_contratos->num_rows > 0) {
-                                $dados_exibe_contratos = $resultado_exibe_contratos->fetch_assoc();
-                                $id_exibe_contratos = $dados_exibe_contratos['id'];
-                                $nome_exibe_contratos = $dados_exibe_contratos['nome'];
-                                
-                                echo '<option value="' . $id_exibe_contratos . '">' . $nome_exibe_contratos . '</option>';
-                            }
+              <label><b>Nome:</b></label>
+              <select class="form-select" id="nome" name="nome">
+                  <?php
+
+                    $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'";
+                    $resultado_validacao_licenca = $conn->query($query_validacao_licenca);
+                        if ($resultado_validacao_licenca->num_rows > 0){
+                            $dados_validacao_licenca = $resultado_validacao_licenca->fetch_assoc();        
+                            $id_validacao_licenca = $dados_validacao_licenca['id']; 
+                            $id_cliente_validacao_licenca = $dados_validacao_licenca['id_cliente']; 
+
+                            $query_coleta_usuarios = "SELECT * FROM licenca WHERE id_cliente = '$id_cliente_validacao_licenca'";
+                                $resultado_coleta_usuarios = $conn->query($query_coleta_usuarios);
+                                    while ($dados_coleta_usuarios = $resultado_coleta_usuarios->fetch_assoc()) {
+                                            $id_coleta_usuarios = $dados_coleta_usuarios['id_usuario'];                       
+
+                                        $query_validacao_usuario = "SELECT * FROM usuario WHERE id = '$id_coleta_usuarios'";
+                                            $resultado_validacao_usuario = $conn->query($query_validacao_usuario);
+                                            
+                                                while ($dados_validacao_usuario = $resultado_validacao_usuario->fetch_assoc()) {
+                                                    $id_validacao_usuario = $dados_validacao_usuario['id'];
+                                                    $login_validacao_usuario = $dados_validacao_usuario['login'];
+                                                        
+                                                            echo '<option value="' . $id_validacao_usuario . '">' . $login_validacao_usuario . '</option>';
+                                                }
+                                            
+                                                
+                                    }
+                        }else {
+                            echo '<option value="">Nenhum usuário encontrado</option>';
                         }
-                    } else {
-                        echo '<option value="">Nenhum contrato vinculado ao Usuário logado</option>';
-                    }
-                    ?>
+
+                      // Preenche o dropdown com os usuários
+                    //   $query_usuarios = "SELECT * FROM usuario ORDER BY login ASC";
+                    //   $result_usuarios = $conn->query($query_usuarios);
+                    //   if ($result_usuarios->num_rows > 0) {
+                    //       while($row = $result_usuarios->fetch_assoc()) {
+                    //           echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
+                    //       }
+                    //   } else {
+                    //       echo '<option value="">Nenhum usuário encontrado</option>';
+                    //   }
+                  ?>
+              </select>
+            </div>
+
+            <div class="form-group form-group-default">
+                <label for="horarioexpediente"><b>Horário de expediente:</b></label>
+                <select class="form-select" id="horarioexpediente" name="horarioexpediente">
+                    <option value="01-07">01h as 07h</option>
+                    <option value="07-13">07h as 13h</option>
+                    <option value="13-19">13h as 19h</option>
+                    <option value="19-01">19h as 01h</option>
                 </select>
             </div>
 
             <div class="form-group form-group-default">
-                <label><b>Local de trabalho:</b></label>
-                <select class="form-select" id="localdetrabalho" name="localdetrabalho" onchange="atualizarProfissionais();">
-                    <option value="">Selecione um contrato para ver os locais</option>
+                <label for="localdetrabalho"><b>Local:</b></label>
+                <select class="form-select" id="localdetrabalho" name="localdetrabalho">
+                    <option value="TJ">TJ</option>
+                    <option value="FC2">FC2</option>
                 </select>
             </div>
-
-            <div class="form-group form-group-default">
-                <label><b>Profissional:</b></label>
-                <select class="form-select" id="profissional" name="profissional">
-                    <option value="">Selecione um local para ver os profissionais</option>
-                </select>
-            </div>
-
-            <div class="form-group form-group-default">
-                <label for="iniciodeexpediente"><b>Início de expediente:</b></label>
-                <input type="time" class="form-control" id="iniciodeexpediente" name="iniciodeexpediente">                
-            </div>
-
-            <div class="form-group form-group-default">
-                <label for="fimdeexpediente"><b>Fim de expediente:</b></label>
-                <input type="time" class="form-control" id="fimdeexpediente" name="fimdeexpediente">                
-            </div>            
 
             <div class="selecionar">
                 <div class="nav">
@@ -189,12 +131,9 @@ if ( $nivel < 2 )
 <script>
     // Adiciona listeners aos selects para chamar enviarDatas() ao alterar o valor
     window.onload = function() {
-            document.getElementById('id_exibe_contratos').addEventListener('change', enviarDatas);            
+            document.getElementById('nome').addEventListener('change', enviarDatas);
+            document.getElementById('horarioexpediente').addEventListener('change', enviarDatas);
             document.getElementById('localdetrabalho').addEventListener('change', enviarDatas);
-            document.getElementById('profissional').addEventListener('change', enviarDatas);
-            document.getElementById('iniciodeexpediente').addEventListener('change', enviarDatas);
-            document.getElementById('fimdeexpediente').addEventListener('change', enviarDatas);
-
             generateCalendar(currentMonth, currentYear);
         };
     
@@ -309,12 +248,10 @@ function cadastrarDatas() {
                   // Envia as datas selecionadas para o PHP
                   if (selectedDates.length > 0) {
                       const selectedDatesStr = selectedDates.join(',');
-                      const id_exibe_Contratos = document.getElementById('contrato').value;                      
+                      const nome = document.getElementById('nome').value;
+                      const horarioExpediente = document.getElementById('horarioexpediente').value;
                       const localDeTrabalho = document.getElementById('localdetrabalho').value;
-                      const Profissional = document.getElementById('profissional').value;
-                      const iniciodeExpediente = document.getElementById('iniciodeexpediente').value;
-                      const fimdeExpediente = document.getElementById('fimdeexpediente').value;                      
-                      window.location.href = `sec/enviaturno.php?dates=${selectedDatesStr}&contrato=${id_exibe_Contratos}&localdetrabalho=${localDeTrabalho}&profissional=${Profissional}&iniciodeexpediente=${iniciodeExpediente}&fimdeexpediente=${fimdeExpediente}`;
+                      window.location.href = `sec/enviaturno.php?dates=${selectedDatesStr}&id=${nome}&horarioexpediente=${horarioExpediente}&localdetrabalho=${localDeTrabalho}`;
                   } else {
                       alert('Selecione pelo menos uma data!');
                   }
@@ -326,12 +263,10 @@ function enviarDatas() {
 
     if (selectedDates.length > 0) {
         const selectedDatesStr = selectedDates.join(',');
-        const id_exibe_Contratos = document.getElementById('contrato').value;                      
+        const nome = document.getElementById('nome').value;
+        const horarioExpediente = document.getElementById('horarioexpediente').value;
         const localDeTrabalho = document.getElementById('localdetrabalho').value;
-        const Profissional = document.getElementById('profissional').value;
-        const iniciodeExpediente = document.getElementById('iniciodeexpediente').value;
-        const fimdeExpediente = document.getElementById('fimdeexpediente').value; 
-        
+
         // Envia as datas selecionadas via AJAX
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -347,7 +282,7 @@ function enviarDatas() {
         };
         xhr.open('POST', 'sec/cria_coletadados.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(`dates=${selectedDatesStr}&contrato=${id_exibe_Contratos}&localdetrabalho=${localDeTrabalho}&profissional=${Profissional}&iniciodeexpediente=${iniciodeExpediente}&fimdeexpediente=${fimdeExpediente}`);
+        xhr.send(`dates=${selectedDatesStr}&nome=${nome}&horarioexpediente=${horarioExpediente}&localdetrabalho=${localDeTrabalho}`);
     } else {
         selectedDatesElement.textContent = 'Nenhuma data selecionada.';
     }

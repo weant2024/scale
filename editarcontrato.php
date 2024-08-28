@@ -37,6 +37,7 @@ $querycontrato = $conn->query($sqlcontrato);
 $dadoscontrato = $querycontrato->fetch_assoc();         
 $nomecontrato = $dadoscontrato["nome"];
 $statuscontrato = $dadoscontrato['status'];
+$tipodeescala = $dadoscontrato['tipodeescala'];
 
  $query_validacao_rlc_cliente = "SELECT * FROM relacao_cliente WHERE id_contrato = $id";
               $result_validacao_rlc_cliente = $conn->query($query_validacao_rlc_cliente);
@@ -67,6 +68,11 @@ $statuscontrato = $dadoscontrato['status'];
         nomeInput.addEventListener('input', checknome);
         window.addEventListener('load', checknome);
     </script>    
+
+    <div class="form-group">
+        <label for="tipodeescala">Tipo de escala:</label> </br>
+        <label for="tipodeescala"> <?php echo $tipodeescala;?></label>
+    </div>
 
     <div class="form-group">
         <label>Status:</label><br />
@@ -187,7 +193,7 @@ $statuscontrato = $dadoscontrato['status'];
             }
         });
     </script>
-   
+    
     <div class="form-group">                                   
         <button class="botao" type="submit">EDITAR CONTRATO</button>                                
     </div>

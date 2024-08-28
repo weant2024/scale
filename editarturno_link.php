@@ -9,12 +9,15 @@ if ($nivel < 2) {
 
 <?php
 $id_escala = $_GET ['id'];
+$data = $_GET['data'];
 
 $query_escala = "SELECT * FROM escala WHERE id = $id_escala";
 $resultado_escala = $conn->query($query_escala);
 $dados_escala = $resultado_escala->fetch_assoc();
 $id_local = $dados_escala['id_local'];
 $id_usuario_escala_selecionado = $dados_escala['id_usuario'];
+$iniciodeexpediente = $dados_escala['horarioinicio'];
+$fimdeexpediente = $dados_escala['horariofim'];
 
 $query_usuario_escala_selecionado = "SELECT * FROM usuario WHERE id = $id_usuario_escala_selecionado";
 $resultado_usuario_escala_selecionado = $conn->query($query_usuario_escala_selecionado);
@@ -59,7 +62,7 @@ $nome_contrato = $dados_contrato['nome'];
                 if (locais.length > 0) {
                     locais.forEach(function(local) {
                         var option = document.createElement('option');
-                        option.value = local.nome;
+                        option.value = local.id;
                         option.textContent = local.nome;
                         selectLocal.appendChild(option);
                     });
@@ -106,7 +109,7 @@ $nome_contrato = $dados_contrato['nome'];
     }
 </script>   
 
-<form method="POST" action="sec/enviaturno2.php">
+<form method="POST" action="sec/atualizaturno2.php?">
     <div class="form-group form-group-default">
         <label><b>Contrato:</b></label>
         <select class="form-select" id="contrato" name="id_exibe_contratos" onchange="atualizarLocais();">
@@ -158,17 +161,21 @@ $nome_contrato = $dados_contrato['nome'];
 
     <div class="form-group form-group-default">
         <label for="iniciodeexpediente"><b>Início de expediente:</b></label>
-        <input type="time" class="form-control" id="iniciodeexpediente" name="iniciodeexpediente">                
+        <input type="time" class="form-control" id="iniciodeexpediente" name="iniciodeexpediente" value="<?php echo $iniciodeexpediente ?>">                
     </div>
 
     <div class="form-group form-group-default">
         <label for="fimdeexpediente"><b>Fim de expediente:</b></label>
-        <input type="time" class="form-control" id="fimdeexpediente" name="fimdeexpediente">                
+        <input type="time" class="form-control" id="fimdeexpediente" name="fimdeexpediente" value="<?php echo $fimdeexpediente ?>">                
     </div>
 
-    <button class="botao" type="submit">Cadastrar Turno</button>
+    <button class="botao" type="submit">Atualizar Turno</button>
     
     <input type="hidden" name="data" value="<?php echo $data; ?>">
+    <input type="hidden" name="id_escala" value="<?php echo $id_escala; ?>">
+    <input type="hidden" name="id_escala" value="<?php echo $id_local; ?>">
+
+
 </form>
 <!-- FINALIZA CONTEÚDO -->  
 

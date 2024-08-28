@@ -158,17 +158,64 @@
 </head>
 <body>
 <h1>Escala Semanal</h1>
-   <div class="navigation-container">
+    <div class="button-container">
+        <button class="button" onclick="sendWhatsApp()">Enviar via WhatsApp</button>
+        <button class="button" onclick="sendEmail()">Enviar via Email</button>
+        <button class="button" onclick="generatePDF()">Gerar PDF</button>
+    </div>
+    <div class="navigation-container">
         <button class="button" onclick="showPreviousWeek()">Semana Anterior</button>
         <button class="button" onclick="showNextWeek()">Próxima Semana</button>
     </div>
     <div class="container" id="weekContainer">
         <!-- Conteúdo da semana será gerado dinamicamente -->
     </div>
+    <div class="button-container">
+        <button class="button" onclick="showMonthSchedule()">Mostrar Escala do Mês Completo</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Weant</p>
+    </footer>
 
     <script>
         const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
         let currentWeekStart = new Date();
+
+        function sendWhatsApp() {
+            const schedule = getScheduleText();
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(schedule)}`;
+            window.open(url, '_blank');
+        }
+
+        function sendEmail() {
+            const schedule = getScheduleText();
+            const subject = "Escala Semanal de Funcionários";
+            const body = encodeURIComponent(schedule);
+            const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('weekContainer');
+            const options = {
+                margin: [20, 20, 20, 20],
+                filename: 'escala_semanal.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'px', format: [2100, 1200], orientation: 'landscape' }
+            };
+
+            html2pdf().from(element).set(options).toPdf().get('pdf').then(function(pdf) {
+                const title = 'Escala Semanal de Funcionários';
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const titleWidth = pdf.getTextWidth(title);
+                const titleX = (pageWidth - titleWidth) / 2;
+                pdf.setFontSize(22);
+                pdf.text(title, titleX, 50);
+                pdf.save();
+            });
+        }
 
         function getScheduleText() {
             let schedule = "Escala semanal:\n";

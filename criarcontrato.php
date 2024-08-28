@@ -23,7 +23,25 @@ $query_validacao_licenca = "SELECT * FROM licenca WHERE id_usuario = '$idlogado'
         <div style="display: flex; align-items: center;">
             <input type="text" name="contrato" id="contrato" class="form-control" required oninvalid="this.setCustomValidity('Insira um nome para o contrato')" onchange="try{setCustomValidity('')}catch(e){}" style="flex: 1; margin-right: 10px;" />            
         </div>
-    </div>    
+    </div>   
+    
+    <div class="form-group">
+        <label>Tipo de escala:</label><br />
+        <div class="d-flex">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipodeescala" id="tipodeescala" value="5x2" checked/>
+                <label class="form-check-label" for="5x2">5x2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipodeescala" id="tipodeescala" value="6x1"/>
+                <label class="form-check-label" for="6x1">6x1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipodeescala" id="tipodeescala" value="12x36"/>
+                <label class="form-check-label" for="12x36">12x36</label>
+            </div>
+        </div>
+    </div>
 
     <div class="form-group">
         <label>Status:</label><br />

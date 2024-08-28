@@ -12,11 +12,12 @@ $id_cliente = $_POST['cliente'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Receber e sanitizar o nome do contrato
     $contrato = isset($_POST['contrato']) ? htmlspecialchars($_POST['contrato']) : '';
+    $tipodeescala = $_POST['tipodeescala'];
     $statuscontrato = $_POST['statuscontrato'];
 
      // Query para contrato
-     $query_contrato = "INSERT INTO contrato (nome, status) 
-     VALUES (?, ?)";
+     $query_contrato = "INSERT INTO contrato (nome, tipodeescala, status) 
+     VALUES (?, ?, ?)";
      
          $stmt_contrato = $conn->prepare($query_contrato);
      
@@ -24,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  die('Erro na preparação da query: ' . $conn->error);
              }
      
-                 $stmt_contrato->bind_param("si", $contrato, $statuscontrato);
+                 $stmt_contrato->bind_param("ssi", $contrato, $tipodeescala ,$statuscontrato);
      
                      if (!$stmt_contrato->execute()) {
                          die('Erro na execução da query: ' . $stmt_contrato->error);
