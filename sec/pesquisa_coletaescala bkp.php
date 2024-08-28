@@ -43,33 +43,55 @@
 
                             @$id_escalahorario = $dados_escalahorario['id'];
                             @$login_escalahorario = $dados_escalahorario['id_usuario']; 
-                            @$login_escalalocaldetrabalho = $dados_escalahorario['id_local'];
                             @$login_escalainiciodeexpediente = $dados_escalahorario['horarioinicio'];
-                            @$login_escalainiciodeintervaloexpediente = $dados_escalahorario['intervaloinicio'];
-                            @$login_escalafimdeintervaloexpediente = $dados_escalahorario['intervalofim']; 
-                            @$login_escalafimdeexpediente = $dados_escalahorario['horariofim']; 
+                            @$login_escalalocaldetrabalho = $dados_escalahorario['local'];
 
                             $query_usuarioescalado = "SELECT * FROM usuario WHERE id='$login_escalahorario'";
                                 $resultado_usuarioescalado = $conn->query($query_usuarioescalado);
                                     $dados_usuarioescalado = $resultado_usuarioescalado->fetch_assoc();
                                         @$nome_usuarioescalado = $dados_usuarioescalado['nome'];
-                                        @$login_usuarioescalado = $dados_usuarioescalado['login'];   
-                            
-                            $query_localescalado = "SELECT * FROM local WHERE id='$login_escalalocaldetrabalho'";
-                                $resultado_localescalado = $conn->query($query_localescalado);
-                                    $dados_localescalado = $resultado_localescalado->fetch_assoc();
-                                        $nome_localescalado = $dados_localescalado['nome'];
+                                        @$login_usuarioescalado = $dados_usuarioescalado['login']; 
                                         
+                                        switch ($login_escalainiciodeexpediente) {
+                                            case "01:00:00":
+                                                $inicioexpediente = "01:00:00";
+                                                $iniciointervalo = "04:00:00";
+                                                $finalintervalo = "04:15:00";
+                                                $finalexpediente = "07:00:00";
+                                                break;
+                                            case "07:00:00":
+                                                $inicioexpediente = "07:00:00";
+                                                $iniciointervalo = "10:00:00";
+                                                $finalintervalo = "10:15:00";
+                                                $finalexpediente = "13:00:00";
+                                                break;
+                                            case "13:00:00":
+                                                $inicioexpediente = "13:00:00";
+                                                $iniciointervalo = "16:00:00";
+                                                $finalintervalo = "16:15:00";
+                                                $finalexpediente = "19:00:00";
+                                                break;
+                                            case "19:00:00":
+                                                $inicioexpediente = "19:00:00";
+                                                $iniciointervalo = "21:00:00";
+                                                $finalintervalo = "21:15:00";
+                                                $finalexpediente = "01:00:00";
+                                                break;
+                                            default:
+                                                // Caso nenhum dos valores seja correspondido
+                                                // Defina um comportamento padrão aqui, se necessário
+                                                break;
+                                        }            
 ?>
                             <a href='editarturno.php?id=<?php echo "$id_escalahorario"; ?>'>
 <?php
                             echo "Nome: $nome_usuarioescalado </br>";  
                             echo "Data: $escaladia/$escalames/$escalaano </br>";   
-                            echo "Início de Expediente: $login_escalainiciodeexpediente</br>"; 
-                            echo "Início de Intervalo: $login_escalainiciodeintervaloexpediente</br>"; 
-                            echo "Fim de Intervalo: $login_escalafimdeintervaloexpediente</br>"; 
-                            echo "Fim de Expediente: $login_escalafimdeexpediente</br>"; 
-                            echo "Local: $nome_localescalado</br> </br>";
+                            echo "Início de Expediente: $inicioexpediente</br>"; 
+                            echo "Início de Intervalo: $iniciointervalo</br>"; 
+                            echo "Fim de Intervalo: $finalintervalo</br>"; 
+                            echo "Fim de Expediente: $finalexpediente</br>"; 
+                            echo "Local: $login_escalalocaldetrabalho</br> </br>";
 ?>
                             </a>
 <?php

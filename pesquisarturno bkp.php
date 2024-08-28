@@ -67,7 +67,7 @@ if ( $nivel < 2 )
     // Adiciona listeners aos selects para chamar enviarDatas() ao alterar o valor
     window.onload = function() {
             document.getElementById('nome').addEventListener('change', enviarDatas);
-            document.getElementById('horarioinicio').addEventListener('change', enviarDatas);
+            document.getElementById('horarioexpediente').addEventListener('change', enviarDatas);
             document.getElementById('localdetrabalho').addEventListener('change', enviarDatas);
             generateCalendar(currentMonth, currentYear);
         };
