@@ -8,14 +8,15 @@ if ( $nivel < 2 )
             
             <!-- INICIA CONTEÚDO -->  
 
-            <div class="selecionar">
+            <!-- <div class="selecionar">
                 <div class="nav">
                     <button class="botao" id="botaoexibircalendario">Mostrar Calendário</button>
                 </div>
-            </div>
+            </div> -->
 
             <div class="calendar">
-                <div id="calendar" style="display: none;">
+                <!-- <div id="calendar" style="display: none;"> -->
+                <div id="calendar">
                     <header>
                         <h2 id="month-year">Julho 2024</h2>
                         <div class="nav">
@@ -72,17 +73,17 @@ if ( $nivel < 2 )
             generateCalendar(currentMonth, currentYear);
         };
     
-    document.getElementById('botaoexibircalendario').addEventListener('click', function() {
-        var calendar = document.getElementById('calendar');
-        var botaoexibircalendario = document.getElementById('botaoexibircalendario');
-        if (calendar.style.display === 'none' || calendar.style.display === '') {
-            calendar.style.display = 'block';
-            botaoexibircalendario.textContent = 'Esconder Calendário';
-        } else {
-            calendar.style.display = 'none';
-            botaoexibircalendario.textContent = 'Mostrar Calendário';
-        }
-    });   
+    // document.getElementById('botaoexibircalendario').addEventListener('click', function() {
+    //     var calendar = document.getElementById('calendar');
+    //     var botaoexibircalendario = document.getElementById('botaoexibircalendario');
+    //     if (calendar.style.display === 'none' || calendar.style.display === '') {
+    //         calendar.style.display = 'block';
+    //         botaoexibircalendario.textContent = 'Esconder Calendário';
+    //     } else {
+    //         calendar.style.display = 'none';
+    //         botaoexibircalendario.textContent = 'Mostrar Calendário';
+    //     }
+    // });   
 
 //     document.getElementById('botaovalidacaoinfo').addEventListener('click', function() {
 //       var validacaoinfo = document.getElementById('validacaoinfo');

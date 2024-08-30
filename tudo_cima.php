@@ -87,12 +87,7 @@ include "sec/sec_verifica.php";
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="escala">
-                  <ul class="nav nav-collapse">                           
-                    <li>
-                      <a href="escala_semanal.php">
-                        <span class="sub-item">Escala Semanal</span>
-                      </a>
-                    </li>
+                  <ul class="nav nav-collapse">  
                     <li>
                       <a data-bs-toggle="collapse" href="#subnav1">
                         <span class="sub-item">Turnos</span>

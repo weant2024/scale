@@ -1,38 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escala de Funcionários</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
+
 
         h1 {
             text-align: center;
             background-color: #2a2f5b;
             color: #fff;
-            padding: 20px;
+            border-radius: 10px;            
             margin: 0;
         }
 
-        .container {
+        .footer {
+            border-top: 1px solid #eee;
+            padding: 15px;
+            background: #fff;
+            position: absolute;
+            width: 100%;
+        }
+
+        .container-escala {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 20px;
+            gap: 5px;
             overflow-x: auto;
             margin-top: 20px;
+            margin: 0;
         }
 
         .day {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #FFFFFF;
+            border-radius: 8px;            
+            box-shadow: inset 0em 0em 1px 1px #2a2f5b;
             padding: 15px;
             position: relative;
         }
@@ -96,11 +94,6 @@
             color: #777;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #777;
-        }
 
         .button-container {
             text-align: center;
@@ -108,7 +101,7 @@
         }
 
         .button {
-            padding: 10px 15px;
+            padding: 8px 8px;
             margin: 0 5px;
             background-color: #2a2f5b;
             color: white;
@@ -123,8 +116,8 @@
         }
 
         .navigation-container {
-            text-align: center;
-            margin: 20px 0;
+            text-align: right;
+            margin: 20px 0;            
         }
 
         /* Estilos permanecem os mesmos */
@@ -154,15 +147,13 @@
         }
        
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-</head>
-<body>
-<h1>Escala Semanal</h1>
+
+ <h1>Escala Semanal</h1>   
    <div class="navigation-container">
         <button class="button" onclick="showPreviousWeek()">Semana Anterior</button>
         <button class="button" onclick="showNextWeek()">Próxima Semana</button>
     </div>
-    <div class="container" id="weekContainer">
+    <div class="container-escala" id="weekContainer">
         <!-- Conteúdo da semana será gerado dinamicamente -->
     </div>
 
@@ -209,7 +200,7 @@
                             if (employee.date === dateString) {
                                 const employeeElement = document.createElement('div');
                                 employeeElement.className = 'employee';
-                                const avatar = `<div class="avatar">${employee.name[0]}</div>`;
+                                const avatar = `<div ></div>`;
 
                                 let scheduleLink;
                                 if (employee.motivo_afastamento) {
@@ -251,5 +242,3 @@
         // Inicializar a semana atual
         generateWeek();
     </script>
-</body>
-</html>

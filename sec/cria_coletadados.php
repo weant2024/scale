@@ -15,44 +15,14 @@
             $todas_as_datas_selecionadas = $_POST['dates'];
 
             $localdetrabalho_selecionado = $_POST['localdetrabalho'];
-            $idusuario_selecionado = $_POST['nome'];
+            $idusuario_selecionado = $_POST['profissional'];
 
-            $horarioexpediente_selecionado = $_POST['horarioexpediente'];
-            switch ($horarioexpediente_selecionado) {
-                case "01-07":
-                    $inicioexpediente = "01:00:00";
-                    $iniciointervalo = "04:00:00";
-                    $finalintervalo = "04:15:00";
-                    $finalexpediente = "07:00:00";
-                    break;
-                case "07-13":
-                    $inicioexpediente = "07:00:00";
-                    $iniciointervalo = "10:00:00";
-                    $finalintervalo = "10:15:00";
-                    $finalexpediente = "13:00:00";
-                    break;
-                case "13-19":
-                    $inicioexpediente = "13:00:00";
-                    $iniciointervalo = "16:00:00";
-                    $finalintervalo = "16:15:00";
-                    $finalexpediente = "19:00:00";
-                    break;
-                case "19-01":
-                    $inicioexpediente = "19:00:00";
-                    $iniciointervalo = "21:00:00";
-                    $finalintervalo = "21:15:00";
-                    $finalexpediente = "01:00:00";
-                    break;
-                default:
-                    // Caso nenhum dos valores seja correspondido
-                    // Defina um comportamento padrão aqui, se necessário
-                    break;
-            }
+            $horarioexpediente_selecionado = $_POST['iniciodeexpediente'];
+                       
             
             $query_selecionado = "SELECT * FROM usuario WHERE id='$idusuario_selecionado'"; //faz a busca com as palavras enviadas
                 $resultado_selecionado = $conn->query($query_selecionado);
-                    $dados_selecionado = $resultado_selecionado->fetch_assoc();
-                        $nome_selecionado = $dados_selecionado['nome']; 
+                    $dados_selecionado = $resultado_selecionado->fetch_assoc();                         
                         @$nome_selecionado = $dados_selecionado['nome'];
                             @$login_selecionado = $dados_selecionado['login'];
                             @$aniversario_selecionado = $dados_selecionado['nascimento'];
@@ -193,7 +163,7 @@
                         $dataescala_tratada = "$escaladia-$escalames"; 
                         $dataescala_completa_tratada = "$escalaano-$escalames-$escaladia";
                         
-                        $query_escalahorario = "SELECT * FROM escala WHERE local='$localdetrabalho_selecionado' AND dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$inicioexpediente'"; //faz a busca com as palavras enviadas
+                        $query_escalahorario = "SELECT * FROM escala WHERE id_local='$localdetrabalho_selecionado' AND dia='$escaladia' AND mes='$escalames' AND ano='$escalaano' AND horarioinicio='$horarioexpediente_selecionado'"; //faz a busca com as palavras enviadas
                             $resultado_escalahorario = $conn->query($query_escalahorario);
                                 $dados_escalahorario = $resultado_escalahorario->fetch_assoc();
                                     @$login_escalahorario = $dados_escalahorario['id_usuario']; 
