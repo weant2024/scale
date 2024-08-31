@@ -180,9 +180,9 @@ if ( $nivel < 2 )
                       <!-- As datas selecionadas serão exibidas aqui -->
                   </div>
 
-                  <div id="formulario-php">
-                      <!-- O formulário PHP será exibido aqui -->
-                  </div>
+                  <!-- <div id="formulario-php">
+                     O formulário PHP de VALIDAÇÂO sec/cria_coletadados.php será exibido aqui
+                  </div> -->
                 </div>
 
             </div>
