@@ -32,9 +32,10 @@ CREATE TABLE `afastamento` (
 --
 
 INSERT INTO `afastamento` (`id`, `id_usuario`, `motivo`, `datainicial`, `datafinal`) VALUES
-(1, 13, 'Atestado', '23/08/2024', '25/08/2024'),
+(1, 13, 'Atestado', '23/08/2024', '24/08/2024'),
 (2, 12, 'Licença paternidade', '26/08/2024', '31/08/2024'),
-(3, 9, 'Férias', '22/08/2024', '07/09/2024');
+(3, 9, 'Férias', '22/08/2024', '07/09/2024'),
+(7, 12, 'Atestado', '03/09/2024', '04/09/2024');
 
 -- --------------------------------------------------------
 
@@ -66,6 +67,7 @@ INSERT INTO `cliente` (`id`, `cnpj_cpf`) VALUES
 CREATE TABLE `contrato` (
   `id` int(11) NOT NULL,
   `nome` varchar(60) NOT NULL,
+  `tipodeescala` varchar(60) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -73,18 +75,19 @@ CREATE TABLE `contrato` (
 -- Despejando dados para a tabela `contrato`
 --
 
-INSERT INTO `contrato` (`id`, `nome`, `status`) VALUES
-(1, 'Ragnarok', 1),
-(2, 'Las Vegas', 1),
-(3, 'Ragnarok', 1),
-(4, 'Ragnarok2', 0),
-(5, 'teste', 1),
-(6, 'Ragnarok3', 1),
-(7, 'Ragnarok3', 1),
-(8, 'Ragnarok3', 1),
-(9, 'Ragnarok3', 1),
-(10, 'Ragnarok3', 1),
-(11, 'Ragnarok3', 1);
+INSERT INTO `contrato` (`id`, `nome`, `tipodeescala`, `status`) VALUES
+(1, 'Ragnarok', '', 1),
+(2, 'Las Vegas', '', 1),
+(3, 'Ragnarok', '', 1),
+(4, 'Ragnarok2', '', 0),
+(5, 'teste', '', 1),
+(6, 'Ragnarok3', '', 1),
+(7, 'Ragnarok3', '', 1),
+(8, 'Ragnarok3', '', 1),
+(9, 'Ragnarok3', '', 1),
+(10, 'Ragnarok3', '', 1),
+(11, 'Ragnarok3', '', 1),
+(12, 'Ragnarok4', '6x1', 1);
 
 -- --------------------------------------------------------
 
@@ -94,13 +97,14 @@ INSERT INTO `contrato` (`id`, `nome`, `status`) VALUES
 
 CREATE TABLE `escala` (
   `id` int(11) NOT NULL,
-  `id_usuario` varchar(60) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_afastamento` int(11) NOT NULL,
+  `id_contrato` int(11) NOT NULL,
+  `id_local` int(11) NOT NULL,
   `horarioinicio` varchar(60) NOT NULL,
   `intervaloinicio` varchar(60) NOT NULL,
   `intervalofim` varchar(60) NOT NULL,
   `horariofim` varchar(60) NOT NULL,
-  `local` varchar(60) NOT NULL,
   `dia` varchar(60) NOT NULL,
   `mes` varchar(60) NOT NULL,
   `ano` varchar(60) NOT NULL,
@@ -111,33 +115,48 @@ CREATE TABLE `escala` (
 -- Despejando dados para a tabela `escala`
 --
 
-INSERT INTO `escala` (`id`, `id_usuario`, `id_afastamento`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `operador`) VALUES
-(1, '13', 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', 'freya.ragnarok'),
-(2, '13', 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', 'freya.ragnarok'),
-(3, '13', 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', 'freya.ragnarok'),
-(4, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', 'freya.ragnarok'),
-(5, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', 'freya.ragnarok'),
-(6, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', 'freya.ragnarok'),
-(7, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', 'freya.ragnarok'),
-(8, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', 'freya.ragnarok'),
-(9, '12', 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', 'freya.ragnarok'),
-(10, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '22', '08', '2024', 'alessandro.albuquerque'),
-(11, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', 'alessandro.albuquerque'),
-(12, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', 'alessandro.albuquerque'),
-(13, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', 'alessandro.albuquerque'),
-(14, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', 'alessandro.albuquerque'),
-(15, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', 'alessandro.albuquerque'),
-(16, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', 'alessandro.albuquerque'),
-(17, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', 'alessandro.albuquerque'),
-(18, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', 'alessandro.albuquerque'),
-(19, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', 'alessandro.albuquerque'),
-(20, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '09', '2024', 'alessandro.albuquerque'),
-(21, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '09', '2024', 'alessandro.albuquerque'),
-(22, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', 'alessandro.albuquerque'),
-(23, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', 'alessandro.albuquerque'),
-(24, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '09', '2024', 'alessandro.albuquerque'),
-(25, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '09', '2024', 'alessandro.albuquerque'),
-(26, '9', 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '07', '09', '2024', 'alessandro.albuquerque');
+INSERT INTO `escala` (`id`, `id_usuario`, `id_afastamento`, `id_contrato`, `id_local`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `dia`, `mes`, `ano`, `operador`) VALUES
+(4, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', 'freya.ragnarok'),
+(5, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', 'freya.ragnarok'),
+(6, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', 'freya.ragnarok'),
+(7, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', 'freya.ragnarok'),
+(8, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', 'freya.ragnarok'),
+(9, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', 'freya.ragnarok'),
+(10, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '22', '08', '2024', 'alessandro.albuquerque'),
+(12, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', 'alessandro.albuquerque'),
+(13, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', 'alessandro.albuquerque'),
+(14, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', 'alessandro.albuquerque'),
+(15, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', 'alessandro.albuquerque'),
+(16, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', 'alessandro.albuquerque'),
+(17, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', 'alessandro.albuquerque'),
+(18, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', 'alessandro.albuquerque'),
+(19, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', 'alessandro.albuquerque'),
+(20, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '01', '09', '2024', 'alessandro.albuquerque'),
+(21, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '02', '09', '2024', 'alessandro.albuquerque'),
+(22, 14, 3, 3, 12, '13:00', '19:33', '19:48', '19:00', '03', '09', '2024', 'freya.ragnarok'),
+(23, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', 'alessandro.albuquerque'),
+(24, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '05', '09', '2024', 'alessandro.albuquerque'),
+(25, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '06', '09', '2024', 'alessandro.albuquerque'),
+(26, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '07', '09', '2024', 'alessandro.albuquerque'),
+(32, 12, 0, 11, 22, '13:00', '19:00', '19:15', '19:00', '29', '08', '2024', 'freya.ragnarok'),
+(33, 12, 0, 11, 22, '13:00', '15:52', '16:07', '19:00', '28', '08', '2024', 'freya.ragnarok'),
+(34, 13, 0, 3, 11, '13:00', '19:36', '19:51', '19:00', '25', '08', '2024', 'freya.ragnarok'),
+(35, 14, 0, 3, 14, '13:00', '16:52', '17:07', '21:00', '27', '08', '2024', 'freya.ragnarok'),
+(36, 12, 0, 12, 23, '01:00', '04:52', '05:07', '09:00', '01', '08', '2024', 'freya.ragnarok'),
+(37, 12, 0, 12, 23, '01:00', '04:52', '05:07', '09:00', '02', '08', '2024', 'freya.ragnarok'),
+(38, 13, 0, 3, 15, '01:00', '04:52', '05:07', '09:00', '01', '09', '2024', 'freya.ragnarok'),
+(39, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '01', '08', '2024', 'freya.ragnarok'),
+(40, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '02', '08', '2024', 'freya.ragnarok'),
+(41, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '03', '08', '2024', 'freya.ragnarok'),
+(42, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '04', '08', '2024', 'freya.ragnarok'),
+(43, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '05', '08', '2024', 'freya.ragnarok'),
+(44, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '06', '08', '2024', 'freya.ragnarok'),
+(50, 12, 7, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', 'freya.ragnarok'),
+(51, 12, 7, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', 'freya.ragnarok'),
+(52, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '01', '08', '2024', 'freya.ragnarok'),
+(53, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '02', '08', '2024', 'freya.ragnarok'),
+(54, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '10', '08', '2024', 'freya.ragnarok'),
+(55, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '20', '08', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -228,7 +247,9 @@ INSERT INTO `local` (`id`, `nome`, `id_contrato`) VALUES
 (19, 'teste', 5),
 (20, 'Asgard3', 11),
 (21, 'Midgard3', 11),
-(22, 'Niflheim3', 11);
+(22, 'Niflheim3', 11),
+(23, 'Asgard4', 12),
+(24, 'Midgard4', 12);
 
 -- --------------------------------------------------------
 
@@ -289,7 +310,12 @@ CREATE TABLE `registroafastamento` (
 INSERT INTO `registroafastamento` (`id`, `id_afastamento`, `id_usuario`, `motivo`, `datanicial`, `datafinal`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
 (1, 1, 13, 'Atestado', '23/08/2024', '25/08/2024', '22:20:52', '22', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
 (2, 2, 12, 'Licença paternidade', '26/08/2024', '31/08/2024', '22:44:42', '22', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(3, 3, 9, 'Férias', '22/08/2024', '07/09/2024', '22:55:57', '22', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque');
+(3, 3, 9, 'Férias', '22/08/2024', '07/09/2024', '22:55:57', '22', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(4, 1, 13, 'Atestado', '23/08/2024', '24/08/2024', '15:44:45', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(5, 4, 12, 'Atestado', '03/09/2024', '06/09/2024', '06:02:01', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(6, 5, 12, 'Atestado', '03/09/2024', '06/09/2024', '06:08:38', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(7, 6, 12, 'Atestado', '03/09/2024', '06/09/2024', '06:09:50', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(8, 7, 12, 'Atestado', '03/09/2024', '04/09/2024', '06:17:58', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -300,6 +326,7 @@ INSERT INTO `registroafastamento` (`id`, `id_afastamento`, `id_usuario`, `motivo
 CREATE TABLE `registrocontrato` (
   `id` int(11) NOT NULL,
   `nome` varchar(60) NOT NULL,
+  `tipodeescala` varchar(60) NOT NULL,
   `status` int(11) NOT NULL,
   `loghorario` varchar(60) NOT NULL,
   `logdia` varchar(60) NOT NULL,
@@ -320,11 +347,12 @@ CREATE TABLE `registroescala` (
   `id_escala` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_afastamento` int(11) NOT NULL,
+  `id_contrato` int(11) NOT NULL,
+  `id_local` int(11) NOT NULL,
   `horarioinicio` varchar(60) NOT NULL,
   `intervaloinicio` varchar(60) NOT NULL,
   `intervalofim` varchar(60) NOT NULL,
   `horariofim` varchar(60) NOT NULL,
-  `local` varchar(60) NOT NULL,
   `dia` varchar(60) NOT NULL,
   `mes` varchar(60) NOT NULL,
   `ano` varchar(60) NOT NULL,
@@ -340,33 +368,79 @@ CREATE TABLE `registroescala` (
 -- Despejando dados para a tabela `registroescala`
 --
 
-INSERT INTO `registroescala` (`id`, `id_escala`, `id_usuario`, `id_afastamento`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `local`, `dia`, `mes`, `ano`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
-(1, 1, 13, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', '22:20:52', '23/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(2, 2, 13, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', '22:20:52', '24/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(3, 3, 13, 1, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', '22:20:52', '25/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(4, 4, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', '22:44:42', '26/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(5, 5, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', '22:44:42', '27/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(6, 6, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', '22:44:42', '28/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(7, 7, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', '22:44:42', '29/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(8, 8, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', '22:44:42', '30/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(9, 9, 12, 2, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', '22:44:42', '31/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
-(10, 10, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '22', '08', '2024', '22:55:57', '22/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(11, 11, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', '22:55:57', '23/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(12, 12, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', '22:55:57', '24/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(13, 13, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', '22:55:57', '25/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(14, 14, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', '22:55:57', '26/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(15, 15, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', '22:55:57', '27/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(16, 16, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', '22:55:57', '28/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(17, 17, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', '22:55:57', '29/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(18, 18, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', '22:55:57', '30/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(19, 19, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', '22:55:57', '31/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(20, 20, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '01', '09', '2024', '22:55:57', '01/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(21, 21, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '02', '09', '2024', '22:55:57', '02/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(22, 22, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', '22:55:57', '03/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(23, 23, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', '22:55:57', '04/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(24, 24, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '05', '09', '2024', '22:55:57', '05/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(25, 25, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '06', '09', '2024', '22:55:57', '06/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
-(26, 26, 9, 3, 'afastado', 'afastado', 'afastado', 'afastado', 'afastado', '07', '09', '2024', '22:55:57', '07/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque');
+INSERT INTO `registroescala` (`id`, `id_escala`, `id_usuario`, `id_afastamento`, `id_contrato`, `id_local`, `horarioinicio`, `intervaloinicio`, `intervalofim`, `horariofim`, `dia`, `mes`, `ano`, `loghorario`, `logdia`, `logsemana`, `logmes`, `logano`, `operador`) VALUES
+(1, 1, 13, 1, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', '22:20:52', '23/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(2, 2, 13, 1, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', '22:20:52', '24/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(3, 3, 13, 1, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', '22:20:52', '25/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(4, 4, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', '22:44:42', '26/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(5, 5, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', '22:44:42', '27/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(6, 6, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', '22:44:42', '28/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(7, 7, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', '22:44:42', '29/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(8, 8, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', '22:44:42', '30/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(9, 9, 12, 2, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', '22:44:42', '31/08/2024', 'Quinta', 'Agosto', '2024', 'freya.ragnarok'),
+(10, 10, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '22', '08', '2024', '22:55:57', '22/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(11, 11, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '23', '08', '2024', '22:55:57', '23/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(12, 12, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '24', '08', '2024', '22:55:57', '24/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(13, 13, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '25', '08', '2024', '22:55:57', '25/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(14, 14, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '26', '08', '2024', '22:55:57', '26/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(15, 15, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '27', '08', '2024', '22:55:57', '27/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(16, 16, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '28', '08', '2024', '22:55:57', '28/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(17, 17, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '29', '08', '2024', '22:55:57', '29/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(18, 18, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '30', '08', '2024', '22:55:57', '30/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(19, 19, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '31', '08', '2024', '22:55:57', '31/08/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(20, 20, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '01', '09', '2024', '22:55:57', '01/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(21, 21, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '02', '09', '2024', '22:55:57', '02/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(22, 22, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', '22:55:57', '03/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(23, 23, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', '22:55:57', '04/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(24, 24, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '05', '09', '2024', '22:55:57', '05/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(25, 25, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '06', '09', '2024', '22:55:57', '06/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(26, 26, 9, 3, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '07', '09', '2024', '22:55:57', '07/09/2024', 'Quinta', 'Agosto', '2024', 'alessandro.albuquerque'),
+(27, 27, 13, 0, 3, 11, '07:00', '12:52', '13:07', '19:00', '23', '08', '2024', '16:02:27', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(28, 28, 13, 0, 3, 11, '01:00', '06:52', '07:07', '13:00', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '16:10:01', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(29, 27, 13, 0, 3, 11, '13:00', '16:52', '17:07', '21:00', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '16:37:40', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(30, 29, 13, 0, 3, 11, '', '16:30', '16:45', '', '25', '08', '2024', '16:38:00', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(31, 29, 12, 0, 11, 0, '', '16:30', '16:45', '', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '16:38:23', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(32, 30, 13, 0, 3, 11, '07:00', '12:52', '13:07', '19:00', '28', '08', '2024', '18:01:33', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(33, 30, 12, 0, 11, 0, '01:00', '06:52', '07:07', '13:00', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '18:04:28', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(34, 31, 13, 0, 3, 11, '01:00', '06:52', '07:07', '13:00', '28', '08', '2024', '18:09:43', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(35, 31, 12, 0, 11, 0, '13:00', '15:52', '16:07', '19:00', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '18:10:15', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(36, 31, 13, 0, 3, 0, '13:00', '15:52', '16:07', '19:00', '<br ', '>\r\n<b>Warning<', 'b>:  Undefined variable $data in <b>C:\\xampp\\htdocs\\scale\\ed', '18:16:51', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(37, 31, 13, 0, 3, 0, '13:00', '15:52', '16:07', '19:00', '28', '08', '2024', '18:32:37', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(38, 31, 13, 0, 3, 0, '13:00', '15:52', '16:07', '19:00', '28', '08', '2024', '18:34:09', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(39, 31, 14, 0, 3, 0, '13:00', '15:52', '16:07', '19:00', '28', '08', '2024', '18:44:12', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(40, 32, 13, 0, 3, 15, '', '18:52', '19:07', '', '29', '08', '2024', '19:00:21', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(41, 33, 12, 0, 11, 22, '13:00', '15:52', '16:07', '19:00', '28', '08', '2024', '19:01:25', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(42, 32, 12, 0, 11, 0, '', '19:00', '19:15', '', '29', '08', '2024', '19:07:49', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(43, 22, 15, 0, 3, 14, '', '19:32', '19:47', '', '29', '08', '2024', '19:40:06', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(44, 22, 13, 0, 3, 14, '', '19:33', '19:48', '', '29', '08', '2024', '19:40:41', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(45, 22, 14, 0, 3, 12, '', '19:33', '19:48', '', '29', '08', '2024', '19:41:28', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(46, 34, 13, 0, 3, 11, '', '19:36', '19:51', '', '25', '08', '2024', '19:44:07', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(47, 11, 12, 0, 11, 20, '', '19:36', '19:51', '', '25', '08', '2024', '19:44:12', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(48, 11, 13, 0, 3, 11, '14:00', '17:22', '17:37', '21:00', '25', '08', '2024', '19:47:03', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(49, 11, 12, 0, 11, 22, '', '19:39', '19:54', '', '25', '08', '2024', '19:47:21', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(50, 11, 13, 0, 3, 11, '', '19:41', '19:56', '', '25', '08', '2024', '19:48:51', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(51, 11, 14, 0, 11, 22, '', '19:41', '19:56', '', '25', '08', '2024', '19:49:03', '23', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(52, 35, 14, 0, 3, 14, '13:00', '16:52', '17:07', '21:00', '27', '08', '2024', '21:17:21', '27', 'Terça', 'Agosto', '2024', 'freya.ragnarok'),
+(53, 36, 12, 0, 12, 23, '01:00', '04:52', '05:07', '09:00', '01', '08', '2024', '15:54:46', '28', 'Quarta', 'Agosto', '2024', 'freya.ragnarok'),
+(54, 37, 12, 0, 12, 23, '01:00', '04:52', '05:07', '09:00', '02', '08', '2024', '15:54:46', '28', 'Quarta', 'Agosto', '2024', 'freya.ragnarok'),
+(55, 38, 13, 0, 3, 15, '01:00', '04:52', '05:07', '09:00', '01', '09', '2024', '20:32:45', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(56, 39, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '01', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(57, 40, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '02', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(58, 41, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '03', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(59, 42, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '04', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(60, 43, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '05', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(61, 44, 15, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '06', '08', '2024', '20:33:40', '30', 'Sexta', 'Agosto', '2024', 'freya.ragnarok'),
+(62, 36, 12, 0, 12, 23, '01:00', '04:52', '05:07', '09:00', '01', '08', '2024', '04:50:38', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(63, 46, 12, 6, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', '06:09:50', '03/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(64, 47, 12, 6, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', '06:09:50', '04/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(65, 48, 12, 6, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '05', '09', '2024', '06:09:50', '05/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(66, 49, 12, 6, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '06', '09', '2024', '06:09:50', '06/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(67, 50, 12, 7, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '03', '09', '2024', '06:17:58', '03/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(68, 51, 12, 7, 0, 0, 'afastado', 'afastado', 'afastado', 'afastado', '04', '09', '2024', '06:17:58', '04/09/2024', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(69, 52, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '01', '08', '2024', '16:58:09', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(70, 53, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '02', '08', '2024', '16:58:09', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(71, 54, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '10', '08', '2024', '16:58:09', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok'),
+(72, 55, 13, 0, 12, 23, '07:00', '09:52', '10:07', '13:00', '20', '08', '2024', '16:58:09', '31', 'Sábado', 'Agosto', '2024', 'freya.ragnarok');
 
 -- --------------------------------------------------------
 
@@ -484,7 +558,13 @@ INSERT INTO `relacao_cliente` (`id`, `id_usuario`, `id_contrato`, `id_cliente`) 
 (65, 13, 11, 2),
 (66, 14, 11, 2),
 (67, 32, 11, 2),
-(68, 15, 11, 2);
+(68, 15, 11, 2),
+(69, 11, 12, 2),
+(70, 12, 12, 2),
+(71, 13, 12, 2),
+(72, 14, 12, 2),
+(73, 32, 12, 2),
+(74, 15, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -517,7 +597,9 @@ INSERT INTO `relacao_contrato` (`id`, `id_cliente`, `id_contrato`, `id_local`) V
 (35, 2, 4, 18),
 (36, 2, 11, 20),
 (37, 2, 11, 21),
-(38, 2, 11, 22);
+(38, 2, 11, 22),
+(39, 2, 12, 23),
+(40, 2, 12, 24);
 
 -- --------------------------------------------------------
 
@@ -717,7 +799,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `afastamento`
 --
 ALTER TABLE `afastamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
@@ -729,13 +811,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `contrato`
 --
 ALTER TABLE `contrato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `escala`
 --
 ALTER TABLE `escala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de tabela `jornada`
@@ -753,7 +835,7 @@ ALTER TABLE `licenca`
 -- AUTO_INCREMENT de tabela `local`
 --
 ALTER TABLE `local`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
@@ -765,7 +847,7 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT de tabela `registroafastamento`
 --
 ALTER TABLE `registroafastamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `registrocontrato`
@@ -777,7 +859,7 @@ ALTER TABLE `registrocontrato`
 -- AUTO_INCREMENT de tabela `registroescala`
 --
 ALTER TABLE `registroescala`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de tabela `registrousuario`
@@ -789,13 +871,13 @@ ALTER TABLE `registrousuario`
 -- AUTO_INCREMENT de tabela `relacao_cliente`
 --
 ALTER TABLE `relacao_cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de tabela `relacao_contrato`
 --
 ALTER TABLE `relacao_contrato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `teste`

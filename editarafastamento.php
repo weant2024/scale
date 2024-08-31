@@ -42,8 +42,25 @@ if ( $nivel < 2 )
               </div>  
 
               <div class="form-group">
-                <label for="motivo">Motivo:</label>
-                <input type="text" name="motivo" id="motivo" class="form-control" value="<?php echo '' .$dados_afastamento['motivo'] . ''?>"/>
+                <label><b>Motivo:</b></label><br />
+                <div class="d-flex">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Folga" <?php if ($dados_afastamento['motivo'] == "Folga") { echo "checked"; } ?>/>
+                        <label class="form-check-label" for="Folga">Folga</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Atestado" <?php if ($dados_afastamento['motivo'] == "Atestado") { echo "checked"; } ?>/>
+                        <label class="form-check-label" for="Atestado">Atestado</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Licença" <?php if ($dados_afastamento['motivo'] == "Licença") { echo "checked"; } ?>/>
+                        <label class="form-check-label" for="Licença">Licença</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Férias" <?php if ($dados_afastamento['motivo'] == "Férias") { echo "checked"; } ?>/>
+                        <label class="form-check-label" for="Férias">Férias</label>
+                    </div>
+                </div>
               </div>
 
               <div class="form-group">

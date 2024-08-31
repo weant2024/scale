@@ -61,17 +61,34 @@ if ( $nivel < 2 )
               </div>  
 
               <div class="form-group">
-                <label for="motivo">Motivo:</label>
-                <input type="text" name="motivo" id="motivo" class="form-control" />
+                <label><b>Motivo:</b></label><br />
+                <div class="d-flex">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Folga" checked/>
+                        <label class="form-check-label" for="Folga">Folga</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Atestado"/>
+                        <label class="form-check-label" for="Atestado">Atestado</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Licença"/>
+                        <label class="form-check-label" for="Licença">Licença</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo" value="Férias"/>
+                        <label class="form-check-label" for="Férias">Férias</label>
+                    </div>
+                </div>
               </div>
 
               <div class="form-group">
-                <label for="datainicial">Data inicial:</label>
+                <label for="datainicial"><b>Data inicial:</b></label>
                 <input type="date" name="datainicial" id="datainicial" class="form-control" />
               </div>
 
               <div class="form-group">
-                <label for="datafinal">Data final:</label>
+                <label for="datafinal"><b>Data final:</b></label>
                 <input type="date" name="datafinal" id="datafinal" class="form-control" />
               </div>
               
