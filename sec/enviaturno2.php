@@ -166,7 +166,7 @@ $stmt1->close();
 $nomeprofissional = $dados2['nome'];
 
 $msg = "Escala para $nomeprofissional criada com sucesso!";
-echo "<script>alert( '$msg' );; window.location = '../escala_semanal.php';</script>";                
+echo "<script>alert( '$msg' );; window.location = '../inicial.php';</script>";                
 ?>
 
 

@@ -185,6 +185,8 @@ $query_usuarioescalado = "SELECT * FROM usuario WHERE id='$id_usuario_escala'";
                 <input type="time" class="form-control" id="fimdeexpediente" name="fimdeexpediente" value="<?php echo $horariofim_escala ?>">                
             </div>
 
+            <input type="hidden" name="id_escala" value="<?php echo $id_escala; ?>">
+
         <div class="selecionar">
             <div class="nav">
                 <button class="botao" type="submit">Atualizar turno</button>        

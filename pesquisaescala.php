@@ -1,7 +1,6 @@
 <?php
 include "tudo_cima.php"; 
 
-
 // Buscar datas do banco de dados
 $query_pesquisaescala = "SELECT dia, mes, ano FROM escala WHERE id_usuario = '$idlogado'";
 $resultado_pesquisaescala = $conn->query($query_pesquisaescala);
@@ -90,7 +89,7 @@ const monthYear = document.getElementById('month-year');
 let today = new Date();
 let currentMonth = today.getMonth(); // Mês atual
 let currentYear = today.getFullYear(); // Ano atual
-let selectedDates = [];
+let selectedDate = null; // Variável para armazenar a data selecionada
 
 function generateCalendar(month, year) {
     // Limpa o calendário
@@ -128,14 +127,14 @@ function generateCalendar(month, year) {
 
                 // Adiciona ou remove a classe 'selected' ao clicar para marcar/desmarcar a seleção
                 cell.onclick = () => {
-                    if (cell.classList.contains('selected')) {
-                        cell.classList.remove('selected');
-                        selectedDates = selectedDates.filter(d => d !== formattedDate);
-                    } else {
-                        cell.classList.add('selected');
-                        selectedDates.push(formattedDate);
+                    // Desmarca a data selecionada anteriormente
+                    if (selectedDate) {
+                        selectedDate.classList.remove('selected');
                     }
-                    enviarDatas(); // Chama a função enviarDatas() sempre que uma data é marcada/desmarcada
+                    
+                    // Marca a nova data selecionada
+                    cell.classList.add('selected');
+                    selectedDate = cell;
                 };
 
                 date++;

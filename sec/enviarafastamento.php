@@ -149,8 +149,8 @@ foreach ($diasNoIntervalo as $dia) {
     $null_campos = "afastado";
 
         // Preparando a primeira de escala
-        $query = "INSERT INTO escala (id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, operador) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO escala (id_usuario, id_afastamento, id_contrato, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, operador) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($query);
 
@@ -158,7 +158,7 @@ foreach ($diasNoIntervalo as $dia) {
             die('Erro na preparação da query: ' . $conn->error);
         }
 
-        $stmt->bind_param("iisssssssss", $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $operador);
+        $stmt->bind_param("iissssssssss", $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $operador);
 
         if (!$stmt->execute()) {
             die('Erro na execução da query: ' . $stmt->error);
@@ -168,8 +168,8 @@ foreach ($diasNoIntervalo as $dia) {
 
 
         // Preparando a segunda query
-        $query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_afastamento, id_contrato, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt1 = $conn->prepare($query1);
 
@@ -177,7 +177,7 @@ foreach ($diasNoIntervalo as $dia) {
             die('Erro na preparação da query1: ' . $conn->error);
         }
 
-        $stmt1->bind_param("iiissssssssssssss", $id_escala, $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $horario, $dia, $semana, $mes, $ano, $operador);
+        $stmt1->bind_param("iiisssssssssssssss", $id_escala, $id_usuario_selecionado, $id_afastamento, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $null_campos, $diaSeparado, $mesSeparado, $anoSeparado, $horario, $dia, $semana, $mes, $ano, $operador);
 
         if (!$stmt1->execute()) {
             die('Erro na execução da query1: ' . $stmt1->error);

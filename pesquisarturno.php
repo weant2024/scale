@@ -40,9 +40,7 @@ if ( $nivel < 2 )
                             <!-- Os dias do calendário serão gerados aqui -->
                         </tbody>
                     </table>
-                    <footer>
-                        
-                    </footer>
+
                 </div>
 
                 <div class="selecionar">
@@ -56,7 +54,9 @@ if ( $nivel < 2 )
                   <div id="selected-dates" class="hidden">
                       <!-- As datas selecionadas serão exibidas aqui -->
                   </div>
-
+</br>
+</br>
+</br>
                   <div id="formulario-php">
                       <!-- O formulário PHP será exibido aqui -->
                   </div>
@@ -107,7 +107,7 @@ const monthYear = document.getElementById('month-year');
 let today = new Date();
 let currentMonth = today.getMonth(); // Mês atual
 let currentYear = today.getFullYear(); // Ano atual
-let selectedDates = [];
+let selectedDate = null; // Mudado para armazenar apenas uma data selecionada
 
 function generateCalendar(month, year) {
     // Limpa o calendário
@@ -138,19 +138,19 @@ function generateCalendar(month, year) {
                 const formattedDate = `${String(date).padStart(2, '0')}-${String(month + 1).padStart(2, '0')}-${year}`; // Formato dd-mm-yyyy
 
                 // Marca a célula como selecionada se a data estiver no array de datas selecionadas
-                if (selectedDates.includes(formattedDate)) {
+                if (formattedDate === selectedDate) {
                     cell.classList.add('selected');
                 }
 
                 // Adiciona ou remove a classe 'selected' ao clicar para marcar/desmarcar a seleção
                 cell.onclick = () => {
-                    if (cell.classList.contains('selected')) {
-                        cell.classList.remove('selected');
-                        selectedDates = selectedDates.filter(d => d !== formattedDate);
-                    } else {
-                        cell.classList.add('selected');
-                        selectedDates.push(formattedDate);
-                    }
+                    // Remove a seleção de todas as células
+                    const allCells = document.querySelectorAll('.day');
+                    allCells.forEach(c => c.classList.remove('selected'));
+
+                    // Seleciona a nova célula
+                    cell.classList.add('selected');
+                    selectedDate = formattedDate;
                     enviarDatas(); // Chama a função enviarDatas() sempre que uma data é marcada/desmarcada
                 };
 
@@ -180,15 +180,12 @@ function nextMonth() {
     generateCalendar(currentMonth, currentYear);
 }
 
-
 function enviarDatas() {
     const selectedDatesElement = document.getElementById('selected-dates');
     selectedDatesElement.innerHTML = ''; // Limpa qualquer conteúdo anterior
 
-    if (selectedDates.length > 0) {
-        const selectedDatesStr = selectedDates.join(',');
-
-        // Envia as datas selecionadas via AJAX
+    if (selectedDate) {
+        // Envia a data selecionada via AJAX
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -203,12 +200,11 @@ function enviarDatas() {
         };
         xhr.open('POST', 'sec/pesquisa_coletaescala.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(`dates=${selectedDatesStr}`);
+        xhr.send(`date=${selectedDate}`);
     } else {
         selectedDatesElement.textContent = 'Nenhuma data selecionada.';
     }
 }
-
 
 // Gera o calendário inicial
 generateCalendar(currentMonth, currentYear);

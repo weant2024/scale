@@ -7,12 +7,12 @@ if ( $nivel < 2 )
 }
 
 
-$id_escala = $_GET['id'];
-$dia_escala = $_GET['dia'];
-$mes_escala = $_GET['mes'];
-$ano_escala = $_GET['ano'];
-$id_usuarioescalado = $_POST['nome'];
-$local_escala = $_POST['localdetrabalho'];
+$id_escala = $_POST['id_escala'];
+$id_usuarioescalado = $_POST['profissional'];
+$id_contrato = $_POST['id_exibe_contratos'];
+$localdetrabalho = $_POST['localdetrabalho'];
+$inicioexpediente = $_POST['iniciodeexpediente'];
+$fimdeexpediente = $_POST['fimdeexpediente'];
 
 $horario = date('H:i:s');
 $dia = date('d');
@@ -21,36 +21,28 @@ $ano = date('Y');
 $semana = date('w');
 $operador = $_SESSION["UsuarioLogin"];
 
-$inicioexpediente_escala = $_POST['horarioexpediente'];
-    switch ($inicioexpediente_escala) {
-        case "01-07":
-            $inicioexpediente = "01:00:00";
-            $iniciointervalo = "04:00:00";
-            $finalintervalo = "04:15:00";
-            $finalexpediente = "07:00:00";
-            break;
-        case "07-13":
-            $inicioexpediente = "07:00:00";
-            $iniciointervalo = "10:00:00";
-            $finalintervalo = "10:15:00";
-            $finalexpediente = "13:00:00";
-            break;
-        case "13-19":
-            $inicioexpediente = "13:00:00";
-            $iniciointervalo = "16:00:00";
-            $finalintervalo = "16:15:00";
-            $finalexpediente = "19:00:00";
-            break;
-        case "19-01":
-            $inicioexpediente = "19:00:00";
-            $iniciointervalo = "21:00:00";
-            $finalintervalo = "21:15:00";
-            $finalexpediente = "01:00:00";
-            break;
-        default:
-            break;
-    }
-            
+// Converter os horários para objetos DateTime
+$inicio = new DateTime($inicioexpediente);
+$fim = new DateTime($fimdeexpediente);
+
+// Calcular a diferença de tempo
+$intervaloTotal = $inicio->diff($fim);
+
+// Encontrar o meio do expediente
+$meioExpediente = clone $inicio;
+$meioExpediente->add(new DateInterval('PT' . (($intervaloTotal->h * 60 + $intervaloTotal->i) / 2) . 'M'));
+
+// Calcular o início e fim do intervalo de 15 minutos
+$inicioIntervalo = clone $meioExpediente;
+$fimIntervalo = clone $meioExpediente;
+$inicioIntervalo->sub(new DateInterval('PT7M30S')); // Subtrai 7 minutos e 30 segundos
+$fimIntervalo->add(new DateInterval('PT7M30S')); // Adiciona 7 minutos e 30 segundos
+
+// Formatar os horários para exibição
+$inicioIntervaloFormatado = $inicioIntervalo->format('H:i');
+$fimIntervaloFormatado = $fimIntervalo->format('H:i');
+
+
 
 switch ($mes){
 
@@ -82,16 +74,18 @@ case 6: $semana = "Sábado"; break;
 
 }
 
-// $query_escala = "SELECT * FROM escala WHERE id='$id_escala'";
-//     $resultado_escala = $conn->query($query_escala);
-//         $dados_escala = $resultado_escala->fetch_assoc();
-//             $id_usuario_escala = $dados_escala['id_usuario'];
+$query_escala = "SELECT * FROM escala WHERE id='$id_escala'";
+    $resultado_escala = $conn->query($query_escala);
+        $dados_escala = $resultado_escala->fetch_assoc();
+            $dia_escala = $dados_escala['dia'];
+            $mes_escala = $dados_escala['mes'];
+            $ano_escala = $dados_escala['ano'];
 ?>
 
                         <?php
 
                         // Preparando a primeira query
-                        $query = "UPDATE escala SET id_usuario=?, horarioinicio=?, intervaloinicio=?, intervalofim=?, horariofim=?, local=?, dia=?, mes=?, ano=?, operador=? WHERE id=?";
+                        $query = "UPDATE escala SET id_usuario=?, id_contrato=?, id_local=?, horarioinicio=?, intervaloinicio=?, intervalofim=?, horariofim=?, operador=? WHERE id=?";
                         $stmt = $conn->prepare($query);
 
                         if ($stmt === false) {
@@ -99,16 +93,14 @@ case 6: $semana = "Sábado"; break;
                         }
 
                         $stmt->bind_param(
-                            'isssssssssi', 
+                            'iiisssssi', 
                             $id_usuarioescalado, 
+                            $id_contrato,
+                            $localdetrabalho,
                             $inicioexpediente, 
-                            $iniciointervalo, 
-                            $finalintervalo, 
-                            $finalexpediente, 
-                            $local_escala, 
-                            $dia_escala, 
-                            $mes_escala, 
-                            $ano_escala, 
+                            $inicioIntervaloFormatado, 
+                            $fimIntervaloFormatado, 
+                            $fimdeexpediente, 
                             $operador, 
                             $id_escala
                         );
@@ -116,14 +108,14 @@ case 6: $semana = "Sábado"; break;
                         if ($stmt->execute() === false) {
                             die('Execute failed: ' . htmlspecialchars($stmt->error));
                         } else {
-                            echo "Registro atualizado com sucesso.";
+                            echo "Turno atualizado com sucesso.";
                         }
 
                         $stmt->close();
                         
                         // Preparando a segunda query
-                        $query1 = "INSERT INTO registroescala (id_usuario, id_escala, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        $query1 = "INSERT INTO registroescala (id_usuario, id_escala, id_contrato, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         $stmt1 = $conn->prepare($query1);
 
@@ -131,7 +123,7 @@ case 6: $semana = "Sábado"; break;
                             die('Erro na preparação da query1: ' . $conn->error);
                         }
 
-                        $stmt1->bind_param("iissssssssssssss", $id_usuarioescalado, $id_escala, $inicioexpediente, $iniciointervalo, $finalintervalo, $finalexpediente, $local_escala, $dia_escala, $mes_escala, $ano_escala, $horario, $dia, $semana, $mes, $ano, $operador);
+                        $stmt1->bind_param("iiiisssssssssssss", $id_usuarioescalado, $id_escala, $id_contrato, $localdetrabalho, $inicioexpediente, $inicioIntervaloFormatado, $fimIntervaloFormatado, $fimdeexpediente, $dia_escala, $mes_escala, $ano_escala, $horario, $dia, $semana, $mes, $ano, $operador);
 
                         if (!$stmt1->execute()) {
                             die('Erro na execução da query1: ' . $stmt1->error);
