@@ -36,7 +36,7 @@
 ?>
 <div class="alertaescalaverde"> 
 <?php  
-            $query_domingousuario = "SELECT *
+            @$query_domingousuario = "SELECT *
                 FROM afastamento
                 WHERE id_usuario = $idusuario_selecionado AND motivo = 'Folga'
                 AND MONTH(STR_TO_DATE(datainicial, '%d/%m/%Y')) = MONTH(CURDATE())
@@ -48,8 +48,8 @@
                         AND STR_TO_DATE(a.datafinal, '%d/%m/%Y') >= STR_TO_DATE(afastamento.datainicial, '%d/%m/%Y')
                         AND (DAYOFWEEK(STR_TO_DATE(a.datainicial, '%d/%m/%Y')) = 1 OR DAYOFWEEK(STR_TO_DATE(a.datafinal, '%d/%m/%Y')) = 1)
                 );";        
-                $resultado_domingousuario = $conn->query($query_domingousuario);  
-                    $dados_domingousuario = $resultado_domingousuario->fetch_assoc();  
+                @$resultado_domingousuario = $conn->query($query_domingousuario);  
+                    @$dados_domingousuario = $resultado_domingousuario->fetch_assoc();  
         
                         if (@$resultado_domingousuario->num_rows < 1) {                  
                             echo "$nome_selecionado ainda não teve um Domingo de folga no mês atual</br>";                                          

@@ -138,7 +138,7 @@ if (isset($_POST['date'])) {
             foreach ($afastamentos as $afastamento) {
 ?>
                 <tr>
-                    <td><a href='editarafastamento.php?id=<?php echo $id_afastamento; ?>'><?php echo $afastamento['nome']; ?></a></td>
+                    <td><a href='editarafastamento_link.php?id=<?php echo $id_escalahorario; ?>&data=<?php echo "$escaladia/$escalames/$escalaano"; ?>'><?php echo $afastamento['nome']; ?></a></td>
                     <td><?php echo $afastamento['motivo']; ?></td>
                     <td><?php echo $afastamento['datainicial']; ?></td>
                     <td><?php echo $afastamento['datafinal']; ?></td>

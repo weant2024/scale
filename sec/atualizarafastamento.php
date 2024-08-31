@@ -90,10 +90,10 @@ if (!$stmt_delete->execute()) {
 }
 
 // Inserindo novas escalas
-$query = "INSERT INTO escala (id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, operador) 
+$query = "INSERT INTO escala (id_usuario, id_afastamento, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, operador) 
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-$query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_afastamento, horarioinicio, intervaloinicio, intervalofim, horariofim, local, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
+$query1 = "INSERT INTO registroescala (id_escala, id_usuario, id_afastamento, id_local, horarioinicio, intervaloinicio, intervalofim, horariofim, dia, mes, ano, loghorario, logdia, logsemana, logmes, logano, operador) 
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 foreach ($diasNoIntervalo as $dia) {
